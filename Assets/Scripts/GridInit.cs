@@ -12,5 +12,7 @@ public class GridInit : MonoBehaviour
         grid.Build(2, 2, tree);
         grid.Build(2, 2, tree);
         grid.Build(5, 4, tree);
+        grid.Demolish(2, 2);
+        grid.Demolish(2, 5);
     }
 }

@@ -54,14 +54,26 @@ public class Grid
     {
         if ((bool)gridArray[x, y].Values["buildable"] && gridArray[x, y].Values["structure"] == null) { // if this cell can be built on
             Transform instantiatedObj = GameObject.Instantiate(obj, (Vector3)gridArray[x, y].Values["center"], Quaternion.identity); // instantiate the object and store it in the dictionary
-            gridArray[x, y].Values["structure"] = instantiatedObj;
+            gridArray[x, y].Values["structure"] = instantiatedObj.gameObject;
+            Debug.Log("Successfully built " + obj + " at position " + x + " " + y);
         } else
         {
             Debug.Log("Unable to build " + obj + " at position " + x + " " + y + " as there is already a structure or this is not buildable");
         }
-
     }
-        
+    public void Demolish(int x, int y)
+    {
+        if (gridArray[x, y].Values["structure"] != null)
+        {
+            string identifier = ((GameObject)gridArray[x, y].Values["structure"]).name;
+            GameObject.Destroy(((GameObject)gridArray[x, y].Values["structure"]));
+            gridArray[x, y].Values["structure"] = null;
+            Debug.Log("Successfully destroyed " + identifier + " at position " + x + " " + y);
+        } else
+        {
+            Debug.Log("Unable to demolish at position " + x + " " + y + " as there is nothing here to destroy");
+        }
+    } 
 
     private Vector2 GetCellWorldPosition(int x, int y)
     {
