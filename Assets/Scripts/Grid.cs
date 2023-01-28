@@ -6,9 +6,24 @@ using UnityEngine;
 
 public class GridCell
 {
-    private int val;
-    private GameObject obj = null;
-    private bool buildable = true;
+    public GridCell()
+    {
+        this.Values = new Dictionary<object, object>();
+        this.Values.Add("buildable", true);
+        this.Values.Add("structure", null);
+    }
+
+    public Dictionary<object, object> Values
+    {
+        get;
+        set;
+    }
+    
+    public void Awake()
+    {
+        
+    }
+
 }
 
 public class Grid
@@ -27,13 +42,15 @@ public class Grid
 
         gridArray = new GridCell[width, height];
 
-        for (int x = (-(gridArray.GetLength(0) - 1)/2); x < (gridArray.GetLength(0)+1)/2; x++)
+        for (int x = 0; x < gridArray.GetLength(0); x++)
         {
-            for (int y = (-(gridArray.GetLength(0) - 1) / 2); y < (gridArray.GetLength(0)+1)/2; y++)
+            for (int y = 0; y < gridArray.GetLength(1); y++)
             {
-                Debug.Log(GetCellWorldPosition(x, y));
+                gridArray[x, y] = new GridCell();
                 Debug.DrawLine(GetCellWorldPosition(x, y), GetCellWorldPosition(x, y + 1), Color.white, 100f);
                 Debug.DrawLine(GetCellWorldPosition(x, y), GetCellWorldPosition(x + 1, y), Color.white, 100f);
+                gridArray[x, y].Values.Add("centerPosition", new Vector2(x, y) * cellSize - new Vector2(cellSize/2, cellSize/2));
+                Debug.Log(gridArray[x, y].Values["buildable"]);
             }
         }
     }
