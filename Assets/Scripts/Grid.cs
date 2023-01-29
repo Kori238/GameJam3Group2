@@ -54,16 +54,18 @@ public class GridCell
         }
     }
 
-    public bool Damage(int amount)
+    public bool Damage(float amount)
     {
-        return false;
-        //if (Values["structure"] != null && //((Transform)Values["structure"]) = true)
-        //{
-//
-        //} else
-        //{
-        //    Debug.Log("Unable to damage at position " + Values["gridPosition"] + " as there is nothing here to damage");
-        //}
+        if (Values["structure"] != null && ((GameObject)Values["structure"]).GetComponent<StructureValues>().damageable == true)
+        {
+            ((GameObject)Values["structure"]).GetComponent<StructureValues>().health -= amount;
+            Debug.Log("Dealt " + amount + " damage to " + ((GameObject)Values["structure"]).name + " at position " + Values["gridPos"]);
+            return true;
+        } else
+        {
+            Debug.Log("Unable to damage at position " + Values["gridPosition"] + " as there is nothing here to damage or this is undamageable");
+            return false;
+        }
     }
 
 }
@@ -120,6 +122,19 @@ public class Grid
             return gridArray[x, y].Demolish();
         }
     }
+
+    public bool DamageAtCell(int x, int y, float amount) 
+    { 
+        if (x > width || y > height || x< 0 || y< 0)
+        {
+            Debug.Log("Could not damage at position " + x + " " + y + " as these co-ordinates are invalid");
+            return false;
+        } else
+        {
+            return gridArray[x, y].Damage(amount);
+        }
+    }
+
 
 
     private Vector2 GetCellWorldPosition(int x, int y)
