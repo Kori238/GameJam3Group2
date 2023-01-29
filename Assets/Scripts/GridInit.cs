@@ -9,11 +9,14 @@ public class GridInit : MonoBehaviour
     private void Start()
     {
         Grid grid = new Grid(9, 9, 10f);
-        grid.gridArray[2, 2].Build(tree);
-        //grid.BuildAtCell(2, 2, tree);
-        //grid.BuildAtCell(2, 2, tree);
-        //grid.BuildAtCell(5, 4, tree);
-        //grid.Demolish(2, 2);
-        grid.gridArray[2, 5].Demolish();
+        grid.BuildAtCell(2, 2, tree);
+        grid.BuildAtCell(2, 2, tree);
+        grid.BuildAtCell(5, 4, tree);
+        grid.DemolishAtCell(2, 2);
+        grid.DemolishAtCell(2, 2);
+        grid.BuildAtCell(2, 2, tree);
+        grid.DemolishAtCell(10, 14);
+        grid.BuildAtCell(20, -100, tree);
+       
     }
 }

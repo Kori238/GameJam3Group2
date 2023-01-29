@@ -21,21 +21,23 @@ public class GridCell
         set;
     }
 
-    public void Build(Transform structure)
+    public bool Build(Transform structure)
     {
         if ((bool)Values["buildable"] && Values["structure"] == null)
         {
             Transform obj = GameObject.Instantiate(structure, (Vector3)Values["center"], Quaternion.identity);
             Values["structure"] = obj.gameObject;
             Debug.Log("Successfully built " + structure + " at position " + Values["gridPosition"]);
+            return true;
         }
         else
         {
             Debug.Log("Unable to build " + structure + " at position " + Values["gridPosition"] + " as there is already a structure or this is not buildable");
+            return false;
         } 
     }
 
-    public void Demolish()
+    public bool Demolish()
     {
         if (Values["structure"] != null)
         {
@@ -43,11 +45,25 @@ public class GridCell
             GameObject.Destroy(((GameObject)Values["structure"]));
             Values["structure"] = null;
             Debug.Log("Successfully destroyed " + identifier + " at position " + Values["gridPosition"]);
+            return true;
         }
         else
         {
             Debug.Log("Unable to demolish at position " + Values["gridPosition"] + " as there is nothing here to destroy");
+            return false;
         }
+    }
+
+    public bool Damage(int amount)
+    {
+        return false;
+        //if (Values["structure"] != null && //((Transform)Values["structure"]) = true)
+        //{
+//
+        //} else
+        //{
+        //    Debug.Log("Unable to damage at position " + Values["gridPosition"] + " as there is nothing here to damage");
+        //}
     }
 
 }
@@ -80,6 +96,31 @@ public class Grid
             }
         }
     }
+
+    public bool BuildAtCell(int x, int y, Transform structure)
+    {
+        if (x > width || y > height || x < 0 || y < 0)
+        {
+            Debug.Log("Could not build at position " + x + " " + y + " as these co-ordinates are invalid");
+            return false;
+        } else
+        {
+            return gridArray[x, y].Build(structure);
+        }
+    }
+
+    public bool DemolishAtCell(int x, int y)
+    {
+        if (x > width || y > height || x < 0 || y < 0)
+        {
+            Debug.Log("Could not destroy at position " + x + " " + y + " as these co-ordinates are invalid");
+            return false;
+        } else
+        {
+            return gridArray[x, y].Demolish();
+        }
+    }
+
 
     private Vector2 GetCellWorldPosition(int x, int y)
     {
