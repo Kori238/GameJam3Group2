@@ -7,6 +7,7 @@ public class S_Pl_Movement : MonoBehaviour
     public float Pl_Speed = 5f; //Player Speed
     public Rigidbody2D RigidBody; //Reference to RigidBody2D
     Vector2 Movement;
+    public int Health = 100;
     
     void Update() // Update is called once per frame
     {
