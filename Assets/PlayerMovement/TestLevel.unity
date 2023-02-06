@@ -596,15 +596,12 @@ PrefabInstance:
       value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5335656976845669905, guid: b48344857b9999844a18b1ead7907542, type: 3}
-<<<<<<< HEAD
       propertyPath: hitSound
       value: 
       objectReference: {fileID: 1722135705}
-=======
       propertyPath: resourceManager
       value: 
       objectReference: {fileID: 1336764419}
->>>>>>> 8ebbf74ab689a4585162ebe2361953d0d9abf8a2
     - target: {fileID: 5335656976845669906, guid: b48344857b9999844a18b1ead7907542, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1144,7 +1141,6 @@ Transform:
   m_Father: {fileID: 1885312078}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD
 --- !u!1 &1722135704
 GameObject:
   m_ObjectHideFlags: 0
@@ -1273,7 +1269,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-=======
 --- !u!1001 &1859143272
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1343,7 +1338,6 @@ PrefabInstance:
       objectReference: {fileID: 1336764419}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 812bfb0d047397843b08d90113ec6120, type: 3}
->>>>>>> 8ebbf74ab689a4585162ebe2361953d0d9abf8a2
 --- !u!1 &1885312077
 GameObject:
   m_ObjectHideFlags: 0
