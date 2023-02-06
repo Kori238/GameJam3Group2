@@ -9,14 +9,11 @@ public class S_Pl_Movement : MonoBehaviour
     public Rigidbody2D RigidBody; //Reference to RigidBody2D
     Vector2 Movement;
     public int Health = 100;
-<<<<<<< HEAD
     public AudioSource hitSound;
     
-=======
     [SerializeField] ResourceManager resourceManager;// referance to the resource manager in game scene
     Vector2 boxSize = new Vector2(0.1f, 0.1f); // size of raycast
 
->>>>>>> 8ebbf74ab689a4585162ebe2361953d0d9abf8a2
     void Update() // Update is called once per frame
     {
         //Input:
@@ -24,13 +21,11 @@ public class S_Pl_Movement : MonoBehaviour
         Movement.x = Input.GetAxisRaw("Horizontal");
         Movement.y = Input.GetAxisRaw("Vertical");
 
-<<<<<<< HEAD
         //if (Input.GetButtonDown("Fire1"))
         //{
           //  Attack();
         //}
 
-=======
         if (Input.GetMouseButtonDown(0))
         {
             
@@ -38,7 +33,6 @@ public class S_Pl_Movement : MonoBehaviour
             print("wood = " + resourceManager.GetWood());
 
         }
->>>>>>> 8ebbf74ab689a4585162ebe2361953d0d9abf8a2
     }
 
     private void FixedUpdate() //Executed on a fixed timer (Not on framerate)
@@ -48,12 +42,11 @@ public class S_Pl_Movement : MonoBehaviour
         RigidBody.MovePosition(RigidBody.position + Movement * Pl_Speed * Time.fixedDeltaTime);
     }
 
-<<<<<<< HEAD
     void Attack()
     {
         hitSound = GetComponent<AudioSource>();
         hitSound.Play();
-=======
+    }
     private void CheckInteraction()
     {
         
@@ -77,6 +70,5 @@ public class S_Pl_Movement : MonoBehaviour
                 }
             }
         }
->>>>>>> 8ebbf74ab689a4585162ebe2361953d0d9abf8a2
     }
 }
