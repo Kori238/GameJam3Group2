@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5a7b050329d3574396b0182177a314e, type: 3}
   m_Name: Wooden Tree
   m_EditorClassIdentifier: 
-  health: 0
+  health: 25
