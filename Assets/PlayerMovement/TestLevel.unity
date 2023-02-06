@@ -599,9 +599,6 @@ PrefabInstance:
       propertyPath: hitSound
       value: 
       objectReference: {fileID: 1722135705}
-      propertyPath: resourceManager
-      value: 
-      objectReference: {fileID: 1336764419}
     - target: {fileID: 5335656976845669906, guid: b48344857b9999844a18b1ead7907542, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -722,7 +719,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1380640549
 GameObject:
@@ -802,6 +799,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5335656976845669906, guid: b48344857b9999844a18b1ead7907542, type: 3}
   m_PrefabInstance: {fileID: 1322399428}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1388830587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388830582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 302147b444ed6644db502c740f464502, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resourceManager: {fileID: 1336764419}
 --- !u!1 &1423536355
 GameObject:
   m_ObjectHideFlags: 0
@@ -1467,7 +1477,7 @@ RectTransform:
   - {fileID: 1222282382}
   - {fileID: 146117631}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
