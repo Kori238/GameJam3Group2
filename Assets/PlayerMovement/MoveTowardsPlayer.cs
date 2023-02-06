@@ -20,14 +20,14 @@ public class MoveTowardsPlayer : MonoBehaviour
         // Move the sprite towards the target
         transform.position += direction * speed * Time.deltaTime;
 
-        if (Vector3.Distance(transform.position, target.position) <= 0.2f)  //Determinds the distance between the player and the enemy.
+        if (Vector3.Distance(transform.position, target.position) <= 4f)  //Determinds the distance between the player and the enemy.
         {
-            // Delete the enemy
-            Destroy(gameObject);
 
             int hp = PlayerScript.GetComponent<S_Pl_Movement>().Health -= 20;
             
             HealthINT.text = hp.ToString();
+
+            Destroy(gameObject);
 
         }
 

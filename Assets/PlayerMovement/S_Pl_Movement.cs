@@ -8,6 +8,7 @@ public class S_Pl_Movement : MonoBehaviour
     public Rigidbody2D RigidBody; //Reference to RigidBody2D
     Vector2 Movement;
     public int Health = 100;
+    public AudioSource hitSound;
     
     void Update() // Update is called once per frame
     {
@@ -16,6 +17,11 @@ public class S_Pl_Movement : MonoBehaviour
         Movement.x = Input.GetAxisRaw("Horizontal");
         Movement.y = Input.GetAxisRaw("Vertical");
 
+        //if (Input.GetButtonDown("Fire1"))
+        //{
+          //  Attack();
+        //}
+
     }
 
     private void FixedUpdate() //Executed on a fixed timer (Not on framerate)
@@ -23,5 +29,11 @@ public class S_Pl_Movement : MonoBehaviour
         //Movement:
 
         RigidBody.MovePosition(RigidBody.position + Movement * Pl_Speed * Time.fixedDeltaTime);
+    }
+
+    void Attack()
+    {
+        hitSound = GetComponent<AudioSource>();
+        hitSound.Play();
     }
 }
