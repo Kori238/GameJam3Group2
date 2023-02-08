@@ -1,6 +1,7 @@
 using Mono.Cecil.Cil;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.GameCenter;
 
@@ -135,11 +136,37 @@ public class Grid
         }
     }
 
+    public bool[] GetAdjacentWalls(int x, int y)
+    {
+        bool[] returnArray = new bool[4];
+        returnArray[0] = false;
+        returnArray[1] = false;
+        returnArray[2] = false;
+        returnArray[3] = false;
 
+        //Debug.Log(((GameObject)gridArray[x + 1, y].Values["structure"]).name);
+
+        if (gridArray[x, y + 1].Values["structure"] != null && ((GameObject)gridArray[x, y + 1].Values["structure"]).tag == "Wall")
+            returnArray[0] = true;
+        if (gridArray[x + 1, y].Values["structure"] != null && ((GameObject)gridArray[x + 1, y].Values["structure"]).tag == "Wall")
+            returnArray[1] = true;
+        if (gridArray[x, y - 1].Values["structure"] != null && ((GameObject)gridArray[x, y - 1].Values["structure"]).tag == "Wall")
+            returnArray[2] = true;
+        if (gridArray[x - 1, y].Values["structure"] != null && ((GameObject)gridArray[x - 1, y].Values["structure"]).tag == "Wall")
+            returnArray[3] = true;
+        return returnArray;
+    }
+        
 
     private Vector2 GetCellWorldPosition(int x, int y)
     {
         return new Vector2(x, y) * cellSize;
     }
+
+    public Vector2 GetWorldCellPosition(float x, float y)
+    {
+        return new Vector2(Mathf.FloorToInt(x / cellSize), Mathf.FloorToInt(y / cellSize));
+    }
+        
 }
 
