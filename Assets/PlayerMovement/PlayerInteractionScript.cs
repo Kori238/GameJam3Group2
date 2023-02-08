@@ -1,12 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Resources;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerInteractionScript : MonoBehaviour
 {
     [SerializeField] ResourceManager resourceManager;// referance to the resource manager in game scene
+    [SerializeField] GameObject WoodCollector;
     Vector2 boxSize = new Vector2(0.1f, 0.1f); // size of raycast
+
+    string currentTool = "Interact";
+    //options:
+    //Interact
+    //WoodCollector
     // Start is called before the first frame update
     void Start()
     {
@@ -19,12 +26,36 @@ public class PlayerInteractionScript : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
 
-            CheckInteraction();
+            PlayerInterct();
             print("wood = " + resourceManager.GetWood());
 
         }
+        if (Input.GetKeyDown("1")){
+            currentTool = "Interact";
+            print("interact Tool Equiped");
+        }
+        if (Input.GetKeyDown("2"))
+        {
+            currentTool = "WoodCollector";
+            print("Build Wood Collector equiped");
+        }
     }
-
+    private void PlayerInterct() //allows mutilple function to be called from mouse button 1
+    {
+        switch (currentTool)
+        {
+            case "Interact":
+                {
+                    CheckInteraction();
+                    break;
+                }
+            case "WoodCollector":
+                {
+                    PlaceWoodCollector();
+                    break;
+                }
+        }
+    }
 
 
 
@@ -78,5 +109,17 @@ public class PlayerInteractionScript : MonoBehaviour
         print("not in range");
         return false;
     }
+    private void PlaceWoodCollector()
+    {
+        Vector2 MousePos = Input.mousePosition;
+        Vector2 MouseWorldPos = Camera.main.ScreenToWorldPoint(MousePos);
 
+        if(resourceManager.GetWood()>= 50)
+        {
+            Instantiate(WoodCollector, MouseWorldPos, quaternion.identity);
+            resourceManager.AddWood(-50);
+        }
+       
+
+    }
 }

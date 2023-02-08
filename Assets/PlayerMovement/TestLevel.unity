@@ -812,6 +812,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resourceManager: {fileID: 1336764419}
+  WoodCollector: {fileID: 8887025705051287312, guid: 57d434b4f96570647a997dbebc4b6c4f, type: 3}
 --- !u!114 &1388830591
 MonoBehaviour:
   m_ObjectHideFlags: 0

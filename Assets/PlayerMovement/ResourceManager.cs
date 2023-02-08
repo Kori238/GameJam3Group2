@@ -41,24 +41,15 @@ public class ResourceManager : MonoBehaviour
     {
         metal = newmetal + metal;
     }
-    public void RemoveMetal(int newmetal)
-    {
-        metal = metal - newmetal;
-    }
+    
     public void AddWood(int newwood)
     {
         wood = wood + newwood;
     }
-    public void RemoveWood(int newwood)
-    {
-        wood = wood - newwood;
-    }
+   
     public void AddStarLight(int newStarLight)
     {
         starlight = starlight + newStarLight;
     }
-    public void RemoveStarLight(int newStarLight)
-    {
-        starlight = starlight - newStarLight;
-    }
+  
 }
