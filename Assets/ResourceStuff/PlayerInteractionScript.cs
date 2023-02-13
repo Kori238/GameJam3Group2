@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerInteractionScript : MonoBehaviour
 {
     [SerializeField] ResourceManager resourceManager;// referance to the resource manager in game scene
-    [SerializeField] GameObject WoodCollector;
+    [SerializeField] Transform WoodCollector;
     Vector2 boxSize = new Vector2(0.1f, 0.1f); // size of raycast
 
     string currentTool = "Interact";
@@ -27,7 +27,7 @@ public class PlayerInteractionScript : MonoBehaviour
         {
 
             PlayerInterct();
-            print("wood = " + resourceManager.GetWood());
+            print("wood = " + GridInit.Instance.resourceManager.GetWood());
 
         }
         if (Input.GetKeyDown("1")){
@@ -113,11 +113,16 @@ public class PlayerInteractionScript : MonoBehaviour
     {
         Vector2 MousePos = Input.mousePosition;
         Vector2 MouseWorldPos = Camera.main.ScreenToWorldPoint(MousePos);
-
-        if(resourceManager.GetWood()>= 50)
+        Vector2 gridPos;
+        if(GridInit.Instance.resourceManager.GetWood()>= 50)
         {
-            Instantiate(WoodCollector, MouseWorldPos, quaternion.identity);
-            resourceManager.AddWood(-50);
+            gridPos = GridInit.Instance.grid.GetWorldCellPosition(MouseWorldPos.x, MouseWorldPos.y);
+            bool valid = GridInit.Instance.grid.BuildAtCell((int)gridPos.x + 1, (int)gridPos.y + 1, WoodCollector);
+
+            if (valid)
+            {
+                GridInit.Instance.resourceManager.AddWood(-50);
+            }
         }
        
 

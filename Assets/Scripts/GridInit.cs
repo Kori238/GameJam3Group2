@@ -10,6 +10,7 @@ public class GridInit : MonoBehaviour
     public Transform tree;
     public Transform wall;
     public Grid grid;
+    public ResourceManager resourceManager;
 
     private void Awake()
     {
@@ -20,6 +21,7 @@ public class GridInit : MonoBehaviour
         } else
         _instance = this;
         grid = new Grid(9, 9, 10f);
+        resourceManager = new ResourceManager();
         StartCoroutine(BuildWalls());
     }
     

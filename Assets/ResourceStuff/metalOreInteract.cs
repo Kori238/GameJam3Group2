@@ -9,7 +9,7 @@ public class metalOreInteract : Interactable
     // Start is called before the first frame update
     public override void Interact()
     {
-        resourceManager.AddMetal(10);
+        GridInit.Instance.resourceManager.AddMetal(10);
     }
 
 }

@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class WoodCollectorScript : MonoBehaviour
 {
-    [SerializeField] ResourceManager resourceManager; 
+    
 
 
 
     int CurrentWoodCoolDown = 0;
-    int MaxWoodCoolDown = 1000;
+    int MaxWoodCoolDown = 500;
 
 
 
@@ -29,7 +29,8 @@ public class WoodCollectorScript : MonoBehaviour
     {
         if(CurrentWoodCoolDown >= MaxWoodCoolDown)
         {
-            resourceManager.AddWood(50);
+            GridInit.Instance.resourceManager.AddWood(50);
+            //resourceManager.AddWood(50);
             print("Wood Collector added 50 wood");
             CurrentWoodCoolDown = 0;
         }

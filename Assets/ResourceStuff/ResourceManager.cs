@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
-public class ResourceManager : MonoBehaviour
+public class ResourceManager 
 {
     private int metal;
     private int wood;
@@ -30,6 +31,7 @@ public class ResourceManager : MonoBehaviour
     }
     public int GetWood()
     {
+        
         return wood;
     }
     public int GetStarlight()
