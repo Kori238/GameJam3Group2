@@ -15,50 +15,65 @@ public class WallConnectors : MonoBehaviour
     public Transform EWW;
     public Transform EWE;
     public Transform EWEW;
-    public bool[] adjacent;
+    public GameObject[] adjacent;
+    public Vector2 cellPos;
     // Start is called before the first frame update
     public void updateAllConnectors()
     {
-        Vector2 cellPos = GridInit.Instance.grid.GetWorldCellPosition(transform.position.x, transform.position.y);
-        bool[] adjacentWalls = GridInit.Instance.grid.GetAdjacentWalls((int)cellPos.x, (int)cellPos.y);
-        updateConnectors(adjacentWalls);
-        if (adjacentWalls[0]) ((GameObject)GridInit.Instance.grid.gridArray[(int)cellPos.x, (int)cellPos.y + 1].Values["structure"])
-                .transform.GetComponent<WallConnectors>().updateConnectors(GridInit.Instance.grid.GetAdjacentWalls((int)cellPos.x, (int)cellPos.y + 1));
-        if (adjacentWalls[1]) ((GameObject)GridInit.Instance.grid.gridArray[(int)cellPos.x + 1, (int)cellPos.y].Values["structure"])
-                .transform.GetComponent<WallConnectors>().updateConnectors(GridInit.Instance.grid.GetAdjacentWalls((int)cellPos.x + 1, (int)cellPos.y));
-        if (adjacentWalls[2]) ((GameObject)GridInit.Instance.grid.gridArray[(int)cellPos.x, (int)cellPos.y - 1].Values["structure"])
-                .transform.GetComponent<WallConnectors>().updateConnectors(GridInit.Instance.grid.GetAdjacentWalls((int)cellPos.x, (int)cellPos.y - 1));
-        if (adjacentWalls[3]) ((GameObject)GridInit.Instance.grid.gridArray[(int)cellPos.x - 1, (int)cellPos.y].Values["structure"])
-                .transform.GetComponent<WallConnectors>().updateConnectors(GridInit.Instance.grid.GetAdjacentWalls((int)cellPos.x - 1, (int)cellPos.y));
+        cellPos = GridInit.Instance.grid.GetWorldCellPosition(transform.position.x, transform.position.y);
+        updateConnectors();
+
+
+        if (adjacent[0]) ((GameObject)GridInit.Instance.grid.gridArray[(int)cellPos.x, (int)cellPos.y + 1].Values["structure"])
+                .transform.GetComponent<WallConnectors>().updateConnectors();
+        if (adjacent[1]) ((GameObject)GridInit.Instance.grid.gridArray[(int)cellPos.x + 1, (int)cellPos.y].Values["structure"])
+                .transform.GetComponent<WallConnectors>().updateConnectors();
+        if (adjacent[2]) ((GameObject)GridInit.Instance.grid.gridArray[(int)cellPos.x, (int)cellPos.y - 1].Values["structure"])
+                .transform.GetComponent<WallConnectors>().updateConnectors();
+        if (adjacent[3]) ((GameObject)GridInit.Instance.grid.gridArray[(int)cellPos.x - 1, (int)cellPos.y].Values["structure"])
+                .transform.GetComponent<WallConnectors>().updateConnectors();
+    }
+
+    private void GetAdjacentWalls()
+    {
+        adjacent = new GameObject[4];
+        cellPos = GridInit.Instance.grid.GetWorldCellPosition(transform.position.x, transform.position.y);
+        if (GridInit.Instance.grid.GetStructureAtCell((int)cellPos.x, (int)cellPos.y + 1) != null && GridInit.Instance.grid.GetStructureAtCell((int)cellPos.x, (int)cellPos.y + 1).CompareTag("Wall")) 
+            adjacent[0] = GridInit.Instance.grid.GetStructureAtCell((int)cellPos.x, (int)cellPos.y + 1);
+        if (GridInit.Instance.grid.GetStructureAtCell((int)cellPos.x + 1, (int)cellPos.y) != null && GridInit.Instance.grid.GetStructureAtCell((int)cellPos.x + 1, (int)cellPos.y).CompareTag("Wall"))
+            adjacent[1] = GridInit.Instance.grid.GetStructureAtCell((int)cellPos.x + 1, (int)cellPos.y);
+        if (GridInit.Instance.grid.GetStructureAtCell((int)cellPos.x, (int)cellPos.y - 1) != null && GridInit.Instance.grid.GetStructureAtCell((int)cellPos.x, (int)cellPos.y - 1).CompareTag("Wall"))
+            adjacent[2] = GridInit.Instance.grid.GetStructureAtCell((int)cellPos.x, (int)cellPos.y - 1);
+        if (GridInit.Instance.grid.GetStructureAtCell((int)cellPos.x - 1, (int)cellPos.y) != null && GridInit.Instance.grid.GetStructureAtCell((int)cellPos.x - 1, (int)cellPos.y).CompareTag("Wall"))
+            adjacent[3] = GridInit.Instance.grid.GetStructureAtCell((int)cellPos.x - 1, (int)cellPos.y);
     }
 
 
-    public void updateConnectors(bool[] adjacentWalls)
-    {
-        adjacent = adjacentWalls;
-
+    public void updateConnectors()
+    { 
+        GetAdjacentWalls();
         Destroy(connectorNS.gameObject);
-        if (adjacentWalls[0] & adjacentWalls[2]) connectorNS = Instantiate(NSNS, transform.position + NSNS.transform.position, Quaternion.identity, transform);
-        else if (adjacentWalls[0]) connectorNS = Instantiate(NSN, transform.position + NSN.transform.position, Quaternion.identity, transform);
-        else if (adjacentWalls[2]) connectorNS = Instantiate(NSS, transform.position + NSS.transform.position, Quaternion.identity, transform);
+        if (adjacent[0] & adjacent[2]) connectorNS = Instantiate(NSNS, transform.position + NSNS.transform.position, Quaternion.identity, transform);
+        else if (adjacent[0]) connectorNS = Instantiate(NSN, transform.position + NSN.transform.position, Quaternion.identity, transform);
+        else if (adjacent[2]) connectorNS = Instantiate(NSS, transform.position + NSS.transform.position, Quaternion.identity, transform);
         else connectorNS = Instantiate(NS, transform.position, Quaternion.identity, transform);
 
         Destroy(connectorEW.gameObject);
-        if (adjacentWalls[1] & adjacentWalls[3]) connectorEW = Instantiate(EWEW, transform.position + EWEW.transform.position, Quaternion.identity, transform);
-        else if (adjacentWalls[1]) connectorEW = Instantiate(EWE, transform.position + EWE.transform.position, Quaternion.identity, transform);
-        else if (adjacentWalls[3]) connectorEW = Instantiate(EWW, transform.position + EWW.transform.position, Quaternion.identity, transform);
+        if (adjacent[1] & adjacent[3]) connectorEW = Instantiate(EWEW, transform.position + EWEW.transform.position, Quaternion.identity, transform);
+        else if (adjacent[1]) connectorEW = Instantiate(EWE, transform.position + EWE.transform.position, Quaternion.identity, transform);
+        else if (adjacent[3]) connectorEW = Instantiate(EWW, transform.position + EWW.transform.position, Quaternion.identity, transform);
         else connectorEW = Instantiate(EW, transform.position, Quaternion.identity, transform);
     }
 
 
     void Start()
     {
-        updateAllConnectors();
+        //updateAllConnectors();
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        updateAllConnectors();
+        GetAdjacentWalls();
     }
+
 }

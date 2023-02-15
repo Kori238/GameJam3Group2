@@ -156,6 +156,11 @@ public class Grid
             returnArray[3] = true;
         return returnArray;
     }
+
+    public GameObject GetStructureAtCell(int x, int y)
+    {
+        return (GameObject)gridArray[x, y].Values["structure"];
+    }
         
 
     private Vector2 GetCellWorldPosition(int x, int y)

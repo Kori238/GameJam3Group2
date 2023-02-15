@@ -75,6 +75,7 @@ MonoBehaviour:
   EWW: {fileID: 1251863355554281704, guid: 150590497f4d5e5489f40d286ae49561, type: 3}
   EWE: {fileID: 1251863355554281704, guid: 75089984ce6e3164693e967d637f5c2e, type: 3}
   EWEW: {fileID: 1251863355554281704, guid: b885458bc80af8547ba80e64097bb1b8, type: 3}
+  adjacent: 
 --- !u!1 &6017539610221782742
 GameObject:
   m_ObjectHideFlags: 0
