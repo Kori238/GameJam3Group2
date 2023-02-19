@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class metalOreInteract : Interactable
+public class StoneInteract : Interactable
 
 {
     [SerializeField] ResourceManager resourceManager;
     // Start is called before the first frame update
     public override void Interact()
     {
-        GridInit.Instance.resourceManager.AddMetal(10);
+        GridInit.Instance.resourceManager.AddStone(10);
     }
 
 }

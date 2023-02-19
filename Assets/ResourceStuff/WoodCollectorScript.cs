@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WoodCollectorScript : MonoBehaviour
+public class WoodCollectorScript : Interactable
 {
     
 
@@ -11,7 +11,8 @@ public class WoodCollectorScript : MonoBehaviour
     int CurrentWoodCoolDown = 0;
     int MaxWoodCoolDown = 500;
 
-
+    int currentHealth =50;
+    int maxHealth = 100;
 
 
 
@@ -34,10 +35,20 @@ public class WoodCollectorScript : MonoBehaviour
             print("Wood Collector added 50 wood");
             CurrentWoodCoolDown = 0;
         }
+        if(currentHealth<=0) 
+        { 
+        Destroy(gameObject);
+        }
     }
     private void FixedUpdate()
     {
         CurrentWoodCoolDown +=  1;
+
+    }
+    public override void Interact()
+    {
+        currentHealth = 100;
+        print(currentHealth);
 
     }
 }

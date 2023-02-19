@@ -1074,7 +1074,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 302147b444ed6644db502c740f464502, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WoodCollector: {fileID: 8887025705051287312, guid: 57d434b4f96570647a997dbebc4b6c4f, type: 3}
+  WoodCollector: {fileID: 3197684958974690188, guid: 57d434b4f96570647a997dbebc4b6c4f, type: 3}
 --- !u!114 &1388830591
 MonoBehaviour:
   m_ObjectHideFlags: 0
