@@ -8,6 +8,10 @@ public class S_Pl_Abilities : MonoBehaviour
 {
     private bool flag = false;
     private GameObject enemy1;
+    private int CameraZoomValue = 40;
+
+    public GameObject MovementScript;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,17 +34,19 @@ public class S_Pl_Abilities : MonoBehaviour
         {
             if (!flag)
             {
-                Camera.main.orthographicSize = 40;
+                CameraZoomValue = 40;
                 flag= true;
+                MovementScript.GetComponent<S_Pl_Movement>().Pl_Speed = 5;
             }
             else
             {
-                Camera.main.orthographicSize = 18;
-                flag= false;
+                CameraZoomValue = 18;
+                flag = false;
+                MovementScript.GetComponent<S_Pl_Movement>().Pl_Speed = 16;
             }
-            
+            Camera.main.orthographicSize = CameraZoomValue;
         }
-
+        
        
     }
 

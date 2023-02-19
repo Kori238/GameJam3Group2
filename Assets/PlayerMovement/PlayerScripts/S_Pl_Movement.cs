@@ -10,7 +10,6 @@ public class S_Pl_Movement : MonoBehaviour
     Vector2 Movement;
     public int Health = 100;
     public AudioSource hitSound;
-    
 
     void Update() // Update is called once per frame
     {
