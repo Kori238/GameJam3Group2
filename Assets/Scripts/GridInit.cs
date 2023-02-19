@@ -32,6 +32,7 @@ public class GridInit : MonoBehaviour
 
     private IEnumerator BuildWalls()
     {
+        grid.BuildAtCell(0, 0, wall);
         grid.BuildAtCell(3, 3, wall);
         yield return new WaitForSeconds(3);
         grid.BuildAtCell(3, 4, wall);
@@ -39,6 +40,8 @@ public class GridInit : MonoBehaviour
         grid.BuildAtCell(4, 3, wall);
         yield return new WaitForSeconds(3);
         grid.BuildAtCell(4, 4, wall);
+        yield return new WaitForSeconds(3);
+        grid.DemolishAtCell(4, 4);
         yield return new WaitForSeconds(3);
         grid.BuildAtCell(3, 5, wall);
         yield return new WaitForSeconds(3);
@@ -48,5 +51,6 @@ public class GridInit : MonoBehaviour
         yield return new WaitForSeconds(3);
         grid.BuildAtCell(2, 2, wall);
         yield return new WaitForSeconds(3);
+        grid.DemolishAtCell(2, 2);
     }
 }

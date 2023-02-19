@@ -28,14 +28,14 @@ public class GridCell
         {
             Transform obj = GameObject.Instantiate(structure, (Vector3)Values["center"], Quaternion.identity);
             Values["structure"] = obj.gameObject;
-            Debug.Log("Successfully built " + structure + " at position " + Values["gridPosition"]);
+            Debug.Log("Successfully built " + structure + " at position " + Values["gridPos"]);
             return true;
         }
         else
         {
-            Debug.Log("Unable to build " + structure + " at position " + Values["gridPosition"] + " as there is already a structure or this is not buildable");
+            Debug.Log("Unable to build " + structure + " at position " + Values["gridPos"] + " as there is already a structure or this is not buildable");
             return false;
-        } 
+        }
     }
 
     public bool Demolish()
@@ -45,12 +45,12 @@ public class GridCell
             string identifier = ((GameObject)Values["structure"]).name;
             GameObject.Destroy(((GameObject)Values["structure"]));
             Values["structure"] = null;
-            Debug.Log("Successfully destroyed " + identifier + " at position " + Values["gridPosition"]);
+            Debug.Log("Successfully destroyed " + identifier + " at position " + Values["gridPos"]);
             return true;
         }
         else
         {
-            Debug.Log("Unable to demolish at position " + Values["gridPosition"] + " as there is nothing here to destroy");
+            Debug.Log("Unable to demolish at position " + Values["gridPos"] + " as there is nothing here to destroy");
             return false;
         }
     }
@@ -64,7 +64,7 @@ public class GridCell
             return true;
         } else
         {
-            Debug.Log("Unable to damage at position " + Values["gridPosition"] + " as there is nothing here to damage or this is undamageable");
+            Debug.Log("Unable to damage at position " + Values["gridPos"] + " as there is nothing here to damage or this is undamageable");
             return false;
         }
     }
@@ -91,11 +91,12 @@ public class Grid
         {
             for (int y = 0; y < gridArray.GetLength(1); y++)
             {
+                Debug.Log(x + " " + y);
                 gridArray[x, y] = new GridCell(); // creates a GridCell object at this cell
                 Debug.DrawLine(GetCellWorldPosition(x, y), GetCellWorldPosition(x, y + 1), Color.white, 100f); // visual outline of cell gizmos
                 Debug.DrawLine(GetCellWorldPosition(x, y), GetCellWorldPosition(x + 1, y), Color.white, 100f);
                 gridArray[x, y].Values["center"] = new Vector3(x, y) * cellSize - new Vector3(cellSize/2, cellSize/2); // calculates and stores the center position of the cell to the Dictionary
-                gridArray[x, y].Values["gridPosition"] = new Vector2(x, y); 
+                gridArray[x, y].Values["gridPos"] = new Vector2(x, y); 
             }
         }
     }
@@ -108,6 +109,8 @@ public class Grid
             return false;
         } else
         {
+            Debug.Log(x + " " + y);
+            Debug.Log(gridArray[x, y].Values["gridPos"]);
             return gridArray[x, y].Build(structure);
         }
     }
@@ -159,7 +162,13 @@ public class Grid
 
     public GameObject GetStructureAtCell(int x, int y)
     {
-        return (GameObject)gridArray[x, y].Values["structure"];
+        if (x > width || y > height || x < 0 || y < 0)
+        {
+            Debug.Log("Attempted to find structure at " + x + " " + y + " but these co-ordinates are out of range");
+            return null;
+        }
+        else
+            return (GameObject)gridArray[x, y].Values["structure"];
     }
         
 
@@ -170,7 +179,7 @@ public class Grid
 
     public Vector2 GetWorldCellPosition(float x, float y)
     {
-        return new Vector2(Mathf.FloorToInt(x / cellSize), Mathf.FloorToInt(y / cellSize));
+        return new Vector2(Mathf.FloorToInt(x / cellSize + 1), Mathf.FloorToInt(y / cellSize + 1));
     }
         
 }

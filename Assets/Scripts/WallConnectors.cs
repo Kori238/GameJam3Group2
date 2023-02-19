@@ -15,7 +15,7 @@ public class WallConnectors : MonoBehaviour
     public Transform EWW;
     public Transform EWE;
     public Transform EWEW;
-    public GameObject[] adjacent;
+    public bool[] adjacent;
     public Vector2 cellPos;
     // Start is called before the first frame update
     public void updateAllConnectors()
@@ -36,16 +36,20 @@ public class WallConnectors : MonoBehaviour
 
     private void GetAdjacentWalls()
     {
-        adjacent = new GameObject[4];
+        adjacent = new bool[4];
         cellPos = GridInit.Instance.grid.GetWorldCellPosition(transform.position.x, transform.position.y);
-        if (GridInit.Instance.grid.GetStructureAtCell((int)cellPos.x, (int)cellPos.y + 1) != null && GridInit.Instance.grid.GetStructureAtCell((int)cellPos.x, (int)cellPos.y + 1).CompareTag("Wall")) 
-            adjacent[0] = GridInit.Instance.grid.GetStructureAtCell((int)cellPos.x, (int)cellPos.y + 1);
+        if (GridInit.Instance.grid.GetStructureAtCell((int)cellPos.x, (int)cellPos.y + 1) != null && GridInit.Instance.grid.GetStructureAtCell((int)cellPos.x, (int)cellPos.y + 1).CompareTag("Wall"))
+            //adjacent[0] = GridInit.Instance.grid.GetStructureAtCell((int)cellPos.x, (int)cellPos.y + 1);
+            adjacent[0] = true;
         if (GridInit.Instance.grid.GetStructureAtCell((int)cellPos.x + 1, (int)cellPos.y) != null && GridInit.Instance.grid.GetStructureAtCell((int)cellPos.x + 1, (int)cellPos.y).CompareTag("Wall"))
-            adjacent[1] = GridInit.Instance.grid.GetStructureAtCell((int)cellPos.x + 1, (int)cellPos.y);
+            //adjacent[1] = GridInit.Instance.grid.GetStructureAtCell((int)cellPos.x + 1, (int)cellPos.y);
+            adjacent[1] = true;
         if (GridInit.Instance.grid.GetStructureAtCell((int)cellPos.x, (int)cellPos.y - 1) != null && GridInit.Instance.grid.GetStructureAtCell((int)cellPos.x, (int)cellPos.y - 1).CompareTag("Wall"))
-            adjacent[2] = GridInit.Instance.grid.GetStructureAtCell((int)cellPos.x, (int)cellPos.y - 1);
+            //adjacent[2] = GridInit.Instance.grid.GetStructureAtCell((int)cellPos.x, (int)cellPos.y - 1);
+            adjacent[2] = true;
         if (GridInit.Instance.grid.GetStructureAtCell((int)cellPos.x - 1, (int)cellPos.y) != null && GridInit.Instance.grid.GetStructureAtCell((int)cellPos.x - 1, (int)cellPos.y).CompareTag("Wall"))
-            adjacent[3] = GridInit.Instance.grid.GetStructureAtCell((int)cellPos.x - 1, (int)cellPos.y);
+            //adjacent[3] = GridInit.Instance.grid.GetStructureAtCell((int)cellPos.x - 1, (int)cellPos.y);
+            adjacent[3] = true;
     }
 
 
@@ -73,7 +77,7 @@ public class WallConnectors : MonoBehaviour
 
     private void FixedUpdate()
     {
-        GetAdjacentWalls();
+        updateConnectors();
     }
 
 }
