@@ -11,7 +11,6 @@ public class S_Pl_Movement : MonoBehaviour
     public int Health = 100;
     public AudioSource hitSound;
     
-   
 
     void Update() // Update is called once per frame
     {
@@ -19,12 +18,6 @@ public class S_Pl_Movement : MonoBehaviour
 
         Movement.x = Input.GetAxisRaw("Horizontal");
         Movement.y = Input.GetAxisRaw("Vertical");
-
-        //if (Input.GetButtonDown("Fire1"))
-        //{
-          //  Attack();
-        //}
-
       
     }
 
@@ -33,12 +26,17 @@ public class S_Pl_Movement : MonoBehaviour
         //Movement:
 
         RigidBody.MovePosition(RigidBody.position + Movement * Pl_Speed * Time.fixedDeltaTime);
-    }
 
-    void Attack()
-    {
-        hitSound = GetComponent<AudioSource>();
-        hitSound.Play();
+        if (Movement.x > 0)
+        {
+            gameObject.transform.localScale = new Vector3(0.3f, 0.3922362f, 0.02614908f);
+        }else if (Movement.x < 0)
+        {
+           gameObject.transform.localScale = new Vector3(-0.3f, 0.3922362f, 0.02614908f);
+        }
+
+
     }
+    
     
 }

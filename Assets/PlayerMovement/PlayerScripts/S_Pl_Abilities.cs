@@ -2,10 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class S_Pl_Abilities : MonoBehaviour
 {
     private bool flag = false;
+    private GameObject enemy1;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,7 @@ public class S_Pl_Abilities : MonoBehaviour
         if (Input.GetButtonDown("Ability1"))
         {
             Debug.Log("MainAttack");
+            
         }
         else if (Input.GetButtonDown("Ability2"))
         {
@@ -37,5 +40,9 @@ public class S_Pl_Abilities : MonoBehaviour
             }
             
         }
+
+       
     }
+
+    
 }
