@@ -28,10 +28,10 @@ public class S_Pl_Movement : MonoBehaviour
 
         if (Movement.x > 0)
         {
-            gameObject.transform.localScale = new Vector3(0.3f, 0.3922362f, 0.02614908f);
+            gameObject.transform.localScale = new Vector3(6.401755f, 7.14f, 0.62f);
         }else if (Movement.x < 0)
         {
-           gameObject.transform.localScale = new Vector3(-0.3f, 0.3922362f, 0.02614908f);
+           gameObject.transform.localScale = new Vector3(-6.401755f, 7.14f, 0.62f);
         }
 
 
