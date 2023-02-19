@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -3085899686838365497}
   - component: {fileID: -4123081843098359457}
   m_Layer: 0
-  m_Name: MetalOre
+  m_Name: StoneOre
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

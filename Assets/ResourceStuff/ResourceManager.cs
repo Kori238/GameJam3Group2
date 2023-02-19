@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ResourceManager 
 {
-    private int metal;
+    private int stone;
     private int wood;
     private int starlight;
 
@@ -15,7 +15,7 @@ public class ResourceManager
     // Start is called before the first frame update
     void Awake()
     {
-        metal = 0;
+        stone = 0;
         wood = 0;
         starlight = 0;
     }
@@ -25,9 +25,9 @@ public class ResourceManager
     {
 
     }
-    public int GetMetal()
+    public int GetStone()
     {
-        return metal;
+        return stone;
     }
     public int GetWood()
     {
@@ -39,9 +39,9 @@ public class ResourceManager
         return starlight;
     }
 
-    public void AddMetal(int newmetal)
+    public void AddStone(int newmetal)
     {
-        metal = newmetal + metal;
+        stone = newmetal + stone;
     }
     
     public void AddWood(int newwood)
