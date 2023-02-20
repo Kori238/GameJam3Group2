@@ -8,22 +8,19 @@ public class PlayerInteractionScript : MonoBehaviour
 {
     [SerializeField] ResourceManager resourceManager;// referance to the resource manager in game scene
     [SerializeField] Transform WoodCollector;
+    [SerializeField] Transform StoneCollector;
     Vector2 boxSize = new Vector2(0.1f, 0.1f); // size of raycast
 
     string currentTool = "Interact";
     //options:
     //Interact
     //WoodCollector
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    //StoneCollector
 
-    // Update is called once per frame
+    
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
 
             PlayerInterct();
@@ -39,6 +36,11 @@ public class PlayerInteractionScript : MonoBehaviour
             currentTool = "WoodCollector";
             print("Build Wood Collector equiped");
         }
+        if (Input.GetKeyDown("3"))
+        {
+            currentTool = "StoneCollector";
+            Debug.Log("Build Stone Collector equiped");
+        }
     }
     private void PlayerInterct() //allows mutilple function to be called from mouse button 1
     {
@@ -52,6 +54,11 @@ public class PlayerInteractionScript : MonoBehaviour
             case "WoodCollector":
                 {
                     PlaceWoodCollector();
+                    break;
+                }
+            case "StoneCollector":
+                {
+                    PlaceStoneCollector();
                     break;
                 }
         }
@@ -117,7 +124,7 @@ public class PlayerInteractionScript : MonoBehaviour
         if(GridInit.Instance.resourceManager.GetWood()>= 50)
         {
             gridPos = GridInit.Instance.grid.GetWorldCellPosition(MouseWorldPos.x, MouseWorldPos.y);
-            bool valid = GridInit.Instance.grid.BuildAtCell((int)gridPos.x + 1, (int)gridPos.y + 1, WoodCollector);
+            bool valid = GridInit.Instance.grid.BuildAtCell((int)gridPos.x , (int)gridPos.y , WoodCollector);
 
             if (valid)
             {
@@ -125,6 +132,24 @@ public class PlayerInteractionScript : MonoBehaviour
             }
         }
        
+
+    }
+    private void PlaceStoneCollector()
+    {
+        Vector2 MousePos = Input.mousePosition;
+        Vector2 MouseWorldPos = Camera.main.ScreenToWorldPoint(MousePos);
+        Vector2 gridPos;
+        if (GridInit.Instance.resourceManager.GetStone() >= 50)
+        {
+            gridPos = GridInit.Instance.grid.GetWorldCellPosition(MouseWorldPos.x, MouseWorldPos.y);
+            bool valid = GridInit.Instance.grid.BuildAtCell((int)gridPos.x, (int)gridPos.y, StoneCollector);
+
+            if (valid)
+            {
+                GridInit.Instance.resourceManager.AddStone(-50);
+            }
+        }
+
 
     }
 }
