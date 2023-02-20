@@ -91,7 +91,6 @@ public class Grid
         {
             for (int y = 0; y < gridArray.GetLength(1); y++)
             {
-                Debug.Log(x + " " + y);
                 gridArray[x, y] = new GridCell(); // creates a GridCell object at this cell
                 Debug.DrawLine(GetCellWorldPosition(x, y), GetCellWorldPosition(x, y + 1), Color.white, 100f); // visual outline of cell gizmos
                 Debug.DrawLine(GetCellWorldPosition(x, y), GetCellWorldPosition(x + 1, y), Color.white, 100f);
@@ -109,8 +108,6 @@ public class Grid
             return false;
         } else
         {
-            Debug.Log(x + " " + y);
-            Debug.Log(gridArray[x, y].Values["gridPos"]);
             return gridArray[x, y].Build(structure);
         }
     }

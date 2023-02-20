@@ -11,6 +11,7 @@ public class GridInit : MonoBehaviour
     public Transform wall;
     public Grid grid;
     public ResourceManager resourceManager;
+    public bool wallDemo = false;
 
     private void Awake()
     {
@@ -22,7 +23,11 @@ public class GridInit : MonoBehaviour
         _instance = this;
         grid = new Grid(9, 9, 10f);
         resourceManager = new ResourceManager();
-        StartCoroutine(BuildWalls());
+        if (wallDemo)
+        {
+            StartCoroutine(BuildWalls());
+        }
+        
     }
     
     private void Start()
