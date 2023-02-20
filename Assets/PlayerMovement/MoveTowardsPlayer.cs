@@ -12,6 +12,8 @@ public class MoveTowardsPlayer : MonoBehaviour
 
     public GameObject PlayerScript;
 
+    public int health = 20;
+
     void Update()
     {
         // Calculate the direction to move towards the target
@@ -27,11 +29,28 @@ public class MoveTowardsPlayer : MonoBehaviour
             
             HealthINT.text = hp.ToString();
 
+
+
+        }
+
+        }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == 7)
+        {
+            Damaged(5);
+        }
+    }
+
+    public void Damaged(int amount)
+    {
+        health -= amount;
+        if (health <= 0)
+        {
             Destroy(gameObject);
-
         }
-
-        }
+    }
 }
 
 

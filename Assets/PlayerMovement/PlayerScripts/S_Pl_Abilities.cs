@@ -12,6 +12,8 @@ public class S_Pl_Abilities : MonoBehaviour
     private int CameraZoomValue = 40;
     Animator animator;
     public GameObject MovementScript;
+    public Collider2D AttackCollider;
+    private bool canAttack = true;
 
     // Start is called before the first frame update
     void Start()
@@ -24,8 +26,22 @@ public class S_Pl_Abilities : MonoBehaviour
 
     void Ability1()
     {
-        Debug.Log("MainAttack");
-        animator.Play("Attack");
+        if (canAttack)
+        {
+            Debug.Log("MainAttack");
+            animator.Play("Attack");
+
+            StartCoroutine(AttackDelay());
+        }
+    }
+
+    private IEnumerator AttackDelay()
+    {
+        canAttack = false;
+        AttackCollider.enabled = true;
+        yield return new WaitForSeconds(1f);
+        AttackCollider.enabled = false;
+        canAttack = true;
     }
 
         // Update is called once per frame
@@ -34,11 +50,7 @@ public class S_Pl_Abilities : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             Ability1();
-            int i;
-            for (i = 100; i > 0; i--)
-            {
-                Debug.Log(i);
-            }
+            
             animator.Play("Idle");
 
         }
