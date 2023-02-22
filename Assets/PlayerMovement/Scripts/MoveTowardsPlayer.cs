@@ -10,6 +10,8 @@ public class MoveTowardsPlayer : MonoBehaviour
 
     public TMP_Text HealthINT;
 
+    public GameObject SoundControllerScript;
+
     public GameObject PlayerScript;
 
     public int health = 20;
@@ -30,6 +32,7 @@ public class MoveTowardsPlayer : MonoBehaviour
             {
                 canAttack = false;
                 StartCoroutine(DamagePlayer());
+                SoundControllerScript.GetComponent<S_SoundController>().AttackHit();
             }
         }
 

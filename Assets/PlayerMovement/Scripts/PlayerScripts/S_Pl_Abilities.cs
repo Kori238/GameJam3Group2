@@ -12,6 +12,7 @@ public class S_Pl_Abilities : MonoBehaviour
     private int CameraZoomValue = 40;
     Animator animator;
     public GameObject MovementScript;
+    public GameObject SoundControllerScript;
     public Collider2D AttackCollider;
     private bool canAttack = true;
 
@@ -29,6 +30,7 @@ public class S_Pl_Abilities : MonoBehaviour
         if (canAttack == true)
         {
             Debug.Log("MainAttack");
+            SoundControllerScript.GetComponent<S_SoundController>().AttackSound();
             StartCoroutine(AttackDelay());
         }
     }
