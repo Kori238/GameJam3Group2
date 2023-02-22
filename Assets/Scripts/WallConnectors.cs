@@ -8,8 +8,10 @@ public class WallConnectors : MonoBehaviour
     public Transform center;
     public Transform connectorNS;
     public Transform connectorEW;
+
     public Transform C;
     public Transform CD;
+    //Naming scheme = First 2 letters is the connector, following letters is the directions it should connect to, if it ends in D, it is the destroyed version
     public Transform NS;
     public Transform NSS;
     public Transform NSSD;
@@ -26,8 +28,7 @@ public class WallConnectors : MonoBehaviour
     public Transform EWEWD;
     public bool[] adjacent;
     public Vector2 cellPos;
-    // Start is called before the first frame update
-    public void updateAllConnectors()
+    public void updateAllConnectors() //Updates this wall's connectors and also updates walls connectors in all 4 cardinal directions
     {
         cellPos = GridInit.Instance.grid.GetWorldCellPosition(transform.position.x, transform.position.y);
         updateConnectors();
@@ -42,7 +43,7 @@ public class WallConnectors : MonoBehaviour
                 .transform.GetComponent<WallConnectors>().updateConnectors();
     }
 
-    private void GetAdjacentWalls()
+    private void GetAdjacentWalls() // Checks if there are walls in all 4 cardinal directions
     {
         adjacent = new bool[4];
         cellPos = GridInit.Instance.grid.GetWorldCellPosition(transform.position.x, transform.position.y);
@@ -57,7 +58,7 @@ public class WallConnectors : MonoBehaviour
     }
 
 
-    public void updateConnectors()
+    public void updateConnectors() // Destroys all visual parts of the wall and then rebuilds appropriate ones
     { 
         GetAdjacentWalls();
 
@@ -65,7 +66,7 @@ public class WallConnectors : MonoBehaviour
         Destroy(connectorNS.gameObject);
         Destroy(connectorEW.gameObject);
 
-        if (gameObject.GetComponent<Wall>().destroyed)
+        if (gameObject.GetComponent<Wall>().destroyed) //Destroyed Sprites
         {
             center = Instantiate(CD, transform.position + NSNS.transform.position, Quaternion.identity, transform);
             if (adjacent[0] & adjacent[2]) connectorNS = Instantiate(NSNSD, transform.position + NSNS.transform.position, Quaternion.identity, transform);
@@ -77,7 +78,7 @@ public class WallConnectors : MonoBehaviour
             else if (adjacent[1]) connectorEW = Instantiate(EWED, transform.position + EWE.transform.position, Quaternion.identity, transform);
             else if (adjacent[3]) connectorEW = Instantiate(EWWD, transform.position + EWW.transform.position, Quaternion.identity, transform);
             else connectorEW = Instantiate(EW, transform.position, Quaternion.identity, transform);
-        } else
+        } else //Not Destroyed Sprites
         {
             center = Instantiate(C, transform.position + NSNS.transform.position, Quaternion.identity, transform);
             if (adjacent[0] & adjacent[2]) connectorNS = Instantiate(NSNS, transform.position + NSNS.transform.position, Quaternion.identity, transform);
