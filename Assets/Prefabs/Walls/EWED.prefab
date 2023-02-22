@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1251863355554281704}
   - component: {fileID: 6873913889231831967}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EWED
   m_TagString: Untagged
   m_Icon: {fileID: 0}

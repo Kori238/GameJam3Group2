@@ -50,6 +50,9 @@ public class Structure : MonoBehaviour
         if (destroyed && health > 0)
         {
             destroyed = false;
+        } else if (!destroyed && health <= 0)
+        {
+            destroyed = true;
         }
     }
 

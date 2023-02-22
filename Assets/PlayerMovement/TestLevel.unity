@@ -1085,7 +1085,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tree: {fileID: 5651157523147767825, guid: 812bfb0d047397843b08d90113ec6120, type: 3}
   wall: {fileID: 8329114379578713061, guid: f2b7826ec2bf66b46b59db64896a0aa6, type: 3}
-  wallDemo: 0
+  wallDemo: 1
 --- !u!4 &1294950277
 Transform:
   m_ObjectHideFlags: 0
@@ -2095,7 +2095,8 @@ PrefabInstance:
       propertyPath: resourceManager
       value: 
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2148468974374724595, guid: 812bfb0d047397843b08d90113ec6120, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 812bfb0d047397843b08d90113ec6120, type: 3}
 --- !u!1 &1885312077
 GameObject:

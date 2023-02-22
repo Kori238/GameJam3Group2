@@ -62,7 +62,6 @@ public class GridInit : MonoBehaviour
         grid.BuildAtCell(2, 3, wall);
         yield return new WaitForSeconds(3);
         grid.BuildAtCell(2, 2, wall);
-        yield return new WaitForSeconds(3);
-        grid.DemolishAtCell(2, 2);
+        grid.SetHealthAtCell(2, 2, 0);
     }
 }
