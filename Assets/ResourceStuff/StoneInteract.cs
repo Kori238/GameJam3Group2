@@ -8,7 +8,7 @@ public class StoneInteract : Interactable
     
     public override void Interact()
     {
-        GridInit.Instance.resourceManager.AddStone(10);
+        Init.Instance.resourceManager.AddStone(10);
     }
 
 }

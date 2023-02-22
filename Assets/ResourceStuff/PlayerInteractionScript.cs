@@ -24,7 +24,7 @@ public class PlayerInteractionScript : MonoBehaviour
         {
 
             PlayerInterct();
-            print("wood = " + GridInit.Instance.resourceManager.GetWood());
+            print("wood = " + Init.Instance.resourceManager.GetWood());
 
         }
         if (Input.GetKeyDown("1")){
@@ -121,14 +121,14 @@ public class PlayerInteractionScript : MonoBehaviour
         Vector2 MousePos = Input.mousePosition;
         Vector2 MouseWorldPos = Camera.main.ScreenToWorldPoint(MousePos);
         Vector2 gridPos;
-        if(GridInit.Instance.resourceManager.GetWood()>= 50)
+        if(Init.Instance.resourceManager.GetWood()>= 50)
         {
-            gridPos = GridInit.Instance.grid.GetWorldCellPosition(MouseWorldPos.x, MouseWorldPos.y);
-            bool valid = GridInit.Instance.grid.BuildAtCell((int)gridPos.x , (int)gridPos.y , WoodCollector);
+            gridPos = Init.Instance.grid.GetWorldCellPosition(MouseWorldPos.x, MouseWorldPos.y);
+            bool valid = Init.Instance.grid.BuildAtCell((int)gridPos.x , (int)gridPos.y , WoodCollector);
 
             if (valid)
             {
-                GridInit.Instance.resourceManager.AddWood(-50);
+                Init.Instance.resourceManager.AddWood(-50);
             }
         }
        
@@ -139,14 +139,14 @@ public class PlayerInteractionScript : MonoBehaviour
         Vector2 MousePos = Input.mousePosition;
         Vector2 MouseWorldPos = Camera.main.ScreenToWorldPoint(MousePos);
         Vector2 gridPos;
-        if (GridInit.Instance.resourceManager.GetStone() >= 50)
+        if (Init.Instance.resourceManager.GetStone() >= 50)
         {
-            gridPos = GridInit.Instance.grid.GetWorldCellPosition(MouseWorldPos.x, MouseWorldPos.y);
-            bool valid = GridInit.Instance.grid.BuildAtCell((int)gridPos.x, (int)gridPos.y, StoneCollector);
+            gridPos = Init.Instance.grid.GetWorldCellPosition(MouseWorldPos.x, MouseWorldPos.y);
+            bool valid = Init.Instance.grid.BuildAtCell((int)gridPos.x, (int)gridPos.y, StoneCollector);
 
             if (valid)
             {
-                GridInit.Instance.resourceManager.AddStone(-50);
+                Init.Instance.resourceManager.AddStone(-50);
             }
         }
 

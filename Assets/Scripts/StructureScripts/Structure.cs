@@ -10,6 +10,7 @@ public class Structure : MonoBehaviour
     public float maxHealth;
     public bool damageable;
     public bool destroyed;
+    public Vector2 gridPos;
 
     public virtual void Damaged(float amount)
     {
@@ -31,6 +32,7 @@ public class Structure : MonoBehaviour
     {
         destroyed = true;
         Debug.Log(gameObject.name + " has been Destroyed!");
+        UpdatePathfinding();
     }
 
     public virtual void Demolished()
@@ -54,6 +56,7 @@ public class Structure : MonoBehaviour
         {
             destroyed = true;
         }
+        UpdatePathfinding();
     }
 
     public virtual void Healed(float amount)
@@ -68,5 +71,11 @@ public class Structure : MonoBehaviour
         {
             destroyed = false;
         }
+        UpdatePathfinding();
+    }
+
+    public virtual void UpdatePathfinding()
+    {
+        Init.Instance.grid.gridArray[(int)gridPos.x, (int)gridPos.y].Values["pathfindable"] = !destroyed;
     }
 }

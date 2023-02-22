@@ -8,7 +8,7 @@ public class TreeInteract:  Interactable
     
     public override void Interact()
     {
-        GridInit.Instance.resourceManager.AddWood(20);
+        Init.Instance.resourceManager.AddWood(20);
     
     }
 }

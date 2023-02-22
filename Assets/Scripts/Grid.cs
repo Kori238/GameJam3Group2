@@ -15,6 +15,7 @@ public class GridCell
         this.Values.Add("structure", null);
         this.Values.Add("center", new Vector3(0, 0, 0));
         this.Values.Add("gridPos", new Vector2(0, 0));
+        this.Values.Add("pathfindable", true);
     }
 
     public Dictionary<object, object> Values
@@ -30,6 +31,8 @@ public class GridCell
             Transform obj = GameObject.Instantiate(structure, (Vector3)Values["center"], Quaternion.identity);
             Values["structure"] = obj.gameObject;
             Debug.Log("Successfully built " + structure + " at position " + Values["gridPos"]);
+            obj.gameObject.GetComponent<Structure>().gridPos = (Vector2)Values["gridPos"];
+            Values["pathfindable"] = false;
             return true;
         }
         else
@@ -47,6 +50,7 @@ public class GridCell
             Values["structure"] = null;
             tempObj.GetComponent<Structure>().Demolished();
             Debug.Log("Successfully destroyed " + tempObj.name + " at position " + Values["gridPos"]);
+            Values["pathfindable"] = true;
             return true;
         }
         else
@@ -116,7 +120,7 @@ public class Grid
 
     public Grid(int width, int height, float cellSize)
     {
-        this.width = width; // this is called by GridInit to define the width, height and cellSize there
+        this.width = width; // this is called by Init to define the width, height and cellSize there
         this.height = height;
         this.cellSize = cellSize;
         

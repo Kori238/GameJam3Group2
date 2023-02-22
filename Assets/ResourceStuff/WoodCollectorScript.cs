@@ -26,7 +26,7 @@ public class WoodCollectorScript : Interactable
     {
         if(CurrentWoodCoolDown >= MaxWoodCoolDown)
         {
-            GridInit.Instance.resourceManager.AddWood((MAssigned/MaxMAssigned)*CollectionAmount);
+            Init.Instance.resourceManager.AddWood((MAssigned/MaxMAssigned)*CollectionAmount);
             //resourceManager.AddWood(50);
             print("Wood Collector added "+ ((MAssigned / MaxMAssigned) * CollectionAmount) + " wood");
             CurrentWoodCoolDown = 0;
@@ -43,7 +43,7 @@ public class WoodCollectorScript : Interactable
     }
     public override void Interact()
     {
-        if(GridInit.Instance.resourceManager.GetWood()>= 50)
+        if(Init.Instance.resourceManager.GetWood()>= 50)
         {
             currentHealth = maxHealth;
             Debug.Log("building repaired");

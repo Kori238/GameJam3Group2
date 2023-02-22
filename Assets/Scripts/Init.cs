@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GridInit : MonoBehaviour
+public class Init : MonoBehaviour
 {
-    private static GridInit _instance;
-    public static GridInit Instance {  get { return _instance;  } }
+    private static Init _instance;
+    public static Init Instance {  get { return _instance;  } }
 
     public Transform tree;
     public Transform wall;

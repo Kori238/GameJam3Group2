@@ -27,33 +27,32 @@ public class WallConnectors : MonoBehaviour
     public Transform EWEW;
     public Transform EWEWD;
     public bool[] adjacent;
-    public Vector2 cellPos;
     public void updateAllConnectors() //Updates this wall's connectors and also updates walls connectors in all 4 cardinal directions
     {
-        cellPos = GridInit.Instance.grid.GetWorldCellPosition(transform.position.x, transform.position.y);
+        Vector2 cellPos = gameObject.GetComponent<Wall>().gridPos;
         updateConnectors();
 
-        if (adjacent[0]) ((GameObject)GridInit.Instance.grid.gridArray[(int)cellPos.x, (int)cellPos.y + 1].Values["structure"])
+        if (adjacent[0]) ((GameObject)Init.Instance.grid.gridArray[(int)cellPos.x, (int)cellPos.y + 1].Values["structure"])
                 .transform.GetComponent<WallConnectors>().updateConnectors();
-        if (adjacent[1]) ((GameObject)GridInit.Instance.grid.gridArray[(int)cellPos.x + 1, (int)cellPos.y].Values["structure"])
+        if (adjacent[1]) ((GameObject)Init.Instance.grid.gridArray[(int)cellPos.x + 1, (int)cellPos.y].Values["structure"])
                 .transform.GetComponent<WallConnectors>().updateConnectors();
-        if (adjacent[2]) ((GameObject)GridInit.Instance.grid.gridArray[(int)cellPos.x, (int)cellPos.y - 1].Values["structure"])
+        if (adjacent[2]) ((GameObject)Init.Instance.grid.gridArray[(int)cellPos.x, (int)cellPos.y - 1].Values["structure"])
                 .transform.GetComponent<WallConnectors>().updateConnectors();
-        if (adjacent[3]) ((GameObject)GridInit.Instance.grid.gridArray[(int)cellPos.x - 1, (int)cellPos.y].Values["structure"])
+        if (adjacent[3]) ((GameObject)Init.Instance.grid.gridArray[(int)cellPos.x - 1, (int)cellPos.y].Values["structure"])
                 .transform.GetComponent<WallConnectors>().updateConnectors();
     }
 
     private void GetAdjacentWalls() // Checks if there are walls in all 4 cardinal directions
     {
         adjacent = new bool[4];
-        cellPos = GridInit.Instance.grid.GetWorldCellPosition(transform.position.x, transform.position.y);
-        if (GridInit.Instance.grid.GetStructureAtCell((int)cellPos.x, (int)cellPos.y + 1) != null && GridInit.Instance.grid.GetStructureAtCell((int)cellPos.x, (int)cellPos.y + 1).CompareTag("Wall"))
+        Vector2 cellPos = gameObject.GetComponent<Wall>().gridPos;
+        if (Init.Instance.grid.GetStructureAtCell((int)cellPos.x, (int)cellPos.y + 1) != null && Init.Instance.grid.GetStructureAtCell((int)cellPos.x, (int)cellPos.y + 1).CompareTag("Wall"))
             adjacent[0] = true;
-        if (GridInit.Instance.grid.GetStructureAtCell((int)cellPos.x + 1, (int)cellPos.y) != null && GridInit.Instance.grid.GetStructureAtCell((int)cellPos.x + 1, (int)cellPos.y).CompareTag("Wall"))
+        if (Init.Instance.grid.GetStructureAtCell((int)cellPos.x + 1, (int)cellPos.y) != null && Init.Instance.grid.GetStructureAtCell((int)cellPos.x + 1, (int)cellPos.y).CompareTag("Wall"))
             adjacent[1] = true;
-        if (GridInit.Instance.grid.GetStructureAtCell((int)cellPos.x, (int)cellPos.y - 1) != null && GridInit.Instance.grid.GetStructureAtCell((int)cellPos.x, (int)cellPos.y - 1).CompareTag("Wall"))
+        if (Init.Instance.grid.GetStructureAtCell((int)cellPos.x, (int)cellPos.y - 1) != null && Init.Instance.grid.GetStructureAtCell((int)cellPos.x, (int)cellPos.y - 1).CompareTag("Wall"))
             adjacent[2] = true;
-        if (GridInit.Instance.grid.GetStructureAtCell((int)cellPos.x - 1, (int)cellPos.y) != null && GridInit.Instance.grid.GetStructureAtCell((int)cellPos.x - 1, (int)cellPos.y).CompareTag("Wall"))
+        if (Init.Instance.grid.GetStructureAtCell((int)cellPos.x - 1, (int)cellPos.y) != null && Init.Instance.grid.GetStructureAtCell((int)cellPos.x - 1, (int)cellPos.y).CompareTag("Wall"))
             adjacent[3] = true;
     }
 
