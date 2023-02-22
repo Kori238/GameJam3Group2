@@ -2,6 +2,7 @@ using Mono.Cecil.Cil;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.GameCenter;
 
@@ -42,10 +43,10 @@ public class GridCell
     {
         if (Values["structure"] != null)
         {
-            string identifier = ((GameObject)Values["structure"]).name;
-            GameObject.Destroy(((GameObject)Values["structure"]));
+            GameObject tempObj = ((GameObject)Values["structure"]);
             Values["structure"] = null;
-            Debug.Log("Successfully destroyed " + identifier + " at position " + Values["gridPos"]);
+            tempObj.GetComponent<Structure>().Demolished();
+            Debug.Log("Successfully destroyed " + tempObj.name + " at position " + Values["gridPos"]);
             return true;
         }
         else
@@ -57,14 +58,49 @@ public class GridCell
 
     public bool Damage(float amount)
     {
-        if (Values["structure"] != null && ((GameObject)Values["structure"]).GetComponent<StructureValues>().damageable == true)
+        if (Values["structure"] != null && ((GameObject)Values["structure"]).GetComponent<Structure>().damageable == true)
         {
-            ((GameObject)Values["structure"]).GetComponent<StructureValues>().health -= amount;
+            ((GameObject)Values["structure"]).GetComponent<Structure>().Damaged(amount);
             Debug.Log("Dealt " + amount + " damage to " + ((GameObject)Values["structure"]).name + " at position " + Values["gridPos"]);
             return true;
         } else
         {
             Debug.Log("Unable to damage at position " + Values["gridPos"] + " as there is nothing here to damage or this is undamageable");
+            return false;
+        }
+    }
+
+    public bool Heal(float amount)
+    {
+        if (Values["structure"] != null)
+        {
+            ((GameObject)Values["structure"]).GetComponent<Structure>().Healed(amount);
+            Debug.Log("Restored " + amount + " health to " + ((GameObject)Values["structure"]).name + " at position " + Values["gridPos"]);
+            return true;
+        }
+        else
+        {
+            Debug.Log("Unable to heal at position " + Values["gridPos"] + " as there is nothing here to heal");
+            return false;
+        }
+    }
+
+    public bool SetHealth(float amount, bool fullyHeal = false)
+    {
+        if (Values["structure"] != null)
+        {
+            ((GameObject)Values["structure"]).GetComponent<Structure>().SetHealth(amount, fullyHeal);
+            if (fullyHeal) {
+                Debug.Log("Fully healed " + ((GameObject)Values["structure"]).name + " at position " + Values["gridPos"]);
+            } else
+            {
+                Debug.Log("Set health of  " + ((GameObject)Values["structure"]).name + "  to " + amount + " at position " + Values["gridPos"]);
+            }
+            return true;
+        }
+        else
+        {
+            Debug.Log("Unable to set health at position " + Values["gridPos"] + " as there is nothing here");
             return false;
         }
     }
@@ -92,8 +128,8 @@ public class Grid
             for (int y = 0; y < gridArray.GetLength(1); y++)
             {
                 gridArray[x, y] = new GridCell(); // creates a GridCell object at this cell
-                Debug.DrawLine(GetCellWorldPosition(x, y), GetCellWorldPosition(x, y + 1), Color.white, 100f); // visual outline of cell gizmos
-                Debug.DrawLine(GetCellWorldPosition(x, y), GetCellWorldPosition(x + 1, y), Color.white, 100f);
+                Debug.DrawLine(GetCellWorldPosition(x, y), GetCellWorldPosition(x, y - 1), Color.white, 100f); // visual outline of cell gizmos
+                Debug.DrawLine(GetCellWorldPosition(x, y), GetCellWorldPosition(x - 1, y), Color.white, 100f);
                 gridArray[x, y].Values["center"] = new Vector3(x, y) * cellSize - new Vector3(cellSize/2, cellSize/2); // calculates and stores the center position of the cell to the Dictionary
                 gridArray[x, y].Values["gridPos"] = new Vector2(x, y); 
             }
@@ -136,27 +172,6 @@ public class Grid
         }
     }
 
-    public bool[] GetAdjacentWalls(int x, int y)
-    {
-        bool[] returnArray = new bool[4];
-        returnArray[0] = false;
-        returnArray[1] = false;
-        returnArray[2] = false;
-        returnArray[3] = false;
-
-        //Debug.Log(((GameObject)gridArray[x + 1, y].Values["structure"]).name);
-
-        if (gridArray[x, y + 1].Values["structure"] != null && ((GameObject)gridArray[x, y + 1].Values["structure"]).tag == "Wall")
-            returnArray[0] = true;
-        if (gridArray[x + 1, y].Values["structure"] != null && ((GameObject)gridArray[x + 1, y].Values["structure"]).tag == "Wall")
-            returnArray[1] = true;
-        if (gridArray[x, y - 1].Values["structure"] != null && ((GameObject)gridArray[x, y - 1].Values["structure"]).tag == "Wall")
-            returnArray[2] = true;
-        if (gridArray[x - 1, y].Values["structure"] != null && ((GameObject)gridArray[x - 1, y].Values["structure"]).tag == "Wall")
-            returnArray[3] = true;
-        return returnArray;
-    }
-
     public GameObject GetStructureAtCell(int x, int y)
     {
         if (x > width || y > height || x < 0 || y < 0)
@@ -166,6 +181,32 @@ public class Grid
         }
         else
             return (GameObject)gridArray[x, y].Values["structure"];
+    }
+
+    public bool HealAtCell(int x, int y, float amount)
+    {
+        if (x > width || y > height || x < 0 || y < 0)
+        {
+            Debug.Log("Could not heal at position " + x + " " + y + " as these co-ordinates are invalid");
+            return false;
+        }
+        else
+        {
+            return gridArray[x, y].Heal(amount);
+        }
+    }
+
+    public bool SetHealthAtCell(int x, int y, float amount, bool fullyHeal = false)
+    {
+        if (x > width || y > height || x < 0 || y < 0)
+        {
+            Debug.Log("Could not set health at position " + x + " " + y + " as these co-ordinates are invalid");
+            return false;
+        }
+        else
+        {
+            return gridArray[x, y].SetHealth(amount, fullyHeal);
+        }
     }
         
 
