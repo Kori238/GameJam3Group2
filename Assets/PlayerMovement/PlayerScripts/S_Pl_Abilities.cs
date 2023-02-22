@@ -26,11 +26,9 @@ public class S_Pl_Abilities : MonoBehaviour
 
     void Ability1()
     {
-        if (canAttack)
+        if (canAttack == true)
         {
             Debug.Log("MainAttack");
-            animator.Play("Attack");
-
             StartCoroutine(AttackDelay());
         }
     }
@@ -39,7 +37,9 @@ public class S_Pl_Abilities : MonoBehaviour
     {
         canAttack = false;
         AttackCollider.enabled = true;
+        animator.Play("Attack");
         yield return new WaitForSeconds(1f);
+        animator.Play("Idle");
         AttackCollider.enabled = false;
         canAttack = true;
     }
@@ -50,9 +50,7 @@ public class S_Pl_Abilities : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             Ability1();
-            
-            animator.Play("Idle");
-
+           
         }
         else if (Input.GetButtonDown("Ability2"))
         {

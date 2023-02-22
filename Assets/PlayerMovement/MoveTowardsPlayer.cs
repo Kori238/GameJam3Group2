@@ -25,7 +25,7 @@ public class MoveTowardsPlayer : MonoBehaviour
         if (Vector3.Distance(transform.position, target.position) <= 4f)  //Determinds the distance between the player and the enemy.
         {
 
-            int hp = PlayerScript.GetComponent<S_Pl_Movement>().Health -= 20;
+            int hp = PlayerScript.GetComponent<S_Pl_Movement>().Health -= 1;
             
             HealthINT.text = hp.ToString();
 
@@ -37,6 +37,7 @@ public class MoveTowardsPlayer : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("Trigger");
         if (collision.gameObject.layer == 7)
         {
             Damaged(5);
