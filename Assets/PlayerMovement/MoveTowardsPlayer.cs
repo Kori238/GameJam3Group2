@@ -14,6 +14,8 @@ public class MoveTowardsPlayer : MonoBehaviour
 
     public int health = 20;
 
+    private bool canAttack = true;
+
     void Update()
     {
         // Calculate the direction to move towards the target
@@ -24,21 +26,27 @@ public class MoveTowardsPlayer : MonoBehaviour
 
         if (Vector3.Distance(transform.position, target.position) <= 4f)  //Determinds the distance between the player and the enemy.
         {
-
-            int hp = PlayerScript.GetComponent<S_Pl_Movement>().Health -= 1;
-            
-            HealthINT.text = hp.ToString();
-
-
-
+            if (canAttack)
+            {
+                canAttack = false;
+                StartCoroutine(DamagePlayer());
+            }
         }
 
-        }
+    }
+
+    private IEnumerator DamagePlayer()
+    {
+        int hp = PlayerScript.GetComponent<S_Pl_Movement>().Health -= 5;
+        HealthINT.text = hp.ToString();
+
+        yield return new WaitForSeconds(1f);
+        canAttack = true;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Trigger");
-        if (collision.gameObject.layer == 7)
+        if (collision.gameObject.layer == 7) //If the Collider is the Players attack range then...
         {
             Damaged(5);
         }
@@ -50,6 +58,7 @@ public class MoveTowardsPlayer : MonoBehaviour
         if (health <= 0)
         {
             Destroy(gameObject);
+            StopCoroutine(DamagePlayer());
         }
     }
 }
