@@ -6,7 +6,7 @@ public class S_SoundController : MonoBehaviour
 {
     public AudioSource SoundSource;
 
-    public AudioClip clip1, clip2;// clip3;
+    public AudioClip clip1, clip2, clip3;
 
     public void AttackSound()
     {
@@ -17,6 +17,12 @@ public class S_SoundController : MonoBehaviour
     public void AttackHit()
     {
         SoundSource.clip = clip2;
+        SoundSource.Play();
+    }
+
+    public void WoodMine()
+    {
+        SoundSource.clip = clip3;
         SoundSource.Play();
     }
 }

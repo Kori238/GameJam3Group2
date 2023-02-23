@@ -8,7 +8,7 @@ public class ResourceManager
     private int stone = 50;
     private int wood;
     private int starlight;
-
+    
 
 
     public int GetStone()

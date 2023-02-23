@@ -17,15 +17,13 @@ public class PlayerInteractionScript : MonoBehaviour
     //WoodCollector
     //StoneCollector
 
-    
+
     void Update()
     {
         if (Input.GetMouseButtonDown(1))
         {
-
             PlayerInterct();
             print("wood = " + Init.Instance.resourceManager.GetWood());
-
         }
         if (Input.GetKeyDown("1")){
             currentTool = "Interact";
@@ -42,7 +40,7 @@ public class PlayerInteractionScript : MonoBehaviour
             Debug.Log("Build Stone Collector equiped");
         }
     }
-    private void PlayerInterct() //allows mutilple function to be called from mouse button 1
+    private void PlayerInterct() //allows mutilple function to be called from mouse button 2
     {
         switch (currentTool)
         {
