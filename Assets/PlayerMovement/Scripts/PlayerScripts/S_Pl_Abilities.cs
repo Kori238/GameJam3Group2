@@ -76,8 +76,17 @@ public class S_Pl_Abilities : MonoBehaviour
             Camera.main.orthographicSize = CameraZoomValue;
         }
         
-       
     }
 
-    
+    public void DashZoom()
+    {
+        CameraZoomValue = 16;
+        Camera.main.orthographicSize = CameraZoomValue;
+    }
+    public void DashunZoom()
+    {
+        CameraZoomValue = 18;
+        Camera.main.orthographicSize = CameraZoomValue;
+    }
+
 }

@@ -5,12 +5,14 @@ using UnityEngine;
 
 public class S_Pl_Movement : MonoBehaviour
 {
-    public float Pl_Speed = 5f; //Player Speed
+    public float Pl_Speed = 16f; //Player Speed
     public Rigidbody2D RigidBody; //Reference to RigidBody2D
     Vector2 Movement;
     public int Health = 100;
     public AudioSource hitSound;
-
+    private bool canDash = true;
+    
+    
     void Update() // Update is called once per frame
     {
         //Input:
@@ -18,9 +20,31 @@ public class S_Pl_Movement : MonoBehaviour
         Movement.x = Input.GetAxisRaw("Horizontal");
         Movement.y = Input.GetAxisRaw("Vertical");
       
+
+        if (Input.GetButtonDown("LeftShift"))
+        {
+            if (canDash)
+            {
+                StartCoroutine(DashDelay());
+            }
+        }
     }
 
-    private void FixedUpdate() //Executed on a fixed timer (Not on framerate)
+    private IEnumerator DashDelay()
+    {
+        S_Pl_Abilities abilities = GetComponent<S_Pl_Abilities>();
+
+        canDash = false;
+        Pl_Speed = 45f;
+        abilities.DashZoom();
+        yield return new WaitForSeconds(0.3f);
+        Pl_Speed = 16f;
+        abilities.DashunZoom();
+        yield return new WaitForSeconds(3f);
+        canDash = true;
+    }
+
+        private void FixedUpdate() //Executed on a fixed timer (Not on framerate)
     {
         //Movement:
 
@@ -36,6 +60,8 @@ public class S_Pl_Movement : MonoBehaviour
 
 
     }
+
+
     
     
 }
