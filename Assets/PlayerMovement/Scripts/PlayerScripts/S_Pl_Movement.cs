@@ -11,8 +11,8 @@ public class S_Pl_Movement : MonoBehaviour
     public int Health = 100;
     public AudioSource hitSound;
     private bool canDash = true;
-    
-    
+    public GameObject SoundControllerScript;
+
     void Update() // Update is called once per frame
     {
         //Input:
@@ -25,6 +25,7 @@ public class S_Pl_Movement : MonoBehaviour
         {
             if (canDash)
             {
+                SoundControllerScript.GetComponent<S_SoundController>().Dash();
                 StartCoroutine(DashDelay());
             }
         }
