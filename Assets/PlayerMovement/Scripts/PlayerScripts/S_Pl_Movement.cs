@@ -12,6 +12,7 @@ public class S_Pl_Movement : MonoBehaviour
     public AudioSource hitSound;
     private bool canDash = true;
     public GameObject SoundControllerScript;
+    public Transform PlayerTransform;
 
     void Update() // Update is called once per frame
     {
@@ -29,6 +30,16 @@ public class S_Pl_Movement : MonoBehaviour
                 StartCoroutine(DashDelay());
             }
         }
+
+        if (Health <= 0)
+        {
+            PlayerDeath();
+        }
+    }
+
+    void PlayerDeath()
+    {
+        PlayerTransform.position = new Vector3(2.154672f, 13.90528f, -0.4391842f);
     }
 
     private IEnumerator DashDelay()
