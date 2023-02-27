@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Resources;
+using UnityEditor;
 using UnityEngine;
 
 public class S_Pl_Movement : MonoBehaviour
@@ -40,6 +41,8 @@ public class S_Pl_Movement : MonoBehaviour
     void PlayerDeath()
     {
         PlayerTransform.position = new Vector3(2.154672f, 13.90528f, -0.4391842f);
+        Health = 100;
+        Debug.Log("YOU DIED"); //REPLACE HERE FOR PLAYER DEATH SCREEN, REMOVE ALL RESOURCES
     }
 
     private IEnumerator DashDelay()
