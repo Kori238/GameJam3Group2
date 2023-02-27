@@ -1417,6 +1417,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WoodCollector: {fileID: 3197684958974690188, guid: 57d434b4f96570647a997dbebc4b6c4f, type: 3}
   StoneCollector: {fileID: 3376082192673638401, guid: afc50cc4d5fd7a74385b3b51db207236, type: 3}
+  WoodUI: {fileID: 1998856770}
 --- !u!114 &1388830591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2031,7 +2032,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1715009188}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 041466c1fc75b6e48b4437cad5ec0a2c, type: 3}
   m_Name: 

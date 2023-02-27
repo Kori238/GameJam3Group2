@@ -18,6 +18,7 @@ public class StoneCollectorScript : Interactable
         {
             Init.Instance.resourceManager.AddStone(50);
             
+            
             print("Stone Collector added 50 stone");
             CurrentWoodCoolDown = 0;
         }

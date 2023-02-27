@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Resources;
+using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ public class PlayerInteractionScript : MonoBehaviour
     [SerializeField] Transform WoodCollector;
     [SerializeField] Transform StoneCollector;
     Vector2 boxSize = new Vector2(0.1f, 0.1f); // size of raycast
-
+    public TMP_Text WoodUI;
     string currentTool = "Interact";
     //options:
     //Interact
@@ -24,6 +25,7 @@ public class PlayerInteractionScript : MonoBehaviour
         {
             PlayerInterct();
             print("wood = " + Init.Instance.resourceManager.GetWood());
+            WoodUI.text = Init.Instance.resourceManager.GetWood().ToString();
         }
         if (Input.GetKeyDown("1")){
             currentTool = "Interact";
