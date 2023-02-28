@@ -32,7 +32,7 @@ public class MoveTowardsPlayer : MonoBehaviour
             {
                 canAttack = false;
                 StartCoroutine(DamagePlayer());
-                SoundControllerScript.GetComponent<S_SoundController>().AttackHit();
+                
             }
         }
 
@@ -42,8 +42,8 @@ public class MoveTowardsPlayer : MonoBehaviour
     {
         int hp = PlayerScript.GetComponent<S_Pl_Movement>().Health -= 5;
         HealthINT.text = hp.ToString();
-
-        yield return new WaitForSeconds(1f);
+        SoundControllerScript.GetComponent<S_SoundController>().AttackHit();
+        yield return new WaitForSeconds(2f);
         canAttack = true;
     }
 
@@ -52,12 +52,14 @@ public class MoveTowardsPlayer : MonoBehaviour
         if (collision.gameObject.layer == 7) //If the Collider is the Players attack range then...
         {
             Damaged(5);
+            SoundControllerScript.GetComponent<S_SoundController>().HurtMonster();
         }
     }
 
     public void Damaged(int amount)
     {
         health -= amount;
+        
         if (health <= 0)
         {
             Destroy(gameObject);

@@ -6,7 +6,7 @@ public class S_SoundController : MonoBehaviour
 {
     public AudioSource SoundSource;
 
-    public AudioClip clip1, clip2, clip3, clip4;
+    public AudioClip clip1, clip2, clip3, clip4, clip5;
 
     public void AttackSound()
     {
@@ -29,6 +29,12 @@ public class S_SoundController : MonoBehaviour
     public void Dash()
     {
         SoundSource.clip = clip4;
+        SoundSource.Play();
+    }
+
+    public void HurtMonster()
+    {
+        SoundSource.clip = clip5;
         SoundSource.Play();
     }
 }

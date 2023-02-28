@@ -25,7 +25,7 @@ public class S_Pl_Abilities : MonoBehaviour
     void Start()
     {
         animator= GetComponent<Animator>();
-        
+        canAttack = true;
     }
 
     public void Dig()
@@ -85,6 +85,10 @@ public class S_Pl_Abilities : MonoBehaviour
             SoundControllerScript.GetComponent<S_SoundController>().AttackSound();
             StartCoroutine(AttackDelay());
         }
+        else
+        {
+            Debug.Log("Can't Attack");
+        }
     }
 
     private IEnumerator AttackDelay()
@@ -104,7 +108,7 @@ public class S_Pl_Abilities : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             Ability1();
-
+            
         }
         else if (Input.GetButtonDown("Ability2"))
         {

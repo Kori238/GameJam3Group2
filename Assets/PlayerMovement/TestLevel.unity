@@ -2129,9 +2129,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SoundSource: {fileID: 301563133}
   clip1: {fileID: 8300000, guid: 4f5849438250be64b9efcef4c2247937, type: 3}
-  clip2: {fileID: 8300000, guid: a82ccaef0a4849b4aa5ddff9ee63523f, type: 3}
+  clip2: {fileID: 8300000, guid: f420d7a5926dcf34d8cc02ebc33060d5, type: 3}
   clip3: {fileID: 8300000, guid: 4a75b9b2bfb9a5846a3e8c414afe259a, type: 3}
-  clip4: {fileID: 0}
+  clip4: {fileID: 8300000, guid: e63429a0eff4e5540b04bcd736be90fb, type: 3}
+  clip5: {fileID: 8300000, guid: be7740a8f5f75424caf03d4732708c92, type: 3}
 --- !u!4 &1762246960
 Transform:
   m_ObjectHideFlags: 0
