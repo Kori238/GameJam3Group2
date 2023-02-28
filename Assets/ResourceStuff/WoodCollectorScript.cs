@@ -11,9 +11,6 @@ public class WoodCollectorScript : Interactable
     int CurrentWoodCoolDown = 0;
     int MaxWoodCoolDown = 500;
 
-    int currentHealth =50;
-    int maxHealth = 100;
-
     int MAssigned = 3 ; // the ammount of minions assigned to the buiding 
     int MaxMAssigned = 5;
 
@@ -31,7 +28,7 @@ public class WoodCollectorScript : Interactable
             print("Wood Collector added "+ ((MAssigned / MaxMAssigned) * CollectionAmount) + " wood");
             CurrentWoodCoolDown = 0;
         }
-        if(currentHealth<=0) 
+        if(health<=0) 
         { 
         Destroy(gameObject);
         }
@@ -45,7 +42,7 @@ public class WoodCollectorScript : Interactable
     {
         if(Init.Instance.resourceManager.GetWood()>= 50)
         {
-            currentHealth = maxHealth;
+            health = maxHealth;
             Debug.Log("building repaired");
         }
         else
