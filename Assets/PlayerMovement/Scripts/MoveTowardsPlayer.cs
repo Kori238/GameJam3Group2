@@ -20,6 +20,7 @@ public class MoveTowardsPlayer : MonoBehaviour
 
     void Update()
     {
+        
         // Calculate the direction to move towards the target
         Vector3 direction = (target.position - transform.position).normalized;
 
@@ -40,8 +41,8 @@ public class MoveTowardsPlayer : MonoBehaviour
 
     private IEnumerator DamagePlayer()
     {
-        int hp = PlayerScript.GetComponent<S_Pl_Movement>().Health -= 5;
-        HealthINT.text = hp.ToString();
+        int playerhp = PlayerScript.GetComponent<S_Pl_Movement>().Health -= 5;
+        HealthINT.text = playerhp.ToString();
         SoundControllerScript.GetComponent<S_SoundController>().AttackHit();
         yield return new WaitForSeconds(2f);
         canAttack = true;
