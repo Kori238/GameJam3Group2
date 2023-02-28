@@ -12,7 +12,11 @@ GameObject:
   - component: {fileID: 6970358878606189328}
   - component: {fileID: 1958050249773056793}
   - component: {fileID: 1404798869854176143}
+<<<<<<< HEAD
   m_Layer: 0
+=======
+  m_Layer: 9
+>>>>>>> parent of f6331d2 (Merge branch 'main' of https://github.com/Kori238/GameJam3Group2)
   m_Name: Wood_Collecter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,6 +102,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8293b38decbd7904c95727d1279149ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
+=======
+  health: 25
+  maxHealth: 25
+  damageable: 1
+  destroyed: 0
+  gridPos: {x: 0, y: 0}
+>>>>>>> parent of f6331d2 (Merge branch 'main' of https://github.com/Kori238/GameJam3Group2)
 --- !u!61 &1404798869854176143
 BoxCollider2D:
   m_ObjectHideFlags: 0

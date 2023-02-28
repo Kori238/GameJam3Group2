@@ -11,9 +11,12 @@ public class WoodCollectorScript : Interactable
     int CurrentWoodCoolDown = 0;
     int MaxWoodCoolDown = 500;
 
+<<<<<<< HEAD
     int currentHealth =50;
     int maxHealth = 100;
 
+=======
+>>>>>>> parent of f6331d2 (Merge branch 'main' of https://github.com/Kori238/GameJam3Group2)
     int MAssigned = 3 ; // the ammount of minions assigned to the buiding 
     int MaxMAssigned = 5;
 
@@ -31,7 +34,11 @@ public class WoodCollectorScript : Interactable
             print("Wood Collector added "+ ((MAssigned / MaxMAssigned) * CollectionAmount) + " wood");
             CurrentWoodCoolDown = 0;
         }
+<<<<<<< HEAD
         if(currentHealth<=0) 
+=======
+        if(health<=0) 
+>>>>>>> parent of f6331d2 (Merge branch 'main' of https://github.com/Kori238/GameJam3Group2)
         { 
         Destroy(gameObject);
         }
@@ -45,7 +52,11 @@ public class WoodCollectorScript : Interactable
     {
         if(Init.Instance.resourceManager.GetWood()>= 50)
         {
+<<<<<<< HEAD
             currentHealth = maxHealth;
+=======
+            health = maxHealth;
+>>>>>>> parent of f6331d2 (Merge branch 'main' of https://github.com/Kori238/GameJam3Group2)
             Debug.Log("building repaired");
         }
         else
