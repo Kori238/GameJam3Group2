@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8293b38decbd7904c95727d1279149ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PopMenu: {fileID: 4407538026853727937, guid: bc43c59aa8da8da4ba5b4608fe9be5fe, type: 3}
 --- !u!61 &1404798869854176143
 BoxCollider2D:
   m_ObjectHideFlags: 0
