@@ -19,13 +19,12 @@ public class S_Pl_Abilities : MonoBehaviour
     [SerializeField] private Collider2D playerCollider, digTrigger;
     [SerializeField] private SpriteRenderer playerVisual, digIcon;
     [SerializeField] private float digSpeedMultiplier = 0.5f;
-    private bool canAttack, canDig = true;
+    private bool canAttack = true, canDig = true;
 
     // Start is called before the first frame update
     void Start()
     {
         animator= GetComponent<Animator>();
-        canAttack = true;
     }
 
     public void Dig()

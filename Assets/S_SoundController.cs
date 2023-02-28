@@ -11,30 +11,30 @@ public class S_SoundController : MonoBehaviour
     public void AttackSound()
     {
         SoundSource.clip = clip1;
-        SoundSource.Play();
+        SoundSource.PlayOneShot(clip1);
     }
 
     public void AttackHit()
     {
         SoundSource.clip = clip2;
-        SoundSource.Play();
+        SoundSource.PlayOneShot(clip2);
     }
 
     public void WoodMine()
     {
         SoundSource.clip = clip3;
-        SoundSource.Play();
+        SoundSource.PlayOneShot(clip3);
     }
 
     public void Dash()
     {
         SoundSource.clip = clip4;
-        SoundSource.Play();
+        SoundSource.PlayOneShot(clip4);
     }
 
     public void HurtMonster()
     {
         SoundSource.clip = clip5;
-        SoundSource.Play();
+        SoundSource.PlayOneShot(clip5);
     }
 }
