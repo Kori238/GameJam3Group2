@@ -8,6 +8,8 @@ public class StoneCollectorScript : Interactable
     int CurrentWoodCoolDown = 0;
     int MaxWoodCoolDown = 500;
 
+    int currentHealth = 50;
+    int maxHealth = 100;
 
     // Update is called once per frame
     void Update()
@@ -20,7 +22,7 @@ public class StoneCollectorScript : Interactable
             print("Stone Collector added 50 stone");
             CurrentWoodCoolDown = 0;
         }
-        if (health <= 0)
+        if (currentHealth <= 0)
         {
             Destroy(gameObject);
         }
@@ -34,7 +36,7 @@ public class StoneCollectorScript : Interactable
     {
         if (Init.Instance.resourceManager.GetStone() >= 50)
         {
-            health = maxHealth;
+            currentHealth = maxHealth;
             Debug.Log("building repaired");
         }
         else
