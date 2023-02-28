@@ -21,8 +21,9 @@ public class Init : MonoBehaviour
             return;
         } else
         _instance = this;
-        grid = new Grid(9, 9, 10f);
+        grid = new Grid(18, 10, 10f);
         resourceManager = new ResourceManager();
+        grid.BuildAtCell(5, 5, tree);
         if (wallDemo)
         {
             StartCoroutine(BuildWalls());

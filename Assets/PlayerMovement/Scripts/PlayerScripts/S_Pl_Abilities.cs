@@ -1,26 +1,78 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.EventSystems.EventTrigger;
 using static UnityEngine.Rendering.DebugUI;
 
 public class S_Pl_Abilities : MonoBehaviour
 {
-    private bool flag = false;
+    private bool flag, digging = false;
     private GameObject enemy1;
     private int CameraZoomValue = 40;
     Animator animator;
     public GameObject MovementScript;
     public GameObject SoundControllerScript;
     public Collider2D AttackCollider;
-    private bool canAttack = true;
+    [SerializeField] private Collider2D playerCollider, digTrigger;
+    [SerializeField] private SpriteRenderer playerVisual, digIcon;
+    [SerializeField] private float digSpeedMultiplier = 0.5f;
+    private bool canAttack, canDig = true;
 
     // Start is called before the first frame update
     void Start()
     {
         animator= GetComponent<Animator>();
         
+    }
+
+    public void Dig()
+    {
+        
+        if (!digging && canDig) {
+            StartCoroutine(beginDig());
+        } else
+        {
+            bool canEmerge = true;
+            Collider2D[] results = new Collider2D[10];
+            string[] obstructions = new string[0];
+            ContactFilter2D filter = new ContactFilter2D().NoFilter();
+            _ = digTrigger.OverlapCollider(filter, results);
+            foreach (Collider2D result in results)
+            {
+                if (result != null && (result.CompareTag("Wall") || (result.gameObject.layer == LayerMask.NameToLayer("Structures"))))
+                {
+                    canEmerge = false;
+                    obstructions.Append(result.name.ToString());
+                }
+            }
+            if (canEmerge) StartCoroutine(finishDig());
+            else Debug.Log("Player attempted to emerge however the location was obstructed by " + obstructions.ToString());
+        }
+    }
+
+    private IEnumerator beginDig()
+    {
+        digging = true;
+        canDig = false;
+        playerCollider.enabled = false;
+        playerVisual.enabled = false;
+        digIcon.enabled = true;
+        MovementScript.GetComponent<S_Pl_Movement>().Pl_Speed *= digSpeedMultiplier;
+        yield return null;
+    }
+
+    private IEnumerator finishDig()
+    {
+        playerCollider.enabled = true;
+        playerVisual.enabled = true;
+        digging = false;
+        canDig = true;
+        digIcon.enabled = false;
+        MovementScript.GetComponent<S_Pl_Movement>().Pl_Speed /= digSpeedMultiplier;
+        yield return null;
     }
 
     
@@ -52,7 +104,7 @@ public class S_Pl_Abilities : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             Ability1();
-           
+
         }
         else if (Input.GetButtonDown("Ability2"))
         {
@@ -64,7 +116,7 @@ public class S_Pl_Abilities : MonoBehaviour
             if (!flag)
             {
                 CameraZoomValue = 40;
-                flag= true;
+                flag = true;
                 MovementScript.GetComponent<S_Pl_Movement>().Pl_Speed = 5;
             }
             else
@@ -74,6 +126,9 @@ public class S_Pl_Abilities : MonoBehaviour
                 MovementScript.GetComponent<S_Pl_Movement>().Pl_Speed = 16;
             }
             Camera.main.orthographicSize = CameraZoomValue;
+        } else if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Dig();
         }
         
     }
