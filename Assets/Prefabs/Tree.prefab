@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5651157523147767827
+--- !u!1 &2461752945452509236
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,40 +8,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5651157523147767825}
-  - component: {fileID: 5651157523147767824}
-  - component: {fileID: 8580606987057632515}
-  - component: {fileID: -1572090344944726726}
-  - component: {fileID: 2876757388241662915}
+  - component: {fileID: 5208463464264852236}
+  - component: {fileID: 3047466645196182693}
   m_Layer: 9
-  m_Name: Tree
+  m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5651157523147767825
+--- !u!4 &5208463464264852236
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5651157523147767827}
+  m_GameObject: {fileID: 2461752945452509236}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 2.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 5651157523147767825}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &5651157523147767824
+--- !u!212 &3047466645196182693
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5651157523147767827}
+  m_GameObject: {fileID: 2461752945452509236}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -87,6 +84,41 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &5651157523147767827
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5651157523147767825}
+  - component: {fileID: 8580606987057632515}
+  - component: {fileID: -1572090344944726726}
+  - component: {fileID: 2876757388241662915}
+  m_Layer: 9
+  m_Name: Tree
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5651157523147767825
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5651157523147767827}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5, y: 5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5208463464264852236}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8580606987057632515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,6 +131,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af87481bbf484c5489c81a67aac7e178, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 0
+  maxHealth: 0
+  damageable: 0
+  destroyed: 0
+  priority: 0
+  gridPos: {x: 0, y: 0}
+  isSpaceOccupied: 0
+  occupiedSpaceCount: 0
 --- !u!61 &-1572090344944726726
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -112,7 +152,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.00000035762787, y: -0.48280835}
+  m_Offset: {x: -0.07213807, y: -0.6992221}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -123,7 +163,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.7715323, y: 2.8105297}
+  m_Size: {x: 2.3005452, y: 8.004477}
   m_EdgeRadius: 0
 --- !u!114 &2876757388241662915
 MonoBehaviour:
@@ -141,4 +181,7 @@ MonoBehaviour:
   maxHealth: 0
   damageable: 0
   destroyed: 0
+  priority: 0
   gridPos: {x: 0, y: 0}
+  isSpaceOccupied: 0
+  occupiedSpaceCount: 0

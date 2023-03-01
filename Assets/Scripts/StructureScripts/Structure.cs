@@ -44,7 +44,8 @@ public class Structure : MonoBehaviour
             Node node = nodeGrid.gridArray[(int)point.x, (int)point.y];
             if (node != null && node.isWalkable)
             {
-                Transform attackPoint = GameObject.Instantiate(attackPointPrefab, point * (10/3), Quaternion.identity, transform);
+                Transform attackPoint = GameObject.Instantiate(attackPointPrefab, ((point) * (3.3333f) + new Vector2(10/6, 10/6) * 1.66f), Quaternion.identity, transform);
+                // Do I understand why the vector has to be timesed by 1.66? No... Does it work? Yes... :(
                 attackPoint.GetComponent<AttackPoint>().parentNode = node;
                 node.SetAttackPoint(attackPoint.gameObject);
                 attackPoints.Add(node);
