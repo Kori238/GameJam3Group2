@@ -1,12 +1,16 @@
 using Newtonsoft.Json.Bson;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
+using Unity.Mathematics;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.Networking.Types;
 
 public class Structure : MonoBehaviour
 {
-
+    private Transform attackPointPrefab;
     public float health;
     public float maxHealth;
     public bool damageable;
@@ -17,13 +21,43 @@ public class Structure : MonoBehaviour
     public List<Node> attackPoints = new();
     public bool isSpaceOccupied = false;
     public int occupiedSpaceCount = 0;
-
     public virtual void Start()
     {
+        attackPointPrefab = Init.Instance.attackPointPrefab;
         FindOccupiedSpace();
         OccupySpace();
-
+        CreateAttackPoints();
     }
+
+    public virtual void CreateAttackPoints()
+    {
+        Vector2 nodePos = gridPos * 3;
+        NodeGrid nodeGrid = Init.Instance.pathfinding.GetGrid();
+        List<Vector2> attackPositions = new List<Vector2> {
+            new Vector2(nodePos.x-1, nodePos.y+1),
+            new Vector2(nodePos.x+3, nodePos.y+1),
+            new Vector2(nodePos.x+1, nodePos.y-1),
+            new Vector2(nodePos.x+1, nodePos.y+3)};
+
+        foreach (Vector2 point in attackPositions)
+        {
+            Node node = nodeGrid.gridArray[(int)point.x, (int)point.y];
+            if (node != null && node.isWalkable)
+            {
+                Transform attackPoint = GameObject.Instantiate(attackPointPrefab, point * (10/3), Quaternion.identity, transform);
+                attackPoint.GetComponent<AttackPoint>().parentNode = node;
+                node.SetAttackPoint(attackPoint.gameObject);
+                attackPoints.Add(node);
+            }
+            
+        }
+    }
+
+    public virtual void RemoveAttackPoints()
+    {
+        return;
+    }
+
 
     public virtual void OccupySpace()
     {
@@ -140,10 +174,10 @@ public class Structure : MonoBehaviour
     public virtual void UpdateOccupiedSpace()
     {
         Debug.Log(gameObject.name + "space was updated" + destroyed);
-        if (destroyed)
+        if (destroyed && isSpaceOccupied)
         {
             DeoccupySpace();
-        } else
+        } else if (!destroyed && !isSpaceOccupied)
         {
             OccupySpace();
         }

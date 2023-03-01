@@ -10,6 +10,7 @@ public class Init : MonoBehaviour
     public Transform tree;
     public Transform wall;
     public Transform home;
+    public Transform attackPointPrefab;
     public Grid grid;
     public AStar pathfinding;
     [SerializeField] Vector2 gridDimensions = new Vector2(18, 10);
