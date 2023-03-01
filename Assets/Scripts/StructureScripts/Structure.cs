@@ -14,6 +14,7 @@ public class Structure : MonoBehaviour
     public int priority;
     public Vector2 gridPos;
     public List<Node> occupiedSpace = new();
+    public List<Node> attackPoints = new();
     public bool isSpaceOccupied = false;
     public int occupiedSpaceCount = 0;
 

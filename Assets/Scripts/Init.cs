@@ -9,6 +9,7 @@ public class Init : MonoBehaviour
 
     public Transform tree;
     public Transform wall;
+    public Transform home;
     public Grid grid;
     public AStar pathfinding;
     [SerializeField] Vector2 gridDimensions = new Vector2(18, 10);
@@ -31,6 +32,7 @@ public class Init : MonoBehaviour
         grid = new Grid((int)gridDimensions.x, (int)gridDimensions.y, cellSize);
         resourceManager = new ResourceManager();
         grid.BuildAtCell(5, 5, tree);
+        grid.BuildAtCell((int)(gridDimensions.x-1) / 2, (int)(gridDimensions.y-1) / 2, home);
         if (wallDemo)
         {
             StartCoroutine(BuildWalls());

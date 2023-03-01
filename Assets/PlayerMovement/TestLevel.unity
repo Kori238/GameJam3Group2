@@ -1406,6 +1406,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tree: {fileID: 5651157523147767825, guid: 812bfb0d047397843b08d90113ec6120, type: 3}
   wall: {fileID: 8329114379578713061, guid: f2b7826ec2bf66b46b59db64896a0aa6, type: 3}
+  home: {fileID: 1190157915604179541, guid: 5ab87a5bab402324ea1cab28bc10f12e, type: 3}
   gridDimensions: {x: 18, y: 10}
   cellSize: 10
   nodeCount: 3

@@ -14,6 +14,7 @@ public class Node
 
     public Node previousNode;
     public bool isWalkable;
+    private GameObject attackPointReference;
 
     public void updateFCost()
     {
@@ -26,6 +27,23 @@ public class Node
         this.x = x;
         this.y = y;
         this.isWalkable = true;
+        this.attackPointReference = null;
+    }
+
+    public void RemoveAttackPoint()
+    {
+        GameObject.Destroy(attackPointReference);
+        attackPointReference = null;
+    }
+
+    public void SetAttackPoint(GameObject reference)
+    {
+        attackPointReference = reference;
+    }
+
+    public GameObject GetAttackPoint()
+    {
+        return attackPointReference;
     }
 
 
