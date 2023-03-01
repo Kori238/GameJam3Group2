@@ -13,6 +13,7 @@ public class Node
     public int gCost, hCost, fCost;
 
     public Node previousNode;
+    public bool isWalkable;
 
     public void updateFCost()
     {
@@ -24,6 +25,7 @@ public class Node
         this.grid = grid;
         this.x = x;
         this.y = y;
+        this.isWalkable = true;
     }
 
 
@@ -50,10 +52,24 @@ public class NodeGrid
             for (int y = 0; y < gridArray.GetLength(1); y++)
             {
                 gridArray[x, y] = new Node(this, x, y);
-                Debug.DrawLine(GetCellWorldPosition(x, y), GetCellWorldPosition(x, y + 1), Color.gray, 100f); // visual outline of cell gizmos
-                Debug.DrawLine(GetCellWorldPosition(x, y), GetCellWorldPosition(x + 1, y), Color.gray, 100f);
             }
         }
+    }
+
+    public IEnumerator DrawNodeOutline()
+    {
+        for (int x = 0; x < gridArray.GetLength(0); x++) // iterates through each cell
+        {
+            for (int y = 0; y < gridArray.GetLength(1); y++)
+            {
+                Color color = Color.gray;
+                if (!gridArray[x, y].isWalkable) color = Color.black;
+                Debug.DrawLine(GetCellWorldPosition(x, y), GetCellWorldPosition(x, y + 1), color, 10f); // visual outline of cell gizmos
+                Debug.DrawLine(GetCellWorldPosition(x, y), GetCellWorldPosition(x + 1, y), color, 10f);
+            }
+        }
+        yield return new WaitForSeconds(10f);
+        yield return DrawNodeOutline();
     }
     private Vector2 GetCellWorldPosition(int x, int y)
     {
@@ -107,7 +123,6 @@ public class AStar
         for (int x=0; x<grid.GetWidth(); x++) {
             for (int y = 0; y < grid.GetHeight(); y++) {
                 Node node = grid.GetNodeFromPosition(x, y);
-                Debug.Log(node);
                 node.gCost = int.MaxValue;
                 node.updateFCost();
                 node.previousNode = null;
@@ -130,6 +145,11 @@ public class AStar
             foreach (Node adjacentNode in GetAdjacentNodes(currentNode))
             {
                 if (searchedNodes.Contains(adjacentNode)) continue;
+                if(!adjacentNode.isWalkable)
+                {
+                    searchedNodes.Add(adjacentNode);
+                    continue;
+                }
 
                 int tentativeGCost = currentNode.gCost + CalculateDistanceCost(currentNode, adjacentNode);
                 if (tentativeGCost < adjacentNode.gCost)

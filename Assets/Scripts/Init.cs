@@ -17,6 +17,7 @@ public class Init : MonoBehaviour
     public ResourceManager resourceManager;
     public bool wallDemo = false;
     public bool testPathfinding = false;
+    public bool debug = true;
 
     private void Awake()
     {
@@ -34,9 +35,14 @@ public class Init : MonoBehaviour
         {
             StartCoroutine(BuildWalls());
         }
-        
+        if (debug)
+        {
+            StartCoroutine(pathfinding.GetGrid().DrawNodeOutline());
+            StartCoroutine(grid.DrawGridOutline());
+        }
+
     }
-    
+
     private void Start()
     {
         
@@ -44,31 +50,26 @@ public class Init : MonoBehaviour
 
     private IEnumerator BuildWalls()
     {
-        grid.BuildAtCell(0, 0, wall);
         grid.BuildAtCell(3, 3, wall);
-        yield return new WaitForSeconds(3);
-        grid.DamageAtCell(3, 3, 5);
         grid.BuildAtCell(3, 4, wall);
-        yield return new WaitForSeconds(3);
-        grid.DamageAtCell(3, 3, 5);
-        grid.BuildAtCell(4, 3, wall);
-        yield return new WaitForSeconds(3);
-        grid.DamageAtCell(3, 3, 5);
-        grid.BuildAtCell(4, 4, wall);
-        yield return new WaitForSeconds(3);
-        grid.DamageAtCell(3, 3, 5);
-        grid.DemolishAtCell(4, 4);
-        yield return new WaitForSeconds(3);
-        grid.DamageAtCell(3, 3, 5);
         grid.BuildAtCell(3, 5, wall);
-        yield return new WaitForSeconds(3);
-        grid.DamageAtCell(3, 3, 5);
-        grid.BuildAtCell(3, 2, wall);
-        yield return new WaitForSeconds(3);
-        grid.SetHealthAtCell(3, 3, 0, true);
-        grid.BuildAtCell(2, 3, wall);
-        yield return new WaitForSeconds(3);
-        grid.BuildAtCell(2, 2, wall);
-        grid.SetHealthAtCell(2, 2, 0);
+        grid.BuildAtCell(3, 6, wall);
+        grid.BuildAtCell(3, 7, wall);
+        grid.BuildAtCell(3, 8, wall);
+        grid.BuildAtCell(4, 8, wall);
+        grid.BuildAtCell(5, 8, wall);
+        grid.BuildAtCell(5, 7, wall);
+        
+        yield return new WaitForSeconds(5f);
+        grid.DamageAtCell(3, 5, 25);
+        grid.DamageAtCell(3, 5, 25);
+
+        yield return new WaitForSeconds(10f);
+        grid.DemolishAtCell(3, 8);
+
+        yield return new WaitForSeconds(5f);
+        grid.DemolishAtCell(3, 7);
+        //grid.DemolishAtCell(3, 5);
+        yield return null;
     }
 }

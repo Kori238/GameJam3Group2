@@ -1411,6 +1411,7 @@ MonoBehaviour:
   nodeCount: 3
   wallDemo: 1
   testPathfinding: 1
+  debug: 1
 --- !u!4 &1294950277
 Transform:
   m_ObjectHideFlags: 0

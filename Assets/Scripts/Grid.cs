@@ -132,15 +132,27 @@ public class Grid
             for (int y = 0; y < gridArray.GetLength(1); y++)
             {
                 gridArray[x, y] = new GridCell(); // creates a GridCell object at this cell
-                Debug.DrawLine(GetCellWorldPosition(x, y), GetCellWorldPosition(x, y + 1), Color.white, 100f); // visual outline of cell gizmos
-                Debug.DrawLine(GetCellWorldPosition(x, y), GetCellWorldPosition(x + 1, y), Color.white, 100f);
                 gridArray[x, y].Values["center"] = new Vector3(x, y) * cellSize + new Vector3(cellSize/2, cellSize/2); // calculates and stores the center position of the cell to the Dictionary
                 gridArray[x, y].Values["gridPos"] = new Vector2(x, y); 
             }
         }
     }
+    public IEnumerator DrawGridOutline()
+    {
+        for (int x = 0; x < gridArray.GetLength(0); x++) // iterates through each cell
+        {
+            for (int y = 0; y < gridArray.GetLength(1); y++)
+            {
+                Debug.DrawLine(GetCellWorldPosition(x, y), GetCellWorldPosition(x, y + 1), Color.white, 10f); // visual outline of cell gizmos
+                Debug.DrawLine(GetCellWorldPosition(x, y), GetCellWorldPosition(x + 1, y), Color.white, 10f);
+            }
+        }
+        yield return new WaitForSeconds(10f);
+        yield return DrawGridOutline();
 
-    public bool BuildAtCell(int x, int y, Transform structure)
+    }
+
+        public bool BuildAtCell(int x, int y, Transform structure)
     {
         if (x > width || y > height || x < 0 || y < 0)
         {

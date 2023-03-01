@@ -147,7 +147,6 @@ public class PlayerInteractionScript : MonoBehaviour
         {
             pathfindingTestNodes[1] = gridPos;
             List<Node> path = Init.Instance.pathfinding.FindPath((int)pathfindingTestNodes[0].x, (int)pathfindingTestNodes[0].y, (int)pathfindingTestNodes[1].x, (int)pathfindingTestNodes[1].y);
-            print(path);
             if (path != null)
             {
                 for (int i = 0; i < path.Count - 1; i++)
