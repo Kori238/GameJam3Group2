@@ -21,12 +21,7 @@ public class Structure : MonoBehaviour
     {
         FindOccupiedSpace();
         OccupySpace();
-        
-    }
 
-    public void FixedUpdate()
-    {
-        //UpdateStructure();
     }
 
     public virtual void OccupySpace()
