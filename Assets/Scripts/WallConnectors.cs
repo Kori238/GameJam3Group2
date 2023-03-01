@@ -40,6 +40,8 @@ public class WallConnectors : MonoBehaviour
                 .transform.GetComponent<WallConnectors>().updateConnectors();
         if (adjacent[3]) ((GameObject)Init.Instance.grid.gridArray[(int)cellPos.x - 1, (int)cellPos.y].Values["structure"])
                 .transform.GetComponent<WallConnectors>().updateConnectors();
+
+        
     }
 
     private void GetAdjacentWalls() // Checks if there are walls in all 4 cardinal directions
@@ -90,6 +92,7 @@ public class WallConnectors : MonoBehaviour
             else if (adjacent[3]) connectorEW = Instantiate(EWW, transform.position + EWW.transform.position, Quaternion.identity, transform);
             else connectorEW = Instantiate(EW, transform.position, Quaternion.identity, transform);
         }
+        transform.GetComponent<Wall>().UpdateFindOccupiedSpace();
     }
 
 
