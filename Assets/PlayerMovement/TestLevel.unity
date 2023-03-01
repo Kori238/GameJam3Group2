@@ -961,13 +961,22 @@ MonoBehaviour:
 
     Z - Camera Zoom
 
+    1 - Interact
+
+    2 - Place Wood Collector
+
+    3
+    - Place Stone Collector
+
+    T - Pathfinding Query (RMB one node then RMB second
+    node)
+
 
     M - Admin Menu
 
     M -> G = God Mode
 
-    M
-    -> F = Fast Mode'
+    M -> F = Fast Mode'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
