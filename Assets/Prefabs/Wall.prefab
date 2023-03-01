@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1429788955074775326}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5, y: -5, z: 0}
+  m_LocalPosition: {x: 5, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -68,7 +68,6 @@ MonoBehaviour:
   EWEW: {fileID: 1251863355554281704, guid: b885458bc80af8547ba80e64097bb1b8, type: 3}
   EWEWD: {fileID: 1251863355554281704, guid: 7733a4488665a9946879549ca59bec22, type: 3}
   adjacent: 
-  cellPos: {x: 0, y: 0}
 --- !u!114 &5899767425550901396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,6 +84,7 @@ MonoBehaviour:
   maxHealth: 25
   damageable: 1
   destroyed: 0
+  gridPos: {x: 0, y: 0}
 --- !u!1001 &2375087087971758530
 PrefabInstance:
   m_ObjectHideFlags: 0

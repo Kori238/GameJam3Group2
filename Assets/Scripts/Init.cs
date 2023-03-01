@@ -10,8 +10,13 @@ public class Init : MonoBehaviour
     public Transform tree;
     public Transform wall;
     public Grid grid;
+    public AStar pathfinding;
+    [SerializeField] Vector2 gridDimensions = new Vector2(18, 10);
+    public float cellSize = 10f;
+    public int nodeCount = 3;
     public ResourceManager resourceManager;
     public bool wallDemo = false;
+    public bool testPathfinding = false;
 
     private void Awake()
     {
@@ -21,7 +26,8 @@ public class Init : MonoBehaviour
             return;
         } else
         _instance = this;
-        grid = new Grid(18, 10, 10f);
+        pathfinding = new AStar((int)gridDimensions.x * nodeCount, (int)gridDimensions.y * nodeCount, cellSize / nodeCount);
+        grid = new Grid((int)gridDimensions.x, (int)gridDimensions.y, cellSize);
         resourceManager = new ResourceManager();
         grid.BuildAtCell(5, 5, tree);
         if (wallDemo)

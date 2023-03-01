@@ -132,9 +132,9 @@ public class Grid
             for (int y = 0; y < gridArray.GetLength(1); y++)
             {
                 gridArray[x, y] = new GridCell(); // creates a GridCell object at this cell
-                Debug.DrawLine(GetCellWorldPosition(x, y), GetCellWorldPosition(x, y - 1), Color.white, 100f); // visual outline of cell gizmos
-                Debug.DrawLine(GetCellWorldPosition(x, y), GetCellWorldPosition(x - 1, y), Color.white, 100f);
-                gridArray[x, y].Values["center"] = new Vector3(x, y) * cellSize - new Vector3(cellSize/2, cellSize/2); // calculates and stores the center position of the cell to the Dictionary
+                Debug.DrawLine(GetCellWorldPosition(x, y), GetCellWorldPosition(x, y + 1), Color.white, 100f); // visual outline of cell gizmos
+                Debug.DrawLine(GetCellWorldPosition(x, y), GetCellWorldPosition(x + 1, y), Color.white, 100f);
+                gridArray[x, y].Values["center"] = new Vector3(x, y) * cellSize + new Vector3(cellSize/2, cellSize/2); // calculates and stores the center position of the cell to the Dictionary
                 gridArray[x, y].Values["gridPos"] = new Vector2(x, y); 
             }
         }
@@ -221,7 +221,7 @@ public class Grid
 
     public Vector2 GetWorldCellPosition(float x, float y)
     {
-        return new Vector2(Mathf.FloorToInt(x / cellSize + 1), Mathf.FloorToInt(y / cellSize + 1));
+        return new Vector2(Mathf.FloorToInt(x / cellSize), Mathf.FloorToInt(y / cellSize));
     }
         
 }

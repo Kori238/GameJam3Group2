@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Resources;
 using TMPro;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerInteractionScript : MonoBehaviour
@@ -13,11 +14,18 @@ public class PlayerInteractionScript : MonoBehaviour
     Vector2 boxSize = new Vector2(0.1f, 0.1f); // size of raycast
     public TMP_Text WoodUI;
     string currentTool = "Interact";
+    [SerializeField] private Vector2[] pathfindingTestNodes = new Vector2[2];
     //options:
     //Interact
     //WoodCollector
     //StoneCollector
 
+
+    private void Start()
+    {
+        pathfindingTestNodes[0] = -Vector2.one;
+        pathfindingTestNodes[1] = -Vector2.one;
+    }
 
     void Update()
     {
@@ -41,6 +49,11 @@ public class PlayerInteractionScript : MonoBehaviour
             currentTool = "StoneCollector";
             Debug.Log("Build Stone Collector equiped");
         }
+        if (Init.Instance.testPathfinding && Input.GetKeyDown(KeyCode.T))
+        {
+            currentTool = "PathfindingTester";
+            Debug.Log("Pathfinding Tester equipped");
+        }
     }
     private void PlayerInterct() //allows mutilple function to be called from mouse button 2
     {
@@ -59,6 +72,11 @@ public class PlayerInteractionScript : MonoBehaviour
             case "StoneCollector":
                 {
                     PlaceStoneCollector();
+                    break;
+                }
+            case "PathfindingTester":
+                {
+                    PathfindingTester();
                     break;
                 }
         }
@@ -116,6 +134,35 @@ public class PlayerInteractionScript : MonoBehaviour
         print("not in range");
         return false;
     }
+
+    private void PathfindingTester()
+    {
+        Vector2 MousePos = Input.mousePosition;
+        Vector2 MouseWorldPos = Camera.main.ScreenToWorldPoint(MousePos);
+        Vector2 gridPos = Init.Instance.pathfinding.GetGrid().GetWorldCellPosition(MouseWorldPos.x, MouseWorldPos.y);
+        if (pathfindingTestNodes[0] == -Vector2.one)
+        {
+            pathfindingTestNodes[0] = gridPos;
+        } else
+        {
+            pathfindingTestNodes[1] = gridPos;
+            List<Node> path = Init.Instance.pathfinding.FindPath((int)pathfindingTestNodes[0].x, (int)pathfindingTestNodes[0].y, (int)pathfindingTestNodes[1].x, (int)pathfindingTestNodes[1].y);
+            print(path);
+            if (path != null)
+            {
+                for (int i = 0; i < path.Count - 1; i++)
+                {
+                    float nodeSpacing = Init.Instance.cellSize / Init.Instance.nodeCount;
+                    Debug.DrawLine(new Vector3(path[i].x, path[i].y) * nodeSpacing + Vector3.one * nodeSpacing/2, new Vector3(path[i+1].x, path[i+1].y) * nodeSpacing + Vector3.one * nodeSpacing/2, Color.yellow, 5f);
+                }
+            }
+            pathfindingTestNodes[0] = -Vector2.one;
+            pathfindingTestNodes[1] = -Vector2.one;
+        }
+        
+    }
+
+
     private void PlaceWoodCollector()
     {
         Vector2 MousePos = Input.mousePosition;
