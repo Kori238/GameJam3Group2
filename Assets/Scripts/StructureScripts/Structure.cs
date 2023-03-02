@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Networking.Types;
+using static UnityEngine.UI.CanvasScaler;
 
 public class Structure : MonoBehaviour
 {
@@ -45,7 +46,7 @@ public class Structure : MonoBehaviour
             if (node != null && node.isWalkable)
             {
                 Transform attackPoint = GameObject.Instantiate(attackPointPrefab, ((point) * (3.3333f) + new Vector2(10/6, 10/6) * 1.66f), Quaternion.identity, transform);
-                // Do I understand why the vector has to be timesed by 1.66? No... Does it work? Yes... :(
+                // Do I understand why the vector has to be timesed by 1.66? No... Does it work? Unfortunatly... :(
                 attackPoint.GetComponent<AttackPoint>().parentNode = node;
                 node.SetAttackPoint(attackPoint.gameObject);
                 attackPoints.Add(node);
@@ -56,9 +57,37 @@ public class Structure : MonoBehaviour
 
     public virtual void RemoveAttackPoints()
     {
-        return;
+        foreach (Node node in attackPoints)
+        {
+            node.RemoveAttackPoint();
+        }
+        attackPoints = new();
     }
 
+    public virtual void UpdateAllAttackPoints() //Updates the attack points of adjacent cells which contain structures
+    {
+        RemoveAttackPoints();
+        CreateAttackPoints();
+        foreach (Structure structure in FindAdjacentStructures())
+        {
+            structure.RemoveAttackPoints();
+            structure.CreateAttackPoints();
+        }
+    }
+
+    public List<Structure> FindAdjacentStructures()
+    {
+        List<Structure> adjacent = new();
+        if (Init.Instance.grid.GetStructureAtCell((int)gridPos.x, (int)gridPos.y + 1) != null)
+            adjacent.Add(Init.Instance.grid.GetStructureAtCell((int)gridPos.x, (int)gridPos.y + 1).GetComponent<Structure>());
+        if (Init.Instance.grid.GetStructureAtCell((int)gridPos.x + 1, (int)gridPos.y) != null)
+            adjacent.Add(Init.Instance.grid.GetStructureAtCell((int)gridPos.x + 1, (int)gridPos.y).GetComponent<Structure>());
+        if (Init.Instance.grid.GetStructureAtCell((int)gridPos.x, (int)gridPos.y - 1) != null)
+            adjacent.Add(Init.Instance.grid.GetStructureAtCell((int)gridPos.x, (int)gridPos.y - 1).GetComponent<Structure>());
+        if (Init.Instance.grid.GetStructureAtCell((int)gridPos.x - 1, (int)gridPos.y) != null)
+            adjacent.Add(Init.Instance.grid.GetStructureAtCell((int)gridPos.x - 1, (int)gridPos.y).GetComponent<Structure>());
+        return adjacent;
+    }
 
     public virtual void OccupySpace()
     {
@@ -169,6 +198,7 @@ public class Structure : MonoBehaviour
     {
         Debug.Log(gameObject.name + "was Updated");
         UpdateOccupiedSpace();
+        UpdateAllAttackPoints();
     }
 
 
