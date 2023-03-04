@@ -49,6 +49,20 @@ public class Node
 
 }
 
+public class Path
+{
+    public int fCost;
+    public int tCost;
+    public List<Node> nodes;
+
+    public Path()
+    {
+        this.fCost = 0;
+        this.tCost = 0;
+        this.nodes = new();
+    }   
+}
+
 public class NodeGrid
 {
     private int width;
@@ -130,7 +144,7 @@ public class AStar
         return grid;
     }
 
-    public List<Node> FindPath(int x0, int y0, int xn, int yn)
+    public Path FindPath(int x0, int y0, int xn, int yn)
     {
         Node startNode = grid.GetNodeFromPosition(x0, y0);
         Node endNode = grid.GetNodeFromPosition(xn, yn);
@@ -209,17 +223,17 @@ public class AStar
         return adjacentNodes;
     }
 
-    private List<Node> CalculatePath(Node endNode)
+    private Path CalculatePath(Node endNode)
     {
-        List<Node> path = new List<Node>();
-        path.Add(endNode);
+        Path path = new() { fCost = endNode.fCost };
+        path.nodes.Add(endNode);
         Node currentNode = endNode;
         while(currentNode.previousNode != null)
         {
-            path.Add(currentNode.previousNode);
+            path.nodes.Add(currentNode.previousNode);
             currentNode = currentNode.previousNode;
         }
-        path.Reverse();
+        path.nodes.Reverse();
         return path;
     }
     private int CalculateDistanceCost(Node a, Node b)
