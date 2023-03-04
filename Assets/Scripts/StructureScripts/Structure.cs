@@ -96,6 +96,11 @@ public class Structure : MonoBehaviour
         {
             foreach (Node node in occupiedSpace)
             {
+                if (node.GetAttackPoint() != null)
+                {
+                    attackPoints.Remove(node);
+                    node.RemoveAttackPoint();
+                }
                 node.isWalkable = false;
             }
             isSpaceOccupied = true;

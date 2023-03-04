@@ -72,7 +72,12 @@ public class Init : MonoBehaviour
 
         yield return new WaitForSeconds(5f);
         grid.DemolishAtCell(3, 7);
-        //grid.DemolishAtCell(3, 5);
+
+        yield return new WaitForSeconds(5f);
+        grid.BuildAtCell(3, 8, wall);
+        grid.BuildAtCell(3, 7, wall);
+
+
         yield return null;
     }
 }
