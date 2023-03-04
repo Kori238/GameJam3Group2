@@ -146,13 +146,13 @@ public class PlayerInteractionScript : MonoBehaviour
         } else
         {
             pathfindingTestNodes[1] = gridPos;
-            List<Node> path = Init.Instance.pathfinding.FindPath((int)pathfindingTestNodes[0].x, (int)pathfindingTestNodes[0].y, (int)pathfindingTestNodes[1].x, (int)pathfindingTestNodes[1].y);
+            Path path = Init.Instance.pathfinding.FindPath((int)pathfindingTestNodes[0].x, (int)pathfindingTestNodes[0].y, (int)pathfindingTestNodes[1].x, (int)pathfindingTestNodes[1].y);
             if (path != null)
             {
-                for (int i = 0; i < path.Count - 1; i++)
+                for (int i = 0; i < path.nodes.Count - 1; i++)
                 {
                     float nodeSpacing = Init.Instance.cellSize / Init.Instance.nodeCount;
-                    Debug.DrawLine(new Vector3(path[i].x, path[i].y) * nodeSpacing + Vector3.one * nodeSpacing/2, new Vector3(path[i+1].x, path[i+1].y) * nodeSpacing + Vector3.one * nodeSpacing/2, Color.yellow, 5f);
+                    Debug.DrawLine(new Vector3(path.nodes[i].x, path.nodes[i].y) * nodeSpacing + Vector3.one * nodeSpacing/2, new Vector3(path.nodes[i+1].x, path.nodes[i+1].y) * nodeSpacing + Vector3.one * nodeSpacing/2, Color.yellow, 5f);
                 }
             }
             pathfindingTestNodes[0] = -Vector2.one;

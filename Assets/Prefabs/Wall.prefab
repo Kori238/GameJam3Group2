@@ -84,7 +84,10 @@ MonoBehaviour:
   maxHealth: 25
   damageable: 1
   destroyed: 0
+  priority: 1
   gridPos: {x: 0, y: 0}
+  isSpaceOccupied: 0
+  occupiedSpaceCount: 0
 --- !u!1001 &2375087087971758530
 PrefabInstance:
   m_ObjectHideFlags: 0

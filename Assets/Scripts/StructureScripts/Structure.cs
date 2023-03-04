@@ -32,6 +32,7 @@ public class Structure : MonoBehaviour
 
     public virtual void CreateAttackPoints()
     {
+        if (destroyed) return;
         Vector2 nodePos = gridPos * 3;
         NodeGrid nodeGrid = Init.Instance.pathfinding.GetGrid();
         List<Vector2> attackPositions = new List<Vector2> {
