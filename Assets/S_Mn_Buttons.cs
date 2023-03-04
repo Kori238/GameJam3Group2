@@ -9,4 +9,10 @@ public class S_Mn_Buttons : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+
+    public void QuitGame()
+    {
+        Debug.Log("Game Exit.");
+        Application.Quit();
+    }
 }
