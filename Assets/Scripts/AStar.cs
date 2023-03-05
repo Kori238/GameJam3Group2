@@ -54,12 +54,14 @@ public class Path
     public int fCost;
     public int tCost;
     public List<Node> nodes;
+    public GameObject structure;
 
     public Path()
     {
         this.fCost = 0;
         this.tCost = 0;
         this.nodes = new();
+        this.structure = null;
     }   
 }
 
