@@ -219,7 +219,7 @@ MonoBehaviour:
   maxHealth: 100
   damageable: 0
   destroyed: 0
-  priority: 100
+  priority: 10
   gridPos: {x: 0, y: 0}
   isSpaceOccupied: 0
   occupiedSpaceCount: 0

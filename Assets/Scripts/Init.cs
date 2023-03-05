@@ -62,6 +62,13 @@ public class Init : MonoBehaviour
         grid.BuildAtCell(8, 6, wall);
         grid.BuildAtCell(9, 6, wall);
         grid.BuildAtCell(10, 6, wall);
+        grid.BuildAtCell(10, 5, wall);
+        grid.BuildAtCell(10, 4, wall);
+        grid.BuildAtCell(10, 3, wall);
+        grid.BuildAtCell(10, 2, wall);
+        grid.BuildAtCell(9, 2, wall);
+        grid.BuildAtCell(8, 2, wall);
+        grid.BuildAtCell(7, 2, wall);
 
 
         yield return null;
