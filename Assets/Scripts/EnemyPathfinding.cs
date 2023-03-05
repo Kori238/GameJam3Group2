@@ -1,54 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 public class EnemyPathfinding : MonoBehaviour
 {
-    [SerializeField] CircleCollider2D view;
     public Transform test;
     [SerializeField] int viewRange;
     [SerializeField] float speed;
     [SerializeField] bool moving;
+    [SerializeField] bool attacking;
     Path currentPath;
     Path newPath;
     [SerializeField] int currentPathIndex = 1;
+    [SerializeField] float attackDelay = 1f;
+    [SerializeField] float attackDamage = 5f;
     [SerializeField] GameObject target;
+    [SerializeField] Collider2D destination;
+    [SerializeField] Collider2D newDestination;
 
     public virtual void Start()
     {
-        view.radius = viewRange;
-        Pathfind();
-        StartCoroutine(PathfindingUpdate(1f));
+        InvokeRepeating(nameof(Pathfind), 0f, 1f);
+        InvokeRepeating(nameof(Attack), 0f, attackDelay);
     }
 
     public virtual void FixedUpdate()
     {
         TraversePath();
-    }
-
-    public virtual void FindTarget()
-    {
-        return;
-    }
-    
-
-
-   
-
-    public virtual IEnumerator PathfindingUpdate(float frequency)
-    {
-        if (moving)
+        CheckAttack();
+        if (!moving && !attacking)
         {
-            newPath = Pathfind();
-            //TraversePath();
-            //if (currentPath.fCost < 10) moving = false;
-            //else if (currentPath == null) MoveTowardsCenter();
+            MoveTowardsCenter();
         }
-        
-        yield return new WaitForSeconds(frequency);
-        yield return StartCoroutine(PathfindingUpdate(frequency));
     }
 
     public virtual void MoveTowardsCenter()
@@ -56,20 +42,43 @@ public class EnemyPathfinding : MonoBehaviour
         return;
     }
 
-    public virtual void TraversePath()
+    public virtual void Attack()
     {
+        Debug.Log("Attack");
+        if (!attacking || target == null) return;
+        Debug.Log(this.name + " Dealt " + attackDamage + " damage to " + target.name);
+        target.GetComponent<Structure>().Damaged(attackDamage);
+    }
+    public virtual void CheckAttack()
+    {
+        if (!moving && destination != null && Vector3.Distance(destination.transform.position, transform.position) < 2f)
+        {
+            attacking = true;
+        } else
+        {
+            attacking = false;
+        }
+    }
+
+    public virtual void TraversePath()
+    { 
+        
 
         if (newPath != null && newPath != currentPath)
         {
+            newDestination = newPath.attackPoint;
             currentPath = newPath;
             currentPathIndex = 0;
         }
 
-        if (currentPath == null) return;
-        Debug.Log(currentPath.nodes.Count);
+        if (destination != newDestination)
+        {
+            destination = newDestination;
+            moving = true;
+        }
+        if (!moving || currentPath == null) return;
         Node targetNode = currentPath.nodes[currentPathIndex];
-        Vector3 targetPosition = new Vector3(targetNode.x, targetNode.y, transform.position.z);
-        Debug.Log(Vector3.Distance(transform.position, targetPosition));
+        Vector3 targetPosition = new Vector3((targetNode.x + 0.5f) * 10/3, (targetNode.y + 0.5f) * 10/3, transform.position.z);
         if (Vector3.Distance(transform.position, targetPosition) > 1f)
         {
             Vector3 moveDir = (targetPosition - transform.position).normalized;
@@ -79,7 +88,7 @@ public class EnemyPathfinding : MonoBehaviour
             currentPathIndex++;
             if (currentPathIndex >= currentPath.nodes.Count)
             {
-                currentPath = null;
+                moving = false;
             }
         }
 
@@ -89,7 +98,7 @@ public class EnemyPathfinding : MonoBehaviour
         
     }
 
-    public virtual Path Pathfind()
+    public virtual void Pathfind()
     {
         Collider2D[] results = Physics2D.OverlapCircleAll(transform.position, viewRange, LayerMask.GetMask("AttackPoints"));
 
@@ -102,7 +111,8 @@ public class EnemyPathfinding : MonoBehaviour
             Path path = Init.Instance.pathfinding.FindPath((int)enemyPos.x, (int)enemyPos.y, node.x, node.y);
             Structure structure = result.GetComponentInParent<Structure>();
             path.tCost = (int)(path.fCost / ((float)structure.priority * ((structure.health / structure.maxHealth + 1) / 2)));
-            path.structure = result.gameObject;
+            path.structure = result.transform.parent.gameObject;
+            path.attackPoint = result;
             paths.Add(path);
         }
         Path lowestTCostPath = new() { tCost = int.MaxValue };
@@ -118,8 +128,8 @@ public class EnemyPathfinding : MonoBehaviour
         {
             target = lowestTCostPath.structure;
             if (Init.Instance.debug) DrawPath(lowestTCostPath, Color.green);
-            return lowestTCostPath;
-        } else return null;
+            newPath = lowestTCostPath;
+        }
     }
     
     private void DrawPath(Path path, Color color)

@@ -53,29 +53,15 @@ public class Init : MonoBehaviour
 
     private IEnumerator BuildWalls()
     {
-        grid.BuildAtCell(3, 3, wall);
-        grid.BuildAtCell(3, 4, wall);
-        grid.BuildAtCell(3, 5, wall);
-        grid.BuildAtCell(3, 6, wall);
-        grid.BuildAtCell(3, 7, wall);
-        grid.BuildAtCell(3, 8, wall);
-        grid.BuildAtCell(4, 8, wall);
-        grid.BuildAtCell(5, 8, wall);
-        grid.BuildAtCell(5, 7, wall);
-        
-        yield return new WaitForSeconds(5f);
-        grid.DamageAtCell(3, 5, 25);
-        grid.DamageAtCell(3, 5, 25);
-
-        yield return new WaitForSeconds(10f);
-        grid.DemolishAtCell(3, 8);
-
-        yield return new WaitForSeconds(5f);
-        grid.DemolishAtCell(3, 7);
-
-        yield return new WaitForSeconds(5f);
-        grid.BuildAtCell(3, 8, wall);
-        grid.BuildAtCell(3, 7, wall);
+        grid.BuildAtCell(6, 2, wall);
+        grid.BuildAtCell(6, 3, wall);
+        grid.BuildAtCell(6, 4, wall);
+        grid.BuildAtCell(6, 5, wall);
+        grid.BuildAtCell(6, 6, wall);
+        grid.BuildAtCell(7, 6, wall);
+        grid.BuildAtCell(8, 6, wall);
+        grid.BuildAtCell(9, 6, wall);
+        grid.BuildAtCell(10, 6, wall);
 
 
         yield return null;

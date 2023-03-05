@@ -55,6 +55,7 @@ public class Path
     public int tCost;
     public List<Node> nodes;
     public GameObject structure;
+    public Collider2D attackPoint;
 
     public Path()
     {
@@ -62,6 +63,7 @@ public class Path
         this.tCost = 0;
         this.nodes = new();
         this.structure = null;
+        this.attackPoint = null;
     }   
 }
 
