@@ -4085,6 +4085,8 @@ MonoBehaviour:
   PlayerScript: {fileID: 5335656977763315929}
   PlayerTransform: {fileID: 5335656977763315926}
   HealthINT: {fileID: 1222282383}
+  playerCollider: {fileID: 1388830595}
+  playerVisual: {fileID: 5335656977763315927}
 --- !u!114 &5335656977763315931
 MonoBehaviour:
   m_ObjectHideFlags: 0
