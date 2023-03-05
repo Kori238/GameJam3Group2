@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   test: {fileID: 6303581181864359074, guid: 2185b006f3ce2354d86dc05978d2df8b, type: 3}
-  viewRange: 100
+  viewRange: 40
   speed: 10
   moving: 1
   attacking: 0

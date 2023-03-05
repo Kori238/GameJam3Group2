@@ -13,7 +13,7 @@ public class Init : MonoBehaviour
     public Transform attackPointPrefab;
     public Grid grid;
     public AStar pathfinding;
-    [SerializeField] Vector2 gridDimensions = new Vector2(18, 10);
+    public Vector2 gridDimensions = new Vector2(18, 10);
     public float cellSize = 10f;
     public int nodeCount = 3;
     public ResourceManager resourceManager;

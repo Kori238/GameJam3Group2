@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -33,13 +34,15 @@ public class EnemyPathfinding : MonoBehaviour
         CheckAttack();
         if (!moving && !attacking)
         {
-            MoveTowardsCenter();
+            MoveTowardsBase();
         }
     }
 
-    public virtual void MoveTowardsCenter()
+    public virtual void MoveTowardsBase()
     {
-        return;
+        GameObject home = Init.Instance.grid.GetStructureAtCell((int)(Init.Instance.gridDimensions.x - 1) / 2, (int)(Init.Instance.gridDimensions.y - 1) / 2);
+        Vector3 moveDir = (home.transform.position - transform.position).normalized;
+        transform.position = transform.position + speed * Time.deltaTime * moveDir;
     }
 
     public virtual void Attack()
@@ -76,7 +79,12 @@ public class EnemyPathfinding : MonoBehaviour
             destination = newDestination;
             moving = true;
         }
-        if (!moving || currentPath == null) return;
+        if (target == null)
+        {
+            MoveTowardsBase();
+            return;
+        }
+        if (!moving || currentPath == null || currentPath.nodes.Count <= 0) return;
         Node targetNode = currentPath.nodes[currentPathIndex];
         Vector3 targetPosition = new Vector3((targetNode.x + 0.5f) * 10/3, (targetNode.y + 0.5f) * 10/3, transform.position.z);
         if (Vector3.Distance(transform.position, targetPosition) > 1f)
@@ -110,7 +118,7 @@ public class EnemyPathfinding : MonoBehaviour
             Vector2 enemyPos = Init.Instance.pathfinding.GetGrid().GetWorldCellPosition(transform.position.x, transform.position.y);
             Path path = Init.Instance.pathfinding.FindPath((int)enemyPos.x, (int)enemyPos.y, node.x, node.y);
             Structure structure = result.GetComponentInParent<Structure>();
-            path.tCost = (int)(path.fCost / ((float)structure.priority * ((structure.health / structure.maxHealth + 1) / 2)));
+            path.tCost = (int)(path.fCost / (structure.priority * 10 * ((structure.health / structure.maxHealth + 1) / 2)));
             path.structure = result.transform.parent.gameObject;
             path.attackPoint = result;
             paths.Add(path);
@@ -129,6 +137,9 @@ public class EnemyPathfinding : MonoBehaviour
             target = lowestTCostPath.structure;
             if (Init.Instance.debug) DrawPath(lowestTCostPath, Color.green);
             newPath = lowestTCostPath;
+        } else
+        {
+            newPath = null;
         }
     }
     
