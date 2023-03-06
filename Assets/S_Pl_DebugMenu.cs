@@ -8,6 +8,7 @@ public class S_Pl_DebugMenu : MonoBehaviour
     public GameObject PlayerScript;
     public Transform PlayerTransform;
     public TMP_Text HealthINT;
+    public GameObject AdminMenuControls;
     private bool menuOpen = false;
     private bool waitingForInput = false;
     private bool isInvis = false;
@@ -27,6 +28,7 @@ public class S_Pl_DebugMenu : MonoBehaviour
         {
             menuOpen = true;
             Debug.Log("Admin Menu Open.");
+            AdminMenuControls.SetActive(true);
             StartCoroutine(WaitForInput() );
         }
 
@@ -43,7 +45,7 @@ public class S_Pl_DebugMenu : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.C))
             {
-                if (isInvis == false)
+                if (isInvis == false) //85 45
                 {
                     playerCollider.enabled = false;
                     playerVisual.color = Color.black;
@@ -57,6 +59,14 @@ public class S_Pl_DebugMenu : MonoBehaviour
                 }
                 
             }
+            else if (Input.GetKeyDown(KeyCode.Keypad1))
+            {
+                PlayerTransform.position = new Vector3(85, 45, 0);
+            }
+            else if (Input.GetKeyDown(KeyCode.Keypad2))
+            {
+                PlayerTransform.position = new Vector3(10, 90, 0);
+            }
         }
     }
 
@@ -67,5 +77,6 @@ public class S_Pl_DebugMenu : MonoBehaviour
         menuOpen = false;
         waitingForInput = false;
         Debug.Log("Admin Menu Closed.");
+        AdminMenuControls.SetActive(false); 
     }
 }
