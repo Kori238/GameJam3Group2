@@ -1999,7 +1999,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1565054349856889920, guid: 26d1fc5550eacd54dad570685b672da6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 74.153786
+      value: 51.5
       objectReference: {fileID: 0}
     - target: {fileID: 1565054349856889920, guid: 26d1fc5550eacd54dad570685b672da6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4091,6 +4091,7 @@ MonoBehaviour:
   secoundsTime: 0
   minutesTime: 0
   hourTime: 6
+  clock: {fileID: 0}
   timer: {fileID: 2056456144}
 --- !u!114 &2056456144
 MonoBehaviour:

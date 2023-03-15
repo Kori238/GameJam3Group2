@@ -148,13 +148,18 @@ public class AStar
         return grid;
     }
 
-    public Path FindPath(int x0, int y0, int xn, int yn)
+    public Path FindPath(int x0, int y0, int xn, int yn, int viewDistance = int.MaxValue)
     {
         Node startNode = grid.GetNodeFromPosition(x0, y0);
         Node endNode = grid.GetNodeFromPosition(xn, yn);
 
         unsearchedNodes = new List<Node> { startNode };
         searchedNodes = new List<Node>();
+
+        if (viewDistance != int.MaxValue && searchedNodes.Count >= viewDistance * 0.4)
+        {
+            return null; //path is outside of acceptable view distance
+        }
 
         for (int x=0; x<grid.GetWidth(); x++) {
             for (int y = 0; y < grid.GetHeight(); y++) {
