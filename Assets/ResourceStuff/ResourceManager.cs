@@ -9,7 +9,8 @@ public class ResourceManager
     private int stone = 50;
     private int wood;
     private int starlight;
-    
+    private int unassignedMinions;
+    private int maxMinions;
 
 
     public int GetStone()
@@ -41,5 +42,17 @@ public class ResourceManager
     {
         starlight = starlight + newStarLight;
     }
-  
+    public void SetMaxMinion(int newMinion)
+    {
+        maxMinions = maxMinions + newMinion;
+        assignMinion(newMinion);
+    }
+    public int GetMaxMinion() 
+    {
+        return maxMinions;
+    }
+    public void assignMinion(int newMinionToAssign)
+    {
+        unassignedMinions = unassignedMinions + newMinionToAssign;
+    }
 }

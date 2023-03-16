@@ -10,5 +10,8 @@ public class StoneInteract : Interactable
     {
         Init.Instance.resourceManager.AddStone(10);
     }
-
+    public override void CreateAttackPoints()
+    {
+        return;
+    }
 }

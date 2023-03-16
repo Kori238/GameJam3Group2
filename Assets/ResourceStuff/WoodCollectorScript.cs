@@ -1,10 +1,11 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WoodCollectorScript : Interactable
 {
     pMenu pmenu;
     [SerializeField] GameObject PopMenu;
-    GameObject InstanceMenu;
+    
 
 
     int CollectionAmount = 50;
@@ -12,7 +13,7 @@ public class WoodCollectorScript : Interactable
     int CurrentWoodCoolDown = 0;
     int MaxWoodCoolDown = 500;
 
-    int MAssigned = 3; // the ammount of minions assigned to the buiding 
+    int MAssigned; // the ammount of minions assigned to the buiding 
     int MaxMAssigned = 5;
 
 
@@ -40,21 +41,25 @@ public class WoodCollectorScript : Interactable
 
     }
     bool toOpen = true;
+
+    GameObject InstanceMenu;
     public override void Interact()
     {
-
+       
         if (toOpen)
         {
-            var InstanceMenu = Instantiate(PopMenu);
+             InstanceMenu = Instantiate(PopMenu);
             toOpen = false;
             InstanceMenu.GetComponent<pMenu>().SetParentStructure(gameObject);
+            InstanceMenu.GetComponent<pMenu>().setSlider(MAssigned,MaxMAssigned);
+
 
 
         }
-        else
+        else if(!toOpen) 
         {
             Destroy(InstanceMenu);
-            toOpen = true;
+            toOpen= true;
         }
 
 
@@ -91,5 +96,8 @@ public class WoodCollectorScript : Interactable
         return true;
     }
 
-
+    public void SetMinionAssigned(int newminion)
+    {
+        MAssigned= newminion;
+    }
 }

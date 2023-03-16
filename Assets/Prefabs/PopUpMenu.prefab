@@ -530,6 +530,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4e94d3041cec3941a1e011fc66ed865, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AMinionSlider: {fileID: 758432781382892815}
 --- !u!1 &5098212905771315578
 GameObject:
   m_ObjectHideFlags: 0
@@ -1262,6 +1263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4e94d3041cec3941a1e011fc66ed865, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AMinionSlider: {fileID: 0}
 --- !u!1 &9092086529229115617
 GameObject:
   m_ObjectHideFlags: 0

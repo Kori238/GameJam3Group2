@@ -20,4 +20,8 @@ public class TreeInteract:  Interactable
         Init.Instance.resourceManager.AddWood(20);
     
     }
+    public override void CreateAttackPoints()
+    {
+        return;
+    }
 }
