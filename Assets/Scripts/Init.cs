@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class Init : MonoBehaviour
 {
@@ -21,6 +23,8 @@ public class Init : MonoBehaviour
     public bool testPathfinding = false;
     public bool debug = true;
 
+
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -30,6 +34,10 @@ public class Init : MonoBehaviour
         } else
         _instance = this;
         pathfinding = new AStar((int)gridDimensions.x * nodeCount, (int)gridDimensions.y * nodeCount, cellSize / nodeCount);
+        PerformanceCounter cpuCounter;
+
+        cpuCounter = new PerformanceCounter();
+
         grid = new Grid((int)gridDimensions.x, (int)gridDimensions.y, cellSize);
         resourceManager = new ResourceManager();
         grid.BuildAtCell(5, 5, tree);
