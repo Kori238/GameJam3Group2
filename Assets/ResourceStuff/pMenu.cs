@@ -3,10 +3,18 @@ using UnityEngine.UI;
 
 public class pMenu : MonoBehaviour
 {
-    private GameObject ParentStruture;
-    [SerializeField] Slider AMinionSlider;
+    [SerializeField] private Slider AMinionSlider;
     private float AMinion;
     private float mMinion;
+    private GameObject ParentStruture;
+    private void Start()
+    {
+        //  AMinionSlider = GameObject.Find("MinionSlider").GetComponent<Slider>();
+        AMinionSlider.onValueChanged.AddListener(delegate { ValueChanged(); });
+    }
+    private void Update()
+    {
+    }
 
     public void SetParentStructure(GameObject thisParentStruture)
     {
@@ -32,24 +40,9 @@ public class pMenu : MonoBehaviour
     {
         return AMinion;
     }
-    private void Start()
-    {
-        //  AMinionSlider = GameObject.Find("MinionSlider").GetComponent<Slider>();
-        AMinionSlider.onValueChanged.AddListener(delegate { ValueChanged(); });
-
-    }
-    private void Update()
-    {
-
-
-
-    }
 
     public void ValueChanged()
     {
         ParentStruture.GetComponent<WoodCollectorScript>().SetMinionAssigned((int)AMinionSlider.value);
     }
-
 }
-
-

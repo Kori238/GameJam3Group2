@@ -3,13 +3,18 @@ using UnityEngine;
 
 public class PlayerInteractionScript : MonoBehaviour
 {
-    [SerializeField] ResourceManager resourceManager;// referance to the resource manager in game scene
-    [SerializeField] Transform WoodCollector;
-    [SerializeField] Transform StoneCollector;
-    Vector2 boxSize = new Vector2(0.1f, 0.1f); // size of raycast
+    [SerializeField] private Transform WoodCollector;
+    [SerializeField] private Transform StoneCollector;
     public TMP_Text WoodUI;
-    string currentTool = "Interact";
     [SerializeField] private Vector2[] pathfindingTestNodes = new Vector2[2];
+    private readonly Vector2 boxSize = new Vector2(0.1f, 0.1f); // size of raycast
+
+
+
+    private readonly int range = 500;
+    private string currentTool = "Interact";
+
+    [SerializeField] private ResourceManager resourceManager; // referance to the resource manager in game scene
     //options:
     //Interact
     //WoodCollector
@@ -22,7 +27,7 @@ public class PlayerInteractionScript : MonoBehaviour
         pathfindingTestNodes[1] = -Vector2.one;
     }
 
-    void Update()
+    private void Update()
     {
         if (Input.GetMouseButtonDown(1))
         {
@@ -56,25 +61,25 @@ public class PlayerInteractionScript : MonoBehaviour
         switch (currentTool)
         {
             case "Interact":
-                {
-                    CheckInteraction();
-                    break;
-                }
+            {
+                CheckInteraction();
+                break;
+            }
             case "WoodCollector":
-                {
-                    PlaceWoodCollector();
-                    break;
-                }
+            {
+                PlaceWoodCollector();
+                break;
+            }
             case "StoneCollector":
-                {
-                    PlaceStoneCollector();
-                    break;
-                }
+            {
+                PlaceStoneCollector();
+                break;
+            }
             case "PathfindingTester":
-                {
-                    PathfindingTester();
-                    break;
-                }
+            {
+                PathfindingTester();
+                break;
+            }
         }
     }
 
@@ -83,39 +88,32 @@ public class PlayerInteractionScript : MonoBehaviour
 
     private void CheckInteraction()
     {
-
         Vector2 MousePos = Input.mousePosition;
         Vector2 MouseWorldPos = Camera.main.ScreenToWorldPoint(MousePos);
         Vector2 CurrentPlayerPos = transform.position;
-        RaycastHit2D[] hits = Physics2D.BoxCastAll(MouseWorldPos, boxSize, 0, Vector2.zero); // gets list of objects at mouse postition
+        var hits = Physics2D.BoxCastAll(MouseWorldPos, boxSize, 0, Vector2.zero); // gets list of objects at mouse postition
 
-        if (CheckRange(CurrentPlayerPos, MouseWorldPos) == true)
+        if (CheckRange(CurrentPlayerPos, MouseWorldPos))
         {
             if (hits.Length > 0) // checks if object is present
             {
-
-                foreach (RaycastHit2D i in hits)
+                foreach (var i in hits)
                 {
                     if (i.transform.GetComponent<Interactable>()) // checks object is interactable
                     {
                         i.transform.GetComponent<Interactable>().Interact(); // calls interaction script
 
                         return; // stops multiple objects from being interacted with
-
                     }
                 }
             }
         }
     }
-
-
-
-    int range = 500;
-    private bool CheckRange(Vector2 PlayerPos, Vector2 TargetPos) // checks the player is in range of the interactable object 
+    private bool
+        CheckRange(Vector2 PlayerPos, Vector2 TargetPos) // checks the player is in range of the interactable object 
     {
-
-        float xlength = (PlayerPos.x - TargetPos.x) * (PlayerPos.x - TargetPos.x);
-        float ylength = (PlayerPos.y - TargetPos.y) * (PlayerPos.y - TargetPos.y);
+        var xlength = (PlayerPos.x - TargetPos.x) * (PlayerPos.x - TargetPos.x);
+        var ylength = (PlayerPos.y - TargetPos.y) * (PlayerPos.y - TargetPos.y);
 
 
         if (xlength <= range)
@@ -124,7 +122,6 @@ public class PlayerInteractionScript : MonoBehaviour
             {
                 print("in range");
                 return true;
-
             }
         }
         print("not in range");
@@ -135,7 +132,7 @@ public class PlayerInteractionScript : MonoBehaviour
     {
         Vector2 MousePos = Input.mousePosition;
         Vector2 MouseWorldPos = Camera.main.ScreenToWorldPoint(MousePos);
-        Vector2 gridPos = Init.Instance.pathfinding.GetGrid().GetWorldCellPosition(MouseWorldPos.x, MouseWorldPos.y);
+        var gridPos = Init.Instance.pathfinding.GetGrid().GetWorldCellPosition(MouseWorldPos.x, MouseWorldPos.y);
         if (pathfindingTestNodes[0] == -Vector2.one)
         {
             pathfindingTestNodes[0] = gridPos;
@@ -143,19 +140,22 @@ public class PlayerInteractionScript : MonoBehaviour
         else
         {
             pathfindingTestNodes[1] = gridPos;
-            Path path = Init.Instance.pathfinding.FindPath((int)pathfindingTestNodes[0].x, (int)pathfindingTestNodes[0].y, (int)pathfindingTestNodes[1].x, (int)pathfindingTestNodes[1].y);
+            var path = Init.Instance.pathfinding.FindPath((int)pathfindingTestNodes[0].x, (int)pathfindingTestNodes[0].y,
+                (int)pathfindingTestNodes[1].x, (int)pathfindingTestNodes[1].y);
             if (path != null)
             {
-                for (int i = 0; i < path.nodes.Count - 1; i++)
+                for (var i = 0; i < path.nodes.Count - 1; i++)
                 {
-                    float nodeSpacing = Init.Instance.cellSize / Init.Instance.nodeCount;
-                    Debug.DrawLine(new Vector3(path.nodes[i].x, path.nodes[i].y) * nodeSpacing + Vector3.one * nodeSpacing / 2, new Vector3(path.nodes[i + 1].x, path.nodes[i + 1].y) * nodeSpacing + Vector3.one * nodeSpacing / 2, Color.yellow, 5f);
+                    var nodeSpacing = Init.Instance.cellSize / Init.Instance.nodeCount;
+                    Debug.DrawLine(
+                        new Vector3(path.nodes[i].x, path.nodes[i].y) * nodeSpacing + Vector3.one * nodeSpacing / 2,
+                        new Vector3(path.nodes[i + 1].x, path.nodes[i + 1].y) * nodeSpacing + Vector3.one * nodeSpacing / 2,
+                        Color.yellow, 5f);
                 }
             }
             pathfindingTestNodes[0] = -Vector2.one;
             pathfindingTestNodes[1] = -Vector2.one;
         }
-
     }
 
 
@@ -167,15 +167,13 @@ public class PlayerInteractionScript : MonoBehaviour
         if (Init.Instance.resourceManager.GetWood() >= 50)
         {
             gridPos = Init.Instance.grid.GetWorldCellPosition(MouseWorldPos.x, MouseWorldPos.y);
-            bool valid = Init.Instance.grid.BuildAtCell((int)gridPos.x, (int)gridPos.y, WoodCollector);
+            var valid = Init.Instance.grid.BuildAtCell((int)gridPos.x, (int)gridPos.y, WoodCollector);
 
             if (valid)
             {
                 Init.Instance.resourceManager.AddWood(-50);
             }
         }
-
-
     }
     private void PlaceStoneCollector()
     {
@@ -185,14 +183,12 @@ public class PlayerInteractionScript : MonoBehaviour
         if (Init.Instance.resourceManager.GetStone() >= 50)
         {
             gridPos = Init.Instance.grid.GetWorldCellPosition(MouseWorldPos.x, MouseWorldPos.y);
-            bool valid = Init.Instance.grid.BuildAtCell((int)gridPos.x, (int)gridPos.y, StoneCollector);
+            var valid = Init.Instance.grid.BuildAtCell((int)gridPos.x, (int)gridPos.y, StoneCollector);
 
             if (valid)
             {
                 Init.Instance.resourceManager.AddStone(-50);
             }
         }
-
-
     }
 }

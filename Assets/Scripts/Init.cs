@@ -1,38 +1,36 @@
 using System.Collections;
+using System.Diagnostics;
 using UnityEngine;
 
 public class Init : MonoBehaviour
 {
-    private static Init _instance;
-    public static Init Instance { get { return _instance; } }
-
     public Transform tree;
     public Transform wall;
     public Transform home;
     public Transform attackPointPrefab;
-    public Grid grid;
-    public AStar pathfinding;
     public Vector2 gridDimensions = new Vector2(18, 10);
     public float cellSize = 10f;
     public int nodeCount = 3;
-    public ResourceManager resourceManager;
-    public bool wallDemo = false;
-    public bool testPathfinding = false;
+    public bool wallDemo;
+    public bool testPathfinding;
     public bool debug = true;
-    public PerformanceCounter cpuCounter;
-    public PerformanceCounter ramCounter;
+    private PerformanceCounter cpuCounter;
+    public Grid grid;
+    public AStar pathfinding;
+    private PerformanceCounter ramCounter;
+    public ResourceManager resourceManager;
+    public static Init Instance { get; private set; }
 
 
 
     private void Awake()
     {
-        if (_instance != null && _instance != this)
+        if (Instance != null && Instance != this)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
             return;
         }
-        else
-            _instance = this;
+        Instance = this;
         pathfinding = new AStar((int)gridDimensions.x * nodeCount, (int)gridDimensions.y * nodeCount, cellSize / nodeCount);
 
         cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_ Total");

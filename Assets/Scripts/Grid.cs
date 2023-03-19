@@ -6,69 +6,63 @@ public class GridCell
 {
     public GridCell()
     {
-        this.Values = new Dictionary<object, object>(); // Creates a dictionary and initial values for a the grid cell class
-        this.Values.Add("buildable", true);
-        this.Values.Add("structure", null);
-        this.Values.Add("center", new Vector3(0, 0, 0));
-        this.Values.Add("gridPos", new Vector2(0, 0));
-        this.Values.Add("pathfindable", true);
+        Values = new Dictionary<string, object>
+        {
+            { "buildable", true },
+            { "structure", null },
+            { "center", new Vector3(0, 0, 0) },
+            { "gridPos", new Vector2(0, 0) },
+            { "pathfindable", true }
+        }; // Creates a dictionary and initial values for a the grid cell class
     }
 
-    public Dictionary<object, object> Values
-    {
-        get;
-        set;
-    }
+    public Dictionary<string, object> Values { get; set; }
 
     public bool Build(Transform structure)
     {
         if ((bool)Values["buildable"] && Values["structure"] == null)
         {
-            Transform obj = GameObject.Instantiate(structure, (Vector3)Values["center"], Quaternion.identity);
+            var obj = Object.Instantiate(structure, (Vector3)Values["center"], Quaternion.identity);
             Values["structure"] = obj.gameObject;
             Debug.Log("Successfully built " + structure + " at position " + Values["gridPos"]);
             obj.gameObject.GetComponent<Structure>().gridPos = (Vector2)Values["gridPos"];
             Values["pathfindable"] = false;
             return true;
         }
-        else
-        {
-            Debug.Log("Unable to build " + structure + " at position " + Values["gridPos"] + " as there is already a structure or this is not buildable");
-            return false;
-        }
+        Debug.Log("Unable to build " + structure + " at position " + Values["gridPos"] +
+                  " as there is already a structure or this is not buildable");
+        return false;
     }
 
     public bool Demolish()
     {
         if (Values["structure"] != null)
         {
-            GameObject tempObj = ((GameObject)Values["structure"]); //Creates a temporary object so that the demolished function can be called after the dictionary entry being emptied
+            var tempObj =
+                (GameObject)Values[
+                    "structure"]; //Creates a temporary object so that the demolished function can be called after the dictionary entry being emptied
             Values["structure"] = null;
             tempObj.GetComponent<Structure>().Demolished();
             Debug.Log("Successfully destroyed " + tempObj.name + " at position " + Values["gridPos"]);
             Values["pathfindable"] = true;
             return true;
         }
-        else
-        {
-            Debug.Log("Unable to demolish at position " + Values["gridPos"] + " as there is nothing here to destroy");
-            return false;
-        }
+        Debug.Log("Unable to demolish at position " + Values["gridPos"] + " as there is nothing here to destroy");
+        return false;
     }
 
     public bool Damage(float amount)
     {
-        if (Values["structure"] != null && ((GameObject)Values["structure"]).GetComponent<Structure>().damageable == true)
+        if (Values["structure"] != null && ((GameObject)Values["structure"]).GetComponent<Structure>().damageable)
         {
             ((GameObject)Values["structure"]).GetComponent<Structure>().Damaged(amount);
-            Debug.Log("Dealt " + amount + " damage to " + ((GameObject)Values["structure"]).name + " at position " + Values["gridPos"]);
+            Debug.Log("Dealt " + amount + " damage to " + ((GameObject)Values["structure"]).name + " at position " +
+                      Values["gridPos"]);
             return true;
         }
-        else
-        {
-            Debug.Log("Unable to damage at position " + Values["gridPos"] + " as there is nothing here to damage or this is undamageable");
-            return false;
-        }
+        Debug.Log("Unable to damage at position " + Values["gridPos"] +
+                  " as there is nothing here to damage or this is undamageable");
+        return false;
     }
 
     public bool Heal(float amount)
@@ -76,14 +70,12 @@ public class GridCell
         if (Values["structure"] != null)
         {
             ((GameObject)Values["structure"]).GetComponent<Structure>().Healed(amount);
-            Debug.Log("Restored " + amount + " health to " + ((GameObject)Values["structure"]).name + " at position " + Values["gridPos"]);
+            Debug.Log("Restored " + amount + " health to " + ((GameObject)Values["structure"]).name + " at position " +
+                      Values["gridPos"]);
             return true;
         }
-        else
-        {
-            Debug.Log("Unable to heal at position " + Values["gridPos"] + " as there is nothing here to heal");
-            return false;
-        }
+        Debug.Log("Unable to heal at position " + Values["gridPos"] + " as there is nothing here to heal");
+        return false;
     }
 
     public bool SetHealth(float amount, bool fullyHeal = false)
@@ -97,146 +89,130 @@ public class GridCell
             }
             else
             {
-                Debug.Log("Set health of  " + ((GameObject)Values["structure"]).name + "  to " + amount + " at position " + Values["gridPos"]);
+                Debug.Log("Set health of  " + ((GameObject)Values["structure"]).name + "  to " + amount + " at position " +
+                          Values["gridPos"]);
             }
             return true;
         }
-        else
-        {
-            Debug.Log("Unable to set health at position " + Values["gridPos"] + " as there is nothing here");
-            return false;
-        }
+        Debug.Log("Unable to set health at position " + Values["gridPos"] + " as there is nothing here");
+        return false;
     }
-
 }
 
 public class Grid
 {
-    private int width;
-    private int height;
-    private float cellSize;
-    public GridCell[,] gridArray;
+    private readonly float _cellSize;
+    private readonly int _height;
+    private readonly int _width;
+    public readonly GridCell[,] gridArray;
 
     public Grid(int width, int height, float cellSize)
     {
-        this.width = width; // this is called by Init to define the width, height and cellSize there
-        this.height = height;
-        this.cellSize = cellSize;
+        _width = width; // this is called by Init to define the width, height and cellSize there
+        _height = height;
+        _cellSize = cellSize;
 
 
         gridArray = new GridCell[width, height]; // creates a 2D array of GridCell type
 
-        for (int x = 0; x < gridArray.GetLength(0); x++) // iterates through each cell
+        for (var x = 0; x < gridArray.GetLength(0); x++) // iterates through each cell
         {
-            for (int y = 0; y < gridArray.GetLength(1); y++)
+            for (var y = 0; y < gridArray.GetLength(1); y++)
             {
-                gridArray[x, y] = new GridCell(); // creates a GridCell object at this cell
-                gridArray[x, y].Values["center"] = new Vector3(x, y) * cellSize + new Vector3(cellSize / 2, cellSize / 2); // calculates and stores the center position of the cell to the Dictionary
-                gridArray[x, y].Values["gridPos"] = new Vector2(x, y);
+                gridArray[x, y] = new GridCell
+                {
+                    Values =
+                    {
+                        ["center"] = new Vector3(x, y) * cellSize +
+                                     new Vector3(cellSize / 2,
+                                         cellSize / 2), // calculates and stores the center position of the cell to the Dictionary
+                        ["gridPos"] = new Vector2(x, y)
+                    }
+                }; // creates a GridCell object at this cell
             }
         }
     }
     public IEnumerator DrawGridOutline()
     {
-        for (int x = 0; x < gridArray.GetLength(0); x++) // iterates through each cell
+        for (var x = 0; x < gridArray.GetLength(0); x++) // iterates through each cell
         {
-            for (int y = 0; y < gridArray.GetLength(1); y++)
+            for (var y = 0; y < gridArray.GetLength(1); y++)
             {
-                Debug.DrawLine(GetCellWorldPosition(x, y), GetCellWorldPosition(x, y + 1), Color.white, 10f); // visual outline of cell gizmos
+                Debug.DrawLine(GetCellWorldPosition(x, y), GetCellWorldPosition(x, y + 1), Color.white,
+                    10f); // visual outline of cell gizmos
                 Debug.DrawLine(GetCellWorldPosition(x, y), GetCellWorldPosition(x + 1, y), Color.white, 10f);
             }
         }
         yield return new WaitForSeconds(10f);
         yield return DrawGridOutline();
-
     }
 
     public bool BuildAtCell(int x, int y, Transform structure)
     {
-        if (x > width || y > height || x < 0 || y < 0)
+        if (x > _width || y > _height || x < 0 || y < 0)
         {
             Debug.Log("Could not build at position " + x + " " + y + " as these co-ordinates are invalid");
             return false;
         }
-        else
-        {
-            return gridArray[x, y].Build(structure);
-        }
+        return gridArray[x, y].Build(structure);
     }
 
     public bool DemolishAtCell(int x, int y)
     {
-        if (x > width || y > height || x < 0 || y < 0)
+        if (x > _width || y > _height || x < 0 || y < 0)
         {
             Debug.Log("Could not destroy at position " + x + " " + y + " as these co-ordinates are invalid");
             return false;
         }
-        else
-        {
-            return gridArray[x, y].Demolish();
-        }
+        return gridArray[x, y].Demolish();
     }
 
     public bool DamageAtCell(int x, int y, float amount)
     {
-        if (x > width || y > height || x < 0 || y < 0)
+        if (x > _width || y > _height || x < 0 || y < 0)
         {
             Debug.Log("Could not damage at position " + x + " " + y + " as these co-ordinates are invalid");
             return false;
         }
-        else
-        {
-            return gridArray[x, y].Damage(amount);
-        }
+        return gridArray[x, y].Damage(amount);
     }
 
     public GameObject GetStructureAtCell(int x, int y)
     {
-        if (x > width || y > height || x < 0 || y < 0)
-        {
-            Debug.Log("Attempted to find structure at " + x + " " + y + " but these co-ordinates are out of range");
-            return null;
-        }
-        else
+        if (x <= _width && y <= _height && x >= 0 && y >= 0)
             return (GameObject)gridArray[x, y].Values["structure"];
+        Debug.Log("Attempted to find structure at " + x + " " + y + " but these co-ordinates are out of range");
+        return null;
     }
 
     public bool HealAtCell(int x, int y, float amount)
     {
-        if (x > width || y > height || x < 0 || y < 0)
+        if (x > _width || y > _height || x < 0 || y < 0)
         {
             Debug.Log("Could not heal at position " + x + " " + y + " as these co-ordinates are invalid");
             return false;
         }
-        else
-        {
-            return gridArray[x, y].Heal(amount);
-        }
+        return gridArray[x, y].Heal(amount);
     }
 
     public bool SetHealthAtCell(int x, int y, float amount, bool fullyHeal = false)
     {
-        if (x > width || y > height || x < 0 || y < 0)
+        if (x > _width || y > _height || x < 0 || y < 0)
         {
             Debug.Log("Could not set health at position " + x + " " + y + " as these co-ordinates are invalid");
             return false;
         }
-        else
-        {
-            return gridArray[x, y].SetHealth(amount, fullyHeal);
-        }
+        return gridArray[x, y].SetHealth(amount, fullyHeal);
     }
 
 
     private Vector2 GetCellWorldPosition(int x, int y)
     {
-        return new Vector2(x, y) * cellSize;
+        return new Vector2(x, y) * _cellSize;
     }
 
     public Vector2 GetWorldCellPosition(float x, float y)
     {
-        return new Vector2(Mathf.FloorToInt(x / cellSize), Mathf.FloorToInt(y / cellSize));
+        return new Vector2(Mathf.FloorToInt(x / _cellSize), Mathf.FloorToInt(y / _cellSize));
     }
-
 }
-

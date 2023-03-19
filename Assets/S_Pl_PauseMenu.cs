@@ -3,10 +3,10 @@ using UnityEngine.SceneManagement;
 
 public class S_Pl_PauseMenu : MonoBehaviour
 {
-    [SerializeField] GameObject pauseMenu;
-    [SerializeField] GameObject HUD;
+    [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject HUD;
 
-    void Update()
+    private void Update()
     {
         if (Input.GetKey(KeyCode.Escape))
         {

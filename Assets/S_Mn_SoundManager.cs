@@ -3,10 +3,10 @@ using UnityEngine.UI;
 
 public class S_Mn_SoundManager : MonoBehaviour
 {
-    [SerializeField] Slider volumeSlider;
+    [SerializeField] private Slider volumeSlider;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         if (!PlayerPrefs.HasKey("musicVolume"))
         {

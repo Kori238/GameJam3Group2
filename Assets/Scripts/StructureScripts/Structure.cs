@@ -3,17 +3,17 @@ using UnityEngine;
 
 public class Structure : MonoBehaviour
 {
-    private Transform attackPointPrefab;
     public float health;
     public float maxHealth;
     public bool damageable;
     public bool destroyed;
     public int priority;
     public Vector2 gridPos;
-    public List<Node> occupiedSpace = new();
-    public List<Node> attackPoints = new();
-    public bool isSpaceOccupied = false;
-    public int occupiedSpaceCount = 0;
+    public bool isSpaceOccupied;
+    public int occupiedSpaceCount;
+    private Transform attackPointPrefab;
+    public List<Node> attackPoints = new List<Node>();
+    public List<Node> occupiedSpace = new List<Node>();
     public virtual void Start()
     {
         attackPointPrefab = Init.Instance.attackPointPrefab;
@@ -25,43 +25,45 @@ public class Structure : MonoBehaviour
     public virtual void CreateAttackPoints()
     {
         if (destroyed) return;
-        Vector2 nodePos = gridPos * 3;
-        NodeGrid nodeGrid = Init.Instance.pathfinding.GetGrid();
-        List<Vector2> attackPositions = new List<Vector2> {
-            new Vector2(nodePos.x-1, nodePos.y+1),
-            new Vector2(nodePos.x+3, nodePos.y+1),
-            new Vector2(nodePos.x+1, nodePos.y-1),
-            new Vector2(nodePos.x+1, nodePos.y+3)};
-
-        foreach (Vector2 point in attackPositions)
+        var nodePos = gridPos * 3;
+        var nodeGrid = Init.Instance.pathfinding.GetGrid();
+        var attackPositions = new List<Vector2>
         {
-            Node node = nodeGrid.gridArray[(int)point.x, (int)point.y];
+            new Vector2(nodePos.x - 1, nodePos.y + 1),
+            new Vector2(nodePos.x + 3, nodePos.y + 1),
+            new Vector2(nodePos.x + 1, nodePos.y - 1),
+            new Vector2(nodePos.x + 1, nodePos.y + 3)
+        };
+
+        foreach (var point in attackPositions)
+        {
+            var node = nodeGrid.gridArray[(int)point.x, (int)point.y];
             if (node != null && node.isWalkable)
             {
-                Transform attackPoint = GameObject.Instantiate(attackPointPrefab, ((point) * (3.3333f) + new Vector2(10 / 6, 10 / 6) * 1.66f), Quaternion.identity, transform);
+                var attackPoint = Instantiate(attackPointPrefab, point * 3.3333f + new Vector2(10 / 6, 10 / 6) * 1.66f,
+                    Quaternion.identity, transform);
                 // Do I understand why the vector has to be timesed by 1.66? No... Does it work? Unfortunatly... :(
                 attackPoint.GetComponent<AttackPoint>().parentNode = node;
                 node.SetAttackPoint(attackPoint.gameObject);
                 attackPoints.Add(node);
             }
-
         }
     }
 
     public virtual void RemoveAttackPoints()
     {
-        foreach (Node node in attackPoints)
+        foreach (var node in attackPoints)
         {
             node.RemoveAttackPoint();
         }
-        attackPoints = new();
+        attackPoints = new List<Node>();
     }
 
     public virtual void UpdateAllAttackPoints() //Updates the attack points of adjacent cells which contain structures
     {
         RemoveAttackPoints();
         CreateAttackPoints();
-        foreach (Structure structure in FindAdjacentStructures())
+        foreach (var structure in FindAdjacentStructures())
         {
             structure.RemoveAttackPoints();
             structure.CreateAttackPoints();
@@ -70,15 +72,27 @@ public class Structure : MonoBehaviour
 
     public List<Structure> FindAdjacentStructures()
     {
-        List<Structure> adjacent = new();
+        var adjacent = new List<Structure>();
         if (Init.Instance.grid.GetStructureAtCell((int)gridPos.x, (int)gridPos.y + 1) != null)
-            adjacent.Add(Init.Instance.grid.GetStructureAtCell((int)gridPos.x, (int)gridPos.y + 1).GetComponent<Structure>());
+        {
+            adjacent.Add(
+                Init.Instance.grid.GetStructureAtCell((int)gridPos.x, (int)gridPos.y + 1).GetComponent<Structure>());
+        }
         if (Init.Instance.grid.GetStructureAtCell((int)gridPos.x + 1, (int)gridPos.y) != null)
-            adjacent.Add(Init.Instance.grid.GetStructureAtCell((int)gridPos.x + 1, (int)gridPos.y).GetComponent<Structure>());
+        {
+            adjacent.Add(
+                Init.Instance.grid.GetStructureAtCell((int)gridPos.x + 1, (int)gridPos.y).GetComponent<Structure>());
+        }
         if (Init.Instance.grid.GetStructureAtCell((int)gridPos.x, (int)gridPos.y - 1) != null)
-            adjacent.Add(Init.Instance.grid.GetStructureAtCell((int)gridPos.x, (int)gridPos.y - 1).GetComponent<Structure>());
+        {
+            adjacent.Add(
+                Init.Instance.grid.GetStructureAtCell((int)gridPos.x, (int)gridPos.y - 1).GetComponent<Structure>());
+        }
         if (Init.Instance.grid.GetStructureAtCell((int)gridPos.x - 1, (int)gridPos.y) != null)
-            adjacent.Add(Init.Instance.grid.GetStructureAtCell((int)gridPos.x - 1, (int)gridPos.y).GetComponent<Structure>());
+        {
+            adjacent.Add(
+                Init.Instance.grid.GetStructureAtCell((int)gridPos.x - 1, (int)gridPos.y).GetComponent<Structure>());
+        }
         return adjacent;
     }
 
@@ -87,7 +101,7 @@ public class Structure : MonoBehaviour
         Debug.Log(gameObject.name + " space has been occupied");
         if (occupiedSpace.Count > 0)
         {
-            foreach (Node node in occupiedSpace)
+            foreach (var node in occupiedSpace)
             {
                 if (node.GetAttackPoint() != null)
                 {
@@ -103,11 +117,11 @@ public class Structure : MonoBehaviour
 
     public virtual void FindOccupiedSpace()
     {
-        Vector2 nodePos = gridPos * 3;
-        NodeGrid nodeGrid = Init.Instance.pathfinding.GetGrid();
-        for (int y = (int)nodePos.y; y < (int)nodePos.y + 3; y++)
+        var nodePos = gridPos * 3;
+        var nodeGrid = Init.Instance.pathfinding.GetGrid();
+        for (var y = (int)nodePos.y; y < (int)nodePos.y + 3; y++)
         {
-            for (int x = (int)nodePos.x; x < (int)nodePos.x + 3; x++)
+            for (var x = (int)nodePos.x; x < (int)nodePos.x + 3; x++)
                 occupiedSpace.Add(nodeGrid.gridArray[x, y]);
         }
     }
@@ -117,7 +131,7 @@ public class Structure : MonoBehaviour
         Debug.Log(gameObject.name + " Space was deoccupied");
         if (occupiedSpace.Count > 0)
         {
-            foreach (Node node in occupiedSpace)
+            foreach (var node in occupiedSpace)
             {
                 node.isWalkable = true;
             }
@@ -149,7 +163,6 @@ public class Structure : MonoBehaviour
         destroyed = true;
         UpdateStructure();
         Debug.Log(gameObject.name + " has been Destroyed!");
-
     }
 
     public virtual void Demolished()

@@ -2,12 +2,11 @@ using UnityEngine;
 
 public class StoneCollectorScript : Interactable
 {
-
-    int CurrentWoodCoolDown = 0;
-    int MaxWoodCoolDown = 500;
+    private readonly int MaxWoodCoolDown = 500;
+    private int CurrentWoodCoolDown;
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (CurrentWoodCoolDown >= MaxWoodCoolDown)
         {
@@ -25,7 +24,6 @@ public class StoneCollectorScript : Interactable
     private void FixedUpdate()
     {
         CurrentWoodCoolDown += 1;
-
     }
     public override void Interact()
     {
@@ -38,6 +36,5 @@ public class StoneCollectorScript : Interactable
         {
             Debug.Log("failed to repair");
         }
-
     }
 }

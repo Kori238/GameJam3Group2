@@ -8,30 +8,27 @@ public class S_Pl_DebugMenu : MonoBehaviour
     public Transform PlayerTransform;
     public TMP_Text HealthINT;
     public GameObject AdminMenuControls;
-    private bool menuOpen = false;
-    private bool waitingForInput = false;
-    private bool isInvis = false;
     [SerializeField] private Collider2D playerCollider;
     [SerializeField] private SpriteRenderer playerVisual;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    private bool isInvis;
 
-    }
+    //private bool menuOpen = false;
+    private bool waitingForInput;
+
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.M))
         {
-            menuOpen = true;
+            //menuOpen = true;
             Debug.Log("Admin Menu Open.");
             AdminMenuControls.SetActive(true);
             StartCoroutine(WaitForInput());
         }
 
-        if (waitingForInput == true)
+        if (waitingForInput)
         {
             if (Input.GetKeyDown(KeyCode.G))
             {
@@ -56,7 +53,6 @@ public class S_Pl_DebugMenu : MonoBehaviour
                     playerVisual.color = Color.white;
                     isInvis = false;
                 }
-
             }
             else if (Input.GetKeyDown(KeyCode.Keypad1))
             {
@@ -69,11 +65,11 @@ public class S_Pl_DebugMenu : MonoBehaviour
         }
     }
 
-    IEnumerator WaitForInput()
+    private IEnumerator WaitForInput()
     {
         waitingForInput = true;
         yield return new WaitForSeconds(2f);
-        menuOpen = false;
+        //menuOpen = false;
         waitingForInput = false;
         Debug.Log("Admin Menu Closed.");
         AdminMenuControls.SetActive(false);

@@ -17,34 +17,23 @@ public class MoveTowardsPlayer : MonoBehaviour
 
     private bool canAttack = true;
 
-    void Update()
+    private void Update()
     {
-
         // Calculate the direction to move towards the target
-        Vector3 direction = (target.position - transform.position).normalized;
+        var direction = (target.position - transform.position).normalized;
 
         // Move the sprite towards the target
         transform.position += direction * speed * Time.deltaTime;
 
-        if (Vector3.Distance(transform.position, target.position) <= 4f)  //Determinds the distance between the player and the enemy.
+        if (Vector3.Distance(transform.position, target.position) <=
+            4f) //Determinds the distance between the player and the enemy.
         {
             if (canAttack)
             {
                 canAttack = false;
                 StartCoroutine(DamagePlayer());
-
             }
         }
-
-    }
-
-    private IEnumerator DamagePlayer()
-    {
-        int playerhp = PlayerScript.GetComponent<S_Pl_Movement>().Health -= 5;
-        HealthINT.text = playerhp.ToString();
-        SoundControllerScript.GetComponent<S_SoundController>().AttackHit();
-        yield return new WaitForSeconds(2f);
-        canAttack = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -54,6 +43,15 @@ public class MoveTowardsPlayer : MonoBehaviour
             Damaged(5);
             SoundControllerScript.GetComponent<S_SoundController>().HurtMonster();
         }
+    }
+
+    private IEnumerator DamagePlayer()
+    {
+        var playerhp = PlayerScript.GetComponent<S_Pl_Movement>().Health -= 5;
+        HealthINT.text = playerhp.ToString();
+        SoundControllerScript.GetComponent<S_SoundController>().AttackHit();
+        yield return new WaitForSeconds(2f);
+        canAttack = true;
     }
 
     public void Damaged(int amount)
@@ -67,7 +65,3 @@ public class MoveTowardsPlayer : MonoBehaviour
         }
     }
 }
-
-
-
-

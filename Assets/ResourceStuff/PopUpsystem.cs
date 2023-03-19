@@ -2,6 +2,5 @@ using UnityEngine;
 
 public class PopUpsystem : MonoBehaviour
 {
-    [SerializeField] GameObject popUpMenu;
-
+    [SerializeField] private GameObject popUpMenu;
 }

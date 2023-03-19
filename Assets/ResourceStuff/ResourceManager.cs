@@ -1,10 +1,10 @@
 public class ResourceManager
 {
-    private int stone = 50;
-    private int wood;
-    private int starlight;
-    private int unassignedMinions;
     private int maxMinions;
+    private int starlight;
+    private int stone = 50;
+    private int unassignedMinions;
+    private int wood;
 
 
     public int GetStone()
@@ -13,7 +13,6 @@ public class ResourceManager
     }
     public int GetWood()
     {
-
         return wood;
     }
     public int GetStarlight()
@@ -29,7 +28,6 @@ public class ResourceManager
     public void AddWood(int newwood)
     {
         wood = wood + newwood;
-
     }
 
     public void AddStarLight(int newStarLight)

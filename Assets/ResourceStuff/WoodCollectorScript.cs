@@ -2,31 +2,34 @@ using UnityEngine;
 
 public class WoodCollectorScript : Interactable
 {
-    pMenu pmenu;
-    [SerializeField] GameObject PopMenu;
+    [SerializeField] private GameObject PopMenu;
 
 
 
-    int CollectionAmount = 50;
-
-    int CurrentWoodCoolDown = 0;
-    int MaxWoodCoolDown = 500;
-
-    int MAssigned; // the ammount of minions assigned to the buiding 
-    int MaxMAssigned = 5;
+    private readonly int CollectionAmount = 50;
 
 
-    int CurrentBuildingLevel = 0;// building level 1
+    private readonly int CurrentBuildingLevel = 0; // building level 1
+    private readonly int MaxWoodCoolDown = 500;
+
+    private int CurrentWoodCoolDown;
+
+    private GameObject InstanceMenu;
+
+    private int MAssigned; // the ammount of minions assigned to the buiding 
+    private int MaxMAssigned = 5;
+    private pMenu pmenu;
+    private bool toOpen = true;
 
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (CurrentWoodCoolDown >= MaxWoodCoolDown)
         {
-            Init.Instance.resourceManager.AddWood((MAssigned / MaxMAssigned) * CollectionAmount);
+            Init.Instance.resourceManager.AddWood(MAssigned / MaxMAssigned * CollectionAmount);
             //resourceManager.AddWood(50);
-            print("Wood Collector added " + ((MAssigned / MaxMAssigned) * CollectionAmount) + " wood");
+            print("Wood Collector added " + MAssigned / MaxMAssigned * CollectionAmount + " wood");
             CurrentWoodCoolDown = 0;
         }
         if (health <= 0)
@@ -37,23 +40,15 @@ public class WoodCollectorScript : Interactable
     private void FixedUpdate()
     {
         CurrentWoodCoolDown += 1;
-
     }
-    bool toOpen = true;
-
-    GameObject InstanceMenu;
     public override void Interact()
     {
-
         if (toOpen)
         {
             InstanceMenu = Instantiate(PopMenu);
             toOpen = false;
             InstanceMenu.GetComponent<pMenu>().SetParentStructure(gameObject);
             InstanceMenu.GetComponent<pMenu>().setSlider(MAssigned, MaxMAssigned);
-
-
-
         }
         else if (!toOpen)
         {
@@ -71,7 +66,6 @@ public class WoodCollectorScript : Interactable
         // {
         //    Debug.Log("failed to repair");
         //  }
-
     }
 
     public void repair()
@@ -80,15 +74,13 @@ public class WoodCollectorScript : Interactable
     }
     public bool upgrade()
     {
-
         switch (CurrentBuildingLevel)
         {
-            case 0:// upgades to level 2
-                {
-                    MaxMAssigned = 10;
-                    break;
-                }
-
+            case 0: // upgades to level 2
+            {
+                MaxMAssigned = 10;
+                break;
+            }
         }
 
         print("succces");
