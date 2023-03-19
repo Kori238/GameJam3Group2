@@ -1,11 +1,6 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.EventSystems.EventTrigger;
-using static UnityEngine.Rendering.DebugUI;
 
 public class S_Pl_Abilities : MonoBehaviour
 {
@@ -24,15 +19,17 @@ public class S_Pl_Abilities : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animator= GetComponent<Animator>();
+        animator = GetComponent<Animator>();
     }
 
     public void Dig()
     {
-        
-        if (!digging && canDig) {
+
+        if (!digging && canDig)
+        {
             StartCoroutine(beginDig());
-        } else
+        }
+        else
         {
             bool canEmerge = true;
             Collider2D[] results = new Collider2D[10];
@@ -74,7 +71,7 @@ public class S_Pl_Abilities : MonoBehaviour
         yield return null;
     }
 
-    
+
 
     void Ability1()
     {
@@ -101,13 +98,13 @@ public class S_Pl_Abilities : MonoBehaviour
         canAttack = true;
     }
 
-        // Update is called once per frame
-        void Update()
+    // Update is called once per frame
+    void Update()
     {
         if (Input.GetButtonDown("Fire1"))
         {
             Ability1();
-            
+
         }
         else if (Input.GetButtonDown("Ability2"))
         {
@@ -129,11 +126,12 @@ public class S_Pl_Abilities : MonoBehaviour
                 MovementScript.GetComponent<S_Pl_Movement>().Pl_Speed = 16;
             }
             Camera.main.orthographicSize = CameraZoomValue;
-        } else if (Input.GetKeyDown(KeyCode.Space))
+        }
+        else if (Input.GetKeyDown(KeyCode.Space))
         {
             Dig();
         }
-        
+
     }
 
     public void DashZoom()

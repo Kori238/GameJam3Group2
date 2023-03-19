@@ -1,8 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using Unity.VisualScripting.FullSerializer;
-using UnityEditorInternal;
 using UnityEngine;
 
 
@@ -64,7 +61,7 @@ public class Path
         this.nodes = new();
         this.structure = null;
         this.attackPoint = null;
-    }   
+    }
 }
 
 public class NodeGrid
@@ -124,7 +121,7 @@ public class NodeGrid
 
     public int GetWidth() { return width; }
     public int GetHeight() { return height; }
-    
+
 
 
 }
@@ -161,8 +158,10 @@ public class AStar
             return null; //path is outside of acceptable view distance
         }
 
-        for (int x=0; x<grid.GetWidth(); x++) {
-            for (int y = 0; y < grid.GetHeight(); y++) {
+        for (int x = 0; x < grid.GetWidth(); x++)
+        {
+            for (int y = 0; y < grid.GetHeight(); y++)
+            {
                 Node node = grid.GetNodeFromPosition(x, y);
                 node.gCost = int.MaxValue;
                 node.updateFCost();
@@ -186,7 +185,7 @@ public class AStar
             foreach (Node adjacentNode in GetAdjacentNodes(currentNode))
             {
                 if (searchedNodes.Contains(adjacentNode)) continue;
-                if(!adjacentNode.isWalkable)
+                if (!adjacentNode.isWalkable)
                 {
                     searchedNodes.Add(adjacentNode);
                     continue;
@@ -200,7 +199,7 @@ public class AStar
                     adjacentNode.hCost = CalculateDistanceCost(adjacentNode, endNode);
                     adjacentNode.updateFCost();
 
-                if (!unsearchedNodes.Contains(adjacentNode))
+                    if (!unsearchedNodes.Contains(adjacentNode))
                     {
                         unsearchedNodes.Add(adjacentNode);
                     }
@@ -214,20 +213,20 @@ public class AStar
     private List<Node> GetAdjacentNodes(Node currentNode)
     {
         List<Node> adjacentNodes = new List<Node>();
-        if (currentNode.x-1 >= 0)
+        if (currentNode.x - 1 >= 0)
         {
-            adjacentNodes.Add(grid.GetNodeFromPosition(currentNode.x-1, currentNode.y));
-            if (currentNode.y-1 >= 0) adjacentNodes.Add(grid.GetNodeFromPosition(currentNode.x-1, currentNode.y-1));
-            if (currentNode.y+1 < grid.GetHeight()) adjacentNodes.Add(grid.GetNodeFromPosition(currentNode.x-1, currentNode.y+1));
+            adjacentNodes.Add(grid.GetNodeFromPosition(currentNode.x - 1, currentNode.y));
+            if (currentNode.y - 1 >= 0) adjacentNodes.Add(grid.GetNodeFromPosition(currentNode.x - 1, currentNode.y - 1));
+            if (currentNode.y + 1 < grid.GetHeight()) adjacentNodes.Add(grid.GetNodeFromPosition(currentNode.x - 1, currentNode.y + 1));
         }
-        if (currentNode.x+1 < grid.GetWidth())
+        if (currentNode.x + 1 < grid.GetWidth())
         {
-            adjacentNodes.Add(grid.GetNodeFromPosition(currentNode.x+1, currentNode.y));
-            if (currentNode.y-1 >= 0) adjacentNodes.Add(grid.GetNodeFromPosition(currentNode.x+1, currentNode.y-1));
-            if (currentNode.y+1 < grid.GetHeight()) adjacentNodes.Add(grid.GetNodeFromPosition(currentNode.x+1, currentNode.y+1));
+            adjacentNodes.Add(grid.GetNodeFromPosition(currentNode.x + 1, currentNode.y));
+            if (currentNode.y - 1 >= 0) adjacentNodes.Add(grid.GetNodeFromPosition(currentNode.x + 1, currentNode.y - 1));
+            if (currentNode.y + 1 < grid.GetHeight()) adjacentNodes.Add(grid.GetNodeFromPosition(currentNode.x + 1, currentNode.y + 1));
         }
-        if (currentNode.y-1 >= 0) adjacentNodes.Add(grid.GetNodeFromPosition(currentNode.x, currentNode.y-1));
-        if (currentNode.y+1 < grid.GetHeight()) adjacentNodes.Add(grid.GetNodeFromPosition(currentNode.x, currentNode.y+1));
+        if (currentNode.y - 1 >= 0) adjacentNodes.Add(grid.GetNodeFromPosition(currentNode.x, currentNode.y - 1));
+        if (currentNode.y + 1 < grid.GetHeight()) adjacentNodes.Add(grid.GetNodeFromPosition(currentNode.x, currentNode.y + 1));
 
         return adjacentNodes;
     }
@@ -237,7 +236,7 @@ public class AStar
         Path path = new() { fCost = endNode.fCost };
         path.nodes.Add(endNode);
         Node currentNode = endNode;
-        while(currentNode.previousNode != null)
+        while (currentNode.previousNode != null)
         {
             path.nodes.Add(currentNode.previousNode);
             currentNode = currentNode.previousNode;
@@ -259,7 +258,8 @@ public class AStar
         Node lowestFCostNode = nodeList[0];
         foreach (Node node in nodeList)
         {
-            if (node.fCost < lowestFCostNode.fCost) {
+            if (node.fCost < lowestFCostNode.fCost)
+            {
                 lowestFCostNode = node;
             }
         }

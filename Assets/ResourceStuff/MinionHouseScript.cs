@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MinionHouseScript : MonoBehaviour
@@ -13,6 +11,6 @@ public class MinionHouseScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

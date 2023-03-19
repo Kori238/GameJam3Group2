@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
 
 public class pMenu : MonoBehaviour
 {
@@ -11,7 +7,7 @@ public class pMenu : MonoBehaviour
     [SerializeField] Slider AMinionSlider;
     private float AMinion;
     private float mMinion;
-    
+
     public void SetParentStructure(GameObject thisParentStruture)
     {
         ParentStruture = thisParentStruture;
@@ -19,8 +15,8 @@ public class pMenu : MonoBehaviour
 
     public void setSlider(int newAMinion, int newMMinion)
     {
-        AMinion= newAMinion;
-        mMinion= newMMinion;
+        AMinion = newAMinion;
+        mMinion = newMMinion;
         AMinionSlider.SetValueWithoutNotify(3);
     }
 
@@ -40,20 +36,20 @@ public class pMenu : MonoBehaviour
     {
         //  AMinionSlider = GameObject.Find("MinionSlider").GetComponent<Slider>();
         AMinionSlider.onValueChanged.AddListener(delegate { ValueChanged(); });
-        
+
     }
     private void Update()
     {
-   
-        
+
+
 
     }
-    
-    public void ValueChanged() 
+
+    public void ValueChanged()
     {
         ParentStruture.GetComponent<WoodCollectorScript>().SetMinionAssigned((int)AMinionSlider.value);
     }
-        
-    }
+
+}
 
 

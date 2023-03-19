@@ -1,13 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
-using UnityEngine.Analytics;
 
 public class Init : MonoBehaviour
 {
     private static Init _instance;
-    public static Init Instance {  get { return _instance;  } }
+    public static Init Instance { get { return _instance; } }
 
     public Transform tree;
     public Transform wall;
@@ -22,6 +19,8 @@ public class Init : MonoBehaviour
     public bool wallDemo = false;
     public bool testPathfinding = false;
     public bool debug = true;
+    public PerformanceCounter cpuCounter;
+    public PerformanceCounter ramCounter;
 
 
 
@@ -31,17 +30,18 @@ public class Init : MonoBehaviour
         {
             Destroy(this.gameObject);
             return;
-        } else
-        _instance = this;
+        }
+        else
+            _instance = this;
         pathfinding = new AStar((int)gridDimensions.x * nodeCount, (int)gridDimensions.y * nodeCount, cellSize / nodeCount);
-        PerformanceCounter cpuCounter;
 
-        cpuCounter = new PerformanceCounter();
+        cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_ Total");
+        ramCounter = new PerformanceCounter("Memory", "Available MBytes");
 
         grid = new Grid((int)gridDimensions.x, (int)gridDimensions.y, cellSize);
         resourceManager = new ResourceManager();
         grid.BuildAtCell(5, 5, tree);
-        grid.BuildAtCell((int)(gridDimensions.x-1) / 2, (int)(gridDimensions.y-1) / 2, home);
+        grid.BuildAtCell((int)(gridDimensions.x - 1) / 2, (int)(gridDimensions.y - 1) / 2, home);
         if (wallDemo)
         {
             StartCoroutine(BuildWalls());
@@ -51,12 +51,15 @@ public class Init : MonoBehaviour
             StartCoroutine(pathfinding.GetGrid().DrawNodeOutline());
             StartCoroutine(grid.DrawGridOutline());
         }
-
     }
 
-    private void Start()
+    public float getCurrentCPUUsage()
     {
-        
+        return cpuCounter.NextValue();
+    }
+    public float getAvailableRam()
+    {
+        return ramCounter.NextValue();
     }
 
     private IEnumerator BuildWalls()

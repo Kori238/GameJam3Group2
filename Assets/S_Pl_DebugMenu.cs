@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -18,7 +17,7 @@ public class S_Pl_DebugMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -29,7 +28,7 @@ public class S_Pl_DebugMenu : MonoBehaviour
             menuOpen = true;
             Debug.Log("Admin Menu Open.");
             AdminMenuControls.SetActive(true);
-            StartCoroutine(WaitForInput() );
+            StartCoroutine(WaitForInput());
         }
 
         if (waitingForInput == true)
@@ -57,7 +56,7 @@ public class S_Pl_DebugMenu : MonoBehaviour
                     playerVisual.color = Color.white;
                     isInvis = false;
                 }
-                
+
             }
             else if (Input.GetKeyDown(KeyCode.Keypad1))
             {
@@ -77,6 +76,6 @@ public class S_Pl_DebugMenu : MonoBehaviour
         menuOpen = false;
         waitingForInput = false;
         Debug.Log("Admin Menu Closed.");
-        AdminMenuControls.SetActive(false); 
+        AdminMenuControls.SetActive(false);
     }
 }

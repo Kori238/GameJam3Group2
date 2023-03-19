@@ -1,13 +1,5 @@
-using Newtonsoft.Json.Bson;
-using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
-using Unity.Mathematics;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.Networking.Types;
-using static UnityEngine.UI.CanvasScaler;
 
 public class Structure : MonoBehaviour
 {
@@ -46,13 +38,13 @@ public class Structure : MonoBehaviour
             Node node = nodeGrid.gridArray[(int)point.x, (int)point.y];
             if (node != null && node.isWalkable)
             {
-                Transform attackPoint = GameObject.Instantiate(attackPointPrefab, ((point) * (3.3333f) + new Vector2(10/6, 10/6) * 1.66f), Quaternion.identity, transform);
+                Transform attackPoint = GameObject.Instantiate(attackPointPrefab, ((point) * (3.3333f) + new Vector2(10 / 6, 10 / 6) * 1.66f), Quaternion.identity, transform);
                 // Do I understand why the vector has to be timesed by 1.66? No... Does it work? Unfortunatly... :(
                 attackPoint.GetComponent<AttackPoint>().parentNode = node;
                 node.SetAttackPoint(attackPoint.gameObject);
                 attackPoints.Add(node);
             }
-            
+
         }
     }
 
@@ -113,9 +105,9 @@ public class Structure : MonoBehaviour
     {
         Vector2 nodePos = gridPos * 3;
         NodeGrid nodeGrid = Init.Instance.pathfinding.GetGrid();
-        for (int y = (int)nodePos.y; y < (int)nodePos.y+3; y++)
+        for (int y = (int)nodePos.y; y < (int)nodePos.y + 3; y++)
         {
-            for (int x = (int)nodePos.x; x < (int)nodePos.x+3; x++)
+            for (int x = (int)nodePos.x; x < (int)nodePos.x + 3; x++)
                 occupiedSpace.Add(nodeGrid.gridArray[x, y]);
         }
     }
@@ -140,11 +132,12 @@ public class Structure : MonoBehaviour
         if (health - amount < 0)
         {
             health = 0;
-        } else
+        }
+        else
         {
             health -= amount;
         }
-        
+
         if (health <= 0)
         {
             Destroyed();
@@ -156,7 +149,7 @@ public class Structure : MonoBehaviour
         destroyed = true;
         UpdateStructure();
         Debug.Log(gameObject.name + " has been Destroyed!");
-        
+
     }
 
     public virtual void Demolished()
@@ -168,17 +161,23 @@ public class Structure : MonoBehaviour
 
     public virtual void SetHealth(float amount, bool fullyHeal = false)
     {
-        if (amount > maxHealth || fullyHeal) {
+        if (amount > maxHealth || fullyHeal)
+        {
             health = maxHealth;
-        } else if (amount < 0){
+        }
+        else if (amount < 0)
+        {
             health = amount;
-        } else {
+        }
+        else
+        {
             health = 0;
         }
         if (destroyed && health > 0)
         {
             destroyed = false;
-        } else if (!destroyed && health <= 0)
+        }
+        else if (!destroyed && health <= 0)
         {
             Destroyed();
         }
@@ -190,7 +189,9 @@ public class Structure : MonoBehaviour
         if (health + amount > maxHealth)
         {
             health = maxHealth;
-        } else {
+        }
+        else
+        {
             health += amount;
         }
         if (destroyed && health > 0)
@@ -214,7 +215,8 @@ public class Structure : MonoBehaviour
         if (destroyed && isSpaceOccupied)
         {
             DeoccupySpace();
-        } else if (!destroyed && !isSpaceOccupied)
+        }
+        else if (!destroyed && !isSpaceOccupied)
         {
             OccupySpace();
         }

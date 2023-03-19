@@ -1,9 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Resources;
 using TMPro;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerInteractionScript : MonoBehaviour
@@ -35,7 +30,8 @@ public class PlayerInteractionScript : MonoBehaviour
             print("wood = " + Init.Instance.resourceManager.GetWood());
             WoodUI.text = Init.Instance.resourceManager.GetWood().ToString();
         }
-        if (Input.GetKeyDown("1")){
+        if (Input.GetKeyDown("1"))
+        {
             currentTool = "Interact";
             print("interact Tool Equiped");
         }
@@ -143,7 +139,8 @@ public class PlayerInteractionScript : MonoBehaviour
         if (pathfindingTestNodes[0] == -Vector2.one)
         {
             pathfindingTestNodes[0] = gridPos;
-        } else
+        }
+        else
         {
             pathfindingTestNodes[1] = gridPos;
             Path path = Init.Instance.pathfinding.FindPath((int)pathfindingTestNodes[0].x, (int)pathfindingTestNodes[0].y, (int)pathfindingTestNodes[1].x, (int)pathfindingTestNodes[1].y);
@@ -152,13 +149,13 @@ public class PlayerInteractionScript : MonoBehaviour
                 for (int i = 0; i < path.nodes.Count - 1; i++)
                 {
                     float nodeSpacing = Init.Instance.cellSize / Init.Instance.nodeCount;
-                    Debug.DrawLine(new Vector3(path.nodes[i].x, path.nodes[i].y) * nodeSpacing + Vector3.one * nodeSpacing/2, new Vector3(path.nodes[i+1].x, path.nodes[i+1].y) * nodeSpacing + Vector3.one * nodeSpacing/2, Color.yellow, 5f);
+                    Debug.DrawLine(new Vector3(path.nodes[i].x, path.nodes[i].y) * nodeSpacing + Vector3.one * nodeSpacing / 2, new Vector3(path.nodes[i + 1].x, path.nodes[i + 1].y) * nodeSpacing + Vector3.one * nodeSpacing / 2, Color.yellow, 5f);
                 }
             }
             pathfindingTestNodes[0] = -Vector2.one;
             pathfindingTestNodes[1] = -Vector2.one;
         }
-        
+
     }
 
 
@@ -167,17 +164,17 @@ public class PlayerInteractionScript : MonoBehaviour
         Vector2 MousePos = Input.mousePosition;
         Vector2 MouseWorldPos = Camera.main.ScreenToWorldPoint(MousePos);
         Vector2 gridPos;
-        if(Init.Instance.resourceManager.GetWood()>= 50)
+        if (Init.Instance.resourceManager.GetWood() >= 50)
         {
             gridPos = Init.Instance.grid.GetWorldCellPosition(MouseWorldPos.x, MouseWorldPos.y);
-            bool valid = Init.Instance.grid.BuildAtCell((int)gridPos.x , (int)gridPos.y , WoodCollector);
+            bool valid = Init.Instance.grid.BuildAtCell((int)gridPos.x, (int)gridPos.y, WoodCollector);
 
             if (valid)
             {
                 Init.Instance.resourceManager.AddWood(-50);
             }
         }
-       
+
 
     }
     private void PlaceStoneCollector()

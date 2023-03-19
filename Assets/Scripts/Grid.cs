@@ -1,10 +1,6 @@
-using Mono.Cecil.Cil;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
-using UnityEditor.Rendering;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.GameCenter;
 
 public class GridCell
 {
@@ -67,7 +63,8 @@ public class GridCell
             ((GameObject)Values["structure"]).GetComponent<Structure>().Damaged(amount);
             Debug.Log("Dealt " + amount + " damage to " + ((GameObject)Values["structure"]).name + " at position " + Values["gridPos"]);
             return true;
-        } else
+        }
+        else
         {
             Debug.Log("Unable to damage at position " + Values["gridPos"] + " as there is nothing here to damage or this is undamageable");
             return false;
@@ -94,9 +91,11 @@ public class GridCell
         if (Values["structure"] != null)
         {
             ((GameObject)Values["structure"]).GetComponent<Structure>().SetHealth(amount, fullyHeal);
-            if (fullyHeal) {
+            if (fullyHeal)
+            {
                 Debug.Log("Fully healed " + ((GameObject)Values["structure"]).name + " at position " + Values["gridPos"]);
-            } else
+            }
+            else
             {
                 Debug.Log("Set health of  " + ((GameObject)Values["structure"]).name + "  to " + amount + " at position " + Values["gridPos"]);
             }
@@ -123,7 +122,7 @@ public class Grid
         this.width = width; // this is called by Init to define the width, height and cellSize there
         this.height = height;
         this.cellSize = cellSize;
-        
+
 
         gridArray = new GridCell[width, height]; // creates a 2D array of GridCell type
 
@@ -132,8 +131,8 @@ public class Grid
             for (int y = 0; y < gridArray.GetLength(1); y++)
             {
                 gridArray[x, y] = new GridCell(); // creates a GridCell object at this cell
-                gridArray[x, y].Values["center"] = new Vector3(x, y) * cellSize + new Vector3(cellSize/2, cellSize/2); // calculates and stores the center position of the cell to the Dictionary
-                gridArray[x, y].Values["gridPos"] = new Vector2(x, y); 
+                gridArray[x, y].Values["center"] = new Vector3(x, y) * cellSize + new Vector3(cellSize / 2, cellSize / 2); // calculates and stores the center position of the cell to the Dictionary
+                gridArray[x, y].Values["gridPos"] = new Vector2(x, y);
             }
         }
     }
@@ -152,13 +151,14 @@ public class Grid
 
     }
 
-        public bool BuildAtCell(int x, int y, Transform structure)
+    public bool BuildAtCell(int x, int y, Transform structure)
     {
         if (x > width || y > height || x < 0 || y < 0)
         {
             Debug.Log("Could not build at position " + x + " " + y + " as these co-ordinates are invalid");
             return false;
-        } else
+        }
+        else
         {
             return gridArray[x, y].Build(structure);
         }
@@ -170,19 +170,21 @@ public class Grid
         {
             Debug.Log("Could not destroy at position " + x + " " + y + " as these co-ordinates are invalid");
             return false;
-        } else
+        }
+        else
         {
             return gridArray[x, y].Demolish();
         }
     }
 
-    public bool DamageAtCell(int x, int y, float amount) 
-    { 
-        if (x > width || y > height || x< 0 || y< 0)
+    public bool DamageAtCell(int x, int y, float amount)
+    {
+        if (x > width || y > height || x < 0 || y < 0)
         {
             Debug.Log("Could not damage at position " + x + " " + y + " as these co-ordinates are invalid");
             return false;
-        } else
+        }
+        else
         {
             return gridArray[x, y].Damage(amount);
         }
@@ -224,7 +226,7 @@ public class Grid
             return gridArray[x, y].SetHealth(amount, fullyHeal);
         }
     }
-        
+
 
     private Vector2 GetCellWorldPosition(int x, int y)
     {
@@ -235,6 +237,6 @@ public class Grid
     {
         return new Vector2(Mathf.FloorToInt(x / cellSize), Mathf.FloorToInt(y / cellSize));
     }
-        
+
 }
 

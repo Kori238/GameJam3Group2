@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class StoneCollectorScript : Interactable
@@ -14,8 +12,8 @@ public class StoneCollectorScript : Interactable
         if (CurrentWoodCoolDown >= MaxWoodCoolDown)
         {
             Init.Instance.resourceManager.AddStone(50);
-            
-            
+
+
             print("Stone Collector added 50 stone");
             CurrentWoodCoolDown = 0;
         }

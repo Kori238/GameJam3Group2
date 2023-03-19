@@ -1,6 +1,3 @@
-using Newtonsoft.Json.Bson;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WallConnectors : MonoBehaviour
@@ -41,7 +38,7 @@ public class WallConnectors : MonoBehaviour
         if (adjacent[3]) ((GameObject)Init.Instance.grid.gridArray[(int)cellPos.x - 1, (int)cellPos.y].Values["structure"])
                 .transform.GetComponent<WallConnectors>().updateConnectors();
 
-        
+
     }
 
     private void GetAdjacentWalls() // Checks if there are walls in all 4 cardinal directions
@@ -60,7 +57,7 @@ public class WallConnectors : MonoBehaviour
 
 
     public void updateConnectors() // Destroys all visual parts of the wall and then rebuilds appropriate ones
-    { 
+    {
         GetAdjacentWalls();
 
         Destroy(center.gameObject);
@@ -79,7 +76,8 @@ public class WallConnectors : MonoBehaviour
             else if (adjacent[1]) connectorEW = Instantiate(EWED, transform.position + EWE.transform.position, Quaternion.identity, transform);
             else if (adjacent[3]) connectorEW = Instantiate(EWWD, transform.position + EWW.transform.position, Quaternion.identity, transform);
             else connectorEW = Instantiate(EW, transform.position, Quaternion.identity, transform);
-        } else //Not Destroyed Sprites
+        }
+        else //Not Destroyed Sprites
         {
             center = Instantiate(C, transform.position + NSNS.transform.position, Quaternion.identity, transform);
             if (adjacent[0] & adjacent[2]) connectorNS = Instantiate(NSNS, transform.position + NSNS.transform.position, Quaternion.identity, transform);

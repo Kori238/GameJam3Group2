@@ -1,7 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Resources;
-using UnityEditor;
 using UnityEngine;
 
 public class S_Pl_Movement : MonoBehaviour
@@ -21,7 +18,7 @@ public class S_Pl_Movement : MonoBehaviour
 
         Movement.x = Input.GetAxisRaw("Horizontal");
         Movement.y = Input.GetAxisRaw("Vertical");
-      
+
 
         if (Input.GetButtonDown("LeftShift"))
         {
@@ -59,7 +56,7 @@ public class S_Pl_Movement : MonoBehaviour
         canDash = true;
     }
 
-        private void FixedUpdate() //Executed on a fixed timer (Not on framerate)
+    private void FixedUpdate() //Executed on a fixed timer (Not on framerate)
     {
         //Movement:
 
@@ -68,15 +65,16 @@ public class S_Pl_Movement : MonoBehaviour
         if (Movement.x > 0)
         {
             gameObject.transform.localScale = new Vector3(6.401755f, 7.14f, 0.62f);
-        }else if (Movement.x < 0)
+        }
+        else if (Movement.x < 0)
         {
-           gameObject.transform.localScale = new Vector3(-6.401755f, 7.14f, 0.62f);
+            gameObject.transform.localScale = new Vector3(-6.401755f, 7.14f, 0.62f);
         }
 
 
     }
 
 
-    
-    
+
+
 }

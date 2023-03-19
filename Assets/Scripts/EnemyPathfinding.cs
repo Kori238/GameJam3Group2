@@ -1,10 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class EnemyPathfinding : MonoBehaviour
 {
@@ -58,15 +53,16 @@ public class EnemyPathfinding : MonoBehaviour
         if (!moving && destination != null && Vector3.Distance(destination.transform.position, transform.position) < 2f)
         {
             attacking = true;
-        } else
+        }
+        else
         {
             attacking = false;
         }
     }
 
     public virtual void TraversePath()
-    { 
-        
+    {
+
 
         if (newPath != null && newPath != currentPath)
         {
@@ -87,12 +83,13 @@ public class EnemyPathfinding : MonoBehaviour
         }
         if (!moving || currentPath == null || currentPath.nodes.Count <= 0) return;
         Node targetNode = currentPath.nodes[currentPathIndex];
-        Vector3 targetPosition = new Vector3((targetNode.x + 0.5f) * 10/3, (targetNode.y + 0.5f) * 10/3, transform.position.z);
+        Vector3 targetPosition = new Vector3((targetNode.x + 0.5f) * 10 / 3, (targetNode.y + 0.5f) * 10 / 3, transform.position.z);
         if (Vector3.Distance(transform.position, targetPosition) > 1f)
         {
             Vector3 moveDir = (targetPosition - transform.position).normalized;
             transform.position = transform.position + speed * Time.deltaTime * moveDir;
-        } else
+        }
+        else
         {
             currentPathIndex++;
             if (currentPathIndex >= currentPath.nodes.Count)
@@ -103,8 +100,8 @@ public class EnemyPathfinding : MonoBehaviour
 
 
 
-            
-        
+
+
     }
 
     public virtual void Pathfind()
@@ -139,17 +136,18 @@ public class EnemyPathfinding : MonoBehaviour
             target = lowestTCostPath.structure;
             if (Init.Instance.debug) DrawPath(lowestTCostPath, Color.green);
             newPath = lowestTCostPath;
-        } else
+        }
+        else
         {
             newPath = null;
         }
     }
-    
+
     private void DrawPath(Path path, Color color)
     {
         float nodeSpacing = Init.Instance.cellSize / Init.Instance.nodeCount;
         for (int i = 0; i < path.nodes.Count - 1; i++)
-        {   
+        {
             Debug.DrawLine(new Vector3(path.nodes[i].x, path.nodes[i].y) * nodeSpacing + Vector3.one * nodeSpacing / 2, new Vector3(path.nodes[i + 1].x, path.nodes[i + 1].y) * nodeSpacing + Vector3.one * nodeSpacing / 2, color, 1f);
         }
     }

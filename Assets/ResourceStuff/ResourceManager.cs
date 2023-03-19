@@ -1,10 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting.FullSerializer;
-using UnityEngine;
-
-public class ResourceManager 
+public class ResourceManager
 {
     private int stone = 50;
     private int wood;
@@ -19,7 +13,7 @@ public class ResourceManager
     }
     public int GetWood()
     {
-        
+
         return wood;
     }
     public int GetStarlight()
@@ -31,13 +25,13 @@ public class ResourceManager
     {
         stone = newmetal + stone;
     }
-    
+
     public void AddWood(int newwood)
     {
         wood = wood + newwood;
-        
+
     }
-   
+
     public void AddStarLight(int newStarLight)
     {
         starlight = starlight + newStarLight;
@@ -47,7 +41,7 @@ public class ResourceManager
         maxMinions = maxMinions + newMinion;
         assignMinion(newMinion);
     }
-    public int GetMaxMinion() 
+    public int GetMaxMinion()
     {
         return maxMinions;
     }

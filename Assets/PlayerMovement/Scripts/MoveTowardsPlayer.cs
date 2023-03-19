@@ -1,7 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class MoveTowardsPlayer : MonoBehaviour
 {
@@ -20,7 +19,7 @@ public class MoveTowardsPlayer : MonoBehaviour
 
     void Update()
     {
-        
+
         // Calculate the direction to move towards the target
         Vector3 direction = (target.position - transform.position).normalized;
 
@@ -33,7 +32,7 @@ public class MoveTowardsPlayer : MonoBehaviour
             {
                 canAttack = false;
                 StartCoroutine(DamagePlayer());
-                
+
             }
         }
 
@@ -60,7 +59,7 @@ public class MoveTowardsPlayer : MonoBehaviour
     public void Damaged(int amount)
     {
         health -= amount;
-        
+
         if (health <= 0)
         {
             Destroy(gameObject);
