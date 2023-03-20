@@ -3,9 +3,10 @@ using UnityEngine;
 
 public class TimeController : MonoBehaviour
 {
-    public float secoundsTime;
+    
     public float minutesTime;
     public float hourTime = 12;
+    public int day = 0;
     public GameObject clock;
     public TMP_Text timer;
     float clockRotation = 0;
@@ -15,6 +16,9 @@ public class TimeController : MonoBehaviour
     {
     }
 
+
+
+
     // Update is called once per frame
     private void Update()
     {
@@ -23,11 +27,11 @@ public class TimeController : MonoBehaviour
 
         if(minutesTime <= 9)
         {
-            timer.text = hourTime + ": 0" + (int)minutesTime;
+            timer.text = hourTime + ": 0" + (int)minutesTime + " | Day: " + day;
         }
         else
         {
-            timer.text = hourTime + ": " + (int)minutesTime;
+            timer.text = hourTime + ": " + (int)minutesTime + " | Day: " + day;
         }
         
         var rotateClock = new Vector3(0, 0, (float)(clockRotation));
@@ -36,6 +40,12 @@ public class TimeController : MonoBehaviour
         {
             hourTime++;
             minutesTime = 0;
+        }
+
+        if(hourTime >= 24)
+        {
+            day++;
+            hourTime = 0;
         }
     }
 }

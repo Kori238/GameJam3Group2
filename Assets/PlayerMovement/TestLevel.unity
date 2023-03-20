@@ -5287,9 +5287,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 754b4a278e4bac74ea465c1af039a948, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  secoundsTime: 0
   minutesTime: 0
   hourTime: 12
+  day: 0
   clock: {fileID: 1645789609}
   timer: {fileID: 2056456144}
   timeMultiplyer: 10
@@ -5347,7 +5347,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -5356,7 +5356,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
