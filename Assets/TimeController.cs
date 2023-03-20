@@ -12,7 +12,6 @@ public class TimeController : MonoBehaviour
     float clockRotation = 0;
     public int timeMultiplyer = 10;
     public SpriteRenderer map;
-
     // Start is called before the first frame update
     private void Start()
     {
