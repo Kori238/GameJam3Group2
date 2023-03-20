@@ -48,7 +48,6 @@ public class EnemyPathfinding : MonoBehaviour
 
     public virtual void Attack()
     {
-        Debug.Log("Attack");
         if (!attacking || target == null) return;
         Debug.Log(name + " Dealt " + attackDamage + " damage to " + target.name);
         target.GetComponent<Structure>().Damaged(attackDamage);
