@@ -12,6 +12,9 @@ public class Init : MonoBehaviour
     public Vector2 gridDimensions = new Vector2(18, 10);
     public float cellSize = 10f;
     public int nodeCount = 3;
+    public float fps = 0;
+    public float runtimeFPS = 0;
+    public bool highUsage = false;
     public bool wallDemo;
     public bool testPathfinding;
     public bool debug = true;

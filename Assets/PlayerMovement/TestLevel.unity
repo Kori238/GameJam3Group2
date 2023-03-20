@@ -2100,6 +2100,9 @@ MonoBehaviour:
   gridDimensions: {x: 18, y: 10}
   cellSize: 10
   nodeCount: 3
+  fps: 0
+  runtimeFPS: 0
+  highUsage: 0
   wallDemo: 1
   testPathfinding: 1
   debug: 1
@@ -3488,7 +3491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fpsDisplay: {fileID: 177940132}
-  sampleDuration: 0.1
+  sampleDuration: 0.01
 --- !u!1 &1817243745
 GameObject:
   m_ObjectHideFlags: 0
