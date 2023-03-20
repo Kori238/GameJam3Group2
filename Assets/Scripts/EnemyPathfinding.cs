@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,12 +15,12 @@ public class EnemyPathfinding : MonoBehaviour
     [SerializeField] private GameObject target;
     [SerializeField] private Collider2D destination;
     [SerializeField] private Collider2D newDestination;
-    private Path currentPath;
-    private Path newPath;
+    private Path _currentPath;
+    private Path _newPath;
 
     public virtual void Start()
     {
-        InvokeRepeating(nameof(Pathfind), 0f, 1f);
+        StartCoroutine(PathfindingLoop());
         InvokeRepeating(nameof(Attack), 0f, attackDelay);
     }
 
@@ -39,7 +40,7 @@ public class EnemyPathfinding : MonoBehaviour
             (int)(Init.Instance.gridDimensions.y - 1) / 2);
         var targetPosition = new Vector3(home.transform.position.x, home.transform.position.y, transform.position.z);
         var moveDir = (targetPosition - transform.position).normalized;
-        transform.position = transform.position + speed * Time.deltaTime * moveDir;
+        transform.position += speed * Time.deltaTime * moveDir;
     }
 
     public virtual void Attack()
@@ -63,10 +64,10 @@ public class EnemyPathfinding : MonoBehaviour
 
     public virtual void TraversePath()
     {
-        if (newPath != null && newPath != currentPath)
+        if (_newPath != null && _newPath != _currentPath)
         {
-            newDestination = newPath.attackPoint;
-            currentPath = newPath;
+            newDestination = _newPath.attackPoint;
+            _currentPath = _newPath;
             currentPathIndex = 0;
         }
 
@@ -77,11 +78,15 @@ public class EnemyPathfinding : MonoBehaviour
         }
         if (target == null)
         {
-            MoveTowardsBase();
-            return;
+            StartCoroutine(OneTimePathfind());
+            if (target == null)
+            {
+                MoveTowardsBase();
+                return;
+            }
         }
-        if (!moving || currentPath == null || currentPath.nodes.Count <= 0) return;
-        var targetNode = currentPath.nodes[currentPathIndex];
+        if (!moving || _currentPath == null || _currentPath.nodes.Count <= 0) return;
+        var targetNode = _currentPath.nodes[currentPathIndex];
         var targetPosition =
             new Vector3((targetNode.x + 0.5f) * 10 / 3, (targetNode.y + 0.5f) * 10 / 3, transform.position.z);
         if (Vector3.Distance(transform.position, targetPosition) > 1f)
@@ -92,14 +97,39 @@ public class EnemyPathfinding : MonoBehaviour
         else
         {
             currentPathIndex++;
-            if (currentPathIndex >= currentPath.nodes.Count)
+            if (currentPathIndex >= _currentPath.nodes.Count)
             {
                 moving = false;
             }
         }
     }
 
-    public virtual void Pathfind()
+    public IEnumerator OneTimePathfind()
+    {
+        if (Init.Instance.highUsage)
+        {
+            yield return new WaitForFixedUpdate();
+            yield return OneTimePathfind();
+        }
+        Pathfind();
+    }
+
+    public IEnumerator PathfindingLoop()
+    {
+        if (Init.Instance.highUsage)
+        {
+            yield return new WaitForFixedUpdate();
+            yield return PathfindingLoop();
+        }
+        Pathfind();
+        yield return new WaitForSeconds(1f);
+        yield return PathfindingLoop();
+
+
+
+    }
+
+    public void Pathfind()
     {
         var results = Physics2D.OverlapCircleAll(transform.position, viewRange, LayerMask.GetMask("AttackPoints"));
 
@@ -132,11 +162,11 @@ public class EnemyPathfinding : MonoBehaviour
         {
             target = lowestTCostPath.structure;
             if (Init.Instance.debug) DrawPath(lowestTCostPath, Color.green);
-            newPath = lowestTCostPath;
+            _newPath = lowestTCostPath;
         }
         else
         {
-            newPath = null;
+            _newPath = null;
         }
     }
 

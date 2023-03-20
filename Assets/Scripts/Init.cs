@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Diagnostics;
 using UnityEngine;
 
 public class Init : MonoBehaviour
@@ -18,10 +17,8 @@ public class Init : MonoBehaviour
     public bool wallDemo;
     public bool testPathfinding;
     public bool debug = true;
-    private PerformanceCounter _cpuCounter;
     public Grid grid;
     public AStar pathfinding;
-    private PerformanceCounter _ramCounter;
     public ResourceManager resourceManager;
     public static Init Instance { get; private set; }
 
@@ -40,10 +37,6 @@ public class Init : MonoBehaviour
         }
         Instance = this;
         pathfinding = new AStar((int)gridDimensions.x * nodeCount, (int)gridDimensions.y * nodeCount, cellSize / nodeCount);
-
-        _cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_ Total");
-        _ramCounter = new PerformanceCounter("Memory", "Available MBytes");
-
         grid = new Grid((int)gridDimensions.x, (int)gridDimensions.y, cellSize);
         resourceManager = new ResourceManager();
         grid.BuildAtCell(5, 5, tree);
@@ -56,15 +49,6 @@ public class Init : MonoBehaviour
             return;
         StartCoroutine(pathfinding.GetGrid().DrawNodeOutline());
         StartCoroutine(grid.DrawGridOutline());
-    }
-
-    public float GetCurrentCPUUsage()
-    {
-        return _cpuCounter.NextValue();
-    }
-    public float GetAvailableRam()
-    {
-        return _ramCounter.NextValue();
     }
 
     private IEnumerator BuildWalls()
