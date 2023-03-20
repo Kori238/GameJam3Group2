@@ -11,13 +11,24 @@ public class TimeController : MonoBehaviour
     public TMP_Text timer;
     float clockRotation = 0;
     public int timeMultiplyer = 10;
+    public SpriteRenderer map;
+
     // Start is called before the first frame update
     private void Start()
     {
     }
 
+    public void ActivateDay()
+    {
+        Debug.Log("DAY TIME AT " + hourTime + minutesTime);
+        map.color = Color.white;
+    }
 
-
+    public void ActivateNight()
+    {
+        Debug.Log("NIGHT TIME AT " + hourTime + minutesTime);
+        map.color = Color.grey;
+    }
 
     // Update is called once per frame
     private void Update()
@@ -46,6 +57,12 @@ public class TimeController : MonoBehaviour
         {
             day++;
             hourTime = 0;
+        }else if (hourTime == 6)
+        {
+            ActivateDay();
+        }else if(hourTime == 17)
+        {
+            ActivateNight();
         }
     }
 }
