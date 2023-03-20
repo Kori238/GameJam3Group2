@@ -7,7 +7,7 @@ public class UsageDisplay : MonoBehaviour
 {
     [SerializeField] private TMP_Text fpsDisplay;
     private float _frames;
-    private float _runtimeFrames = 600f;
+    private float _runtimeFrames = 1200f;
     private float _duration;
     private float _runtimeDuration = 1f;
 
