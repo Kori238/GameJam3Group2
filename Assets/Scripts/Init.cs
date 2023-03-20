@@ -22,6 +22,16 @@ public class Init : MonoBehaviour
     public ResourceManager resourceManager;
     public static Init Instance { get; private set; }
 
+    private void Update()
+    {
+
+    }
+
+    private void DrawGridOutline()
+    {
+
+    }
+
 
     private void Awake()
     {
@@ -64,6 +74,8 @@ public class Init : MonoBehaviour
         grid.BuildAtCell(9, 2, wall);
         grid.BuildAtCell(8, 2, wall);
         grid.BuildAtCell(7, 2, wall);
+
+        grid.BuildAtCell(9, 4, wall);
 
 
         yield return null;

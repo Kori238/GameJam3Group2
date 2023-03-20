@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,11 +16,13 @@ public class EnemyPathfinding : MonoBehaviour
     [SerializeField] private GameObject target;
     [SerializeField] private Collider2D destination;
     [SerializeField] private Collider2D newDestination;
+    private bool _initiated = false;
     private Path _currentPath;
     private Path _newPath;
 
     public virtual void Start()
     {
+        
         StartCoroutine(PathfindingLoop());
         InvokeRepeating(nameof(Attack), 0f, attackDelay);
     }
@@ -116,6 +119,10 @@ public class EnemyPathfinding : MonoBehaviour
 
     public IEnumerator PathfindingLoop()
     {
+        if (!_initiated)
+        {
+            
+        }
         if (Init.Instance.highUsage)
         {
             yield return new WaitForFixedUpdate();
