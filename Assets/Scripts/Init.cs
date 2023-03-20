@@ -22,11 +22,6 @@ public class Init : MonoBehaviour
     public ResourceManager resourceManager;
     public static Init Instance { get; private set; }
 
-    private void FixedUpdate()
-    {
-        print(Time.deltaTime);
-    }
-
 
     private void Awake()
     {
