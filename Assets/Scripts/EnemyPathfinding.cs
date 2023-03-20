@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = System.Random;
 
 public class EnemyPathfinding : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class EnemyPathfinding : MonoBehaviour
     [SerializeField] private GameObject target;
     [SerializeField] private Collider2D destination;
     [SerializeField] private Collider2D newDestination;
-    private bool _initiated = false;
+    [SerializeField] private bool _initiated = false;
     private Path _currentPath;
     private Path _newPath;
 
@@ -120,19 +121,21 @@ public class EnemyPathfinding : MonoBehaviour
     {
         if (!_initiated)
         {
-            
+            var rnd = new Random();
+            int delay = rnd.Next(1, 10);
+            delay /= 10;
+            _initiated = true;
+            yield return new WaitForSeconds(delay);
+            //yield return PathfindingLoop();
         }
         if (Init.Instance.highUsage)
         {
             yield return new WaitForFixedUpdate();
-            yield return PathfindingLoop();
+            //yield return PathfindingLoop();
         }
         Pathfind();
         yield return new WaitForSeconds(1f);
         yield return PathfindingLoop();
-
-
-
     }
 
     public void Pathfind()
@@ -142,7 +145,7 @@ public class EnemyPathfinding : MonoBehaviour
         var paths = new List<Path>();
         foreach (var result in results)
         {
-            if (result == null) continue;
+            if (!result) continue;
             var node = result.GetComponent<AttackPoint>().parentNode;
             var enemyPos = Init.Instance.pathfinding.GetGrid()
                 .GetWorldCellPosition(transform.position.x, transform.position.y);

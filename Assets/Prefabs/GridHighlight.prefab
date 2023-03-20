@@ -177,8 +177,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3024127230897615172}
-  - component: {fileID: 3024127230897615175}
-  - component: {fileID: 3024127230897615169}
   - component: {fileID: 3024127230897615174}
   m_Layer: 9
   m_Name: GridHighlight
@@ -210,29 +208,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!225 &3024127230897615175
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3024127230897615173}
-  m_Enabled: 1
-  m_Alpha: 0.5
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
---- !u!210 &3024127230897615169
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3024127230897615173}
-  m_Enabled: 1
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
 --- !u!114 &3024127230897615174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,6 +232,7 @@ MonoBehaviour:
   - {fileID: 3024127231787540227}
   fullOpacity: 0.1
   fadedOpacity: 0.05
+  hovering: 1
 --- !u!1 &3024127230912372131
 GameObject:
   m_ObjectHideFlags: 0

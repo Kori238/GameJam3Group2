@@ -9,62 +9,63 @@ public class GridHighlight : MonoBehaviour
     [SerializeField] private List<SpriteRenderer> fadedSpriteRenderers;
     [SerializeField] float fullOpacity = 0.1f;
     [SerializeField] float fadedOpacity = 0.05f;
+    public bool hovering = true;
 
     void Start()
     {
-        StartCoroutine(FadeIn());
+        StartCoroutine(Fade());
     }
 
-    private IEnumerator FadeIn()
-    {
-
-        while (true)
-        {
-            var full = new Color(1f, 1f, 1f, fullOpacity);
-            var faded = new Color(1f, 1f, 1f, fadedOpacity);
-
-            foreach (SpriteRenderer renderer in spriteRenderers)
-            {
-                renderer.color = full;
-            }
-            foreach (SpriteRenderer renderer in fadedSpriteRenderers)
-            {
-                renderer.color = faded;
-            }
-            if (fullOpacity >= 1f)
-            {
-                StartCoroutine(FadeOut());
-                break;
-            }
-            yield return new WaitForSeconds(0.4f);
-            fullOpacity += 0.1f;
-            fadedOpacity += 0.05f;
-        }
-        
-    }
-
-    public IEnumerator FadeOut()
+    private IEnumerator Fade()
     {
         while (true)
         {
-            var full = new Color(1f, 1f, 1f, fullOpacity);
-            var faded = new Color(1f, 1f, 1f, fadedOpacity);
+            if (hovering)
+            {
+                var full = new Color(1f, 1f, 1f, fullOpacity);
+                var faded = new Color(1f, 1f, 1f, fadedOpacity);
 
-            foreach (SpriteRenderer renderer in spriteRenderers)
-            {
-                renderer.color = full;
+                foreach (SpriteRenderer renderer in spriteRenderers)
+                {
+                    renderer.color = full;
+                }
+                foreach (SpriteRenderer renderer in fadedSpriteRenderers)
+                {
+                    renderer.color = faded;
+                }
+                if (fullOpacity >= 1f)
+                {
+                    continue;
+                }
+                yield return new WaitForSeconds(0.4f);
+                fullOpacity += 0.1f;
+                fadedOpacity += 0.05f;
             }
-            foreach (SpriteRenderer renderer in fadedSpriteRenderers)
+            else
             {
-                renderer.color = faded;
+                while (true)
+                {
+                    var full = new Color(1f, 1f, 1f, fullOpacity);
+                    var faded = new Color(1f, 1f, 1f, fadedOpacity);
+
+                    foreach (SpriteRenderer renderer in spriteRenderers)
+                    {
+                        renderer.color = full;
+                    }
+                    foreach (SpriteRenderer renderer in fadedSpriteRenderers)
+                    {
+                        renderer.color = faded;
+                    }
+                    if (fullOpacity <= 0f)
+                    {
+                        Destroy(this);
+                    }
+                    yield return new WaitForSeconds(0.05f);
+                    fullOpacity -= 0.1f;
+                    fadedOpacity -= 0.5f;
+                }
             }
-            if (fullOpacity <= 0f)
-            {
-                Destroy(this);
-            }
-            yield return new WaitForSeconds(0.05f);
-            fullOpacity -= 0.1f;
-            fadedOpacity -= 0.5f;
         }
     }
 }
+        
