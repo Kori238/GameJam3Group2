@@ -14,10 +14,10 @@ public class Init : MonoBehaviour
     public bool wallDemo;
     public bool testPathfinding;
     public bool debug = true;
-    private PerformanceCounter cpuCounter;
+    private PerformanceCounter _cpuCounter;
     public Grid grid;
     public AStar pathfinding;
-    private PerformanceCounter ramCounter;
+    private PerformanceCounter _ramCounter;
     public ResourceManager resourceManager;
     public static Init Instance { get; private set; }
 
@@ -33,8 +33,8 @@ public class Init : MonoBehaviour
         Instance = this;
         pathfinding = new AStar((int)gridDimensions.x * nodeCount, (int)gridDimensions.y * nodeCount, cellSize / nodeCount);
 
-        cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_ Total");
-        ramCounter = new PerformanceCounter("Memory", "Available MBytes");
+        _cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_ Total");
+        _ramCounter = new PerformanceCounter("Memory", "Available MBytes");
 
         grid = new Grid((int)gridDimensions.x, (int)gridDimensions.y, cellSize);
         resourceManager = new ResourceManager();
@@ -44,20 +44,19 @@ public class Init : MonoBehaviour
         {
             StartCoroutine(BuildWalls());
         }
-        if (debug)
-        {
-            StartCoroutine(pathfinding.GetGrid().DrawNodeOutline());
-            StartCoroutine(grid.DrawGridOutline());
-        }
+        if (!debug)
+            return;
+        StartCoroutine(pathfinding.GetGrid().DrawNodeOutline());
+        StartCoroutine(grid.DrawGridOutline());
     }
 
-    public float getCurrentCPUUsage()
+    public float GetCurrentCPUUsage()
     {
-        return cpuCounter.NextValue();
+        return _cpuCounter.NextValue();
     }
-    public float getAvailableRam()
+    public float GetAvailableRam()
     {
-        return ramCounter.NextValue();
+        return _ramCounter.NextValue();
     }
 
     private IEnumerator BuildWalls()
