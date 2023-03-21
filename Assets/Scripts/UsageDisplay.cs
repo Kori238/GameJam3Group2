@@ -22,7 +22,6 @@ public class UsageDisplay : MonoBehaviour
 
         if (_duration >= Time.deltaTime)
         {
-            
             Init.Instance.fps = _frames / _duration;
             Init.Instance.runtimeFPS = _runtimeFrames / _runtimeDuration;
             fpsDisplay.SetText("FPS\n{0:0}\n{1:0}\n000", Init.Instance.fps, Init.Instance.runtimeFPS);
