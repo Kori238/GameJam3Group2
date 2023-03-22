@@ -12,7 +12,8 @@ public class GridCell
             { "structure", null },
             { "center", new Vector3(0, 0, 0) },
             { "gridPos", new Vector2(0, 0) },
-            { "pathfindable", true }
+            { "pathfindable", true },
+            { "outline", null}
         }; // Creates a dictionary and initial values for a the grid cell class
     }
 
@@ -97,6 +98,28 @@ public class GridCell
         Debug.Log("Unable to set health at position " + Values["gridPos"] + " as there is nothing here");
         return false;
     }
+
+    public void Outline(Transform outline)
+    {
+        Debug.Log("outlining");
+        Debug.Log(Values["outline"]);
+        if ((Transform)Values["outline"] == null)
+        {
+            var obj = Object.Instantiate(outline, (Vector3)Values["center"] - new Vector3(5, 5), Quaternion.identity);
+            Values["outline"] = obj;
+        }
+        else
+        {
+            ((Transform)Values["outline"]).GetComponent<GridHighlight>().hovering = true;
+        }
+    }
+
+    public void DeOutline()
+    {
+        if (Values["outline"] == null) return;
+        ((Transform)Values["outline"]).GetComponent<GridHighlight>().hovering = false;
+    }
+
 }
 
 public class Grid
@@ -147,6 +170,15 @@ public class Grid
         yield return DrawGridOutline();
     }
 
+    public void OutlineCell(int x, int y, Transform outline)
+    {
+        gridArray[x, y].Outline(outline);
+    }
+
+    public void DeOutlineCell(int x, int y)
+    {
+        gridArray[x, y].DeOutline();
+    }
     public bool BuildAtCell(int x, int y, Transform structure)
     {
         if (x > _width || y > _height || x < 0 || y < 0)

@@ -1,12 +1,15 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Init : MonoBehaviour
 {
     public Transform tree;
     public Transform wall;
     public Transform home;
+    public Transform gridOutline;
     public Transform attackPointPrefab;
     public Vector2 gridDimensions = new Vector2(18, 10);
     public float cellSize = 10f;
@@ -21,17 +24,6 @@ public class Init : MonoBehaviour
     public AStar pathfinding;
     public ResourceManager resourceManager;
     public static Init Instance { get; private set; }
-
-    private void Update()
-    {
-
-    }
-
-    private void DrawGridOutline()
-    {
-
-    }
-
 
     private void Awake()
     {
@@ -50,10 +42,29 @@ public class Init : MonoBehaviour
         {
             StartCoroutine(BuildWalls());
         }
+        StartCoroutine(GridHighlights());
         if (!debug)
             return;
         StartCoroutine(pathfinding.GetGrid().DrawNodeOutline());
         StartCoroutine(grid.DrawGridOutline());
+    }
+
+    private IEnumerator GridHighlights()
+    {
+        Vector2 previousGridCellPosition = new Vector2(0, 0);
+        while (true)
+        {
+            Vector2 mousePos = Input.mousePosition;
+            Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(mousePos);
+            Vector2 gridCellPosition = grid.GetWorldCellPosition(mouseWorldPos.x, mouseWorldPos.y);
+            grid.OutlineCell((int)gridCellPosition.x, (int)gridCellPosition.y, gridOutline);
+            if (previousGridCellPosition != gridCellPosition)
+            {
+                grid.DeOutlineCell((int)previousGridCellPosition.x, (int)previousGridCellPosition.y);
+            }
+            previousGridCellPosition = gridCellPosition;
+            yield return new WaitForSeconds(0.4f);
+        }
     }
 
     private IEnumerator BuildWalls()
@@ -74,7 +85,6 @@ public class Init : MonoBehaviour
         grid.BuildAtCell(9, 2, wall);
         grid.BuildAtCell(8, 2, wall);
         grid.BuildAtCell(7, 2, wall);
-
         grid.BuildAtCell(9, 4, wall);
 
 
