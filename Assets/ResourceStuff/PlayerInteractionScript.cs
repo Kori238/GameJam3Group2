@@ -5,6 +5,8 @@ public class PlayerInteractionScript : MonoBehaviour
 {
     [SerializeField] private Transform WoodCollector;
     [SerializeField] private Transform StoneCollector;
+    [SerializeField] private Transform minionHouse;
+
     public TMP_Text WoodUI;
     [SerializeField] private Vector2[] pathfindingTestNodes = new Vector2[2];
     private readonly Vector2 boxSize = new Vector2(0.1f, 0.1f); // size of raycast
@@ -55,31 +57,41 @@ public class PlayerInteractionScript : MonoBehaviour
             currentTool = "PathfindingTester";
             Debug.Log("Pathfinding Tester equipped");
         }
+        if (Input.GetKeyDown("4"))
+        {
+            currentTool = "minionHouse";
+            Debug.Log("build minion house equiped");
+        }
     }
     private void PlayerInterct() //allows mutilple function to be called from mouse button 2
     {
         switch (currentTool)
         {
             case "Interact":
-            {
-                CheckInteraction();
-                break;
-            }
+                {
+                    CheckInteraction();
+                    break;
+                }
             case "WoodCollector":
-            {
-                PlaceWoodCollector();
-                break;
-            }
+                {
+                    PlaceWoodCollector();
+                    break;
+                }
             case "StoneCollector":
-            {
-                PlaceStoneCollector();
-                break;
-            }
+                {
+                    PlaceStoneCollector();
+                    break;
+                }
             case "PathfindingTester":
-            {
-                PathfindingTester();
-                break;
-            }
+                {
+                    PathfindingTester();
+                    break;
+                }
+            case "minionHouse":
+                {
+                    placeMinionHouse();
+                    break;
+                }
         }
     }
 
@@ -190,5 +202,24 @@ public class PlayerInteractionScript : MonoBehaviour
                 Init.Instance.resourceManager.AddStone(-50);
             }
         }
+    }
+    private void placeMinionHouse()
+    {
+
+
+        Vector2 MousePos = Input.mousePosition;
+        Vector2 MouseWorldPos = Camera.main.ScreenToWorldPoint(MousePos);
+        Vector2 gridPos;
+        if (Init.Instance.resourceManager.GetWood() >= 50)
+        {
+            gridPos = Init.Instance.grid.GetWorldCellPosition(MouseWorldPos.x, MouseWorldPos.y);
+            var valid = Init.Instance.grid.BuildAtCell((int)gridPos.x, (int)gridPos.y,minionHouse);
+
+            if (valid)
+            {
+                Init.Instance.resourceManager.AddStone(0);
+            }
+        }
+
     }
 }

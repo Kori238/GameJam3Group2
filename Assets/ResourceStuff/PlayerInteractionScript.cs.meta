@@ -5,6 +5,9 @@ MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - WoodCollector: {fileID: 3197684958974690188, guid: 57d434b4f96570647a997dbebc4b6c4f, type: 3}
+  - StoneCollector: {fileID: 3376082192673638401, guid: 2e13d128650c6f64a97f07e8cb9f6225, type: 3}
+  - minionHouse: {fileID: 7485029518356243802, guid: dffb038e2980de746beb85e70422fc84, type: 3}
+  - WoodUI: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

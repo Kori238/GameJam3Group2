@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using UnityEngine;
+
 public class ResourceManager
 {
     private int maxMinions;
@@ -5,7 +8,7 @@ public class ResourceManager
     private int stone = 50;
     private int unassignedMinions;
     private int wood;
-
+    private List<GameObject> housedMinions;
 
     public int GetStone()
     {
@@ -46,5 +49,10 @@ public class ResourceManager
     public void assignMinion(int newMinionToAssign)
     {
         unassignedMinions = unassignedMinions + newMinionToAssign;
+    }
+
+    public void AddToMinionList(GameObject newMinion)
+    {
+        housedMinions.Add(newMinion);
     }
 }

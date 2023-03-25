@@ -48,7 +48,7 @@ public class WoodCollectorScript : Interactable
             InstanceMenu = Instantiate(PopMenu);
             toOpen = false;
             InstanceMenu.GetComponent<pMenu>().SetParentStructure(gameObject);
-            InstanceMenu.GetComponent<pMenu>().setSlider(MAssigned, MaxMAssigned);
+            
         }
         else if (!toOpen)
         {
@@ -91,4 +91,5 @@ public class WoodCollectorScript : Interactable
     {
         MAssigned = newminion;
     }
+    public int GetMinionAssigned() { return MAssigned; }
 }
