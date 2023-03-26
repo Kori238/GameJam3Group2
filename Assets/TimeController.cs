@@ -19,13 +19,13 @@ public class TimeController : MonoBehaviour
 
     public void ActivateDay()
     {
-        Debug.Log("DAY TIME AT " + hourTime + minutesTime);
+        
         map.color = Color.white;
     }
 
     public void ActivateNight()
     {
-        Debug.Log("NIGHT TIME AT " + hourTime + minutesTime);
+        
         map.color = Color.grey;
     }
 
