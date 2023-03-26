@@ -8,7 +8,6 @@ public class EnemyTakeDamage : MonoBehaviour
 
     public GameObject PlayerScript;
 
-    public GameObject swordSwing;
 
     public int health = 10;
 
@@ -26,7 +25,7 @@ public class EnemyTakeDamage : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == swordSwing.layer) //If the Collider is the Players attack range then...
+        if (collision.gameObject.layer == 7) //If the Collider is the Players attack range then...
         {
             Damaged(5);
             SoundControllerScript.GetComponent<S_SoundController>().HurtMonster();

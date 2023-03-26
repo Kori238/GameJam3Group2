@@ -143,6 +143,7 @@ GameObject:
   - component: {fileID: 1565054349856889920}
   - component: {fileID: 822463097559112523}
   - component: {fileID: 6432438790963624118}
+  - component: {fileID: 6227942256147178774}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -205,5 +206,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SoundControllerScript: {fileID: 0}
   PlayerScript: {fileID: 5048883363140918959, guid: 0e1588dcc6c7b5d47bb5c54ff9f42f92, type: 3}
-  swordSwing: {fileID: 5048883363140918959, guid: 0e1588dcc6c7b5d47bb5c54ff9f42f92, type: 3}
   health: 10
+--- !u!58 &6227942256147178774
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7072006865073987118}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2.46
