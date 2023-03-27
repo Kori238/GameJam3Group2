@@ -4,16 +4,24 @@ using UnityEngine;
 
 public class MinionHouseScript : Interactable
 {
-    [SerializeField] private GameObject Minion;
-    private List<GameObject> housedMinions;
+    [SerializeField] private Transform Minion;
+    [SerializeField] private List<Transform> housedMinions;
+    private Vector3 Location;
+    
     // Start is called before the first frame update
     private  new void Start()
     {
-        housedMinions = new List<GameObject>();
+        
         Init.Instance.resourceManager.SetMaxMinion(5);
-        GameObject newMinion = Instantiate(Minion);
+        Location = transform.position;
+        Transform newMinion = Instantiate(Minion, Location , Quaternion.identity);
         housedMinions.Add(newMinion);
-        Init.Instance.resourceManager.AddToMinionList(newMinion);
+        
+        Debug.Log(housedMinions);
+        //Init.Instance.resourceManager.availableMinions.Add(newMinion);
+        Init.Instance.resourceManager.AddToMinionList(housedMinions);
+       
+
         
     }
 

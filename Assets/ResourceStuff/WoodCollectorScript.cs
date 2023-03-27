@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WoodCollectorScript : Interactable
@@ -20,7 +21,10 @@ public class WoodCollectorScript : Interactable
     private int MaxMAssigned = 5;
     private pMenu pmenu;
     private bool toOpen = true;
+    [SerializeField] private List<Transform> MinionList;
 
+
+ 
 
     // Update is called once per frame
     private void Update()
@@ -57,15 +61,7 @@ public class WoodCollectorScript : Interactable
         }
 
 
-        //if(Init.Instance.resourceManager.GetWood()>= 50)
-        //{
-        // currentHealth = maxHealth;
-        //   Debug.Log("building repaired");
-        // }
-        // else
-        // {
-        //    Debug.Log("failed to repair");
-        //  }
+     
     }
 
     public void repair()
@@ -87,9 +83,27 @@ public class WoodCollectorScript : Interactable
         return true;
     }
 
-    public void SetMinionAssigned(int newminion)
+    public void SetMinionAssigned(int newMinionAssigned)
     {
-        MAssigned = newminion;
+        if (MAssigned < MaxMAssigned) 
+        {
+
+            MAssigned = newMinionAssigned + MAssigned;
+            if(MAssigned< MaxMAssigned) { MAssigned=MaxMAssigned; }
+        }
+        SetMinion();
     }
     public int GetMinionAssigned() { return MAssigned; }
+
+    public void SetMinion()
+    {
+        print("Setting minion");
+        Transform newMinion = Init.Instance.resourceManager.GetMinionList();
+        Debug.Log(newMinion.ToString());
+        MinionList.Add(newMinion);
+        newMinion.GetComponent<MinionScript>().setJobLocation(this);
+    }
+
+
+   
 }

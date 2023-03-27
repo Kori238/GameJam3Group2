@@ -8,7 +8,7 @@ public class ResourceManager
     private int stone = 50;
     private int unassignedMinions;
     private int wood;
-    private List<GameObject> housedMinions;
+    private List<Transform> availableMinions = new List<Transform>();
 
     public int GetStone()
     {
@@ -51,8 +51,30 @@ public class ResourceManager
         unassignedMinions = unassignedMinions + newMinionToAssign;
     }
 
-    public void AddToMinionList(GameObject newMinion)
+    public void AddToMinionList(List<Transform> MinionToAdd)
+
     {
-        housedMinions.Add(newMinion);
+        int i = MinionToAdd.Count;
+         
+        for(int j=0 ; j <i; j++)
+        {
+
+            
+            Transform temp= MinionToAdd[j];
+            availableMinions.Add(temp);
+            Debug.Log( " minionList");
+            
+            
+        }
+        Debug.Log(availableMinions[0]);
+
+    }
+    public Transform GetMinionList()
+    {
+
+
+        int ListLength = availableMinions.Count;
+        Debug.Log(ListLength-1);
+       return availableMinions[ListLength- 1];
     }
 }

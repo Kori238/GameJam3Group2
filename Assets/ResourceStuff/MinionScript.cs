@@ -29,6 +29,9 @@ public class MinionScript : MonoBehaviour
     }
     public bool setJobLocation(Structure newJobLocation)
     {
+        jobLocation = newJobLocation;
+        Debug.Log(jobLocation.ToString());
+        Debug.Log("Setting job location");
         return true;
     }
 
