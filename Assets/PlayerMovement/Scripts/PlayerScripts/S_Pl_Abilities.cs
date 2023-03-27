@@ -34,6 +34,11 @@ public class S_Pl_Abilities : MonoBehaviour
             animator.Play("Idle");
             Debug.Log("SideAttack");
         }
+        else if (Input.GetKeyDown(KeyCode.G))
+        {
+            animator.Play("Axe Swing");
+            animator.Play("Idle");
+        }
         else if (Input.GetButtonDown("Camera"))
         {
             if (!flag)
