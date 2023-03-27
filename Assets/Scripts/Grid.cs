@@ -172,6 +172,12 @@ public class Grid
 
     public void OutlineCell(int x, int y, Transform outline)
     {
+        Debug.Log(x + " " + y);
+        if (x > _width || y > _height || x < 0 || y < 0)
+        {
+            Debug.Log("Could not outline cell at position " + x + " " + y + "as these co-ordinates are invalid");
+            return;
+        }
         gridArray[x, y].Outline(outline);
     }
 

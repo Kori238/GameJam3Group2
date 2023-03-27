@@ -16,5 +16,6 @@ public class TreeInteract : Interactable
     }
     public override void CreateAttackPoints()
     {
+        return;
     }
 }

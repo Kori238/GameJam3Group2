@@ -43,12 +43,12 @@ public class GridHighlight : MonoBehaviour
             }
             if (hovering)
             {
-                yield return new WaitForSeconds(0.1f); 
+                yield return new WaitForSeconds(0.06f); 
                 index += 1;
             }
             else
             {
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSeconds(0.03f);
                 index -= 1;
             }
         }
