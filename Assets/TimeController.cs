@@ -12,7 +12,7 @@ public class TimeController : MonoBehaviour
     public TMP_Text timer;
     float clockRotation = 0;
     public int timeMultiplyer = 10;
-    public SpriteRenderer map;
+    public SpriteRenderer m, m1, m2, m3, m4, m5, m6, m7, m8, m9, m10;
     private bool canSpawn = true;
 
     public GameObject enemy;
@@ -27,12 +27,12 @@ public class TimeController : MonoBehaviour
     public void ActivateDay()
     {
 
-        map.color = Color.white;
+        m.color = Color.white; m1.color = Color.white; m2.color = Color.white; m3.color = Color.white; m4.color = Color.white; m6.color = Color.white; m7.color = Color.white; m8.color = Color.white;
     }
 
     public void ActivateNight()
     {
-        map.color = Color.grey;
+        m.color = Color.grey; m1.color = Color.grey; m2.color = Color.grey; m3.color = Color.grey; m4.color = Color.grey; m6.color = Color.grey; m7.color = Color.grey; m8.color = Color.grey;
         if (canSpawn == true)
         {
             StartCoroutine(SpawnEnemy());
