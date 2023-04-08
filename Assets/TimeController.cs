@@ -19,6 +19,9 @@ public class TimeController : MonoBehaviour
     public GameObject enemy;
     public Vector3 loc;
     private bool isNight = false;
+    private int x;
+    private int y;
+
 
     // Start is called before the first frame update
     private void Start()
@@ -52,6 +55,32 @@ public class TimeController : MonoBehaviour
     private IEnumerator SpawnEnemy()
     {
         canSpawn = false;
+        int r = Random.Range(0, 3);
+
+        if(r == 0)
+        {
+            y = 352;
+            x = Random.Range(-240, 211);
+        } 
+        else if (r == 1)
+        {
+            y = -95;
+            x = Random.Range(-240, 211);
+        }
+        else if (r == 2)
+        {
+            x = -242;
+            y = Random.Range(-93, 351);
+        }
+        else if (r == 3)
+        {
+            x = 223;
+            y = Random.Range(350, -90);
+        }
+
+
+        loc.Set(x, y, -1);
+
         GameObject enemy1 = (GameObject)Instantiate(enemy, loc, Quaternion.identity);
         yield return new WaitForSeconds(1.5f);
         canSpawn = true;
