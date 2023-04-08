@@ -12,7 +12,8 @@ public class TimeController : MonoBehaviour
     public TMP_Text timer;
     float clockRotation = 0;
     public int timeMultiplyer = 10;
-    public SpriteRenderer m, m1, m2, m3, m4, m5, m6, m7, m8, m9, m10;
+    //public SpriteRenderer m, m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15, m16, m17, m18;
+    public SpriteRenderer[] maptiles = new SpriteRenderer[25];
     private bool canSpawn = true;
 
     public GameObject enemy;
@@ -22,17 +23,25 @@ public class TimeController : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+
     }
 
     public void ActivateDay()
     {
+        for (int i = 0; i < maptiles.Length; i++)
+        {
+            maptiles[i].color = Color.white;
+        }
 
-        m.color = Color.white; m1.color = Color.white; m2.color = Color.white; m3.color = Color.white; m4.color = Color.white; m6.color = Color.white; m7.color = Color.white; m8.color = Color.white;
     }
 
     public void ActivateNight()
     {
-        m.color = Color.grey; m1.color = Color.grey; m2.color = Color.grey; m3.color = Color.grey; m4.color = Color.grey; m6.color = Color.grey; m7.color = Color.grey; m8.color = Color.grey;
+        for (int i = 0; i < maptiles.Length; i++)
+        {
+            maptiles[i].color = Color.gray;
+        }
+
         if (canSpawn == true)
         {
             StartCoroutine(SpawnEnemy());

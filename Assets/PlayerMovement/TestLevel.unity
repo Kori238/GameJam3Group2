@@ -7029,17 +7029,34 @@ MonoBehaviour:
   clock: {fileID: 1645789609}
   timer: {fileID: 2056456144}
   timeMultiplyer: 10
-  m: {fileID: 1451860184}
-  m1: {fileID: 1120545921}
-  m2: {fileID: 1076392509}
-  m3: {fileID: 1887207105}
-  m4: {fileID: 1569274846}
-  m5: {fileID: 613736096}
-  m6: {fileID: 848322182}
-  m7: {fileID: 1131267771}
-  m8: {fileID: 135146838}
-  m9: {fileID: 363881549}
-  m10: {fileID: 107936863}
+  maptiles:
+  - {fileID: 1451860184}
+  - {fileID: 1120545921}
+  - {fileID: 1076392509}
+  - {fileID: 1887207105}
+  - {fileID: 1569274846}
+  - {fileID: 613736096}
+  - {fileID: 848322182}
+  - {fileID: 1131267771}
+  - {fileID: 135146838}
+  - {fileID: 363881549}
+  - {fileID: 363881549}
+  - {fileID: 107936863}
+  - {fileID: 582820525}
+  - {fileID: 320983112}
+  - {fileID: 467731851}
+  - {fileID: 2140892553}
+  - {fileID: 801361363}
+  - {fileID: 1677551280}
+  - {fileID: 1440098585}
+  - {fileID: 1914983824}
+  - {fileID: 253263176}
+  - {fileID: 1830514902}
+  - {fileID: 2011830245}
+  - {fileID: 1112010948}
+  - {fileID: 1030480209}
+  - {fileID: 1971184351}
+  - {fileID: 870024157}
   enemy: {fileID: 7072006865073987118, guid: 26d1fc5550eacd54dad570685b672da6, type: 3}
   loc: {x: 85, y: 95, z: -1}
 --- !u!114 &2056456144
