@@ -59,23 +59,23 @@ public class TimeController : MonoBehaviour
 
         if(r == 0)
         {
-            y = 352;
-            x = Random.Range(-240, 211);
+            y = 475;
+            x = Random.Range(25, 475);
         } 
         else if (r == 1)
         {
-            y = -95;
-            x = Random.Range(-240, 211);
+            y = 25;
+            x = Random.Range(25, 475);
         }
         else if (r == 2)
         {
-            x = -242;
-            y = Random.Range(-93, 351);
+            x = 25;
+            y = Random.Range(25, 475);
         }
         else if (r == 3)
         {
-            x = 223;
-            y = Random.Range(350, -90);
+            x = 475;
+            y = Random.Range(25, 475);
         }
 
 

@@ -183,6 +183,11 @@ public class Grid
 
     public void DeOutlineCell(int x, int y)
     {
+        if (x > _width || y > _height || x < 0 || y < 0)
+        {
+            Debug.Log("Could not deoutline cell at position " + x + " " + y + "as these co-ordinates are invalid");
+            return;
+        }
         gridArray[x, y].DeOutline();
     }
     public bool BuildAtCell(int x, int y, Transform structure)

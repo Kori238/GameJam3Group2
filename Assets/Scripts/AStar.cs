@@ -146,7 +146,7 @@ public class AStar
         return grid;
     }
 
-    public Path FindPath(int x0, int y0, int xn, int yn, int viewDistance = int.MaxValue)
+    public Path FindPath(int x0, int y0, int xn, int yn, int viewDistance = int.MaxValue, bool ignoreWalls = false)
     {
         var startNode = grid.GetNodeFromPosition(x0, y0);
         var endNode = grid.GetNodeFromPosition(xn, yn);
@@ -186,7 +186,7 @@ public class AStar
             foreach (var adjacentNode in GetAdjacentNodes(currentNode))
             {
                 if (searchedNodes.Contains(adjacentNode)) continue;
-                if (!adjacentNode.isWalkable)
+                if (!ignoreWalls && !adjacentNode.isWalkable)
                 {
                     searchedNodes.Add(adjacentNode);
                     continue;
