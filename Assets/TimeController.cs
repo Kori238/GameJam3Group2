@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -16,7 +17,7 @@ public class TimeController : MonoBehaviour
     public SpriteRenderer[] maptiles = new SpriteRenderer[25];
     private bool canSpawn = true;
 
-    public GameObject enemy;
+    public List<GameObject> enemies;
     public Vector3 loc;
     private bool isNight = false;
     private int x;
@@ -81,7 +82,9 @@ public class TimeController : MonoBehaviour
 
         loc.Set(x, y, -1);
 
-        GameObject enemy1 = (GameObject)Instantiate(enemy, loc, Quaternion.identity);
+
+        int toSpawn = Random.Range(0, enemies.Count) ;
+        GameObject enemy1 = (GameObject)Instantiate(enemies[toSpawn], loc, Quaternion.identity);
         yield return new WaitForSeconds(1.5f);
         canSpawn = true;
     }

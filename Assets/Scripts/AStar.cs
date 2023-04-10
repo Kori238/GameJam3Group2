@@ -147,7 +147,7 @@ public class AStar
 
     }
 
-    public Path FindPath(int x0, int y0, int xn, int yn, int viewDistance = int.MaxValue, bool ignoreWalls = false)
+    public Path FindPath(int x0, int y0, int xn, int yn, int viewDistance = int.MaxValue, bool flying = false)
     {
         var startNode = grid.GetNodeFromPosition(x0, y0);
         var endNode = grid.GetNodeFromPosition(xn, yn);
@@ -187,7 +187,7 @@ public class AStar
             foreach (var adjacentNode in GetAdjacentNodes(currentNode))
             {
                 if (searchedNodes.Contains(adjacentNode)) continue;
-                if (!ignoreWalls && !adjacentNode.isWalkable)
+                if (!flying && !adjacentNode.isWalkable)
                 {
                     searchedNodes.Add(adjacentNode);
                     continue;
@@ -206,7 +206,7 @@ public class AStar
                         unsearchedNodes.Add(adjacentNode);
                     }
                 }
-                if (viewDistance != int.MaxValue && tentativeGCost >= viewDistance * 2)
+                if (viewDistance != int.MaxValue && tentativeGCost >= viewDistance * 3)
                 {
                     return null; //path is outside of acceptable view distance
                 }

@@ -18,6 +18,7 @@ public class EnemyPathfinding : MonoBehaviour
     [SerializeField] private Collider2D destination;
     [SerializeField] private Collider2D newDestination;
     [SerializeField] private bool _initiated = false;
+    [SerializeField] private bool flying = false;
     private Path _currentPath;
     private Path _newPath;
 
@@ -149,7 +150,7 @@ public class EnemyPathfinding : MonoBehaviour
             var node = result.GetComponent<AttackPoint>().parentNode;
             var enemyPos = Init.Instance.pathfinding.GetGrid()
                 .GetWorldCellPosition(transform.position.x, transform.position.y);
-            var path = Init.Instance.pathfinding.FindPath((int)enemyPos.x, (int)enemyPos.y, node.x, node.y, viewRange);
+            var path = Init.Instance.pathfinding.FindPath((int)enemyPos.x, (int)enemyPos.y, node.x, node.y, viewRange, flying);
             var structure = result.GetComponentInParent<Structure>();
             if (path == null) continue;
             path.tCost = (int)((path.fCost + 10) /
