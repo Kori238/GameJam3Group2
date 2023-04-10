@@ -18,13 +18,12 @@ public class EnemyPathfinding : MonoBehaviour
     [SerializeField] private Collider2D destination;
     [SerializeField] private Collider2D newDestination;
     [SerializeField] private bool _initiated = false;
-    [SerializeField] private bool ignoreWalls = false;
     private Path _currentPath;
     private Path _newPath;
 
     public virtual void Start()
     {
-        
+
         StartCoroutine(PathfindingLoop());
         InvokeRepeating(nameof(Attack), 0f, attackDelay);
     }
@@ -82,7 +81,7 @@ public class EnemyPathfinding : MonoBehaviour
         }
         if (target == null)
         {
-            StartCoroutine(OneTimePathfind());
+            Pathfind();
             if (target == null)
             {
                 MoveTowardsBase();
@@ -150,21 +149,11 @@ public class EnemyPathfinding : MonoBehaviour
             var node = result.GetComponent<AttackPoint>().parentNode;
             var enemyPos = Init.Instance.pathfinding.GetGrid()
                 .GetWorldCellPosition(transform.position.x, transform.position.y);
-            Path path = new Path();
-            if (node == null)
-            {
-                var structPos = Init.Instance.pathfinding.GetGrid()
-                .GetWorldCellPosition(result.transform.position.x, result.transform.position.y);
-                //var structPos = Init.Instance.grid.GetWorldCellPosition(result.transform.parent.position.x, result.transform.parent.position.y);
-                path = Init.Instance.pathfinding.FindPath((int)enemyPos.x, (int)enemyPos.y, (int)structPos.x, (int)structPos.y, viewRange, ignoreWalls);
-            } else
-            {
-                path = Init.Instance.pathfinding.FindPath((int)enemyPos.x, (int)enemyPos.y, node.x, node.y, viewRange, ignoreWalls);
-            }
+            var path = Init.Instance.pathfinding.FindPath((int)enemyPos.x, (int)enemyPos.y, node.x, node.y, viewRange);
             var structure = result.GetComponentInParent<Structure>();
             if (path == null) continue;
-            path.tCost = (int)((path.fCost + 24) /
-                               (structure.priority * 10)); //* ((structure.health / structure.maxHealth + 1) / 2)));
+            path.tCost = (int)((path.fCost + 10) /
+                               (structure.priority * 10 * ((structure.health / structure.maxHealth + 1) / 2)));
             path.structure = result.transform.parent.gameObject;
             path.attackPoint = result;
             paths.Add(path);

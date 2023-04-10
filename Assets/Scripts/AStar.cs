@@ -144,6 +144,7 @@ public class AStar
     public NodeGrid GetGrid()
     {
         return grid;
+
     }
 
     public Path FindPath(int x0, int y0, int xn, int yn, int viewDistance = int.MaxValue, bool ignoreWalls = false)
@@ -154,10 +155,10 @@ public class AStar
         unsearchedNodes = new List<Node> { startNode };
         searchedNodes = new List<Node>();
 
-        if (viewDistance != int.MaxValue && searchedNodes.Count >= viewDistance * 0.4)
+        /*if (viewDistance != int.MaxValue && searchedNodes.Count >= viewDistance / 10)
         {
             return null; //path is outside of acceptable view distance
-        }
+        }*/
 
         for (var x = 0; x < grid.GetWidth(); x++)
         {
@@ -205,7 +206,13 @@ public class AStar
                         unsearchedNodes.Add(adjacentNode);
                     }
                 }
+                if (viewDistance != int.MaxValue && tentativeGCost >= viewDistance * 2)
+                {
+                    return null; //path is outside of acceptable view distance
+                }
             }
+
+            
         }
         // No possible path;
         return null;
