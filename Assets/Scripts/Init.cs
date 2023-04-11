@@ -87,6 +87,14 @@ public class Init : MonoBehaviour
         grid.BuildAtCell(7, 2, wall);
         grid.BuildAtCell(9, 4, wall);
 
+        for (int x = 23; x < 26; x++)
+        {
+            for (int y = 23; y < 26; y++)
+            {
+                grid.BuildAtCell(x, y, wall);
+            }
+        }
+
 
         yield return null;
     }

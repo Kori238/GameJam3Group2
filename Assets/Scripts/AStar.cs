@@ -11,6 +11,7 @@ public class Node
 
     public Node previousNode;
     public int x, y;
+    public bool central;
 
     public Node(NodeGrid grid, int x, int y)
     {
@@ -19,6 +20,7 @@ public class Node
         this.y = y;
         isWalkable = true;
         attackPointReference = null;
+        central = false;
     }
 
     public void updateFCost()

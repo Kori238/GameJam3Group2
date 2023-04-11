@@ -10,9 +10,11 @@ public class Structure : MonoBehaviour
     public int priority;
     public Vector2 gridPos;
     public bool isSpaceOccupied;
+    public bool hasCentralAttackPoint = false;
     public int occupiedSpaceCount;
     private Transform attackPointPrefab;
     public List<Node> attackPoints = new List<Node>();
+    public Node centralAttackPoint;
     public List<Node> occupiedSpace = new List<Node>();
     public virtual void Start()
     {
@@ -35,6 +37,16 @@ public class Structure : MonoBehaviour
             new Vector2(nodePos.x + 1, nodePos.y + 3)
         };
 
+        nodePos = nodePos + new Vector2(1, 1);
+        var centerNode = nodeGrid.gridArray[(int)nodePos.x, (int)nodePos.y];
+        var centerAttackPoint = Instantiate(attackPointPrefab, nodePos * 3.3333f + new Vector2(10 / 6, 10 / 6) * 1.66f,
+                Quaternion.identity, transform);
+        centerNode.central = true;
+        centerAttackPoint.GetComponent<AttackPoint>().parentNode = centerNode;
+        centerNode.SetAttackPoint(centerAttackPoint.gameObject);
+        attackPoints.Add(centerNode);
+        centralAttackPoint = centerNode;
+
         foreach (var point in attackPositions)
         {
             var node = nodeGrid.gridArray[(int)point.x, (int)point.y];
@@ -48,6 +60,12 @@ public class Structure : MonoBehaviour
                 attackPoints.Add(node);
             }
         }
+
+        //if (!hasCentralAttackPoint)
+        //{
+            
+            //hasCentralAttackPoint = true;
+        //}
     }
 
     public virtual void RemoveAttackPoints()
@@ -103,7 +121,7 @@ public class Structure : MonoBehaviour
         {
             foreach (var node in occupiedSpace)
             {
-                if (node.GetAttackPoint() != null)
+                if (node.GetAttackPoint() != null && !node.central)
                 {
                     attackPoints.Remove(node);
                     node.RemoveAttackPoint();

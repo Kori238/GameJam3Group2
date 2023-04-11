@@ -1,30 +1,30 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = System.Random;
 
 public class EnemyPathfinding : MonoBehaviour
 {
     public Transform test;
-    [SerializeField] private int viewRange;
+    [SerializeField] public int viewRange;
     [SerializeField] private float speed;
     [SerializeField] private bool moving;
-    [SerializeField] private bool attacking;
+    [SerializeField] public bool attacking;
     [SerializeField] private int currentPathIndex = 1;
     [SerializeField] private float attackDelay = 1f;
-    [SerializeField] private float attackDamage = 5f;
-    [SerializeField] private GameObject target;
-    [SerializeField] private Collider2D destination;
-    [SerializeField] private Collider2D newDestination;
+    [SerializeField] public float attackDamage = 5f;
+    [SerializeField] public GameObject target;
+    [SerializeField] private Vector2 destination;
+    [SerializeField] private Vector2 newDestination;
     [SerializeField] private bool _initiated = false;
-    [SerializeField] private bool flying = false;
-    private Path _currentPath;
-    private Path _newPath;
+    [SerializeField] public bool flying = false;
+    private Path _currentPath = null;
+    public Path _newPath = null;
 
     public virtual void Start()
     {
-
         StartCoroutine(PathfindingLoop());
         InvokeRepeating(nameof(Attack), 0f, attackDelay);
     }
@@ -56,7 +56,7 @@ public class EnemyPathfinding : MonoBehaviour
     }
     public virtual void CheckAttack()
     {
-        if (!moving && destination != null && Vector3.Distance(destination.transform.position, transform.position) < 2f)
+        if (!moving && destination != null && Vector3.Distance(destination, transform.position) < 2f)
         {
             attacking = true;
         }
@@ -68,9 +68,11 @@ public class EnemyPathfinding : MonoBehaviour
 
     public virtual void TraversePath()
     {
-        if (_newPath != null && _newPath != _currentPath)
+        //if (attacking && target != null) return;
+        if (_newPath != null && _newPath != _currentPath && _newPath.attackPoint != null)
         {
-            newDestination = _newPath.attackPoint;
+            newDestination = new Vector2(_newPath.nodes.Last().x, _newPath.nodes.Last().y) * (Init.Instance.cellSize / Init.Instance.nodeCount) + (Vector2.one * (Init.Instance.cellSize / Init.Instance.nodeCount) / 2);
+            //newDestination = new Vector2(_newPath.attackPoint.transform.position.x, _newPath.attackPoint.transform.position.y);
             _currentPath = _newPath;
             currentPathIndex = 0;
         }
@@ -139,7 +141,7 @@ public class EnemyPathfinding : MonoBehaviour
         yield return PathfindingLoop();
     }
 
-    public void Pathfind()
+    public virtual void Pathfind()
     {
         var results = Physics2D.OverlapCircleAll(transform.position, viewRange, LayerMask.GetMask("AttackPoints"));
 
@@ -180,7 +182,7 @@ public class EnemyPathfinding : MonoBehaviour
         }
     }
 
-    private void DrawPath(Path path, Color color)
+    public void DrawPath(Path path, Color color)
     {
         var nodeSpacing = Init.Instance.cellSize / Init.Instance.nodeCount;
         for (var i = 0; i < path.nodes.Count - 1; i++)

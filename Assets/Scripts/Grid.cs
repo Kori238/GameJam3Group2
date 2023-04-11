@@ -40,8 +40,7 @@ public class GridCell
         if (Values["structure"] != null)
         {
             var tempObj =
-                (GameObject)Values[
-                    "structure"]; //Creates a temporary object so that the demolished function can be called after the dictionary entry being emptied
+                (GameObject)Values["structure"]; //Creates a temporary object so that the demolished function can be called after the dictionary entry being emptied
             Values["structure"] = null;
             tempObj.GetComponent<Structure>().Demolished();
             Debug.Log("Successfully destroyed " + tempObj.name + " at position " + Values["gridPos"]);
