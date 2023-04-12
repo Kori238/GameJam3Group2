@@ -6,6 +6,7 @@ public class S_Pl_DebugMenu : MonoBehaviour
 {
     public GameObject PlayerScript;
     public Transform PlayerTransform;
+    
     public TMP_Text HealthINT;
     public GameObject AdminMenuControls;
     [SerializeField] private Collider2D playerCollider;
@@ -53,6 +54,10 @@ public class S_Pl_DebugMenu : MonoBehaviour
                     playerVisual.color = Color.white;
                     isInvis = false;
                 }
+            }
+            else if (Input.GetKeyDown(KeyCode.X))
+            {
+                Camera.main.orthographicSize = 200;
             }
             else if (Input.GetKeyDown(KeyCode.Keypad1))
             {
