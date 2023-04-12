@@ -22,6 +22,7 @@ public class S_Pl_Movement : MonoBehaviour
         Movement.y = Input.GetAxisRaw("Vertical");
 
 
+
         if (Input.GetButtonDown("LeftShift"))
         {
             if (staminaBar.value >= 50)
