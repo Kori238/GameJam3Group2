@@ -6291,7 +6291,9 @@ MonoBehaviour:
   - {fileID: 1971184351}
   - {fileID: 870024157}
   enemies:
-  - {fileID: 6576508593008396103, guid: f0a95d596d6591f439d9c795ae7b0f02, type: 3}
+  - {fileID: 7072006865073987118, guid: 26d1fc5550eacd54dad570685b672da6, type: 3}
+  - {fileID: 3632742365309149546, guid: acf8ee30fcc57d1469fef007430e84d9, type: 3}
+  - {fileID: 4869960893891326948, guid: c8a202551097d3e4187a236658f67493, type: 3}
   - {fileID: 6576508593008396103, guid: f0a95d596d6591f439d9c795ae7b0f02, type: 3}
   loc: {x: 85, y: 95, z: -1}
 --- !u!114 &2056456144
@@ -6638,6 +6640,10 @@ PrefabInstance:
       propertyPath: SoundControllerScript
       value: 
       objectReference: {fileID: 1762246958}
+    - target: {fileID: 872910437640417549, guid: 0e1588dcc6c7b5d47bb5c54ff9f42f92, type: 3}
+      propertyPath: Wall
+      value: 
+      objectReference: {fileID: 8329114379578713061, guid: f2b7826ec2bf66b46b59db64896a0aa6, type: 3}
     - target: {fileID: 872910437640417549, guid: 0e1588dcc6c7b5d47bb5c54ff9f42f92, type: 3}
       propertyPath: WoodUI
       value: 

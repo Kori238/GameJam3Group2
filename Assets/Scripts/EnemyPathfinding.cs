@@ -22,9 +22,12 @@ public class EnemyPathfinding : MonoBehaviour
     [SerializeField] public bool flying = false;
     private Path _currentPath = null;
     public Path _newPath = null;
+    private GameObject home;
 
     public virtual void Start()
     {
+        home = Init.Instance.grid.GetStructureAtCell((int)(Init.Instance.gridDimensions.x - 1) / 2,
+            (int)(Init.Instance.gridDimensions.y - 1) / 2);
         StartCoroutine(PathfindingLoop());
         InvokeRepeating(nameof(Attack), 0f, attackDelay);
     }
@@ -41,11 +44,11 @@ public class EnemyPathfinding : MonoBehaviour
 
     public virtual void MoveTowardsBase()
     {
-        var home = Init.Instance.grid.GetStructureAtCell((int)(Init.Instance.gridDimensions.x - 1) / 2,
-            (int)(Init.Instance.gridDimensions.y - 1) / 2);
-        var targetPosition = new Vector3(home.transform.position.x, home.transform.position.y, transform.position.z);
-        var moveDir = (targetPosition - transform.position).normalized;
-        transform.position += speed * Time.deltaTime * moveDir;
+        var position = transform.position;
+        var targetPosition = new Vector3(home.transform.position.x, home.transform.position.y, position.z);
+        var moveDir = (targetPosition - position).normalized;
+        position += speed * Time.deltaTime * moveDir;
+        transform.position = position;
     }
 
     public virtual void Attack()
@@ -97,8 +100,10 @@ public class EnemyPathfinding : MonoBehaviour
             new Vector3((targetNode.x + 0.5f) * 10 / 3, (targetNode.y + 0.5f) * 10 / 3, transform.position.z);
         if (Vector3.Distance(transform.position, targetPosition) > 1f)
         {
-            var moveDir = (targetPosition - transform.position).normalized;
-            transform.position = transform.position + speed * Time.deltaTime * moveDir;
+            var position = transform.position;
+            var moveDir = (targetPosition - position).normalized;
+            position += speed * Time.deltaTime * moveDir;
+            transform.position = position;
         }
         else
         {
@@ -110,32 +115,8 @@ public class EnemyPathfinding : MonoBehaviour
         }
     }
 
-    public IEnumerator OneTimePathfind()
-    {
-        if (Init.Instance.highUsage)
-        {
-            yield return new WaitForFixedUpdate();
-            yield return OneTimePathfind();
-        }
-        Pathfind();
-    }
-
     public IEnumerator PathfindingLoop()
     {
-        if (!_initiated)
-        {
-            var rnd = new Random();
-            int delay = rnd.Next(1, 10);
-            delay /= 10;
-            _initiated = true;
-            yield return new WaitForSeconds(delay);
-            //yield return PathfindingLoop();
-        }
-        if (Init.Instance.highUsage)
-        {
-            yield return new WaitForFixedUpdate();
-            //yield return PathfindingLoop();
-        }
         Pathfind();
         yield return new WaitForSeconds(1f);
         yield return PathfindingLoop();
@@ -153,10 +134,10 @@ public class EnemyPathfinding : MonoBehaviour
             var enemyPos = Init.Instance.pathfinding.GetGrid()
                 .GetWorldCellPosition(transform.position.x, transform.position.y);
             var path = Init.Instance.pathfinding.FindPath((int)enemyPos.x, (int)enemyPos.y, node.x, node.y, viewRange, flying);
-            var structure = result.GetComponentInParent<Structure>();
             if (path == null) continue;
-            path.tCost = (int)((path.fCost + 10) /
-                               (structure.priority * 10 * ((structure.health / structure.maxHealth + 1) / 2)));
+            var structure = result.GetComponentInParent<Structure>();
+            path.tCost = (int)((path.fCost + 10) * 10 /
+                               (structure.priority * ((structure.health / structure.maxHealth + 1) / 2)));
             path.structure = result.transform.parent.gameObject;
             path.attackPoint = result;
             paths.Add(path);

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Node
@@ -23,7 +24,7 @@ public class Node
         central = false;
     }
 
-    public void updateFCost()
+    public void UpdateFCost()
     {
         fCost = gCost + hCost;
     }
@@ -118,7 +119,6 @@ public class NodeGrid
     {
         return gridArray[x, y];
     }
-
     public int GetWidth()
     {
         return width;
@@ -128,7 +128,6 @@ public class NodeGrid
         return height;
     }
 }
-
 public class AStar
 {
     private const int DIAGONAL_COST = 14;
@@ -151,8 +150,16 @@ public class AStar
 
     public Path FindPath(int x0, int y0, int xn, int yn, int viewDistance = int.MaxValue, bool flying = false)
     {
+        float gridSizeX = Init.Instance.gridDimensions.x * 3;
+        float gridSizeY = Init.Instance.gridDimensions.y * 3;
+
+        if (xn < 0 || yn < 0 || xn > gridSizeX || yn > gridSizeY) return null; //Positions are out of the grid
+        if (x0 < 0 || y0 < 0 || x0 > gridSizeX || y0 > gridSizeY) return null;
+
         var startNode = grid.GetNodeFromPosition(x0, y0);
         var endNode = grid.GetNodeFromPosition(xn, yn);
+
+        if (endNode == null) return null;
 
         unsearchedNodes = new List<Node> { startNode };
         searchedNodes = new List<Node>();
@@ -167,14 +174,15 @@ public class AStar
             for (var y = 0; y < grid.GetHeight(); y++)
             {
                 var node = grid.GetNodeFromPosition(x, y);
+                if(node == null) return null;
                 node.gCost = int.MaxValue;
-                node.updateFCost();
+                node.UpdateFCost();
                 node.previousNode = null;
             }
         }
         startNode.gCost = 0;
         startNode.hCost = CalculateDistanceCost(startNode, endNode);
-        startNode.updateFCost();
+        startNode.UpdateFCost();
 
         while (unsearchedNodes.Count > 0)
         {
@@ -201,7 +209,7 @@ public class AStar
                     adjacentNode.previousNode = currentNode;
                     adjacentNode.gCost = tentativeGCost;
                     adjacentNode.hCost = CalculateDistanceCost(adjacentNode, endNode);
-                    adjacentNode.updateFCost();
+                    adjacentNode.UpdateFCost();
 
                     if (!unsearchedNodes.Contains(adjacentNode))
                     {

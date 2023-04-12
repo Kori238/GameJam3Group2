@@ -5,6 +5,7 @@ public class PlayerInteractionScript : MonoBehaviour
 {
     [SerializeField] private Transform WoodCollector;
     [SerializeField] private Transform StoneCollector;
+    [SerializeField] private Transform Wall;
     [SerializeField] private Transform minionHouse;
 
     public TMP_Text WoodUI;
@@ -62,6 +63,11 @@ public class PlayerInteractionScript : MonoBehaviour
             currentTool = "minionHouse";
             Debug.Log("build minion house equiped");
         }
+        if (Input.GetKeyDown("5"))
+        {
+            currentTool = "wall";
+            Debug.Log("build wall equipped");
+        }
     }
     private void PlayerInterct() //allows mutilple function to be called from mouse button 2
     {
@@ -90,6 +96,11 @@ public class PlayerInteractionScript : MonoBehaviour
             case "minionHouse":
                 {
                     placeMinionHouse();
+                    break;
+                }
+            case "wall":
+                {
+                    PlaceWall();
                     break;
                 }
         }
@@ -187,6 +198,17 @@ public class PlayerInteractionScript : MonoBehaviour
             }
         }
     }
+
+    private void PlaceWall()
+    {
+        Vector2 MousePos = Input.mousePosition;
+        Vector2 MouseWorldPos = Camera.main.ScreenToWorldPoint(MousePos);
+        Vector2 gridPos;
+        gridPos = Init.Instance.grid.GetWorldCellPosition(MouseWorldPos.x, MouseWorldPos.y);
+        var valid = Init.Instance.grid.BuildAtCell((int)gridPos.x, (int)gridPos.y, Wall);
+    }
+
+
     private void PlaceStoneCollector()
     {
         Vector2 MousePos = Input.mousePosition;

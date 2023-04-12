@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   test: {fileID: 0}
-  viewRange: 50
+  viewRange: 60
   speed: 10
   moving: 1
   attacking: 0
@@ -96,8 +96,8 @@ MonoBehaviour:
   attackDelay: 1
   attackDamage: 5
   target: {fileID: 0}
-  destination: {fileID: 0}
-  newDestination: {fileID: 0}
+  destination: {x: 0, y: 0}
+  newDestination: {x: 0, y: 0}
   _initiated: 0
   flying: 0
-  attackRange: 25
+  attackRange: 30
