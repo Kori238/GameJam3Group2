@@ -8,9 +8,10 @@ public class Castle : Structure
 
     public TMP_Text bh;
 
-    private void Start()
+    public override void Start()
     {
         bh = GameObject.Find("BaseHealth").GetComponent<TMP_Text>();
+        base.Start();
     }
     public override void Damaged(float amount)
     {

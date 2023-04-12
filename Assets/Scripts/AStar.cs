@@ -164,11 +164,6 @@ public class AStar
         unsearchedNodes = new List<Node> { startNode };
         searchedNodes = new List<Node>();
 
-        /*if (viewDistance != int.MaxValue && searchedNodes.Count >= viewDistance / 10)
-        {
-            return null; //path is outside of acceptable view distance
-        }*/
-
         for (var x = 0; x < grid.GetWidth(); x++)
         {
             for (var y = 0; y < grid.GetHeight(); y++)
