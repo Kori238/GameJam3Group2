@@ -165,7 +165,6 @@ public class Structure : MonoBehaviour
         if (health - amount < 0)
         {
             health = 0;
-            
         }
         else
         {
