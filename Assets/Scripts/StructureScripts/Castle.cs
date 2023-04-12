@@ -2,20 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Castle : Structure
 {
-
-    public TMP_Text bh;
+    public Slider healthSlider;
 
     public override void Start()
     {
-        bh = GameObject.Find("BaseHealth").GetComponent<TMP_Text>();
+        healthSlider = GameObject.Find("HealthSlider").GetComponent<Slider>();
         base.Start();
     }
     public override void Damaged(float amount)
     {
         base.Damaged(amount);
-        bh.GetComponent<TMP_Text>().SetText((health).ToString());
+        healthSlider.GetComponent<Slider>().value = health;
     }
 }

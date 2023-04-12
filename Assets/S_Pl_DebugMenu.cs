@@ -59,13 +59,17 @@ public class S_Pl_DebugMenu : MonoBehaviour
             {
                 Camera.main.orthographicSize = 200;
             }
-            else if (Input.GetKeyDown(KeyCode.Keypad1))
+            else if (Input.GetKeyDown("1"))
             {
-                PlayerTransform.position = new Vector3(85, 45, 0);
+                PlayerTransform.position = new Vector3(51, 440, 0);
             }
-            else if (Input.GetKeyDown(KeyCode.Keypad2))
+            else if (Input.GetKeyDown("2"))
             {
-                PlayerTransform.position = new Vector3(10, 90, 0);
+                PlayerTransform.position = new Vector3(451, 44, 0);
+            }
+            else if (Input.GetKeyDown("3"))
+            {
+                PlayerTransform.position = new Vector3(45, 45, 0);
             }
         }
     }
@@ -73,7 +77,7 @@ public class S_Pl_DebugMenu : MonoBehaviour
     private IEnumerator WaitForInput()
     {
         waitingForInput = true;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(5f);
         //menuOpen = false;
         waitingForInput = false;
         Debug.Log("Admin Menu Closed.");
