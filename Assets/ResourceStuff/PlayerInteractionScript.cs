@@ -12,7 +12,8 @@ public class PlayerInteractionScript : MonoBehaviour
     [SerializeField] private Vector2[] pathfindingTestNodes = new Vector2[2];
     private readonly Vector2 boxSize = new Vector2(0.1f, 0.1f); // size of raycast
 
-
+    public Transform select;
+    public Transform H1; public Transform H2; public Transform H3; public Transform H4; public Transform H5; public Transform H6;
 
     private readonly int range = 500;
     private string currentTool = "Interact";
@@ -42,31 +43,36 @@ public class PlayerInteractionScript : MonoBehaviour
         {
             currentTool = "Interact";
             print("interact Tool Equiped");
-        }
-        if (Input.GetKeyDown("2"))
-        {
-            currentTool = "WoodCollector";
-            print("Build Wood Collector equiped");
+            select.transform.position = H1.transform.position;
         }
         if (Input.GetKeyDown("3"))
         {
+            currentTool = "WoodCollector";
+            print("Build Wood Collector equiped");
+            select.transform.position = H3.transform.position;
+        }
+        if (Input.GetKeyDown("4"))
+        {
             currentTool = "StoneCollector";
             Debug.Log("Build Stone Collector equiped");
+            select.transform.position = H4.transform.position;
         }
         if (Init.Instance.testPathfinding && Input.GetKeyDown(KeyCode.T))
         {
             currentTool = "PathfindingTester";
             Debug.Log("Pathfinding Tester equipped");
         }
-        if (Input.GetKeyDown("4"))
+        if (Input.GetKeyDown("6"))
         {
             currentTool = "minionHouse";
             Debug.Log("build minion house equiped");
+            select.transform.position = H6.transform.position;
         }
         if (Input.GetKeyDown("5"))
         {
             currentTool = "wall";
             Debug.Log("build wall equipped");
+            select.transform.position = H5.transform.position;
         }
     }
     private void PlayerInterct() //allows mutilple function to be called from mouse button 2

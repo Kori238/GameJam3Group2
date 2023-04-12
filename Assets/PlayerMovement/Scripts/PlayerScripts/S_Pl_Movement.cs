@@ -10,7 +10,6 @@ public class S_Pl_Movement : MonoBehaviour
     public AudioSource hitSound;
     public GameObject SoundControllerScript;
     public Transform PlayerTransform;
-    private bool canDash = true;
     private Vector2 Movement;
     public Slider staminaBar;
     private float staminaRegenDelay = 0.2f;
