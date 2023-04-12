@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class S_Pl_Movement : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class S_Pl_Movement : MonoBehaviour
     public Transform PlayerTransform;
     private bool canDash = true;
     private Vector2 Movement;
+    public Slider staminaBar;
+    private float staminaRegenDelay = 0.2f;
 
     private void Update() // Update is called once per frame
     {
@@ -22,7 +25,7 @@ public class S_Pl_Movement : MonoBehaviour
 
         if (Input.GetButtonDown("LeftShift"))
         {
-            if (canDash)
+            if (staminaBar.value >= 50)
             {
                 SoundControllerScript.GetComponent<S_SoundController>().Dash();
                 StartCoroutine(DashDelay());
@@ -61,14 +64,26 @@ public class S_Pl_Movement : MonoBehaviour
     private IEnumerator DashDelay()
     {
         var abilities = GetComponent<S_Pl_Abilities>();
-
-        canDash = false;
         Pl_Speed = 45f;
         abilities.DashZoom();
+        DecreaseStamina(50);
         yield return new WaitForSeconds(0.3f);
         Pl_Speed = 16f;
         abilities.DashunZoom();
-        yield return new WaitForSeconds(3f);
-        canDash = true;
+    }
+
+    private void DecreaseStamina(int staminaUsed)
+    {
+        staminaBar.value -= staminaUsed;
+        StartCoroutine(RegenStamina());
+    }
+
+    private IEnumerator RegenStamina()
+    {
+        while (staminaBar.value != 100)
+        {
+            staminaBar.value += 1;
+            yield return new WaitForSeconds(staminaRegenDelay);
+        }
     }
 }

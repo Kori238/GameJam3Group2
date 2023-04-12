@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Structure : MonoBehaviour
@@ -164,6 +165,7 @@ public class Structure : MonoBehaviour
         if (health - amount < 0)
         {
             health = 0;
+            
         }
         else
         {

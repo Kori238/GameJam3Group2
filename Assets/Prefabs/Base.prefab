@@ -225,6 +225,7 @@ MonoBehaviour:
   isSpaceOccupied: 0
   hasCentralAttackPoint: 0
   occupiedSpaceCount: 0
+  BaseHealth: {fileID: 9183180002831524590, guid: 084f287824e21ce469e61452c920767c, type: 3}
 --- !u!61 &-7124798464319429725
 BoxCollider2D:
   m_ObjectHideFlags: 0
