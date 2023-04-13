@@ -7,8 +7,9 @@ public class S_Pl_DebugMenu : MonoBehaviour
     public GameObject PlayerScript;
     public Transform PlayerTransform;
     public GameObject ComputerUsage;
-    public TMP_Text HealthINT;
+    //public TMP_Text HealthINT;
     public GameObject AdminMenuControls;
+    public GameObject TimeController;
     [SerializeField] private Collider2D playerCollider;
     [SerializeField] private SpriteRenderer playerVisual;
 
@@ -34,7 +35,7 @@ public class S_Pl_DebugMenu : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.G))
             {
                 PlayerScript.GetComponent<S_Pl_Movement>().Health = 10000;
-                HealthINT.text = PlayerScript.GetComponent<S_Pl_Movement>().Health.ToString();
+                //HealthINT.text = PlayerScript.GetComponent<S_Pl_Movement>().Health.ToString();
             }
             else if (Input.GetKeyDown(KeyCode.F))
             {
@@ -71,7 +72,11 @@ public class S_Pl_DebugMenu : MonoBehaviour
                     ComputerUsage.SetActive(true);
                     statsOpen = true;
                 }
-                
+
+            }
+            else if (Input.GetKeyDown(KeyCode.U))
+            {
+                TimeController.GetComponent<TimeController>().ForceSpawnEnemy();
             }
             else if (Input.GetKeyDown("1"))
             {

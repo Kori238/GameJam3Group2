@@ -18,6 +18,7 @@ public class TimeController : MonoBehaviour
 
     public List<GameObject> enemies;
     public Vector3 loc;
+    public Transform playerLocation;
     public bool isNight = false;
     private int x;
     private int y;
@@ -47,12 +48,12 @@ public class TimeController : MonoBehaviour
 
         if (canSpawn == true)
         {
-            StartCoroutine(SpawnEnemy());
+            StartCoroutine(SpawnEnemyTimer());
         }
 
     }
 
-    private IEnumerator SpawnEnemy()
+    private IEnumerator SpawnEnemyTimer()
     {
         canSpawn = false;
         int r = Random.Range(0, 3);
@@ -82,12 +83,23 @@ public class TimeController : MonoBehaviour
         loc.Set(x, y, -1);
 
 
-        int toSpawn = Random.Range(0, enemies.Count) ;
-        //GameObject enemy1 = (GameObject)Instantiate(enemies[toSpawn], loc, Quaternion.identity);
+        spawnEnemy();
         yield return new WaitForSeconds(1.5f);
         canSpawn = true;
     }
 
+    private void spawnEnemy()
+    {
+        int toSpawn = Random.Range(0, enemies.Count);
+        GameObject enemy1 = (GameObject)Instantiate(enemies[toSpawn], loc, Quaternion.identity);
+    }
+
+    public void ForceSpawnEnemy()
+    {
+        loc.Set(playerLocation.position.x, playerLocation.position.y, playerLocation.position.z);
+        int toSpawn = Random.Range(0, enemies.Count);
+        GameObject enemy1 = (GameObject)Instantiate(enemies[toSpawn], loc, Quaternion.identity);
+    }
     // Update is called once per frame
     private void Update()
     {
