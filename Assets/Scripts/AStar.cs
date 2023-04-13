@@ -9,6 +9,7 @@ public class Node
     public int gCost, hCost, fCost;
     private NodeGrid grid;
     public bool isWalkable;
+    public bool minionWalkable;
 
     public Node previousNode;
     public int x, y;
@@ -20,6 +21,7 @@ public class Node
         this.x = x;
         this.y = y;
         isWalkable = true;
+        minionWalkable = true;
         attackPointReference = null;
         central = false;
     }
@@ -148,7 +150,7 @@ public class AStar
 
     }
 
-    public Path FindPath(int x0, int y0, int xn, int yn, int viewDistance = int.MaxValue, bool flying = false)
+    public Path FindPath(int x0, int y0, int xn, int yn, int viewDistance = int.MaxValue, bool flying = false, bool isMinion = false)
     {
         float gridSizeX = Init.Instance.gridDimensions.x * 3;
         float gridSizeY = Init.Instance.gridDimensions.y * 3;
@@ -194,8 +196,11 @@ public class AStar
                 if (searchedNodes.Contains(adjacentNode)) continue;
                 if (!flying && !adjacentNode.isWalkable)
                 {
-                    searchedNodes.Add(adjacentNode);
-                    continue;
+                    if (!(isMinion && adjacentNode.minionWalkable))
+                    {
+                        searchedNodes.Add(adjacentNode);
+                        continue;
+                    }
                 }
 
                 var tentativeGCost = currentNode.gCost + CalculateDistanceCost(currentNode, adjacentNode);

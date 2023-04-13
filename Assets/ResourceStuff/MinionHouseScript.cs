@@ -16,8 +16,6 @@ public class MinionHouseScript : Interactable
         Transform newMinion = Instantiate(Minion, Location , Quaternion.identity);
         newMinion.GetComponent<MinionScript>().setHouse(this);
         housedMinions.Add(newMinion);
-        
-        
         Debug.Log(housedMinions);
         //Init.Instance.resourceManager.availableMinions.Add(newMinion);
         Init.Instance.resourceManager.AddToMinionsList(housedMinions);
@@ -36,10 +34,10 @@ public class MinionHouseScript : Interactable
 
 
 
-    public override void OccupySpace()
+    /*public override void OccupySpace()
     {
         return;
-    }
+    }*/
 
     // Update is called once per frame
     private void Update()

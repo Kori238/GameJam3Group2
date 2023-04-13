@@ -10,6 +10,7 @@ public class Structure : MonoBehaviour
     public bool damageable;
     public bool destroyed;
     public int priority;
+    public bool canMinionsWalkThrough = false;
     public Vector2 gridPos;
     public bool isSpaceOccupied;
     public bool hasCentralAttackPoint = false;
@@ -154,6 +155,7 @@ public class Structure : MonoBehaviour
                     node.RemoveAttackPoint();
                 }
                 node.isWalkable = false;
+                node.minionWalkable = canMinionsWalkThrough;
             }
             isSpaceOccupied = true;
         }
@@ -179,6 +181,7 @@ public class Structure : MonoBehaviour
             foreach (var node in occupiedSpace)
             {
                 node.isWalkable = true;
+                node.minionWalkable = true;
             }
             isSpaceOccupied = false;
         }

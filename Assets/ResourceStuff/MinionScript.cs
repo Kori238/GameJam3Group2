@@ -59,7 +59,7 @@ public class MinionScript : MonoBehaviour
         float point = Random.Range(0, destination.collectionPoints.Count);
         var minionPos = Init.Instance.pathfinding.GetGrid().GetWorldCellPosition(transform.position.x, transform.position.y);
         Node node = destination.collectionPoints[(int)point];
-        _currentPath = Init.Instance.pathfinding.FindPath((int)minionPos.x, (int)minionPos.y, node.x, node.y);
+        _currentPath = Init.Instance.pathfinding.FindPath((int)minionPos.x, (int)minionPos.y, node.x, node.y, isMinion: true);
         moving = true;
     }
 
