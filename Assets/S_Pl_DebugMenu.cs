@@ -6,7 +6,7 @@ public class S_Pl_DebugMenu : MonoBehaviour
 {
     public GameObject PlayerScript;
     public Transform PlayerTransform;
-    
+    public GameObject ComputerUsage;
     public TMP_Text HealthINT;
     public GameObject AdminMenuControls;
     [SerializeField] private Collider2D playerCollider;
@@ -16,7 +16,7 @@ public class S_Pl_DebugMenu : MonoBehaviour
 
     //private bool menuOpen = false;
     private bool waitingForInput;
-
+    private bool statsOpen;
 
     // Update is called once per frame
     private void Update()
@@ -58,6 +58,20 @@ public class S_Pl_DebugMenu : MonoBehaviour
             else if (Input.GetKeyDown(KeyCode.X))
             {
                 Camera.main.orthographicSize = 200;
+            }
+            else if (Input.GetKeyDown(KeyCode.S))
+            {
+                if (statsOpen == true)
+                {
+                    ComputerUsage.SetActive(false);
+                    statsOpen = false;
+                }
+                else
+                {
+                    ComputerUsage.SetActive(true);
+                    statsOpen = true;
+                }
+                
             }
             else if (Input.GetKeyDown("1"))
             {
