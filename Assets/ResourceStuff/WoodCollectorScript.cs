@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WoodCollectorScript : Interactable
@@ -17,14 +18,39 @@ public class WoodCollectorScript : Interactable
 
     private GameObject InstanceMenu;
 
-   [SerializeField] private int MAssigned; // the ammount of minions assigned to the buiding 
+    [SerializeField] private int MAssigned; // the ammount of minions assigned to the buiding 
     private int MaxMAssigned = 5;
     private pMenu pmenu;
     private bool toOpen = true;
     [SerializeField] private List<Transform> MinionList;
+    [SerializeField] private List<GameObject> LocalTrees;
+    [SerializeField] private Collider2D collectZone;
+     [SerializeField] private List<Collider2D> overlapingObjects;
+    [SerializeField] ContactFilter2D treeFilter;
+    
+    public override void Start()
+    {
+
+       collectZone.GetComponent<Collider2D>().OverlapCollider(treeFilter,overlapingObjects);
+        if (overlapingObjects.Equals(null)) { }
+        else
+        {
+            for (int i = 0; i < overlapingObjects.Count; i++)
+            {
+                if (overlapingObjects[i].GetComponent<TreeInteract>() is TreeInteract)
+                {
+                    LocalTrees.Add(overlapingObjects[i].gameObject);
+                }
+
+            }
+        }
+       //overlapingObjects.Clear();
+        base.Start();
+    }
 
 
- 
+
+
 
     // Update is called once per frame
     private void Update()
@@ -119,7 +145,11 @@ public class WoodCollectorScript : Interactable
     private void OnDestroy()// temp may change how damgaged building works 
     {
         Destroy(InstanceMenu);
-        for(int i = 0;i< MinionList.Count;i++) { MinionList[i].GetComponent<MinionScript>().setJobLocation(null); }
-        MinionList.Clear();
+        //for(int i = 0;i< MinionList.Count;i++) { MinionList[i].GetComponent<MinionScript>().setJobLocation(null); }
+        //MinionList.Clear();
     }
+  // public Structure GetLocalTree()
+   // {
+        //return LocalTrees[(int)Random.Range(0,LocalTrees.Count-1)];
+   // }
 }
