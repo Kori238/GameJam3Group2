@@ -13,7 +13,6 @@ public class TimeController : MonoBehaviour
     public TMP_Text timer;
     float clockRotation = 0;
     public int timeMultiplyer = 10;
-    //public SpriteRenderer m, m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15, m16, m17, m18;
     public SpriteRenderer[] maptiles = new SpriteRenderer[25];
     private bool canSpawn = true;
 
@@ -27,7 +26,7 @@ public class TimeController : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-
+        timer.text = "Day: " + day;
     }
 
     public void ActivateDay()
@@ -95,14 +94,16 @@ public class TimeController : MonoBehaviour
         minutesTime += Time.deltaTime * timeMultiplyer * 4;
         clockRotation += Time.deltaTime * timeMultiplyer;
 
-        if (minutesTime <= 9)
-        {
-            timer.text = hourTime + ": 0" + (int)minutesTime + " | Day: " + day;
-        }
-        else
-        {
-            timer.text = hourTime + ": " + (int)minutesTime + " | Day: " + day;
-        }
+        
+
+        //if (minutesTime <= 9)
+        //{
+        //    timer.text = hourTime + ": 0" + (int)minutesTime + " | Day: " + day;
+        //}
+        //else
+        //{
+        //    timer.text = hourTime + ": " + (int)minutesTime + " | Day: " + day;
+        //}
 
         var rotateClock = new Vector3(0, 0, (float)(clockRotation));
         clock.transform.eulerAngles = rotateClock;
@@ -116,6 +117,7 @@ public class TimeController : MonoBehaviour
         {
             day++;
             hourTime = 0;
+            timer.text = "Day: " + day;
         }
         else if (hourTime == 6)
         {
