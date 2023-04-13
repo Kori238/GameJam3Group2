@@ -17,7 +17,7 @@ public class WoodCollectorScript : Interactable
 
     private GameObject InstanceMenu;
 
-    private int MAssigned; // the ammount of minions assigned to the buiding 
+   [SerializeField] private int MAssigned; // the ammount of minions assigned to the buiding 
     private int MaxMAssigned = 5;
     private pMenu pmenu;
     private bool toOpen = true;
@@ -83,27 +83,43 @@ public class WoodCollectorScript : Interactable
         return true;
     }
 
-    public void SetMinionAssigned(int newMinionAssigned)
+    public bool SetMinionAssigned(int newMinionAssigned)// checks if minion can be assinged
     {
-        if (MAssigned < MaxMAssigned) 
-        {
-
-            MAssigned = newMinionAssigned + MAssigned;
-            if(MAssigned< MaxMAssigned) { MAssigned=MaxMAssigned; }
+        
+        if(Init.Instance.resourceManager.getAvailableMinionLength() > 0) 
+        { 
+            SetMinion();
+           
+            return true;
         }
-        SetMinion();
+        else { Debug.Log("no minions available");
+            return false;
+        }
     }
     public int GetMinionAssigned() { return MAssigned; }
 
-    public void SetMinion()
+    public void SetMinion()// assigns a minion from available minion list
     {
         print("Setting minion");
         Transform newMinion = Init.Instance.resourceManager.GetMinionList();
         Debug.Log(newMinion.ToString());
         MinionList.Add(newMinion);
         newMinion.GetComponent<MinionScript>().setJobLocation(this);
+        MAssigned= MAssigned +1;
     }
 
-
-   
+    public void unassignMinion()// unassings minions and adds them to available minion list
+    {
+        Transform temp = MinionList[MinionList.Count - 1];
+        MinionList.RemoveAt(MinionList.Count - 1);
+        temp.GetComponent<MinionScript>().setJobLocation(null);
+        Init.Instance.resourceManager.addSingleMinionToList(temp);
+        MAssigned = MAssigned - 1;
+    }
+    private void OnDestroy()// temp may change how damgaged building works 
+    {
+        Destroy(InstanceMenu);
+        for(int i = 0;i< MinionList.Count;i++) { MinionList[i].GetComponent<MinionScript>().setJobLocation(null); }
+        MinionList.Clear();
+    }
 }

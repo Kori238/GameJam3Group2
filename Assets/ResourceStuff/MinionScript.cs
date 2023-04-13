@@ -5,8 +5,8 @@ using UnityEngine;
 public class MinionScript : MonoBehaviour
 {
     private bool occupation = false;
-    private Structure jobLocation;
-    private Structure House;
+    [SerializeField] private Structure jobLocation;
+    [SerializeField] private Structure House;
 
 
     // Start is called before the first frame update

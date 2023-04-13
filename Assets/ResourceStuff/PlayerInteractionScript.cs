@@ -39,11 +39,11 @@ public class PlayerInteractionScript : MonoBehaviour
             print("wood = " + Init.Instance.resourceManager.GetWood());
             WoodUI.text = Init.Instance.resourceManager.GetWood().ToString();
         }
-        if (Input.GetKeyDown("1"))
+        if (Input.GetKeyDown("2"))
         {
             currentTool = "Interact";
             print("interact Tool Equiped");
-            select.transform.position = H1.transform.position;
+            select.transform.position = H2.transform.position;
         }
         if (Input.GetKeyDown("3"))
         {
@@ -193,14 +193,14 @@ public class PlayerInteractionScript : MonoBehaviour
         Vector2 MousePos = Input.mousePosition;
         Vector2 MouseWorldPos = Camera.main.ScreenToWorldPoint(MousePos);
         Vector2 gridPos;
-        if (Init.Instance.resourceManager.GetWood() >= 50)
+        if (Init.Instance.resourceManager.GetWood() >= 0)
         {
             gridPos = Init.Instance.grid.GetWorldCellPosition(MouseWorldPos.x, MouseWorldPos.y);
             var valid = Init.Instance.grid.BuildAtCell((int)gridPos.x, (int)gridPos.y, WoodCollector);
 
             if (valid)
             {
-                Init.Instance.resourceManager.AddWood(-50);
+                //Init.Instance.resourceManager.AddWood(-50);
             }
         }
     }
@@ -238,14 +238,14 @@ public class PlayerInteractionScript : MonoBehaviour
         Vector2 MousePos = Input.mousePosition;
         Vector2 MouseWorldPos = Camera.main.ScreenToWorldPoint(MousePos);
         Vector2 gridPos;
-        if (Init.Instance.resourceManager.GetWood() >= 50)
+        if (Init.Instance.resourceManager.GetWood() >= 0)
         {
             gridPos = Init.Instance.grid.GetWorldCellPosition(MouseWorldPos.x, MouseWorldPos.y);
             var valid = Init.Instance.grid.BuildAtCell((int)gridPos.x, (int)gridPos.y,minionHouse);
 
             if (valid)
             {
-                Init.Instance.resourceManager.AddStone(0);
+              //  Init.Instance.resourceManager.AddStone(0);
             }
         }
 

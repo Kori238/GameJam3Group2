@@ -51,7 +51,7 @@ public class ResourceManager
         unassignedMinions = unassignedMinions + newMinionToAssign;
     }
 
-    public void AddToMinionList(List<Transform> MinionToAdd)
+    public void AddToMinionsList(List<Transform> MinionToAdd)
 
     {
         int i = MinionToAdd.Count;
@@ -67,14 +67,24 @@ public class ResourceManager
             
         }
         Debug.Log(availableMinions[0]);
-
     }
+    public void addSingleMinionToList(Transform minionToAdd)
+    {
+        availableMinions.Add(minionToAdd);
+    }
+
     public Transform GetMinionList()
     {
 
 
         int ListLength = availableMinions.Count;
         Debug.Log(ListLength-1);
-       return availableMinions[ListLength- 1];
+        Transform temp = availableMinions[ListLength - 1];
+        availableMinions.RemoveAt(ListLength-1);
+        return temp;
+    }
+    public int getAvailableMinionLength()
+    {
+        return availableMinions.Count;
     }
 }

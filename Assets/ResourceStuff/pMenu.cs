@@ -8,6 +8,7 @@ public class pMenu : MonoBehaviour
     private float mMinion;
     private GameObject ParentStruture;
     private float currentSliderValue;
+    int minionsAssigned;
     private void Start()
     {
         // AMinionSlider = GameObject.Find("MinionSlider").GetComponent<Slider>();
@@ -25,7 +26,7 @@ public class pMenu : MonoBehaviour
 
     public void setSlider()
     {
-        int minionsAssigned = ParentStruture.GetComponent<WoodCollectorScript>().GetMinionAssigned();
+         minionsAssigned = ParentStruture.GetComponent<WoodCollectorScript>().GetMinionAssigned();
         
         AMinionSlider.SetValueWithoutNotify(minionsAssigned);
     }
@@ -46,7 +47,13 @@ public class pMenu : MonoBehaviour
     public void ValueChanged()
     {
 
-        ParentStruture.GetComponent<WoodCollectorScript>().SetMinionAssigned((int)AMinionSlider.value);
+        if (AMinionSlider.value>minionsAssigned)
+        {
+            if (ParentStruture.GetComponent<WoodCollectorScript>().SetMinionAssigned((int)AMinionSlider.value)) { minionsAssigned = (int)AMinionSlider.value; }
+            else { setSlider(); }
+        }
+        else { ParentStruture.GetComponent<WoodCollectorScript>().unassignMinion(); minionsAssigned = (int)AMinionSlider.value; }
 
+        
     }
 }

@@ -15,11 +15,13 @@ public class MinionHouseScript : Interactable
         Init.Instance.resourceManager.SetMaxMinion(5);
         Location = transform.position;
         Transform newMinion = Instantiate(Minion, Location , Quaternion.identity);
+        newMinion.GetComponent<MinionScript>().setHouse(this);
         housedMinions.Add(newMinion);
+        
         
         Debug.Log(housedMinions);
         //Init.Instance.resourceManager.availableMinions.Add(newMinion);
-        Init.Instance.resourceManager.AddToMinionList(housedMinions);
+        Init.Instance.resourceManager.AddToMinionsList(housedMinions);
        
 
         
