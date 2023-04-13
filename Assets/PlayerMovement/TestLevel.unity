@@ -7568,6 +7568,7 @@ MonoBehaviour:
   - {fileID: 4869960893891326948, guid: c8a202551097d3e4187a236658f67493, type: 3}
   - {fileID: 6576508593008396103, guid: f0a95d596d6591f439d9c795ae7b0f02, type: 3}
   loc: {x: 85, y: 95, z: -1}
+  playerLocation: {fileID: 5335656977763315926}
   isNight: 0
 --- !u!114 &2056456144
 MonoBehaviour:
@@ -8152,6 +8153,10 @@ PrefabInstance:
       propertyPath: ComputerUsage
       value: 
       objectReference: {fileID: 1765353957}
+    - target: {fileID: 5048883363140918956, guid: 0e1588dcc6c7b5d47bb5c54ff9f42f92, type: 3}
+      propertyPath: TimeController
+      value: 
+      objectReference: {fileID: 2056456141}
     - target: {fileID: 5048883363140918956, guid: 0e1588dcc6c7b5d47bb5c54ff9f42f92, type: 3}
       propertyPath: AdminMenuControls
       value: 

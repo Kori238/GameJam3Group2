@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Linq;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class S_Pl_Abilities : MonoBehaviour
@@ -58,6 +59,14 @@ public class S_Pl_Abilities : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Space))
         {
             Dig();
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
+        {
+            Camera.main.orthographicSize-= 10;
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
+        {
+            Camera.main.orthographicSize+= 10;
         }
     }
 
