@@ -12,7 +12,6 @@ public class S_Pl_Abilities : MonoBehaviour
     [SerializeField] private SpriteRenderer playerVisual, digIcon;
     [SerializeField] private float digSpeedMultiplier = 0.5f;
     private Animator animator;
-    private int CameraZoomValue = 40;
     private bool canAttack = true, canDig = true;
     private GameObject enemy1;
     private bool flag, digging;
@@ -40,33 +39,41 @@ public class S_Pl_Abilities : MonoBehaviour
             animator.Play("Axe Swing");
             animator.Play("Idle");
         }
-        else if (Input.GetButtonDown("Camera"))
-        {
-            if (!flag)
-            {
-                CameraZoomValue = 40;
-                flag = true;
-                MovementScript.GetComponent<S_Pl_Movement>().Pl_Speed = 5;
-            }
-            else
-            {
-                CameraZoomValue = 18;
-                flag = false;
-                MovementScript.GetComponent<S_Pl_Movement>().Pl_Speed = 16;
-            }
-            Camera.main.orthographicSize = CameraZoomValue;
-        }
+        //else if (Input.GetButtonDown("Camera"))           
+        //{
+        //    if (!flag)
+        //    {
+        //        CameraZoomValue = 40;
+        //        flag = true;
+        //        MovementScript.GetComponent<S_Pl_Movement>().Pl_Speed = 5;
+        //    }
+        //    else
+        //    {
+        //        CameraZoomValue = 18;
+        //        flag = false;
+        //        MovementScript.GetComponent<S_Pl_Movement>().Pl_Speed = 16;
+        //    }
+        //    Camera.main.orthographicSize = CameraZoomValue;
+        //}
         else if (Input.GetKeyDown(KeyCode.Space))
         {
             Dig();
         }
         else if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
         {
-            Camera.main.orthographicSize-= 10;
+            if (Camera.main.orthographicSize >= 15)
+            {
+                Camera.main.orthographicSize -= 5;
+            }
+            
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
         {
-            Camera.main.orthographicSize+= 10;
+            if (Camera.main.orthographicSize <= 200)
+            {
+                Camera.main.orthographicSize += 5;
+            }
+           
         }
     }
 
@@ -148,12 +155,10 @@ public class S_Pl_Abilities : MonoBehaviour
 
     public void DashZoom()
     {
-        CameraZoomValue = 16;
-        Camera.main.orthographicSize = CameraZoomValue;
+        Camera.main.orthographicSize = Camera.main.orthographicSize - 10;
     }
     public void DashunZoom()
     {
-        CameraZoomValue = 18;
-        Camera.main.orthographicSize = CameraZoomValue;
+        Camera.main.orthographicSize = Camera.main.orthographicSize + 10;
     }
 }
