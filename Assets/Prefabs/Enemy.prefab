@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2326355868957124359}
   - component: {fileID: 6812901537557010019}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5725366791326877040}
   - component: {fileID: 7509946285645565263}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 822463097559112523}
   - component: {fileID: 6432438790963624118}
   - component: {fileID: 6227942256147178774}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,9 +189,10 @@ MonoBehaviour:
   attackDelay: 1
   attackDamage: 5
   target: {fileID: 0}
-  destination: {fileID: 0}
-  newDestination: {fileID: 0}
+  destination: {x: 0, y: 0}
+  newDestination: {x: 0, y: 0}
   _initiated: 0
+  flying: 0
 --- !u!114 &6432438790963624118
 MonoBehaviour:
   m_ObjectHideFlags: 0
