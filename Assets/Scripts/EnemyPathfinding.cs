@@ -8,6 +8,8 @@ using Random = System.Random;
 public class EnemyPathfinding : MonoBehaviour
 {
     public Transform test;
+    public int health = 100;
+    public int maxHealth = 100;
     [SerializeField] public int viewRange;
     [SerializeField] private float speed;
     [SerializeField] private bool moving;
@@ -23,6 +25,17 @@ public class EnemyPathfinding : MonoBehaviour
     private Path _currentPath = null;
     public Path _newPath = null;
     private GameObject home;
+
+    public virtual void Damaged(int amount)
+    {
+        health -= amount;
+        if (health <= 0) Defeated();
+    }
+
+    public virtual void Defeated()
+    {
+        Destroy(this.gameObject);
+    }
 
     public virtual void Start()
     {

@@ -23,7 +23,6 @@ public class MinionScript : MonoBehaviour
     private void Start()
     {
         time = GameObject.Find("Time").GetComponent<TimeController>();
-        
     }
 
     private void FixedUpdate()

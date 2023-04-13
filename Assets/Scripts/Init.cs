@@ -9,6 +9,7 @@ public class Init : MonoBehaviour
     public Transform tree;
     public Transform wall;
     public Transform home;
+    public Transform tower;
     public Transform gridOutline;
     public Transform attackPointPrefab;
     public Vector2 gridDimensions = new Vector2(18, 10);
@@ -94,6 +95,8 @@ public class Init : MonoBehaviour
                 grid.BuildAtCell(x, y, wall);
             }
         }
+
+        grid.BuildAtCell(22, 24, tower);
 
 
         yield return null;
