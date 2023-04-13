@@ -19,7 +19,7 @@ public class TimeController : MonoBehaviour
 
     public List<GameObject> enemies;
     public Vector3 loc;
-    private bool isNight = false;
+    public bool isNight = false;
     private int x;
     private int y;
 
@@ -84,7 +84,7 @@ public class TimeController : MonoBehaviour
 
 
         int toSpawn = Random.Range(0, enemies.Count) ;
-        GameObject enemy1 = (GameObject)Instantiate(enemies[toSpawn], loc, Quaternion.identity);
+        //GameObject enemy1 = (GameObject)Instantiate(enemies[toSpawn], loc, Quaternion.identity);
         yield return new WaitForSeconds(1.5f);
         canSpawn = true;
     }

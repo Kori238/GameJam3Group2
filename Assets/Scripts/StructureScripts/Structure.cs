@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Drawing;
 using TMPro;
 using UnityEngine;
 
@@ -17,13 +18,38 @@ public class Structure : MonoBehaviour
     public List<Node> attackPoints = new List<Node>();
     public Node centralAttackPoint;
     public List<Node> occupiedSpace = new List<Node>();
+    public List<Node> collectionPoints = new List<Node>();
+
+
     public virtual void Start()
     {
         attackPointPrefab = Init.Instance.attackPointPrefab;
         FindOccupiedSpace();
         OccupySpace();
         CreateAttackPoints();
+        FindCollectionPoints();
     }
+
+    public virtual void FindCollectionPoints()
+    {
+        if (destroyed) return;
+        var nodePos = gridPos * 3;
+        var nodeGrid = Init.Instance.pathfinding.GetGrid();
+        var collectionPositions = new List<Vector2>
+        {
+            new Vector2(nodePos.x - 1, nodePos.y + 1),
+            new Vector2(nodePos.x + 3, nodePos.y + 1),
+            new Vector2(nodePos.x + 1, nodePos.y - 1),
+            new Vector2(nodePos.x + 1, nodePos.y + 3)
+        };
+
+        foreach (Vector2 collectionPosition in collectionPositions)
+        {
+            var node = nodeGrid.gridArray[(int)collectionPosition.x, (int)collectionPosition.y];
+            collectionPoints.Add(node);
+        }
+    }
+
 
     public virtual void CreateAttackPoints()
     {

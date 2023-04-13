@@ -100,8 +100,6 @@ public class GridCell
 
     public void Outline(Transform outline)
     {
-        Debug.Log("outlining");
-        Debug.Log(Values["outline"]);
         if ((Transform)Values["outline"] == null)
         {
             var obj = Object.Instantiate(outline, (Vector3)Values["center"] - new Vector3(5, 5), Quaternion.identity);
@@ -171,7 +169,6 @@ public class Grid
 
     public void OutlineCell(int x, int y, Transform outline)
     {
-        Debug.Log(x + " " + y);
         if (x > _width || y > _height || x < 0 || y < 0)
         {
             Debug.Log("Could not outline cell at position " + x + " " + y + "as these co-ordinates are invalid");

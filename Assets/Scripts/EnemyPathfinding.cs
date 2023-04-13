@@ -71,11 +71,9 @@ public class EnemyPathfinding : MonoBehaviour
 
     public virtual void TraversePath()
     {
-        //if (attacking && target != null) return;
         if (_newPath != null && _newPath != _currentPath && _newPath.attackPoint != null)
         {
             newDestination = new Vector2(_newPath.nodes.Last().x, _newPath.nodes.Last().y) * (Init.Instance.cellSize / Init.Instance.nodeCount) + (Vector2.one * (Init.Instance.cellSize / Init.Instance.nodeCount) / 2);
-            //newDestination = new Vector2(_newPath.attackPoint.transform.position.x, _newPath.attackPoint.transform.position.y);
             _currentPath = _newPath;
             currentPathIndex = 0;
         }

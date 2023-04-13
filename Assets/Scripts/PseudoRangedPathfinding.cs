@@ -26,7 +26,6 @@ public class PseudoRangedPathfinding : EnemyPathfinding
             var structure = result.GetComponentInParent<Structure>();
             structures.Add(structure);
         }
-        //List<float> priorities = new(); 
         float bestValue = 0f;
         Structure bestStructure = null;
         foreach (var structure in structures)
