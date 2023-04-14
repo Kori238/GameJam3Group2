@@ -150,7 +150,10 @@ public class WoodCollectorScript : Interactable
     }
    public Structure GetLocalTree()
     {
-        GameObject temp = LocalTrees[(int)Random.Range(0, LocalTrees.Count - 1)];
-        return temp.GetComponent<TreeInteract>();
+        if (LocalTrees.Count > 0) {
+            GameObject temp = LocalTrees[(int)Random.Range(0, LocalTrees.Count - 1)];
+            return temp.GetComponent<TreeInteract>();
+        }
+        return null;
     }
 }

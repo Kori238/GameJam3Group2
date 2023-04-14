@@ -42,10 +42,15 @@ public class MinionScript : MonoBehaviour
         if(!time.isNight && atJob && goToResource)
         {
             ResetPath();
-            Pathfind(jobLocation.GetComponent<WoodCollectorScript>().GetLocalTree());
-            atHouse = false;
-            atJob = false;
-            atResource = true;
+            Structure temp = jobLocation.GetComponent<WoodCollectorScript>().GetLocalTree();
+            if (temp != null)
+            {
+                Pathfind(temp);
+                atHouse = false;
+                atJob = false;
+                atResource = true;
+            }
+            else { goToResource= false; }
 
         }
         if (time.isNight && !atHouse)
