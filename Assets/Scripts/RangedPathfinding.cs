@@ -25,6 +25,7 @@ public class RangedPathfinding : EnemyPathfinding
         {
             proj.position += directionVector.normalized * (flightTime * Time.deltaTime);
             yield return new WaitForSeconds(Time.deltaTime);
+            if (Vector2.Distance(proj.position, transform.position) > viewRange) break;
         }
         Destroy(proj.gameObject);
     }

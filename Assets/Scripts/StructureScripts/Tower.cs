@@ -47,10 +47,7 @@ public class Tower : Structure
         {
             proj.position += directionVector.normalized * (flightSpeed * Time.deltaTime);
             yield return new WaitForSeconds(Time.deltaTime);
-            if (target == null)
-            {
-                break;
-            }
+            if (Vector2.Distance(proj.position, transform.position) > viewRange) break;
         }
         Destroy(proj.gameObject);
     }
