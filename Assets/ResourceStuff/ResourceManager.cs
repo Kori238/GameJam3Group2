@@ -77,10 +77,9 @@ public class ResourceManager
     {
 
 
-        int ListLength = availableMinions.Count;
-        Debug.Log(ListLength-1);
-        Transform temp = availableMinions[ListLength - 1];
-        availableMinions.RemoveAt(ListLength-1);
+        
+        Transform temp = availableMinions[availableMinions.Count - 1];
+        availableMinions.RemoveAt(availableMinions.Count - 1);
         return temp;
     }
     public int getAvailableMinionLength()

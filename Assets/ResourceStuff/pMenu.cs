@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -49,11 +50,17 @@ public class pMenu : MonoBehaviour
 
         if (AMinionSlider.value>minionsAssigned)
         {
-            if (ParentStruture.GetComponent<WoodCollectorScript>().SetMinionAssigned((int)AMinionSlider.value)) { minionsAssigned = (int)AMinionSlider.value; }
+            if (ParentStruture.GetComponent<WoodCollectorScript>().SetMinionAssigned()) { minionsAssigned = (int)AMinionSlider.value; }
             else { setSlider(); }
+           
         }
-        else { ParentStruture.GetComponent<WoodCollectorScript>().unassignMinion(); minionsAssigned = (int)AMinionSlider.value; }
+        else if ( ParentStruture.GetComponent<WoodCollectorScript>().SetMinionUnAssigned()){ minionsAssigned = (int)AMinionSlider.value; }
+        else { setSlider(); }
+        
+       
 
         
     }
+    
+    
 }

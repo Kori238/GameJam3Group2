@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -44,6 +45,7 @@ public class WoodCollectorScript : Interactable
 
             }
         }
+        overlapingObjects.Clear();
        //overlapingObjects.Clear();
         base.Start();
     }
@@ -55,13 +57,13 @@ public class WoodCollectorScript : Interactable
     // Update is called once per frame
     private void Update()
     {
-        if (CurrentWoodCoolDown >= MaxWoodCoolDown)
-        {
-            Init.Instance.resourceManager.AddWood(MAssigned / MaxMAssigned * CollectionAmount);
+       // if (CurrentWoodCoolDown >= MaxWoodCoolDown)
+       // {
+         //   Init.Instance.resourceManager.AddWood(MAssigned / MaxMAssigned * CollectionAmount);
             //resourceManager.AddWood(50);
-            print("Wood Collector added " + MAssigned / MaxMAssigned * CollectionAmount + " wood");
-            CurrentWoodCoolDown = 0;
-        }
+          //  print("Wood Collector added " + MAssigned / MaxMAssigned * CollectionAmount + " wood");
+          //  CurrentWoodCoolDown = 0;
+       // }
         if (health <= 0)
         {
             Destroy(gameObject);
@@ -109,7 +111,7 @@ public class WoodCollectorScript : Interactable
         return true;
     }
 
-    public bool SetMinionAssigned(int newMinionAssigned)// checks if minion can be assinged
+    public bool SetMinionAssigned()// checks if minion can be assinged
     {
         
         if(Init.Instance.resourceManager.getAvailableMinionLength() > 0) 
@@ -122,6 +124,21 @@ public class WoodCollectorScript : Interactable
             return false;
         }
     }
+    public bool SetMinionUnAssigned()// checks if minion can be unassinged
+    {
+
+        if (MinionList.Count != 0)
+        {
+            unassignMinion();
+
+            return true;
+        }
+        else
+        {
+            Debug.Log("no minions to unassign");
+            return false;
+        }
+    }
     public int GetMinionAssigned() { return MAssigned; }
 
     public void SetMinion()// assigns a minion from available minion list
@@ -131,17 +148,22 @@ public class WoodCollectorScript : Interactable
         Debug.Log(newMinion.ToString());
         MinionList.Add(newMinion);
         newMinion.GetComponent<MinionScript>().setJobLocation(this);
-        MAssigned= MAssigned +1;
+        MAssigned= MinionList.Count;
     }
 
     public void unassignMinion()// unassings minions and adds them to available minion list
     {
-        Transform temp = MinionList[MinionList.Count - 1];
-        MinionList.RemoveAt(MinionList.Count - 1);
-        temp.GetComponent<MinionScript>().setJobLocation(null);
-        Init.Instance.resourceManager.addSingleMinionToList(temp);
-        MAssigned = MAssigned - 1;
+       
+            Transform temp = MinionList[MinionList.Count - 1];
+            MinionList.RemoveAt(MinionList.Count - 1);
+            temp.GetComponent<MinionScript>().setJobLocation(null);
+            Init.Instance.resourceManager.addSingleMinionToList(temp);
+            MAssigned = MinionList.Count;
+       
+       
     }
+   
+    
     private void OnDestroy()// temp may change how damgaged building works 
     {
         Destroy(InstanceMenu);

@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 
 public class MinionScript : MonoBehaviour
 {
-    private bool occupation = false;
+   
     [SerializeField] private Structure jobLocation = null;
     [SerializeField] private Structure house = null;
     [SerializeField] private float speed = 10f;
@@ -140,16 +140,11 @@ public class MinionScript : MonoBehaviour
 
 
 
-    public bool setOccupation(bool newOccupation)
-    {
-        occupation= newOccupation;
-        return true;
-    }
+    
     public bool setJobLocation(Structure newJobLocation)
     {
         jobLocation = newJobLocation;
-        Debug.Log(jobLocation.ToString());
-        Debug.Log("Setting job location");
+        
         return true;
     }
 
