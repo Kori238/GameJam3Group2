@@ -48,11 +48,13 @@ MonoBehaviour:
   jobLocation: {fileID: 0}
   house: {fileID: 0}
   speed: 10
+  waitTime: 3
   moving: 0
   currentPathIndex: 0
   atJob: 0
   atResource: 0
   atHouse: 1
+  goToResource: 0
 --- !u!1 &4481540310144710694
 GameObject:
   m_ObjectHideFlags: 0

@@ -41,6 +41,7 @@ public class Tower : Structure
     public virtual IEnumerator FireProjectile(Vector2 start, Vector2 end)
     {
         Vector3 directionVector = end - start;
+        end = new Vector2(end.x, end.y);
         Transform proj = Instantiate(projectile, transform.position, Quaternion.LookRotation(directionVector) * Quaternion.FromToRotation(Vector3.right, Vector3.forward), transform);
         Debug.Log(Vector2.Distance(new Vector2(proj.position.x, proj.position.y), end));
         while (Vector2.Distance(new Vector2(proj.position.x, proj.position.y), end) > 0.5f)

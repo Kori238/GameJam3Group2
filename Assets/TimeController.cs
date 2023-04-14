@@ -83,7 +83,7 @@ public class TimeController : MonoBehaviour
         loc.Set(x, y, -1);
 
 
-        spawnEnemy();
+        //spawnEnemy();
         yield return new WaitForSeconds(1.5f);
         canSpawn = true;
     }

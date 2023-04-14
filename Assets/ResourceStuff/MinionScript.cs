@@ -11,6 +11,7 @@ public class MinionScript : MonoBehaviour
     [SerializeField] private Structure jobLocation = null;
     [SerializeField] private Structure house = null;
     [SerializeField] private float speed = 10f;
+    [SerializeField] private float waitTime = 10f;
     [SerializeField] private bool moving;
     [SerializeField] private int currentPathIndex;
     [SerializeField] private bool atJob = false;
@@ -28,6 +29,12 @@ public class MinionScript : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (time.hourTime == 6)
+        {
+            goToResource = false;
+        }
+
+
         if ((!time.isNight && atHouse)|| atResource && !goToResource)
         {
             if (jobLocation != null)
@@ -37,6 +44,7 @@ public class MinionScript : MonoBehaviour
                 atHouse = false;
                 atJob = true;
                 atResource= false;
+                StartCoroutine(WaitAt());
             }
         }
         if(!time.isNight && atJob && goToResource)
@@ -49,8 +57,9 @@ public class MinionScript : MonoBehaviour
                 atHouse = false;
                 atJob = false;
                 atResource = true;
+                StartCoroutine(WaitAt());
             }
-            else { goToResource= false; }
+            else { goToResource = false; }
 
         }
         if (time.isNight && !atHouse)
@@ -65,7 +74,19 @@ public class MinionScript : MonoBehaviour
             }
         }
         if (_currentPath != null) TraversePath();
-    }   
+    }
+
+    private IEnumerator WaitAt()
+    {
+        while (moving)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        yield return new WaitForSeconds(waitTime);
+        goToResource = !goToResource;
+    }
+
+
 
 
 
