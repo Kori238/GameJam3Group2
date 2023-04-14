@@ -34,7 +34,8 @@ public class Tower : Structure
         if (target != null)
         {
             target.Damaged(attackDamage);
-            StartCoroutine(FireProjectile(transform.position, target.transform.position));
+            if (Vector3.Distance(transform.position, target.transform.position) < viewRange)
+                StartCoroutine(FireProjectile(transform.position, target.transform.position));
         }
     }
 
@@ -42,13 +43,14 @@ public class Tower : Structure
     {
         Vector3 directionVector = end - start;
         end = new Vector2(end.x, end.y);
+        if (Vector2.Distance(transform.position, end) > viewRange) yield break;
         Transform proj = Instantiate(projectile, transform.position, Quaternion.LookRotation(directionVector) * Quaternion.FromToRotation(Vector3.right, Vector3.forward), transform);
-        Debug.Log(Vector2.Distance(new Vector2(proj.position.x, proj.position.y), end));
         while (Vector2.Distance(new Vector2(proj.position.x, proj.position.y), end) > 0.5f)
         {
             proj.position += directionVector.normalized * (flightSpeed * Time.deltaTime);
             yield return new WaitForSeconds(Time.deltaTime);
             if (Vector2.Distance(proj.position, transform.position) > viewRange) break;
+            if (Vector2.Distance(start, end) < Vector2.Distance(start, proj.position)) break;
         }
         Destroy(proj.gameObject);
     }

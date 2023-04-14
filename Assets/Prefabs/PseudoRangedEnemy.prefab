@@ -53,7 +53,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7072006865073987118, guid: 26d1fc5550eacd54dad570685b672da6, type: 3}
       propertyPath: m_Name
-      value: RangedEnemy
+      value: PseudoRangedEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 7509946285645565263, guid: 26d1fc5550eacd54dad570685b672da6, type: 3}
       propertyPath: m_Color.b
@@ -88,6 +88,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   test: {fileID: 0}
+  health: 100
+  maxHealth: 100
   viewRange: 50
   speed: 10
   moving: 1
@@ -96,7 +98,9 @@ MonoBehaviour:
   attackDelay: 1
   attackDamage: 5
   target: {fileID: 0}
-  destination: {fileID: 0}
-  newDestination: {fileID: 0}
+  destination: {x: 0, y: 0}
+  newDestination: {x: 0, y: 0}
   _initiated: 0
   flying: 0
+  projectile: {fileID: 7466798797180198136, guid: b7f1f4a398493e64f82df7f41573a6b4, type: 3}
+  flightTime: 100

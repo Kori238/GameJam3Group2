@@ -5,6 +5,8 @@ using UnityEngine;
 public class PseudoRangedPathfinding : EnemyPathfinding
 {
     private Structure rangedTarget = null;
+    [SerializeField] private Transform projectile;
+    [SerializeField] private float flightTime = 100f;
 
     public override void Attack()
     {
@@ -12,6 +14,21 @@ public class PseudoRangedPathfinding : EnemyPathfinding
         GetRangedTarget();
         Debug.Log(name + " Dealt " + attackDamage + " damage to " + rangedTarget.name);
         rangedTarget.Damaged(attackDamage);
+        StartCoroutine(FireProjectile(transform.position, rangedTarget.transform.position, flightTime));
+    }
+
+    public virtual IEnumerator FireProjectile(Vector2 start, Vector2 end, float flightTime)
+    {
+        Vector3 directionVector = end - start;
+        Transform proj = Instantiate(projectile, transform.position, Quaternion.LookRotation(directionVector) * Quaternion.FromToRotation(Vector3.right, Vector3.forward), transform);
+        while (Vector2.Distance(new Vector2(proj.position.x, proj.position.y), end) > 0.5f)
+        {
+            proj.position += directionVector.normalized * (flightTime * Time.deltaTime);
+            yield return new WaitForSeconds(Time.deltaTime);
+            if (Vector2.Distance(proj.position, transform.position) > viewRange) break;
+            if (Vector2.Distance(start, end) < Vector2.Distance(start, proj.position)) break;
+        }
+        Destroy(proj.gameObject);
     }
 
 
