@@ -16,6 +16,7 @@ public class MinionScript : MonoBehaviour
     [SerializeField] private bool atJob = false;
     [SerializeField] private bool atResource = false;
     [SerializeField] private bool atHouse = true;
+    [SerializeField] private bool goToResource = false; // change in inspector
     
     private Path _currentPath = null;
     private TimeController time;
@@ -27,7 +28,7 @@ public class MinionScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!time.isNight && atHouse)
+        if ((!time.isNight && atHouse)|| atResource && !goToResource)
         {
             if (jobLocation != null)
             {
@@ -35,7 +36,17 @@ public class MinionScript : MonoBehaviour
                 Pathfind(jobLocation);
                 atHouse = false;
                 atJob = true;
+                atResource= false;
             }
+        }
+        if(!time.isNight && atJob && goToResource)
+        {
+            ResetPath();
+            Pathfind(jobLocation.GetComponent<WoodCollectorScript>().GetLocalTree());
+            atHouse = false;
+            atJob = false;
+            atResource = true;
+
         }
         if (time.isNight && !atHouse)
         {

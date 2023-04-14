@@ -148,8 +148,9 @@ public class WoodCollectorScript : Interactable
         //for(int i = 0;i< MinionList.Count;i++) { MinionList[i].GetComponent<MinionScript>().setJobLocation(null); }
         //MinionList.Clear();
     }
-  // public Structure GetLocalTree()
-   // {
-        //return LocalTrees[(int)Random.Range(0,LocalTrees.Count-1)];
-   // }
+   public Structure GetLocalTree()
+    {
+        GameObject temp = LocalTrees[(int)Random.Range(0, LocalTrees.Count - 1)];
+        return temp.GetComponent<TreeInteract>();
+    }
 }
