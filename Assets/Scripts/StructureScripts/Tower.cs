@@ -17,7 +17,9 @@ public class Tower : Structure
     [SerializeField] private Transform projectile;
     [SerializeField] private int flightSpeed;
     private GameObject home;
-    
+    [SerializeField] private Transform occupant = null;
+    [SerializeField] private Transform firingPoint = null;
+    private bool facingRight = true;
 
     public override void Start()
     {
@@ -31,11 +33,25 @@ public class Tower : Structure
     {
         if (destroyed) return;
         if (target == null) FindTarget();
-        if (target != null)
+        if (target == null) return;
+
+        Transform firePoint = transform;
+        if (firingPoint != null) firePoint = firingPoint;
+        target.Damaged(attackDamage);
+        if (Vector3.Distance(firePoint.position, target.transform.position) < viewRange)
+                StartCoroutine(FireProjectile(firePoint.position, target.transform.position));
+        if (occupant != null)
         {
-            target.Damaged(attackDamage);
-            if (Vector3.Distance(transform.position, target.transform.position) < viewRange)
-                StartCoroutine(FireProjectile(transform.position, target.transform.position));
+            if (firingPoint.position.x > target.transform.position.x && facingRight)
+            {
+                facingRight = false;
+                occupant.transform.localScale = new Vector3(-1, 1, 1);
+            }
+            else if (firingPoint.position.x < target.transform.position.x && !facingRight)
+            {
+                facingRight = true;
+                occupant.transform.localScale = new Vector3(1, 1, 1);
+            }
         }
     }
 
@@ -44,7 +60,7 @@ public class Tower : Structure
         Vector3 directionVector = end - start;
         end = new Vector2(end.x, end.y);
         if (Vector2.Distance(transform.position, end) > viewRange) yield break;
-        Transform proj = Instantiate(projectile, transform.position, Quaternion.LookRotation(directionVector) * Quaternion.FromToRotation(Vector3.right, Vector3.forward), transform);
+        Transform proj = Instantiate(projectile, start, Quaternion.LookRotation(directionVector) * Quaternion.FromToRotation(Vector3.right, Vector3.forward), transform);
         while (Vector2.Distance(new Vector2(proj.position.x, proj.position.y), end) > 0.5f)
         {
             proj.position += directionVector.normalized * (flightSpeed * Time.deltaTime);
