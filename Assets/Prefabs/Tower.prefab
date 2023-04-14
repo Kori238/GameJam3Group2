@@ -156,8 +156,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7396df37414ca7947b0f817caef703bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 400
-  maxHealth: 400
+  health: 50
+  maxHealth: 50
   damageable: 1
   destroyed: 0
   priority: 10
@@ -166,3 +166,10 @@ MonoBehaviour:
   isSpaceOccupied: 0
   hasCentralAttackPoint: 0
   occupiedSpaceCount: 0
+  attackDamage: 5
+  attackRate: 1
+  viewRange: 40
+  targetPrioritization: 0
+  target: {fileID: 0}
+  projectile: {fileID: 1418432050567799694, guid: 0d1d1ba1dd50c244d9740aee3c3d7286, type: 3}
+  flightSpeed: 100

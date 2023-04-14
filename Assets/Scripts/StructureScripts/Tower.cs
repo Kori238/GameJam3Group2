@@ -14,6 +14,8 @@ public class Tower : Structure
     private const int TARGETWEAKEST = 3;
     [SerializeField] private int targetPrioritization = TARGETCLOSEST;
     [SerializeField] private EnemyPathfinding target = null;
+    [SerializeField] private Transform projectile;
+    [SerializeField] private int flightSpeed;
     private GameObject home;
     
 
@@ -27,14 +29,32 @@ public class Tower : Structure
 
     public virtual void AttackTarget()
     {
-        Debug.Log(target);
+        if (destroyed) return;
         if (target == null) FindTarget();
-        Debug.Log(target);
         if (target != null)
         {
             target.Damaged(attackDamage);
+            StartCoroutine(FireProjectile(transform.position, target.transform.position));
         }
     }
+
+    public virtual IEnumerator FireProjectile(Vector2 start, Vector2 end)
+    {
+        Vector3 directionVector = end - start;
+        Transform proj = Instantiate(projectile, transform.position, Quaternion.LookRotation(directionVector) * Quaternion.FromToRotation(Vector3.right, Vector3.forward), transform);
+        Debug.Log(Vector2.Distance(new Vector2(proj.position.x, proj.position.y), end));
+        while (Vector2.Distance(new Vector2(proj.position.x, proj.position.y), end) > 0.5f)
+        {
+            proj.position += directionVector.normalized * (flightSpeed * Time.deltaTime);
+            yield return new WaitForSeconds(Time.deltaTime);
+            if (target == null)
+            {
+                break;
+            }
+        }
+        Destroy(proj.gameObject);
+    }
+
 
 
     public virtual void FindTarget()
