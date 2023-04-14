@@ -6,7 +6,7 @@ using UnityEngine;
 public class Tower : Structure
 {
     [SerializeField] private int attackDamage = 5;
-    [SerializeField] int attackRate = 1;
+    [SerializeField] float attackRate = 1f;
     [SerializeField] int viewRange = 40;
     private const int TARGETCLOSEST = 0;
     private const int TARGETFURTHEST = 1;
