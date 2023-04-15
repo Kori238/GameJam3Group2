@@ -5,6 +5,7 @@ public class S_Pl_PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject HUD;
+    public GameObject WarningPanel;
 
     private void Update()
     {
@@ -17,6 +18,7 @@ public class S_Pl_PauseMenu : MonoBehaviour
     {
         pauseMenu.SetActive(true);
         HUD.SetActive(false);
+        WarningPanel.SetActive(false);
         Time.timeScale = 0f;
     }
 
@@ -31,5 +33,10 @@ public class S_Pl_PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(0);
+    }
+
+    public void WarningMessage()
+    {
+        WarningPanel.SetActive(true);
     }
 }
