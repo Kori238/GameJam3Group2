@@ -28,7 +28,7 @@ public class PseudoRangedPathfinding : EnemyPathfinding
             if (Vector2.Distance(proj.position, transform.position) > viewRange) break;
             if (Vector2.Distance(start, end) < Vector2.Distance(start, proj.position)) break;
         }
-        Destroy(proj.gameObject);
+        StartCoroutine(proj.GetComponent<Projectile>().Destroyed());
     }
 
 

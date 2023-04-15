@@ -20,6 +20,9 @@ public class Tower : Structure
     [SerializeField] private Transform occupant = null;
     [SerializeField] private Transform firingPoint = null;
     private bool facingRight = true;
+    [SerializeField] private Animator animator = null;
+    [SerializeField] private AnimationClip shootClip = null;
+    [SerializeField] private AnimationClip idleClip = null;
 
     public override void Start()
     {
@@ -39,7 +42,10 @@ public class Tower : Structure
         if (firingPoint != null) firePoint = firingPoint;
         target.Damaged(attackDamage);
         if (Vector3.Distance(firePoint.position, target.transform.position) < viewRange)
-                StartCoroutine(FireProjectile(firePoint.position, target.transform.position));
+        {
+            
+            StartCoroutine(FireProjectile(firePoint.position, target.transform.position));
+        }
         if (occupant != null)
         {
             if (firingPoint.position.x > target.transform.position.x && facingRight)
@@ -57,6 +63,8 @@ public class Tower : Structure
 
     public virtual IEnumerator FireProjectile(Vector2 start, Vector2 end)
     {
+        //if (animator != null) animator.Play(idleClip.name);
+        if (animator != null) animator.Play(shootClip.name);
         Vector3 directionVector = end - start;
         end = new Vector2(end.x, end.y);
         if (Vector2.Distance(transform.position, end) > viewRange) yield break;
@@ -68,7 +76,7 @@ public class Tower : Structure
             if (Vector2.Distance(proj.position, transform.position) > viewRange) break;
             if (Vector2.Distance(start, end) < Vector2.Distance(start, proj.position)) break;
         }
-        Destroy(proj.gameObject);
+        StartCoroutine(proj.GetComponent<Projectile>().Destroyed());
     }
 
 

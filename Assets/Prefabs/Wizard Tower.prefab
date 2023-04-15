@@ -56,7 +56,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 650025033546163307}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.8981237, y: -2.2788215, z: 1.8806957}
+  m_LocalPosition: {x: 6.34, y: -2.2788215, z: 1.8806957}
   m_LocalScale: {x: 4.4682755, y: 4.4682755, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -73,6 +73,7 @@ GameObject:
   m_Component:
   - component: {fileID: 175311012366669687}
   - component: {fileID: 6292525111839357942}
+  - component: {fileID: 6103506862804595203}
   m_Layer: 0
   m_Name: Fire_Wizard_Attack_p1_2
   m_TagString: Untagged
@@ -88,8 +89,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3113297606660431963}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.56, y: -0.061822414, z: -1.8806957}
-  m_LocalScale: {x: 0.2238, y: 0.2238, z: 1}
+  m_LocalPosition: {x: 0.7, y: -0.02, z: -1.8806957}
+  m_LocalScale: {x: 0.30723265, y: 0.30723265, z: 1.3728}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7937389157717400744}
@@ -148,6 +149,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &6103506862804595203
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3113297606660431963}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6fe40c3f1ab523c4eb11186cf714ccab, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1001 &8657503100443404802
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -200,9 +221,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6201257626278293352, guid: 54b05267c83a2874098ca36184d8d891, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 6103506862804595203}
+    - target: {fileID: 6201257626278293352, guid: 54b05267c83a2874098ca36184d8d891, type: 3}
+      propertyPath: idleClip
+      value: 
+      objectReference: {fileID: 7400000, guid: baede55d1ff8bab43a0c76a66c0fd629, type: 2}
+    - target: {fileID: 6201257626278293352, guid: 54b05267c83a2874098ca36184d8d891, type: 3}
       propertyPath: occupant
       value: 
       objectReference: {fileID: 2276461191985552144}
+    - target: {fileID: 6201257626278293352, guid: 54b05267c83a2874098ca36184d8d891, type: 3}
+      propertyPath: shootClip
+      value: 
+      objectReference: {fileID: 7400000, guid: c608cffce115e4243bec7c9fb730a204, type: 2}
     - target: {fileID: 6201257626278293352, guid: 54b05267c83a2874098ca36184d8d891, type: 3}
       propertyPath: projectile
       value: 
