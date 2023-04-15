@@ -6,7 +6,7 @@ public class S_Pl_Movement : MonoBehaviour
 {
     public float Pl_Speed = 16f; //Player Speed
     public Rigidbody2D RigidBody; //Reference to RigidBody2D
-    public int Health = 100;
+    public int Health = 100; //Not in use atm
     public AudioSource hitSound;
     public GameObject SoundControllerScript;
     public Transform PlayerTransform;
