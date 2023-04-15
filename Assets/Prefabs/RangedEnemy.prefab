@@ -56,16 +56,20 @@ PrefabInstance:
       value: RangedEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 7509946285645565263, guid: 26d1fc5550eacd54dad570685b672da6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8bfdc1d5db13b514da510c10c2864472, type: 3}
+    - target: {fileID: 7509946285645565263, guid: 26d1fc5550eacd54dad570685b672da6, type: 3}
       propertyPath: m_Color.b
-      value: 0.70653486
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7509946285645565263, guid: 26d1fc5550eacd54dad570685b672da6, type: 3}
       propertyPath: m_Color.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7509946285645565263, guid: 26d1fc5550eacd54dad570685b672da6, type: 3}
       propertyPath: m_Color.r
-      value: 0.7264151
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 822463097559112523, guid: 26d1fc5550eacd54dad570685b672da6, type: 3}
@@ -102,6 +106,8 @@ MonoBehaviour:
   newDestination: {x: 0, y: 0}
   _initiated: 0
   flying: 0
+  slowed: 0
+  burning: 0
   attackRange: 30
   projectile: {fileID: 7466798797180198136, guid: b7f1f4a398493e64f82df7f41573a6b4, type: 3}
   flightTime: 100

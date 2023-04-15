@@ -74,8 +74,8 @@ Transform:
   m_GameObject: {fileID: 6171078113355210412}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.39, y: 0.39, z: 0.077999994}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1565054349856889920}
   m_RootOrder: 0
@@ -121,8 +121,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.28022557, g: 0.032529376, b: 0.4056604, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 7e40309d1d0ae0047a415688b0be495a, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -181,6 +181,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   test: {fileID: 6303581181864359074, guid: 2185b006f3ce2354d86dc05978d2df8b, type: 3}
+  health: 100
+  maxHealth: 100
   viewRange: 50
   speed: 10
   moving: 1
@@ -193,6 +195,8 @@ MonoBehaviour:
   newDestination: {x: 0, y: 0}
   _initiated: 0
   flying: 0
+  slowed: 0
+  burning: 0
 --- !u!114 &6432438790963624118
 MonoBehaviour:
   m_ObjectHideFlags: 0
