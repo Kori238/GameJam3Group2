@@ -22,6 +22,8 @@ public class EnemyPathfinding : MonoBehaviour
     [SerializeField] private Vector2 newDestination;
     [SerializeField] private bool _initiated = false;
     [SerializeField] public bool flying = false;
+    [SerializeField] bool slowed = false;
+    [SerializeField] bool burning = false;
     private Path _currentPath = null;
     public Path _newPath = null;
     private GameObject home;
@@ -183,5 +185,28 @@ public class EnemyPathfinding : MonoBehaviour
                 new Vector3(path.nodes[i + 1].x, path.nodes[i + 1].y) * nodeSpacing + Vector3.one * nodeSpacing / 2, color,
                 1f);
         }
+    }
+
+    public IEnumerator Burn(int damagePerTick, float tickRate, float duration)
+    {
+        if (burning) yield break;
+        burning = true;
+        while (duration > 0)
+        {
+            Damaged(damagePerTick);
+            duration -= tickRate;
+            yield return new WaitForSeconds(tickRate);
+        }
+        burning = false;
+    }
+
+    public IEnumerator Slow(float slowAmount, float duration)
+    {
+        if (slowed) yield break;
+        slowed = true;
+        speed -= slowAmount;
+        yield return new WaitForSeconds(duration);
+        speed += slowAmount;
+        slowed = false;
     }
 }
