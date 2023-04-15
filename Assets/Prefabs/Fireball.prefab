@@ -91,7 +91,24 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fireball
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8332220108689638058, guid: b7f1f4a398493e64f82df7f41573a6b4, type: 3}
+      propertyPath: flyClip
+      value: 
+      objectReference: {fileID: 7400000, guid: d74303940a25b1047881bbf4894c05c5, type: 2}
+    - target: {fileID: 8332220108689638058, guid: b7f1f4a398493e64f82df7f41573a6b4, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 656346325137672688}
+    - target: {fileID: 8332220108689638058, guid: b7f1f4a398493e64f82df7f41573a6b4, type: 3}
+      propertyPath: destroyDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8332220108689638058, guid: b7f1f4a398493e64f82df7f41573a6b4, type: 3}
+      propertyPath: destroyedClip
+      value: 
+      objectReference: {fileID: 7400000, guid: 3afebd81b241f784d86f06ceffe599d3, type: 2}
+    m_RemovedComponents:
+    - {fileID: 8332220108689638058, guid: b7f1f4a398493e64f82df7f41573a6b4, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b7f1f4a398493e64f82df7f41573a6b4, type: 3}
 --- !u!1 &5068492953792962411 stripped
 GameObject:
@@ -118,3 +135,26 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!1 &5191220403954960646 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8097233012308975147, guid: b7f1f4a398493e64f82df7f41573a6b4, type: 3}
+  m_PrefabInstance: {fileID: 4059377078716389165}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-1385589312748388042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5191220403954960646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a395fc2bb15ba664eab5891c45ec2498, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 656346325137672688}
+  flyClip: {fileID: 7400000, guid: d74303940a25b1047881bbf4894c05c5, type: 2}
+  destroyedClip: {fileID: 7400000, guid: 3afebd81b241f784d86f06ceffe599d3, type: 2}
+  destroyDelay: 0.5
+  towerScript: {fileID: 0}
+  AOERadius: 20

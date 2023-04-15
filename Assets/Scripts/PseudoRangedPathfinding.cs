@@ -12,6 +12,7 @@ public class PseudoRangedPathfinding : EnemyPathfinding
     {
         if (!attacking || target == null) return;
         GetRangedTarget();
+        if (rangedTarget == null) return;
         Debug.Log(name + " Dealt " + attackDamage + " damage to " + rangedTarget.name);
         rangedTarget.Damaged(attackDamage);
         StartCoroutine(FireProjectile(transform.position, rangedTarget.transform.position, flightTime));
