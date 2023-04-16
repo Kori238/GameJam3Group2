@@ -23,16 +23,7 @@ public class EnemyTakeDamage : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.layer == 7) //If the Collider is the Players attack range then...
-        {
-            Damaged(5);
-            SoundControllerScript.GetComponent<S_SoundController>().HurtMonster();
-            Debug.Log("HURT");
-        }
-    }
-
+    
 
     public void Damaged(int amount)
     {

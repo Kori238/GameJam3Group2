@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class S_SoundController : MonoBehaviour
@@ -5,6 +6,7 @@ public class S_SoundController : MonoBehaviour
     public AudioSource SoundSource;
 
     public AudioClip clip1, clip2, clip3, clip4, clip5;
+
 
     public void AttackSound()
     {

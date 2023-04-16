@@ -26,24 +26,38 @@ public class EnemyPathfinding : MonoBehaviour
     [SerializeField] bool burning = false;
     [SerializeField] private Transform spriteContainer;
     [SerializeField] bool facingRight = true;
+    [SerializeField] private S_SoundController SoundScript;
     private Path _currentPath = null;
     public Path _newPath = null;
     private GameObject home;
     public GameObject SoundController;
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == 7) //If the Collider is the Players attack range then...
+        {
+            Damaged(5);
+            SoundScript.HurtMonster();
+            Debug.Log("HURT");
+        }
+    }
+
+
     public virtual void Damaged(int amount)
     {
         health -= amount;
+        SoundScript.HurtMonster();
         if (health <= 0) Defeated();
     }
 
     public virtual void Defeated()
     {
-        SoundController.GetComponent<S_SoundController>().HurtMonster();
         Destroy(this.gameObject);
     }
 
     public virtual void Start()
     {
+        SoundScript = GameObject.Find("SoundController").GetComponent<S_SoundController>();
         home = Init.Instance.grid.GetStructureAtCell((int)(Init.Instance.gridDimensions.x - 1) / 2,
             (int)(Init.Instance.gridDimensions.y - 1) / 2);
         StartCoroutine(PathfindingLoop());
