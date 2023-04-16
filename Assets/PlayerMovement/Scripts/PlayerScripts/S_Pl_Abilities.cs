@@ -43,22 +43,6 @@ public class S_Pl_Abilities : MonoBehaviour
             animator.Play("Axe Swing");
             animator.Play("Idle");
         }
-        //else if (Input.GetButtonDown("Camera"))           
-        //{
-        //    if (!flag)
-        //    {
-        //        CameraZoomValue = 40;
-        //        flag = true;
-        //        MovementScript.GetComponent<S_Pl_Movement>().Pl_Speed = 5;
-        //    }
-        //    else
-        //    {
-        //        CameraZoomValue = 18;
-        //        flag = false;
-        //        MovementScript.GetComponent<S_Pl_Movement>().Pl_Speed = 16;
-        //    }
-        //    Camera.main.orthographicSize = CameraZoomValue;
-        //}
         else if (Input.GetKeyDown(KeyCode.Space))
         {
             Dig();
@@ -155,7 +139,7 @@ public class S_Pl_Abilities : MonoBehaviour
         animator.Play("Attack");
         float timer = 1.5f;
         float i;
-        for (i = 0; i < timer; i += 0.1f)
+        for (i = 0; i < timer; i += 0.1f) //Increases value of slider over time with the delay.
         {
             yield return new WaitForSeconds(0.1f);
             swordSwingSlider.value = i;
