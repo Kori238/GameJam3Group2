@@ -147,7 +147,7 @@ public class S_Pl_Abilities : MonoBehaviour
         canAttack = false;
         AttackCollider.enabled = true;
         animator.Play("Attack");
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         animator.Play("Idle");
         AttackCollider.enabled = false;
         canAttack = true;
