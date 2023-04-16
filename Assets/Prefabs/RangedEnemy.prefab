@@ -121,6 +121,8 @@ MonoBehaviour:
   slowed: 0
   burning: 0
   spriteContainer: {fileID: 8908979588625618419}
+  facingRight: 1
+  SoundController: {fileID: 3683826661274061954, guid: e7ac84214fde43b4c9cabf8127251a7d, type: 3}
   attackRange: 30
   projectile: {fileID: 7466798797180198136, guid: b7f1f4a398493e64f82df7f41573a6b4, type: 3}
   flightTime: 100

@@ -29,7 +29,7 @@ public class EnemyPathfinding : MonoBehaviour
     private Path _currentPath = null;
     public Path _newPath = null;
     private GameObject home;
-
+    public GameObject SoundController;
     public virtual void Damaged(int amount)
     {
         health -= amount;
@@ -38,6 +38,7 @@ public class EnemyPathfinding : MonoBehaviour
 
     public virtual void Defeated()
     {
+        SoundController.GetComponent<S_SoundController>().HurtMonster();
         Destroy(this.gameObject);
     }
 

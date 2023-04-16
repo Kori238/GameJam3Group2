@@ -230,6 +230,8 @@ MonoBehaviour:
   slowed: 0
   burning: 0
   spriteContainer: {fileID: 4810880988336245914}
+  facingRight: 1
+  SoundController: {fileID: 3683826661274061954, guid: e7ac84214fde43b4c9cabf8127251a7d, type: 3}
 --- !u!114 &6432438790963624118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,7 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 677edb46ed129b240a9daf2dde337d6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SoundControllerScript: {fileID: 0}
+  SoundControllerScript: {fileID: 3683826661274061954, guid: e7ac84214fde43b4c9cabf8127251a7d, type: 3}
   PlayerScript: {fileID: 5048883363140918959, guid: 0e1588dcc6c7b5d47bb5c54ff9f42f92, type: 3}
   health: 10
 --- !u!58 &6227942256147178774
