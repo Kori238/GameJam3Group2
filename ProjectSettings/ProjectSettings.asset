@@ -14,7 +14,7 @@ PlayerSettings:
   accelerometerFrequency: 60
   companyName: DefaultCompany
   productName: Game Jam 3 Group 2
-  defaultCursor: {fileID: 2800000, guid: 70879254317798d44b61af89edcda104, type: 3}
+  defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.3586153, g: 0.13363297, b: 0.8584906, a: 1}
   m_ShowUnitySplashScreen: 1
