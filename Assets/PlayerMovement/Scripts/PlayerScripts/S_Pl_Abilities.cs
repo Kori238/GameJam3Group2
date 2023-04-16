@@ -2,15 +2,19 @@ using System.Collections;
 using System.Linq;
 //using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class S_Pl_Abilities : MonoBehaviour
 {
     public GameObject MovementScript;
     public GameObject SoundControllerScript;
     public Collider2D AttackCollider;
+    public Slider swordSwingSlider;
+    public GameObject swordSwingObject;
     [SerializeField] private Collider2D playerCollider, digTrigger;
     [SerializeField] private SpriteRenderer playerVisual, digIcon;
     [SerializeField] private float digSpeedMultiplier = 0.5f;
+
     private Animator animator;
     private bool canAttack = true, canDig = true;
     private GameObject enemy1;
@@ -144,14 +148,26 @@ public class S_Pl_Abilities : MonoBehaviour
 
     private IEnumerator AttackDelay()
     {
+        swordSwingObject.SetActive(true);
+        swordSwingSlider.value = 0;
         canAttack = false;
         AttackCollider.enabled = true;
         animator.Play("Attack");
-        yield return new WaitForSeconds(1.5f);
+        float timer = 1.5f;
+        float i;
+        for (i = 0; i < timer; i += 0.1f)
+        {
+            yield return new WaitForSeconds(0.1f);
+            swordSwingSlider.value = i;
+        }
+        swordSwingSlider.value = timer;
         animator.Play("Idle");
+        yield return new WaitForSeconds(0.2f);
         AttackCollider.enabled = false;
         canAttack = true;
+        swordSwingObject.SetActive(false);
     }
+
 
     public void DashZoom()
     {
