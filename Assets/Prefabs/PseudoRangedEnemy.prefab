@@ -51,6 +51,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4810880988336245914, guid: 26d1fc5550eacd54dad570685b672da6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5725366791326877040, guid: 26d1fc5550eacd54dad570685b672da6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 5725366791326877040, guid: 26d1fc5550eacd54dad570685b672da6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 7072006865073987118, guid: 26d1fc5550eacd54dad570685b672da6, type: 3}
       propertyPath: m_Name
       value: PseudoRangedEnemy
@@ -108,5 +120,11 @@ MonoBehaviour:
   flying: 0
   slowed: 0
   burning: 0
+  spriteContainer: {fileID: 7166051237706735952}
   projectile: {fileID: 7466798797180198136, guid: b7f1f4a398493e64f82df7f41573a6b4, type: 3}
   flightTime: 100
+--- !u!4 &7166051237706735952 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4810880988336245914, guid: 26d1fc5550eacd54dad570685b672da6, type: 3}
+  m_PrefabInstance: {fileID: 2427795784590454218}
+  m_PrefabAsset: {fileID: 0}

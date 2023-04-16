@@ -24,6 +24,8 @@ public class EnemyPathfinding : MonoBehaviour
     [SerializeField] public bool flying = false;
     [SerializeField] bool slowed = false;
     [SerializeField] bool burning = false;
+    [SerializeField] private Transform spriteContainer;
+    [SerializeField] bool facingRight = true;
     private Path _currentPath = null;
     public Path _newPath = null;
     private GameObject home;
@@ -116,6 +118,16 @@ public class EnemyPathfinding : MonoBehaviour
             var position = transform.position;
             var moveDir = (targetPosition - position).normalized;
             position += speed * Time.deltaTime * moveDir;
+            if (moveDir.x < 0 && facingRight)
+            {
+                spriteContainer.localScale = new Vector3(-1, 1, 1);
+                facingRight = false;
+            }
+            else if (moveDir.x > 0 && !facingRight)
+            {
+                spriteContainer.localScale = new Vector3(1, 1, 1);
+                facingRight = true;
+            }
             transform.position = position;
         }
         else

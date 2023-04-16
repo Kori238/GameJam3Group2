@@ -48,6 +48,38 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.0001
+--- !u!1 &5562648930520008430
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4810880988336245914}
+  m_Layer: 8
+  m_Name: SpriteContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4810880988336245914
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5562648930520008430}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.46, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5725366791326877040}
+  m_Father: {fileID: 1565054349856889920}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6171078113355210412
 GameObject:
   m_ObjectHideFlags: 0
@@ -72,14 +104,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6171078113355210412}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: 0.019756112, w: 0.99980485}
+  m_LocalPosition: {x: 0.22, y: 0, z: 0}
   m_LocalScale: {x: 0.39, y: 0.39, z: 0.077999994}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 1565054349856889920}
+  m_Father: {fileID: 4810880988336245914}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 2.264}
 --- !u!212 &7509946285645565263
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -159,11 +191,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7072006865073987118}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 60.44919, y: 46.228363, z: -1}
+  m_LocalPosition: {x: 60.44919, y: 47.14, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5725366791326877040}
+  - {fileID: 4810880988336245914}
   - {fileID: 2326355868957124359}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -197,6 +229,7 @@ MonoBehaviour:
   flying: 0
   slowed: 0
   burning: 0
+  spriteContainer: {fileID: 4810880988336245914}
 --- !u!114 &6432438790963624118
 MonoBehaviour:
   m_ObjectHideFlags: 0
