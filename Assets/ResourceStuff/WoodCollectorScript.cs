@@ -97,7 +97,13 @@ public class WoodCollectorScript : Interactable
 
     public void repair()
     {
-        print("repairing");
+        if(Init.Instance.resourceManager.GetWood()== 25)
+        {
+            Debug.Log("repairing");
+            SetHealth(0f, true);
+        }
+        else { Debug.Log("Not enough resources to repair"); }
+       
     }
     public bool upgrade()
     {
