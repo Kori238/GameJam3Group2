@@ -55,6 +55,7 @@ MonoBehaviour:
   atResource: 0
   atHouse: 1
   goToResource: 0
+  woodPU: {fileID: 7001411070169600475, guid: 2f2ca000bb1158748918cd56eb8a7079, type: 3}
 --- !u!1 &4481540310144710694
 GameObject:
   m_ObjectHideFlags: 0

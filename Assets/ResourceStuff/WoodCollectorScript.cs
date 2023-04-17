@@ -26,8 +26,11 @@ public class WoodCollectorScript : Interactable
     [SerializeField] private List<Transform> MinionList;
     [SerializeField] private List<GameObject> LocalTrees;
     [SerializeField] private Collider2D collectZone;
-     [SerializeField] private List<Collider2D> overlapingObjects;
+    [SerializeField] private List<Collider2D> overlapingObjects;
     [SerializeField] ContactFilter2D treeFilter;
+
+
+    private string resourceType = "wood";
     
     public override void Start()
     {
@@ -46,7 +49,7 @@ public class WoodCollectorScript : Interactable
             }
         }
         overlapingObjects.Clear();
-       //overlapingObjects.Clear();
+      
         base.Start();
     }
 
@@ -177,5 +180,16 @@ public class WoodCollectorScript : Interactable
             return temp.GetComponent<TreeInteract>();
         }
         return null;
+    }
+
+    public string getResourceType()
+    {
+        return "wood";
+    }
+
+
+    public override void CreateAttackPoints()
+    {
+        return;
     }
 }

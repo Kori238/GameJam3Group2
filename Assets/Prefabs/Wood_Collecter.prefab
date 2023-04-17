@@ -191,7 +191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 25
   maxHealth: 25
-  damageable: 1
+  damageable: 0
   destroyed: 0
   priority: 15
   canMinionsWalkThrough: 0

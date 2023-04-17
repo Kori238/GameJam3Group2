@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -17,7 +18,9 @@ public class MinionScript : MonoBehaviour
     [SerializeField] private bool atJob = false;
     [SerializeField] private bool atResource = false;
     [SerializeField] private bool atHouse = true;
-    [SerializeField] private bool goToResource = false; // change in inspector
+    [SerializeField] private bool goToResource = false;
+    private string ResourceType;
+    [SerializeField] private GameObject woodPU;
     
     private Path _currentPath = null;
     private TimeController time;
@@ -35,7 +38,7 @@ public class MinionScript : MonoBehaviour
         }
 
 
-        if ((!time.isNight && atHouse)|| atResource && !goToResource)
+        if ((!time.isNight && atHouse)|| atResource && !goToResource) // moves to resource collector 
         {
             if (jobLocation != null)
             {
@@ -47,7 +50,7 @@ public class MinionScript : MonoBehaviour
                 StartCoroutine(WaitAt());
             }
         }
-        if(!time.isNight && atJob && goToResource)
+        if(!time.isNight && atJob && goToResource) // move to local resource
         {
             ResetPath();
             Structure temp = jobLocation.GetComponent<WoodCollectorScript>().GetLocalTree();
@@ -62,7 +65,7 @@ public class MinionScript : MonoBehaviour
             else { goToResource = false; }
 
         }
-        if (time.isNight && !atHouse)
+        if (time.isNight && !atHouse) // move to house at night
         {
             if (house != null)
             {
@@ -76,7 +79,7 @@ public class MinionScript : MonoBehaviour
         if (_currentPath != null) TraversePath();
     }
 
-    private IEnumerator WaitAt()
+    private IEnumerator WaitAt()// time before moving again between collector and resource
     {
         while (moving)
         {
@@ -84,6 +87,23 @@ public class MinionScript : MonoBehaviour
         }
         yield return new WaitForSeconds(waitTime);
         goToResource = !goToResource;
+        if(atResource)
+        {
+            Debug.Log("add resource");
+            if(ResourceType == "wood")
+            {               
+                Init.Instance.resourceManager.AddWood(50);
+                Vector3 location = transform.position;
+                GameObject PopUpInstance =Instantiate(woodPU,location, quaternion.identity);
+                resourcePopUp instanceScript = PopUpInstance.GetComponent<resourcePopUp>();
+                instanceScript.setImage("wood");
+                instanceScript.setText("+50");
+               
+            }
+            else {Init.Instance.resourceManager.AddStone(50);Debug.Log("stone"); }
+           
+        }
+        else { Debug.Log("fail"); }
     }
 
 
@@ -144,7 +164,12 @@ public class MinionScript : MonoBehaviour
     public bool setJobLocation(Structure newJobLocation)
     {
         jobLocation = newJobLocation;
-        
+        if(jobLocation.GetComponent<WoodCollectorScript>() is WoodCollectorScript) 
+        { ResourceType = jobLocation.GetComponent<WoodCollectorScript>().getResourceType(); }
+        else 
+        {
+            //stonecollector
+        }
         return true;
     }
 
