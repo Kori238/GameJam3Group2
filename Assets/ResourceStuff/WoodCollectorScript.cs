@@ -30,6 +30,8 @@ public class WoodCollectorScript : Interactable
     [SerializeField] ContactFilter2D treeFilter;
 
 
+    private int repairCost=25;
+
     private string resourceType = "wood";
     
     public override void Start()
@@ -97,7 +99,7 @@ public class WoodCollectorScript : Interactable
 
     public void repair()
     {
-        if(Init.Instance.resourceManager.GetWood()== 25)
+        if(Init.Instance.resourceManager.GetWood()== repairCost)
         {
             Debug.Log("repairing");
             SetHealth(0f, true);
@@ -197,5 +199,9 @@ public class WoodCollectorScript : Interactable
     public override void CreateAttackPoints()
     {
         return;
+    }
+    public int getRepairCost()
+    {
+        return repairCost;
     }
 }

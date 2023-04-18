@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,10 @@ public class pMenu : MonoBehaviour
     private GameObject ParentStruture;
     private float currentSliderValue;
     int minionsAssigned;
+    WoodCollectorScript ParentStructureScript;
+
+    [SerializeField] TextMeshProUGUI repairText;
+
     private void Start()
     {
         // AMinionSlider = GameObject.Find("MinionSlider").GetComponent<Slider>();
@@ -19,42 +24,54 @@ public class pMenu : MonoBehaviour
     private void Update()
     {
     }
+    private void setMenucosts()
+    {
+       
+      repairText.SetText(ParentStructureScript.getRepairCost().ToString());
+    }
 
     public void SetParentStructure(GameObject thisParentStruture)
     {
         ParentStruture = thisParentStruture;
+        ParentStructureScript= ParentStruture.GetComponent<WoodCollectorScript>();
+        setMenucosts();
     }
 
     public void setSlider()
     {
-         minionsAssigned = ParentStruture.GetComponent<WoodCollectorScript>().GetMinionAssigned();
+         minionsAssigned = ParentStructureScript.GetMinionAssigned();
         
         AMinionSlider.SetValueWithoutNotify(minionsAssigned);
     }
 
     public void onUpgradeButtonClick()
     {
-        ParentStruture.GetComponent<WoodCollectorScript>().upgrade();
+        ParentStructureScript.upgrade();
     }
     public void onRepairButtonClick()
     {
-        ParentStruture.GetComponent<WoodCollectorScript>().repair();
+        ParentStructureScript.repair();
     }
     public float GetMinionSlider()
     {
         return AMinion;
     }
+    public void onCloseButton()
+    {
+        Destroy(gameObject);
+    }
+    
 
     public void ValueChanged()
     {
 
         if (AMinionSlider.value>minionsAssigned)
         {
-            if (ParentStruture.GetComponent<WoodCollectorScript>().SetMinionAssigned()) { minionsAssigned = (int)AMinionSlider.value; }
+            if (ParentStructureScript.SetMinionAssigned()) { minionsAssigned = (int)AMinionSlider.value; }
             else { setSlider(); }
            
         }
-        else if ( ParentStruture.GetComponent<WoodCollectorScript>().SetMinionUnAssigned()){ minionsAssigned = (int)AMinionSlider.value; }
+        else if (ParentStructureScript.SetMinionUnAssigned()){ minionsAssigned = (int)AMinionSlider.value; }
         else { setSlider(); }
         
        
