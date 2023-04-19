@@ -8,6 +8,8 @@ public class PlayerInteractionScript : MonoBehaviour
     [SerializeField] private Transform Wall;
     [SerializeField] private Transform minionHouse;
 
+    [SerializeField] private GameObject BuildingNotificationPrefab;
+
     public TMP_Text WoodUI;
     [SerializeField] private Vector2[] pathfindingTestNodes = new Vector2[2];
     private readonly Vector2 boxSize = new Vector2(0.1f, 0.1f); // size of raycast
@@ -193,7 +195,7 @@ public class PlayerInteractionScript : MonoBehaviour
         Vector2 MousePos = Input.mousePosition;
         Vector2 MouseWorldPos = Camera.main.ScreenToWorldPoint(MousePos);
         Vector2 gridPos;
-        if (Init.Instance.resourceManager.GetWood() >= 0)
+        if (Init.Instance.resourceManager.GetWood() >= 50)
         {
             gridPos = Init.Instance.grid.GetWorldCellPosition(MouseWorldPos.x, MouseWorldPos.y);
             var valid = Init.Instance.grid.BuildAtCell((int)gridPos.x, (int)gridPos.y, WoodCollector);
@@ -201,8 +203,11 @@ public class PlayerInteractionScript : MonoBehaviour
             if (valid)
             {
                 //Init.Instance.resourceManager.AddWood(-50);
+
             }
+            else { GameObject temp = Instantiate(BuildingNotificationPrefab, transform.position, Quaternion.identity); temp.GetComponent<resourcePopUp>().setText("INVALID LOCATION"); }
         }
+        else { GameObject temp =Instantiate(BuildingNotificationPrefab, transform.position, Quaternion.identity); temp.GetComponent<resourcePopUp>().setText("NOT ENOUGH RESOURCES"); }
     }
 
     private void PlaceWall()
@@ -210,8 +215,16 @@ public class PlayerInteractionScript : MonoBehaviour
         Vector2 MousePos = Input.mousePosition;
         Vector2 MouseWorldPos = Camera.main.ScreenToWorldPoint(MousePos);
         Vector2 gridPos;
-        gridPos = Init.Instance.grid.GetWorldCellPosition(MouseWorldPos.x, MouseWorldPos.y);
-        var valid = Init.Instance.grid.BuildAtCell((int)gridPos.x, (int)gridPos.y, Wall);
+        if (Init.Instance.resourceManager.GetWood () >= 0)
+        {
+            gridPos = Init.Instance.grid.GetWorldCellPosition(MouseWorldPos.x, MouseWorldPos.y);
+            var valid = Init.Instance.grid.BuildAtCell((int)gridPos.x, (int)gridPos.y, Wall);
+            if (valid) { }
+            else { GameObject temp = Instantiate(BuildingNotificationPrefab, transform.position, Quaternion.identity); temp.GetComponent<resourcePopUp>().setText("INVALID LOCATION"); }
+        }
+        else { GameObject temp = Instantiate(BuildingNotificationPrefab, transform.position, Quaternion.identity); temp.GetComponent<resourcePopUp>().setText("NOT ENOUGH RESOURCES"); }
+          
+           
     }
 
 
@@ -229,7 +242,9 @@ public class PlayerInteractionScript : MonoBehaviour
             {
                 Init.Instance.resourceManager.AddStone(-50);
             }
+            else { GameObject temp = Instantiate(BuildingNotificationPrefab, transform.position, Quaternion.identity); temp.GetComponent<resourcePopUp>().setText("INVALID LOCATION"); }
         }
+        else { GameObject temp = Instantiate(BuildingNotificationPrefab, transform.position, Quaternion.identity); temp.GetComponent<resourcePopUp>().setText("NOT ENOUGH RESOURCES"); }
     }
     private void placeMinionHouse()
     {
@@ -247,7 +262,13 @@ public class PlayerInteractionScript : MonoBehaviour
             {
               //  Init.Instance.resourceManager.AddStone(0);
             }
+            else
+            {
+                GameObject temp = Instantiate(BuildingNotificationPrefab, transform.position, Quaternion.identity);
+                temp.GetComponent<resourcePopUp>().setText("INVALID LOCATION");
+            }
         }
+        else { GameObject temp = Instantiate(BuildingNotificationPrefab, transform.position, Quaternion.identity); temp.GetComponent<resourcePopUp>().setText("NOT ENOUGH RESOURCES"); }
 
     }
 }
