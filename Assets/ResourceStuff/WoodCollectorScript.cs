@@ -5,34 +5,34 @@ using UnityEngine;
 
 public class WoodCollectorScript : Interactable
 {
-    [SerializeField] private GameObject PopMenu;
+    public GameObject PopMenu;
 
 
 
-    private readonly int CollectionAmount = 50;
+    public readonly int CollectionAmount = 50;
 
 
-    private readonly int CurrentBuildingLevel = 0; // building level 1
-    private readonly int MaxWoodCoolDown = 500;
+    public readonly int CurrentBuildingLevel = 0; // building level 1
+    public readonly int MaxWoodCoolDown = 500;
 
-    private int CurrentWoodCoolDown;
+    public int CurrentWoodCoolDown;
 
-    private GameObject InstanceMenu;
+    public GameObject InstanceMenu;
 
-    [SerializeField] private int MAssigned; // the ammount of minions assigned to the buiding 
-    private int MaxMAssigned = 5;
-    private pMenu pmenu;
-    private bool toOpen = true;
-    [SerializeField] private List<Transform> MinionList;
-    [SerializeField] private List<GameObject> LocalTrees;
-    [SerializeField] private Collider2D collectZone;
-    [SerializeField] private List<Collider2D> overlapingObjects;
-    [SerializeField] ContactFilter2D treeFilter;
+    public int MAssigned; // the ammount of minions assigned to the buiding 
+    public int MaxMAssigned = 5;
+    public pMenu pmenu;
+    public bool toOpen = true;
+    public List<Transform> MinionList;
+    public List<GameObject> LocalTrees;
+    public Collider2D collectZone;
+     public List<Collider2D> overlapingObjects;
+     public ContactFilter2D treeFilter;
 
 
-    private int repairCost=25;
+    public int repairCost=25;
 
-    private string resourceType = "wood";
+    public string resourceType = "wood";
     
     public override void Start()
     {
@@ -43,10 +43,20 @@ public class WoodCollectorScript : Interactable
         {
             for (int i = 0; i < overlapingObjects.Count; i++)
             {
-                if (overlapingObjects[i].GetComponent<TreeInteract>() is TreeInteract)
-                {
-                    LocalTrees.Add(overlapingObjects[i].gameObject);
+               if(resourceType == "wood") {
+                    if (overlapingObjects[i].GetComponent<TreeInteract>() is TreeInteract)
+                    {
+                        LocalTrees.Add(overlapingObjects[i].gameObject);
+                    }
                 }
+                else
+                {
+                    if (overlapingObjects[i].GetComponent<StoneInteract>() is StoneInteract)
+                    {
+                        LocalTrees.Add(overlapingObjects[i].gameObject);
+                    }
+               }
+               
 
             }
         }

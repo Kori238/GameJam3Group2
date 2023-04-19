@@ -240,7 +240,7 @@ public class PlayerInteractionScript : MonoBehaviour
 
             if (valid)
             {
-                Init.Instance.resourceManager.AddStone(-50);
+                Init.Instance.resourceManager.AddStone(0);
             }
             else { GameObject temp = Instantiate(BuildingNotificationPrefab, transform.position, Quaternion.identity); temp.GetComponent<resourcePopUp>().setText("INVALID LOCATION"); }
         }

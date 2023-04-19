@@ -55,5 +55,65 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stone_Collector
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1958050249773056793, guid: 57d434b4f96570647a997dbebc4b6c4f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 57d434b4f96570647a997dbebc4b6c4f, type: 3}
+--- !u!61 &2088788878813914183 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 2680919870504414373, guid: 57d434b4f96570647a997dbebc4b6c4f, type: 3}
+  m_PrefabInstance: {fileID: 4163670214829852898}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4800092605898958834 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8887025705051287312, guid: 57d434b4f96570647a997dbebc4b6c4f, type: 3}
+  m_PrefabInstance: {fileID: 4163670214829852898}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &414242218146092201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4800092605898958834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f275f78bb18bd7b4eab445bd28534333, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 25
+  maxHealth: 25
+  damageable: 0
+  destroyed: 0
+  priority: 0
+  canMinionsWalkThrough: 0
+  gridPos: {x: 0, y: 0}
+  isSpaceOccupied: 0
+  hasCentralAttackPoint: 0
+  occupiedSpaceCount: 0
+  PopMenu: {fileID: 4407538026853727937, guid: bc43c59aa8da8da4ba5b4608fe9be5fe, type: 3}
+  CurrentWoodCoolDown: 0
+  InstanceMenu: {fileID: 0}
+  MAssigned: 0
+  MaxMAssigned: 5
+  pmenu: {fileID: 0}
+  toOpen: 1
+  MinionList: []
+  LocalTrees: []
+  collectZone: {fileID: 2088788878813914183}
+  overlapingObjects: []
+  treeFilter:
+    useTriggers: 0
+    useLayerMask: 0
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 0
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+  repairCost: 25
+  resourceType: wood

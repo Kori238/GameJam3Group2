@@ -5934,6 +5934,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tree: {fileID: 5651157523147767825, guid: 812bfb0d047397843b08d90113ec6120, type: 3}
+  stone: {fileID: 5284620651877625013, guid: 63edd78857e54ff43be0ecf498bbf5c1, type: 3}
   wall: {fileID: 8329114379578713061, guid: f2b7826ec2bf66b46b59db64896a0aa6, type: 3}
   home: {fileID: 1190157915604179541, guid: 5ab87a5bab402324ea1cab28bc10f12e, type: 3}
   tower: {fileID: 6072493544227891598, guid: 3668718f5d95b754092696977e074ae6, type: 3}

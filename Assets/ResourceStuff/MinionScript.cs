@@ -100,7 +100,15 @@ public class MinionScript : MonoBehaviour
                 instanceScript.setText("+50");
                
             }
-            else {Init.Instance.resourceManager.AddStone(50);Debug.Log("stone"); }
+            else
+            {
+                Init.Instance.resourceManager.AddStone(50);Debug.Log("stone");
+                Vector3 location = transform.position;
+                GameObject PopUpInstance = Instantiate(woodPU, location, quaternion.identity);
+                resourcePopUp instanceScript = PopUpInstance.GetComponent<resourcePopUp>();
+                instanceScript.setImage("stone");
+                instanceScript.setText("+50");
+            }
            
         }
         else { Debug.Log("fail"); }
