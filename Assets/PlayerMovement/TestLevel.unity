@@ -10756,6 +10756,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 224264284}
     - target: {fileID: 872910437640417549, guid: 0e1588dcc6c7b5d47bb5c54ff9f42f92, type: 3}
+      propertyPath: StoneCollector
+      value: 
+      objectReference: {fileID: 1560534135251209070, guid: f70aba8806a08354da0f05dbe6f856b8, type: 3}
+    - target: {fileID: 872910437640417549, guid: 0e1588dcc6c7b5d47bb5c54ff9f42f92, type: 3}
       propertyPath: BuildingNotificationPrefab
       value: 
       objectReference: {fileID: 6641150058937854118, guid: e4ac53ae1aa7a3b41a0c675bba08d3e9, type: 3}

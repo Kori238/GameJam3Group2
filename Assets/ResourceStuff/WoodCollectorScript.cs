@@ -181,7 +181,7 @@ public class WoodCollectorScript : Interactable
         //for(int i = 0;i< MinionList.Count;i++) { MinionList[i].GetComponent<MinionScript>().setJobLocation(null); }
         //MinionList.Clear();
     }
-   public Structure GetLocalTree()
+   public virtual Structure GetLocalTree()
     {
         if (LocalTrees.Count > 0) {
             GameObject temp = LocalTrees[(int)Random.Range(0, LocalTrees.Count - 1)];
@@ -190,7 +190,7 @@ public class WoodCollectorScript : Interactable
         return null;
     }
 
-    public string getResourceType()
+    public virtual string getResourceType()
     {
         return "wood";
     }
