@@ -200,7 +200,13 @@ MonoBehaviour:
   hasCentralAttackPoint: 0
   occupiedSpaceCount: 0
   PopMenu: {fileID: 4407538026853727937, guid: bc43c59aa8da8da4ba5b4608fe9be5fe, type: 3}
+  BuildingNotificationPrefab: {fileID: 6641150058937854118, guid: e4ac53ae1aa7a3b41a0c675bba08d3e9, type: 3}
+  CurrentWoodCoolDown: 0
+  InstanceMenu: {fileID: 0}
   MAssigned: 0
+  MaxMAssigned: 5
+  pmenu: {fileID: 0}
+  toOpen: 1
   MinionList: []
   LocalTrees: []
   collectZone: {fileID: 2680919870504414373}
@@ -219,6 +225,8 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
+  repairCost: 25
+  resourceType: wood
 --- !u!61 &1404798869854176143
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -172,12 +172,11 @@ public class MinionScript : MonoBehaviour
     public bool setJobLocation(Structure newJobLocation)
     {
         jobLocation = newJobLocation;
-        if(jobLocation.GetComponent<WoodCollectorScript>() is WoodCollectorScript) 
-        { ResourceType = jobLocation.GetComponent<WoodCollectorScript>().getResourceType(); }
-        else 
-        {
-            //stonecollector
+        if(jobLocation != null) {
+            if (jobLocation.GetComponent<WoodCollectorScript>() is WoodCollectorScript)
+            { ResourceType = jobLocation.GetComponent<WoodCollectorScript>().getResourceType(); }
         }
+       
         return true;
     }
 

@@ -33,7 +33,7 @@ public class resourcePopUp : MonoBehaviour
     }
     private IEnumerator wait()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         Destroy(gameObject);
     }
 

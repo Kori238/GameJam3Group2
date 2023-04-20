@@ -7,7 +7,7 @@ public class WoodCollectorScript : Interactable
 {
     public GameObject PopMenu;
 
-
+    public GameObject BuildingNotificationPrefab;
 
     public readonly int CollectionAmount = 50;
 
@@ -60,8 +60,10 @@ public class WoodCollectorScript : Interactable
 
             }
         }
+
         overlapingObjects.Clear();
-      
+        if(LocalTrees.Count == 0) { GameObject temp = Instantiate(BuildingNotificationPrefab, transform.position, Quaternion.identity); temp.GetComponent<resourcePopUp>().setText("INVALID LOCATION, NO RESOURCES NEAR BY"); Demolished(); }
+        
         base.Start();
     }
 

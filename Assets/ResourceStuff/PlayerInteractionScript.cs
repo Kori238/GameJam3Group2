@@ -195,13 +195,14 @@ public class PlayerInteractionScript : MonoBehaviour
         Vector2 MousePos = Input.mousePosition;
         Vector2 MouseWorldPos = Camera.main.ScreenToWorldPoint(MousePos);
         Vector2 gridPos;
-        if (Init.Instance.resourceManager.GetWood() >= 50)
+        if (Init.Instance.resourceManager.GetWood() >= 0)
         {
             gridPos = Init.Instance.grid.GetWorldCellPosition(MouseWorldPos.x, MouseWorldPos.y);
             var valid = Init.Instance.grid.BuildAtCell((int)gridPos.x, (int)gridPos.y, WoodCollector);
 
             if (valid)
             {
+                
                 //Init.Instance.resourceManager.AddWood(-50);
 
             }
