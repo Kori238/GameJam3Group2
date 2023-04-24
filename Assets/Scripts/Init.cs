@@ -95,7 +95,9 @@ public class Init : MonoBehaviour
         grid.BuildAtCell(24, 23, tower);
         grid.BuildAtCell(25, 24, tower);
 
-        grid.BuildAtCell(0, 0, tree);
+
+
+        grid.BuildAtCell(20, 30, tree);
 
 
         yield return null;

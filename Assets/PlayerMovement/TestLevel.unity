@@ -8355,7 +8355,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1760120274
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10085,7 +10085,7 @@ MonoBehaviour:
   day: 0
   clock: {fileID: 1645789609}
   timer: {fileID: 2056456144}
-  timeMultiplyer: 10
+  timeMultiplyer: 5
   maptiles:
   - {fileID: 1451860184}
   - {fileID: 1120545921}
