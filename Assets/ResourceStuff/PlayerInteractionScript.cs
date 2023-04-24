@@ -39,8 +39,8 @@ public class PlayerInteractionScript : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             PlayerInterct();
-            print("wood = " + Init.Instance.resourceManager.GetWood());
-            WoodUI.text = Init.Instance.resourceManager.GetWood().ToString();
+           
+           // WoodUI.text = Init.Instance.resourceManager.GetWood().ToString();
         }
         if (Input.GetKeyDown("2"))
         {

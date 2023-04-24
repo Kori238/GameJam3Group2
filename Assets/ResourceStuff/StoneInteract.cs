@@ -16,12 +16,17 @@ public class StoneInteract : Interactable
     }
     public override void Interact()
     {
-        Init.Instance.resourceManager.AddStone(10);
+        int newstone= Random.Range(10, 30);
+        Init.Instance.resourceManager.AddStone(newstone);
         
         GameObject instance = Instantiate(resourcePU, transform);
         resourcePopUp instanceScript = instance.GetComponent<resourcePopUp>();
         instanceScript.setImage("stone");
-        instanceScript.setText("+10");
+
+        
+        instanceScript.setText("+"+newstone.ToString());
+
+
     }
     public override void CreateAttackPoints()
     {
