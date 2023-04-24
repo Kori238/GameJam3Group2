@@ -1,5 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using Unity.VisualScripting;
+using System.Drawing.Printing;
 
 public class ResourceManager
 {
@@ -9,7 +12,9 @@ public class ResourceManager
     private int unassignedMinions;
     private int wood;
     private List<Transform> availableMinions = new List<Transform>();
-
+    public resourceUIScript resourceUI;
+   
+  
     public int GetStone()
     {
         return stone;
@@ -25,12 +30,16 @@ public class ResourceManager
 
     public void AddStone(int newmetal)
     {
+        
         stone = newmetal + stone;
+        resourceUI.setStone(stone);
     }
 
     public void AddWood(int newwood)
     {
         wood = wood + newwood;
+        resourceUI.setWood(wood);
+        
     }
 
     public void AddStarLight(int newStarLight)

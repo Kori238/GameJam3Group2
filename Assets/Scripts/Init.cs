@@ -25,6 +25,7 @@ public class Init : MonoBehaviour
     public Grid grid;
     public AStar pathfinding;
     public ResourceManager resourceManager;
+    public GameObject resourceUI;
     public static Init Instance { get; private set; }
 
     private void Awake()
@@ -38,6 +39,7 @@ public class Init : MonoBehaviour
         pathfinding = new AStar((int)gridDimensions.x * nodeCount, (int)gridDimensions.y * nodeCount, cellSize / nodeCount);
         grid = new Grid((int)gridDimensions.x, (int)gridDimensions.y, cellSize);
         resourceManager = new ResourceManager();
+        resourceManager.resourceUI = resourceUI.GetComponent<resourceUIScript>();
         grid.BuildAtCell(5, 5, tree);
         grid.BuildAtCell(5, 10, stone);
         grid.BuildAtCell((int)(gridDimensions.x - 1) / 2, (int)(gridDimensions.y - 1) / 2, home);
