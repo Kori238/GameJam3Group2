@@ -5949,6 +5949,7 @@ MonoBehaviour:
   wallDemo: 1
   testPathfinding: 1
   debug: 1
+  resourceUI: {fileID: 2050779407}
 --- !u!4 &1294950277
 Transform:
   m_ObjectHideFlags: 0
@@ -9959,6 +9960,7 @@ GameObject:
   - component: {fileID: 2050779408}
   - component: {fileID: 2050779410}
   - component: {fileID: 2050779409}
+  - component: {fileID: 2050779411}
   m_Layer: 5
   m_Name: ResourcesBG
   m_TagString: Untagged
@@ -10029,6 +10031,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2050779407}
   m_CullTransparentMesh: 1
+--- !u!114 &2050779411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2050779407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 407061c03e7bbb24e90d31178cdf75ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wood: {fileID: 1998856770}
+  stone: {fileID: 2122638655}
 --- !u!1 &2056456141
 GameObject:
   m_ObjectHideFlags: 0
