@@ -8,7 +8,7 @@ public class ResourceManager
 {
     private int maxMinions;
     private int starlight;
-    private int stone = 50;
+    private int stone;
     private int unassignedMinions;
     private int wood;
     private List<Transform> availableMinions = new List<Transform>();
