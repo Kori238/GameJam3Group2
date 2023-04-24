@@ -13,6 +13,7 @@ public class S_Pl_Movement : MonoBehaviour
     private Vector2 Movement;
     public Slider staminaBar;
     private float staminaRegenDelay = 0.2f;
+    [SerializeField] private S_Pl_Abilities abilitiesScript;
 
     private void Update() // Update is called once per frame
     {
@@ -23,7 +24,7 @@ public class S_Pl_Movement : MonoBehaviour
 
 
 
-        if (Input.GetButtonDown("LeftShift"))
+        if (Input.GetButtonDown("LeftShift") && !abilitiesScript.digging)
         {
             if (staminaBar.value >= 50)
             {

@@ -10761,6 +10761,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1560534135251209070, guid: f70aba8806a08354da0f05dbe6f856b8, type: 3}
     - target: {fileID: 872910437640417549, guid: 0e1588dcc6c7b5d47bb5c54ff9f42f92, type: 3}
+      propertyPath: abilitiesScript
+      value: 
+      objectReference: {fileID: 5335656977763315941}
+    - target: {fileID: 872910437640417549, guid: 0e1588dcc6c7b5d47bb5c54ff9f42f92, type: 3}
       propertyPath: BuildingNotificationPrefab
       value: 
       objectReference: {fileID: 6641150058937854118, guid: e4ac53ae1aa7a3b41a0c675bba08d3e9, type: 3}
@@ -10841,6 +10845,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 879754289}
     - target: {fileID: 5048883363140918947, guid: 0e1588dcc6c7b5d47bb5c54ff9f42f92, type: 3}
+      propertyPath: abilitiesScript
+      value: 
+      objectReference: {fileID: 5335656977763315941}
+    - target: {fileID: 5048883363140918947, guid: 0e1588dcc6c7b5d47bb5c54ff9f42f92, type: 3}
       propertyPath: SoundControllerScript
       value: 
       objectReference: {fileID: 1762246958}
@@ -10908,3 +10916,14 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 5048883363140918945, guid: 0e1588dcc6c7b5d47bb5c54ff9f42f92, type: 3}
   m_PrefabInstance: {fileID: 872910439020654198}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5335656977763315941 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 872910437640417545, guid: 0e1588dcc6c7b5d47bb5c54ff9f42f92, type: 3}
+  m_PrefabInstance: {fileID: 872910439020654198}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5335656977763315929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be68a9a56d9e74c429f5643a5ed01299, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

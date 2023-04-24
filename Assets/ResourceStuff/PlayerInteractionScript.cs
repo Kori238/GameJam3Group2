@@ -19,6 +19,7 @@ public class PlayerInteractionScript : MonoBehaviour
 
     private readonly int range = 500;
     private string currentTool = "Interact";
+    [SerializeField] private S_Pl_Abilities abilitiesScript;
 
     [SerializeField] private ResourceManager resourceManager; // referance to the resource manager in game scene
     //options:
@@ -79,6 +80,7 @@ public class PlayerInteractionScript : MonoBehaviour
     }
     private void PlayerInterct() //allows mutilple function to be called from mouse button 2
     {
+        if (abilitiesScript.digging) return;
         switch (currentTool)
         {
             case "Interact":
