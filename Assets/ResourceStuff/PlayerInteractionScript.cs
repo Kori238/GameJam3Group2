@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -27,6 +28,8 @@ public class PlayerInteractionScript : MonoBehaviour
     //WoodCollector
     //StoneCollector
 
+    public Animator animator;
+
 
     private void Start()
     {
@@ -42,7 +45,13 @@ public class PlayerInteractionScript : MonoBehaviour
            
            // WoodUI.text = Init.Instance.resourceManager.GetWood().ToString();
         }
-        if (Input.GetKeyDown("2"))
+        if (Input.GetKeyDown("1"))
+        {
+            currentTool = "Axe";
+
+            select.transform.position = H1.transform.position;
+        }
+            if (Input.GetKeyDown("2"))
         {
             currentTool = "Interact";
             print("interact Tool Equiped");
@@ -83,6 +92,11 @@ public class PlayerInteractionScript : MonoBehaviour
         if (abilitiesScript.digging) return;
         switch (currentTool)
         {
+            case "Axe":
+                {
+                    Axe();
+                    break;
+                }
             case "Interact":
                 {
                     CheckInteraction();
@@ -116,6 +130,12 @@ public class PlayerInteractionScript : MonoBehaviour
         }
     }
 
+    private void Axe()
+    {
+        animator.Play("Axe Swing");
+        CheckInteraction();
+        animator.Play("Idle");
+    }
 
 
 

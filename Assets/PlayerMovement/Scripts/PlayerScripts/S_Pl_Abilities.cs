@@ -56,6 +56,9 @@ public class S_Pl_Abilities : MonoBehaviour
         else if (Input.GetButtonDown("Fire1"))
         {
             Ability1();
+        }else if (Input.GetButtonDown("Fire2"))
+        {
+
         }
         else if (Input.GetButtonDown("Ability2"))
         {
@@ -64,13 +67,28 @@ public class S_Pl_Abilities : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.G))
         {
-            animator.Play("Axe Swing");
-            animator.Play("Idle");
+            if (canAttack)
+            {
+                Debug.Log("AxeSwing");
+                SoundControllerScript.GetComponent<S_SoundController>().AttackSound();
+                StartCoroutine(SwingAxe());
+            }
+            else
+            {
+                Debug.Log("Can't Axe");
+            }
         }
         
     }
 
-    public void Dig()
+    private IEnumerator SwingAxe()
+    {
+        animator.Play("Axe Swing");
+        yield return new WaitForSeconds(0.5f);
+        animator.Play("Idle");
+    }
+
+        public void Dig()
     {
         if (!digging && canDig)
         {
@@ -156,6 +174,8 @@ public class S_Pl_Abilities : MonoBehaviour
         canAttack = true;
         swordSwingObject.SetActive(false);
     }
+
+   
 
 
     public void DashZoom()
