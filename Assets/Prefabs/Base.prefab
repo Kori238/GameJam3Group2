@@ -247,11 +247,13 @@ MonoBehaviour:
   damageable: 0
   destroyed: 0
   priority: 10
+  canMinionsWalkThrough: 0
   gridPos: {x: 0, y: 0}
   isSpaceOccupied: 0
   hasCentralAttackPoint: 0
   occupiedSpaceCount: 0
-  bh: {fileID: 0}
+  damageIndicator: {fileID: 3205582515357515026, guid: 5f4dbc4b19dbf5e4483d0af10644508b, type: 3}
+  healthSlider: {fileID: 0}
 --- !u!1001 &8560546020371250838
 PrefabInstance:
   m_ObjectHideFlags: 0

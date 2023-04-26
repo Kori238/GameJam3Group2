@@ -166,6 +166,7 @@ MonoBehaviour:
   isSpaceOccupied: 0
   hasCentralAttackPoint: 0
   occupiedSpaceCount: 0
+  damageIndicator: {fileID: 3205582515357515026, guid: 5f4dbc4b19dbf5e4483d0af10644508b, type: 3}
   attackDamage: 5
   attackRate: 1
   viewRange: 40
@@ -173,3 +174,8 @@ MonoBehaviour:
   target: {fileID: 0}
   projectile: {fileID: 1418432050567799694, guid: 0d1d1ba1dd50c244d9740aee3c3d7286, type: 3}
   flightSpeed: 100
+  occupant: {fileID: 0}
+  firingPoint: {fileID: 0}
+  animator: {fileID: 0}
+  shootClip: {fileID: 0}
+  idleClip: {fileID: 0}

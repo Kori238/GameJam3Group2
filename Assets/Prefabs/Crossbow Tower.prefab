@@ -211,6 +211,10 @@ PrefabInstance:
       propertyPath: firingPoint
       value: 
       objectReference: {fileID: 1798224751567901251}
+    - target: {fileID: 6201257626278293352, guid: 54b05267c83a2874098ca36184d8d891, type: 3}
+      propertyPath: damageIndicator
+      value: 
+      objectReference: {fileID: 3205582515357515026, guid: 5f4dbc4b19dbf5e4483d0af10644508b, type: 3}
     - target: {fileID: 8887025705051287312, guid: 54b05267c83a2874098ca36184d8d891, type: 3}
       propertyPath: m_Name
       value: Crossbow Tower

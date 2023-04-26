@@ -6042,6 +6042,7 @@ MonoBehaviour:
   wallDemo: 1
   testPathfinding: 1
   debug: 1
+  resourceUI: {fileID: 2050779407}
 --- !u!4 &1294950277
 Transform:
   m_ObjectHideFlags: 0
@@ -8479,7 +8480,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1760120274
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10083,6 +10084,7 @@ GameObject:
   - component: {fileID: 2050779408}
   - component: {fileID: 2050779410}
   - component: {fileID: 2050779409}
+  - component: {fileID: 2050779411}
   m_Layer: 5
   m_Name: ResourcesBG
   m_TagString: Untagged
@@ -10153,6 +10155,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2050779407}
   m_CullTransparentMesh: 1
+--- !u!114 &2050779411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2050779407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 407061c03e7bbb24e90d31178cdf75ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wood: {fileID: 1998856770}
+  stone: {fileID: 2122638655}
 --- !u!1 &2056456141
 GameObject:
   m_ObjectHideFlags: 0
@@ -10209,7 +10225,7 @@ MonoBehaviour:
   day: 0
   clock: {fileID: 1645789609}
   timer: {fileID: 2056456144}
-  timeMultiplyer: 10
+  timeMultiplyer: 5
   maptiles:
   - {fileID: 1451860184}
   - {fileID: 1120545921}
@@ -10885,6 +10901,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1560534135251209070, guid: f70aba8806a08354da0f05dbe6f856b8, type: 3}
     - target: {fileID: 872910437640417549, guid: 0e1588dcc6c7b5d47bb5c54ff9f42f92, type: 3}
+      propertyPath: abilitiesScript
+      value: 
+      objectReference: {fileID: 5335656977763315941}
+    - target: {fileID: 872910437640417549, guid: 0e1588dcc6c7b5d47bb5c54ff9f42f92, type: 3}
       propertyPath: BuildingNotificationPrefab
       value: 
       objectReference: {fileID: 6641150058937854118, guid: e4ac53ae1aa7a3b41a0c675bba08d3e9, type: 3}
@@ -10965,6 +10985,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 879754289}
     - target: {fileID: 5048883363140918947, guid: 0e1588dcc6c7b5d47bb5c54ff9f42f92, type: 3}
+      propertyPath: abilitiesScript
+      value: 
+      objectReference: {fileID: 5335656977763315941}
+    - target: {fileID: 5048883363140918947, guid: 0e1588dcc6c7b5d47bb5c54ff9f42f92, type: 3}
       propertyPath: SoundControllerScript
       value: 
       objectReference: {fileID: 1762246958}
@@ -11032,3 +11056,14 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 5048883363140918945, guid: 0e1588dcc6c7b5d47bb5c54ff9f42f92, type: 3}
   m_PrefabInstance: {fileID: 872910439020654198}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5335656977763315941 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 872910437640417545, guid: 0e1588dcc6c7b5d47bb5c54ff9f42f92, type: 3}
+  m_PrefabInstance: {fileID: 872910439020654198}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5335656977763315929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be68a9a56d9e74c429f5643a5ed01299, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

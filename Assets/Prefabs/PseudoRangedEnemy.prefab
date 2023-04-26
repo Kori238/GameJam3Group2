@@ -122,7 +122,9 @@ MonoBehaviour:
   burning: 0
   spriteContainer: {fileID: 7166051237706735952}
   facingRight: 1
+  SoundScript: {fileID: 0}
   SoundController: {fileID: 3683826661274061954, guid: e7ac84214fde43b4c9cabf8127251a7d, type: 3}
+  damageIndicator: {fileID: 7916877636215915304, guid: 4440668432f7ed341ba20f1bd6f6ef0d, type: 3}
   projectile: {fileID: 7466798797180198136, guid: b7f1f4a398493e64f82df7f41573a6b4, type: 3}
   flightTime: 100
 --- !u!4 &7166051237706735952 stripped

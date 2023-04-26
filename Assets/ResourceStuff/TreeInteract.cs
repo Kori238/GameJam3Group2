@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class TreeInteract : Interactable
@@ -15,11 +16,13 @@ public class TreeInteract : Interactable
 
     public override void Interact()
     {
-        Init.Instance.resourceManager.AddWood(20);
+        int newWood = Random.Range(10, 30);
+        Init.Instance.resourceManager.AddWood(newWood);
         GameObject instance =Instantiate(resourcePU,transform);
         resourcePopUp instanceScript = instance.GetComponent<resourcePopUp>();
         instanceScript.setImage("wood");
-        instanceScript.setText("+20");
+        
+        instanceScript.setText("+" + newWood.ToString());
         
     }
     public override void CreateAttackPoints()
