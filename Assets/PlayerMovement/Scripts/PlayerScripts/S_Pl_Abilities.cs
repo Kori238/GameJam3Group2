@@ -18,7 +18,7 @@ public class S_Pl_Abilities : MonoBehaviour
     private Animator animator;
     private bool canAttack = true, canDig = true;
     private GameObject enemy1;
-    private bool flag, digging;
+    public bool flag, digging;
 
     // Start is called before the first frame update
     private void Start()
@@ -29,21 +29,7 @@ public class S_Pl_Abilities : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
-        {
-            Ability1();
-        }
-        else if (Input.GetButtonDown("Ability2"))
-        {
-            animator.Play("Idle");
-            Debug.Log("SideAttack");
-        }
-        else if (Input.GetKeyDown(KeyCode.G))
-        {
-            animator.Play("Axe Swing");
-            animator.Play("Idle");
-        }
-        else if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             Dig();
         }
@@ -63,6 +49,25 @@ public class S_Pl_Abilities : MonoBehaviour
             }
            
         }
+        else if (digging)
+        {
+            
+        }
+        else if (Input.GetButtonDown("Fire1"))
+        {
+            Ability1();
+        }
+        else if (Input.GetButtonDown("Ability2"))
+        {
+            animator.Play("Idle");
+            Debug.Log("SideAttack");
+        }
+        else if (Input.GetKeyDown(KeyCode.G))
+        {
+            animator.Play("Axe Swing");
+            animator.Play("Idle");
+        }
+        
     }
 
     public void Dig()

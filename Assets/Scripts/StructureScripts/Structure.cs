@@ -20,7 +20,7 @@ public class Structure : MonoBehaviour
     public Node centralAttackPoint;
     public List<Node> occupiedSpace = new List<Node>();
     public List<Node> collectionPoints = new List<Node>();
-
+    [SerializeField] private GameObject damageIndicator;
 
     public virtual void Start()
     {
@@ -194,10 +194,14 @@ public class Structure : MonoBehaviour
         if (health - amount < 0)
         {
             health = 0;
+            GameObject damageIndicatorInstance = Instantiate(damageIndicator, transform.position, Quaternion.identity);
+            damageIndicatorInstance.GetComponent<resourcePopUp>().setText("- " + amount);
         }
         else
         {
             health -= amount;
+            GameObject damageIndicatorInstance = Instantiate(damageIndicator, transform.position, Quaternion.identity);
+            damageIndicatorInstance.GetComponent<resourcePopUp>().setText("- " + amount);
         }
 
         if (health <= 0)
@@ -229,6 +233,8 @@ public class Structure : MonoBehaviour
         else if (amount < 0)
         {
             health = amount;
+            GameObject damageIndicatorInstance = Instantiate(damageIndicator, transform.position, Quaternion.identity);
+            damageIndicatorInstance.GetComponent<resourcePopUp>().setText("- " + amount);
         }
         else
         {

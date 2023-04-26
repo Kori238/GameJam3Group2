@@ -31,6 +31,7 @@ public class EnemyPathfinding : MonoBehaviour
     public Path _newPath = null;
     private GameObject home;
     public GameObject SoundController;
+    [SerializeField] private GameObject damageIndicator;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -46,6 +47,8 @@ public class EnemyPathfinding : MonoBehaviour
     public virtual void Damaged(int amount)
     {
         health -= amount;
+        GameObject damageIndicatorInstance = Instantiate(damageIndicator, transform.position, Quaternion.identity);
+        damageIndicatorInstance.GetComponent<resourcePopUp>().setText("- " + amount);
         SoundScript.HurtMonster();
         if (health <= 0) Defeated();
     }

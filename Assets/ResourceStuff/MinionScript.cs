@@ -85,7 +85,7 @@ public class MinionScript : MonoBehaviour
         {
             yield return new WaitForEndOfFrame();
         }
-        yield return new WaitForSeconds(waitTime);
+        yield return new WaitForSeconds(Random.Range(waitTime/2,waitTime));
         goToResource = !goToResource;
         if(atResource)
         {
