@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
-public class Tower : Structure
+public class Tower : Interactable
 {
     public int attackDamage = 5;
     [SerializeField] float attackRate = 1f;
@@ -24,6 +25,12 @@ public class Tower : Structure
     [SerializeField] private AnimationClip shootClip = null;
     [SerializeField] private AnimationClip idleClip = null;
 
+    private GameObject InstanceMenu;
+    [SerializeField] private GameObject PopMenu;
+    private bool toOpen = true;
+    private int woodUpgradeCost=0;
+    private int stoneUpgradeCost=50;
+
     public override void Start()
     {
         home = Init.Instance.grid.GetStructureAtCell((int)(Init.Instance.gridDimensions.x - 1) / 2,
@@ -32,6 +39,38 @@ public class Tower : Structure
         base.Start();
     }
 
+    public override void Interact()
+    {
+        if (toOpen)
+        {
+            InstanceMenu = Instantiate(PopMenu);
+            toOpen = false;
+            InstanceMenu.GetComponent<towerMenuScript>().SetParentStructure(this);
+
+        }
+        else if (!toOpen)
+        {
+            Destroy(InstanceMenu);
+            toOpen = true;
+        }
+
+
+
+    }
+    public void setTargetPriority(int newpriority)
+    {
+        switch(newpriority)
+        {
+            case 0: targetPrioritization=0; break;
+                case 1:targetPrioritization=1; break;
+                case 2:targetPrioritization= 2; break;
+                case 3:targetPrioritization=3; break;
+        }
+    }
+    public int getWoodUpgradecost() { return woodUpgradeCost; }
+    public int getStoneUpgradecost() { return stoneUpgradeCost; }
+    public void upgradeTower() { }
+    public int getTargetPriority() { return targetPrioritization; }
     public virtual void AttackTarget()
     {
         if (destroyed) return;
