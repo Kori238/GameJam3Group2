@@ -23,6 +23,10 @@ PrefabInstance:
       propertyPath: m_fontColor32.rgba
       value: 4290649975
       objectReference: {fileID: 0}
+    - target: {fileID: 1193991060817869881, guid: 4440668432f7ed341ba20f1bd6f6ef0d, type: 3}
+      propertyPath: floatTime
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6841295504666811722, guid: 4440668432f7ed341ba20f1bd6f6ef0d, type: 3}
       propertyPath: m_RootOrder
       value: 0

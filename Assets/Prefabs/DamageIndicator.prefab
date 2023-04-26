@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7177175893891453238, guid: 2f2ca000bb1158748918cd56eb8a7079, type: 3}
+      propertyPath: floatTime
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 60917143549744614, guid: 2f2ca000bb1158748918cd56eb8a7079, type: 3}
       propertyPath: m_Color.a
       value: 0

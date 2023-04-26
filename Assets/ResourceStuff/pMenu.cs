@@ -64,7 +64,8 @@ public class pMenu : MonoBehaviour
 
     public void ValueChanged()
     {
-
+        AMinionSlider.interactable =false;
+        StartCoroutine(disableTime());
         if (AMinionSlider.value>minionsAssigned)
         {
             if (ParentStructureScript.SetMinionAssigned()) { minionsAssigned = (int)AMinionSlider.value; }
@@ -78,6 +79,11 @@ public class pMenu : MonoBehaviour
 
         
     }
-    
-    
+    private IEnumerator disableTime()
+    {
+        yield return new WaitForSeconds(0.5f);
+        AMinionSlider.interactable = true;
+    }
+
+
 }
