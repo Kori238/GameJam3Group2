@@ -56,9 +56,6 @@ public class S_Pl_Abilities : MonoBehaviour
         else if (Input.GetButtonDown("Fire1"))
         {
             Ability1();
-        }else if (Input.GetButtonDown("Fire2"))
-        {
-
         }
         else if (Input.GetButtonDown("Ability2"))
         {
