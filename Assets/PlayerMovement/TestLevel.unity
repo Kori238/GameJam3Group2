@@ -5914,6 +5914,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1294950277}
   - component: {fileID: 1294950276}
+  - component: {fileID: 1294950278}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -5964,6 +5965,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1294950278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294950275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a027411426340a4fb24bc483211f02c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tree: {fileID: 5651157523147767825, guid: 812bfb0d047397843b08d90113ec6120, type: 3}
+  stone: {fileID: 5284620651877625013, guid: 63edd78857e54ff43be0ecf498bbf5c1, type: 3}
 --- !u!1 &1380640549
 GameObject:
   m_ObjectHideFlags: 0
@@ -10118,7 +10133,6 @@ MonoBehaviour:
   - {fileID: 7072006865073987118, guid: 26d1fc5550eacd54dad570685b672da6, type: 3}
   - {fileID: 3632742365309149546, guid: acf8ee30fcc57d1469fef007430e84d9, type: 3}
   - {fileID: 6576508593008396103, guid: f0a95d596d6591f439d9c795ae7b0f02, type: 3}
-  - {fileID: 4869960893891326948, guid: c8a202551097d3e4187a236658f67493, type: 3}
   loc: {x: 85, y: 95, z: -1}
   playerLocation: {fileID: 5335656977763315926}
   isNight: 0
