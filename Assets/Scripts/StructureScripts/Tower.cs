@@ -28,7 +28,7 @@ public class Tower : Interactable
     private GameObject InstanceMenu;
     [SerializeField] private GameObject PopMenu;
     private bool toOpen = true;
-    private int woodUpgradeCost=0;
+    private int woodUpgradeCost=50;
     private int stoneUpgradeCost=50;
 
     public override void Start()

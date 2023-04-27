@@ -3,17 +3,21 @@ using UnityEngine;
 
 public class StoneCollectorScript : WoodCollectorScript
 {
-  
+
    
 
-    
+
+ 
 
 
 
     public override void Start()
     {
         resourceType = "stone";
-       
+        UpgradeDescription = ("Upgrade to level 2 and increase production to " + (CollectionAmount + 25));
+        woodUpgradeCost = 50;
+        stoneUpgradeCost = 100;
+        CollectionAmount = 25;
 
         base.Start();
     }
@@ -21,18 +25,7 @@ public class StoneCollectorScript : WoodCollectorScript
     // Update is called once per frame
     private void Update()
     {
-        if (CurrentWoodCoolDown >= MaxWoodCoolDown)
-        {
-            Init.Instance.resourceManager.AddStone(50);
-
-
-            print("Stone Collector added 50 stone");
-            CurrentWoodCoolDown = 0;
-        }
-        if (health <= 0)
-        {
-            Destroy(gameObject);
-        }
+      
     }
     private void FixedUpdate()
     {
@@ -66,6 +59,53 @@ public class StoneCollectorScript : WoodCollectorScript
             return temp.GetComponent<StoneInteract>();
         }
         return null;
+    }
+    public override bool upgrade()
+    {
+        if (woodUpgradeCost <= Init.Instance.resourceManager.GetWood() && stoneUpgradeCost <= Init.Instance.resourceManager.GetStone())
+        {
+            Init.Instance.resourceManager.AddWood(-woodUpgradeCost);
+            Init.Instance.resourceManager.AddStone(-stoneUpgradeCost);
+            switch (CurrentBuildingLevel)
+            {
+                case 0: // upgades to level 2
+                    {
+                        CollectionAmount = 50;
+                        CurrentBuildingLevel = 1;
+                        UpgradeDescription = "Upgrade to level 3 and increase production to " + (CollectionAmount + 25);
+                        woodUpgradeCost = 100;
+                        stoneUpgradeCost = 200;
+                        foreach (MinionScript minion in MinionList) { minion.setCollectionAmount(CollectionAmount); }
+
+                        break;
+                    }
+                case 1: // upgades to level 3
+                    {
+                        CollectionAmount = 75;
+                        CurrentBuildingLevel = 2;
+                        UpgradeDescription = ("Upgrade to level 4 and increase production to " + (CollectionAmount + 25));
+                        woodUpgradeCost = 200;
+                        stoneUpgradeCost = 400;
+                        foreach (MinionScript minion in MinionList) { minion.setCollectionAmount(CollectionAmount); }
+
+                        break;
+                    }
+                case 2: // upgades to level 4
+                    {
+                        CollectionAmount = 100;
+                        CurrentBuildingLevel = 3;
+                        UpgradeDescription = "Max Level";
+                        woodUpgradeCost = 0;
+                        stoneUpgradeCost = 0;
+                        foreach (MinionScript minion in MinionList) { minion.setCollectionAmount(CollectionAmount); }
+
+                        break;
+                    }
+            }
+
+            return true;
+        }
+        return false;
     }
 }
 

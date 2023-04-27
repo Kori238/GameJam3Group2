@@ -19,6 +19,7 @@ public class MinionScript : MonoBehaviour
     [SerializeField] private bool atResource = false;
     [SerializeField] private bool atHouse = true;
     [SerializeField] private bool goToResource = false;
+    private int collectionAmount;
     private string ResourceType;
     [SerializeField] private GameObject woodPU;
     
@@ -92,22 +93,22 @@ public class MinionScript : MonoBehaviour
             Debug.Log("add resource");
             if(ResourceType == "wood")
             {               
-                Init.Instance.resourceManager.AddWood(50);
+                Init.Instance.resourceManager.AddWood(collectionAmount);
                 Vector3 location = transform.position;
                 GameObject PopUpInstance =Instantiate(woodPU,location, quaternion.identity);
                 resourcePopUp instanceScript = PopUpInstance.GetComponent<resourcePopUp>();
                 instanceScript.setImage("wood");
-                instanceScript.setText("+50");
+                instanceScript.setText("+"+collectionAmount);
                
             }
             else
             {
-                Init.Instance.resourceManager.AddStone(50);Debug.Log("stone");
+                Init.Instance.resourceManager.AddStone(collectionAmount);Debug.Log("stone");
                 Vector3 location = transform.position;
                 GameObject PopUpInstance = Instantiate(woodPU, location, quaternion.identity);
                 resourcePopUp instanceScript = PopUpInstance.GetComponent<resourcePopUp>();
                 instanceScript.setImage("stone");
-                instanceScript.setText("+50");
+                instanceScript.setText("+"+collectionAmount);
             }
            
         }
@@ -185,4 +186,5 @@ public class MinionScript : MonoBehaviour
         house= newHouse;
         return true;
     }
+    public void setCollectionAmount(int newAmount) { collectionAmount = newAmount; }
 }

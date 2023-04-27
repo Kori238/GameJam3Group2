@@ -51,6 +51,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3709763574979629582, guid: 57d434b4f96570647a997dbebc4b6c4f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8887025705051287312, guid: 57d434b4f96570647a997dbebc4b6c4f, type: 3}
       propertyPath: m_Name
       value: Stone_Collector

@@ -9,11 +9,11 @@ public class WoodCollectorScript : Interactable
 
     public GameObject BuildingNotificationPrefab;
 
-    public readonly int CollectionAmount = 50;
+    public  int CollectionAmount = 25;
 
 
-    public readonly int CurrentBuildingLevel = 0; // building level 1
-    public readonly int MaxWoodCoolDown = 500;
+    public int CurrentBuildingLevel = 0; // building level 1
+   
 
     public int CurrentWoodCoolDown;
 
@@ -23,21 +23,27 @@ public class WoodCollectorScript : Interactable
     public int MaxMAssigned = 5;
     public pMenu pmenu;
     public bool toOpen = true;
-    public List<Transform> MinionList;
+    public List<MinionScript> MinionList;
     public List<GameObject> LocalTrees;
     public Collider2D collectZone;
      public List<Collider2D> overlapingObjects;
      public ContactFilter2D treeFilter;
 
+    public int woodUpgradeCost =100;
+    public int stoneUpgradeCost =20;
+    public string UpgradeDescription;
 
-    public int repairCost=25;
+    
+    public int woodRepairCost=25;
+    public int stoneRepairCost=5;
 
     public string resourceType = "wood";
     
     public override void Start()
     {
+        UpgradeDescription = ("Upgrade to level 2 and increase production to "+ (CollectionAmount+25));
 
-       collectZone.GetComponent<Collider2D>().OverlapCollider(treeFilter,overlapingObjects);
+        collectZone.GetComponent<Collider2D>().OverlapCollider(treeFilter,overlapingObjects);
         if (overlapingObjects.Equals(null)) { }
         else
         {
@@ -63,7 +69,7 @@ public class WoodCollectorScript : Interactable
 
         overlapingObjects.Clear();
         if(LocalTrees.Count == 0) { GameObject temp = Instantiate(BuildingNotificationPrefab, transform.position, Quaternion.identity); temp.GetComponent<resourcePopUp>().setText("INVALID LOCATION, NO RESOURCES NEAR BY"); Demolished(); }
-        
+        Debug.Log(CollectionAmount.ToString());
         base.Start();
     }
 
@@ -74,17 +80,7 @@ public class WoodCollectorScript : Interactable
     // Update is called once per frame
     private void Update()
     {
-       // if (CurrentWoodCoolDown >= MaxWoodCoolDown)
-       // {
-         //   Init.Instance.resourceManager.AddWood(MAssigned / MaxMAssigned * CollectionAmount);
-            //resourceManager.AddWood(50);
-          //  print("Wood Collector added " + MAssigned / MaxMAssigned * CollectionAmount + " wood");
-          //  CurrentWoodCoolDown = 0;
-       // }
-        if (health <= 0)
-        {
-            Destroy(gameObject);
-        }
+    
     }
     private void FixedUpdate()
     {
@@ -111,7 +107,7 @@ public class WoodCollectorScript : Interactable
 
     public void repair()
     {
-        if(Init.Instance.resourceManager.GetWood()== repairCost)
+        if(Init.Instance.resourceManager.GetWood()<= woodRepairCost && Init.Instance.resourceManager.GetStone()<= stoneRepairCost)
         {
             Debug.Log("repairing");
             SetHealth(0f, true);
@@ -119,20 +115,60 @@ public class WoodCollectorScript : Interactable
         else { Debug.Log("Not enough resources to repair"); }
        
     }
-    public bool upgrade()
+    public virtual  bool upgrade()
     {
-        switch (CurrentBuildingLevel)
+        if(woodUpgradeCost<=Init.Instance.resourceManager.GetWood() && stoneUpgradeCost <= Init.Instance.resourceManager.GetStone()) 
         {
-            case 0: // upgades to level 2
+            Init.Instance.resourceManager.AddWood(-woodUpgradeCost);
+            Init.Instance.resourceManager.AddStone(-stoneUpgradeCost);
+            switch (CurrentBuildingLevel)
             {
-                MaxMAssigned = 10;
-                break;
-            }
-        }
+                case 0: // upgades to level 2
+                    {
+                        CollectionAmount = 50;
+                        CurrentBuildingLevel = 1;
+                        UpgradeDescription = "Upgrade to level 3 and increase production to " + (CollectionAmount + 25);
+                        woodUpgradeCost = 200;
+                        stoneUpgradeCost = 50;
+                        foreach (MinionScript minion in MinionList) { minion.setCollectionAmount(CollectionAmount); }
 
-        print("succces");
-        return true;
+                        break;
+                    }
+                case 1: // upgades to level 3
+                    {
+                        CollectionAmount = 75;
+                        CurrentBuildingLevel = 2;
+                        UpgradeDescription = ("Upgrade to level 4 and increase production to " + (CollectionAmount + 25));
+                        woodUpgradeCost = 400;
+                        stoneUpgradeCost = 100;
+                        foreach (MinionScript minion in MinionList) { minion.setCollectionAmount(CollectionAmount); }
+
+                        break;
+                    }
+                case 2: // upgades to level 4
+                    {
+                        CollectionAmount = 100;
+                        CurrentBuildingLevel = 3;
+                        UpgradeDescription = "Max Level";
+                        woodUpgradeCost = 0;
+                        stoneUpgradeCost = 0;
+                        foreach (MinionScript minion in MinionList) { minion.setCollectionAmount(CollectionAmount); }
+
+                        break;
+                    }
+            }
+            
+            return true;
+        }
+        return false;
     }
+    public int getWoodUpgradeCost() { return woodUpgradeCost; }
+    public int getStoneUpgradeCost() { return stoneUpgradeCost; }
+    public string getUpgradeDescription() { return UpgradeDescription; }
+    public int getWoodRepairCost() { return woodRepairCost; }
+    public int getStoneRepairCost() { return stoneRepairCost; }
+   
+    
 
     public bool SetMinionAssigned()// checks if minion can be assinged
     {
@@ -167,20 +203,21 @@ public class WoodCollectorScript : Interactable
     public void SetMinion()// assigns a minion from available minion list
     {
         print("Setting minion");
-        Transform newMinion = Init.Instance.resourceManager.GetMinionList();
-        Debug.Log(newMinion.ToString());
+        MinionScript newMinion = Init.Instance.resourceManager.GetMinionList().GetComponent<MinionScript>();
+       
         MinionList.Add(newMinion);
-        newMinion.GetComponent<MinionScript>().setJobLocation(this);
+        newMinion.setJobLocation(this);
         MAssigned= MinionList.Count;
+        newMinion.setCollectionAmount(CollectionAmount);
     }
 
     public void unassignMinion()// unassings minions and adds them to available minion list
     {
        
-            Transform temp = MinionList[MinionList.Count - 1];
+            MinionScript temp = MinionList[MinionList.Count - 1];
             MinionList.RemoveAt(MinionList.Count - 1);
-            temp.GetComponent<MinionScript>().setJobLocation(null);
-            Init.Instance.resourceManager.addSingleMinionToList(temp);
+            temp.setJobLocation(null);
+            Init.Instance.resourceManager.addSingleMinionToList(temp.transform);
             MAssigned = MinionList.Count;
        
        
@@ -190,8 +227,7 @@ public class WoodCollectorScript : Interactable
     private void OnDestroy()// temp may change how damgaged building works 
     {
         Destroy(InstanceMenu);
-        //for(int i = 0;i< MinionList.Count;i++) { MinionList[i].GetComponent<MinionScript>().setJobLocation(null); }
-        //MinionList.Clear();
+       
     }
    public virtual Structure GetLocalTree()
     {
@@ -212,8 +248,5 @@ public class WoodCollectorScript : Interactable
     {
         return;
     }
-    public int getRepairCost()
-    {
-        return repairCost;
-    }
+    
 }

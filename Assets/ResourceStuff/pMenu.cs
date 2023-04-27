@@ -14,6 +14,13 @@ public class pMenu : MonoBehaviour
     WoodCollectorScript ParentStructureScript;
 
     [SerializeField] TextMeshProUGUI repairText;
+    [SerializeField] private TextMeshProUGUI woodUpgradeCost;
+    [SerializeField] private TextMeshProUGUI stoneUpgradeCost;
+    [SerializeField] private TextMeshProUGUI description;
+
+    [SerializeField] private TextMeshProUGUI woodRepairCost;
+    [SerializeField] private TextMeshProUGUI stoneRepairCost;
+
 
     private void Start()
     {
@@ -26,8 +33,16 @@ public class pMenu : MonoBehaviour
     }
     private void setMenucosts()
     {
-       
-      repairText.SetText(ParentStructureScript.getRepairCost().ToString());
+        int temp = ParentStructureScript.getWoodUpgradeCost();
+        if (temp == 0) { woodUpgradeCost.SetText(""); } else { woodUpgradeCost.text = temp.ToString() + "  <sprite=0>"; }
+        temp =ParentStructureScript.getStoneUpgradeCost();
+        if (temp == 0) { stoneUpgradeCost.SetText(""); } else { stoneUpgradeCost.text = temp.ToString() + "  <sprite=0>"; }
+           
+        description.text =ParentStructureScript.getUpgradeDescription().ToString();
+         temp = ParentStructureScript.getWoodRepairCost();
+        if (temp == 0) { woodRepairCost.SetText(""); } else { woodRepairCost.text = temp.ToString() + "  <sprite=0>"; }
+        temp = ParentStructureScript.getStoneRepairCost();
+        if (temp == 0) { stoneRepairCost.SetText(""); } else { stoneRepairCost.text = temp.ToString() + "  <sprite=0>"; }
     }
 
     public void SetParentStructure(GameObject thisParentStruture)
@@ -46,7 +61,15 @@ public class pMenu : MonoBehaviour
 
     public void onUpgradeButtonClick()
     {
-        ParentStructureScript.upgrade();
+        if (ParentStructureScript.upgrade())
+        {
+            int temp = ParentStructureScript.getWoodUpgradeCost();
+            if (temp == 0) { woodUpgradeCost.SetText(""); } else { woodUpgradeCost.text = ParentStructureScript.getWoodUpgradeCost().ToString() + "  <sprite=0>"; }
+            temp = ParentStructureScript.getStoneUpgradeCost();
+            if (temp == 0) { stoneUpgradeCost.SetText(""); } else { stoneUpgradeCost.text = ParentStructureScript.getStoneUpgradeCost().ToString() + "  <sprite=0>"; }
+            description.text = ParentStructureScript.getUpgradeDescription().ToString();
+        }
+        
     }
     public void onRepairButtonClick()
     {
