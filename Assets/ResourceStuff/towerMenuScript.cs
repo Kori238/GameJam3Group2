@@ -13,15 +13,17 @@ public class towerMenuScript : MonoBehaviour
     [SerializeField] private TextMeshProUGUI woodUpgradeCost;
     [SerializeField] private TextMeshProUGUI stoneUpgradeCost;
     [SerializeField] private TextMeshProUGUI description;
+    [SerializeField] private TextMeshProUGUI buildingLevelText;
 
 
     
 
-    private Tower ParentStruture;
+    private Tower ParentStructure;
     
    
 
-    [SerializeField] TextMeshProUGUI repairText;
+    [SerializeField] TextMeshProUGUI woodRepairCost;
+    [SerializeField] TextMeshProUGUI stoneRepairCost;
 
 
 
@@ -43,7 +45,7 @@ public class towerMenuScript : MonoBehaviour
 
     private void ValueChanged()
     {
-        ParentStruture.setTargetPriority((int)targetSlider.value);
+        ParentStructure.setTargetPriority((int)targetSlider.value);
         switch (targetSlider.value)
         {
             case 0: { targetText.SetText("Target: Closest"); break; }
@@ -70,28 +72,44 @@ public class towerMenuScript : MonoBehaviour
     {
 
         // repairText.SetText(ParentStructureScript.getRepairCost().ToString());
-        int temp = ParentStruture.getWoodUpgradecost();
+        int temp = ParentStructure.getWoodUpgradecost();
         if(temp== 0) { woodUpgradeCost.SetText(""); } else { woodUpgradeCost.SetText(temp.ToString() + "  <sprite=0>"); }
-        temp=ParentStruture.getStoneUpgradecost();
+        temp=ParentStructure.getStoneUpgradecost();
         if(temp== 0) { stoneUpgradeCost.SetText(""); } else { stoneUpgradeCost.SetText(temp.ToString() + "  <sprite=0>"); }
-      
-        description.SetText("Upgrade to the next level");
-        setSlider(ParentStruture.getTargetPriority());
+        temp = ParentStructure.getWoodRepairCost();
+        if(temp== 0) { woodRepairCost.SetText(""); } else { woodRepairCost.SetText(temp.ToString() + "  <sprite=0>"); }
+        temp = ParentStructure.getStoneRepairCost();
+        if (temp == 0) { stoneRepairCost.SetText(""); } else { stoneRepairCost.SetText(temp.ToString() + "  <sprite=0>"); }
+        description.SetText(ParentStructure.getUpgradeDescription());
+        buildingLevelText.SetText("Level "+ParentStructure.getBuildingLevel().ToString());
+        setSlider(ParentStructure.getTargetPriority());
     }
     public void SetParentStructure(Tower thisParentStruture)
     {
-        ParentStruture = thisParentStruture;
+        ParentStructure = thisParentStruture;
        
         setMenucosts();
         
     }
     public void onUpgradeButtonClick()
     {
-        ParentStruture.upgradeTower();
+        if (ParentStructure.upgradeTower())
+        {
+            int temp = ParentStructure.getWoodUpgradecost();
+            if (temp == 0) { woodUpgradeCost.SetText(""); } else { woodUpgradeCost.SetText(temp.ToString() + "  <sprite=0>"); }
+            temp = ParentStructure.getStoneUpgradecost();
+            if (temp == 0) { stoneUpgradeCost.SetText(""); } else { stoneUpgradeCost.SetText(temp.ToString() + "  <sprite=0>"); }
+            temp = ParentStructure.getWoodRepairCost();
+            if (temp == 0) { woodRepairCost.SetText(""); } else { woodRepairCost.SetText(temp.ToString() + "  <sprite=0>"); }
+            temp = ParentStructure.getStoneRepairCost();
+            if (temp == 0) { stoneRepairCost.SetText(""); } else { stoneRepairCost.SetText(temp.ToString() + "  <sprite=0>"); }
+            description.SetText(ParentStructure.getUpgradeDescription());
+            buildingLevelText.SetText("Level " + ParentStructure.getBuildingLevel().ToString());
+        }
     }
     public void onRepairButtonClick()
     {
-       // ParentStructureScript.repair();
+        if (ParentStructure.repair()) { }
     }
     public void onCloseButton()
     {

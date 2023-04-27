@@ -21,6 +21,8 @@ public class pMenu : MonoBehaviour
     [SerializeField] private TextMeshProUGUI woodRepairCost;
     [SerializeField] private TextMeshProUGUI stoneRepairCost;
 
+    [SerializeField] private TextMeshProUGUI buildingLevelText;
+
 
     private void Start()
     {
@@ -43,6 +45,8 @@ public class pMenu : MonoBehaviour
         if (temp == 0) { woodRepairCost.SetText(""); } else { woodRepairCost.text = temp.ToString() + "  <sprite=0>"; }
         temp = ParentStructureScript.getStoneRepairCost();
         if (temp == 0) { stoneRepairCost.SetText(""); } else { stoneRepairCost.text = temp.ToString() + "  <sprite=0>"; }
+
+        buildingLevelText.SetText("Level " + ParentStructureScript.getBuilidingLevel().ToString());
     }
 
     public void SetParentStructure(GameObject thisParentStruture)
@@ -68,6 +72,7 @@ public class pMenu : MonoBehaviour
             temp = ParentStructureScript.getStoneUpgradeCost();
             if (temp == 0) { stoneUpgradeCost.SetText(""); } else { stoneUpgradeCost.text = ParentStructureScript.getStoneUpgradeCost().ToString() + "  <sprite=0>"; }
             description.text = ParentStructureScript.getUpgradeDescription().ToString();
+            buildingLevelText.SetText("Level " + ParentStructureScript.getBuilidingLevel().ToString());
         }
         
     }

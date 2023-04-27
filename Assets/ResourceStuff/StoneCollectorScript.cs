@@ -68,10 +68,10 @@ public class StoneCollectorScript : WoodCollectorScript
             Init.Instance.resourceManager.AddStone(-stoneUpgradeCost);
             switch (CurrentBuildingLevel)
             {
-                case 0: // upgades to level 2
+                case 1: // upgades to level 2
                     {
                         CollectionAmount = 50;
-                        CurrentBuildingLevel = 1;
+                        CurrentBuildingLevel = 2;
                         UpgradeDescription = "Upgrade to level 3 and increase production to " + (CollectionAmount + 25);
                         woodUpgradeCost = 100;
                         stoneUpgradeCost = 200;
@@ -79,10 +79,10 @@ public class StoneCollectorScript : WoodCollectorScript
 
                         break;
                     }
-                case 1: // upgades to level 3
+                case 2: // upgades to level 3
                     {
                         CollectionAmount = 75;
-                        CurrentBuildingLevel = 2;
+                        CurrentBuildingLevel = 3;
                         UpgradeDescription = ("Upgrade to level 4 and increase production to " + (CollectionAmount + 25));
                         woodUpgradeCost = 200;
                         stoneUpgradeCost = 400;
@@ -90,10 +90,10 @@ public class StoneCollectorScript : WoodCollectorScript
 
                         break;
                     }
-                case 2: // upgades to level 4
+                case 3: // upgades to level 4
                     {
                         CollectionAmount = 100;
-                        CurrentBuildingLevel = 3;
+                        CurrentBuildingLevel = 4;
                         UpgradeDescription = "Max Level";
                         woodUpgradeCost = 0;
                         stoneUpgradeCost = 0;

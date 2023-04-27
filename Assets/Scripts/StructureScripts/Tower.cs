@@ -28,11 +28,17 @@ public class Tower : Interactable
     private GameObject InstanceMenu;
     [SerializeField] private GameObject PopMenu;
     private bool toOpen = true;
-    private int woodUpgradeCost=50;
-    private int stoneUpgradeCost=50;
+    private int woodUpgradeCost=1;
+    private int stoneUpgradeCost=1;
+    private string upgradeDescription;
+    private int woodRepairCost=1;
+    private int stoneRepairCost=1;
+
+    private int BuildingLevel =1;
 
     public override void Start()
     {
+        upgradeDescription = "Upgrade to level 2";
         home = Init.Instance.grid.GetStructureAtCell((int)(Init.Instance.gridDimensions.x - 1) / 2,
             (int)(Init.Instance.gridDimensions.y - 1) / 2);
         InvokeRepeating(nameof(AttackTarget), 0f, attackRate);
@@ -69,7 +75,72 @@ public class Tower : Interactable
     }
     public int getWoodUpgradecost() { return woodUpgradeCost; }
     public int getStoneUpgradecost() { return stoneUpgradeCost; }
-    public void upgradeTower() { }
+    public int getWoodRepairCost() { return woodRepairCost; }
+    public int getStoneRepairCost() { return stoneRepairCost; }
+    public string getUpgradeDescription() { return upgradeDescription; }
+    public int getBuildingLevel() { return BuildingLevel; }
+    public bool upgradeTower()
+    {
+        if (woodUpgradeCost <= Init.Instance.resourceManager.GetWood() && stoneUpgradeCost <= Init.Instance.resourceManager.GetStone())
+        {
+            Init.Instance.resourceManager.AddWood(-woodUpgradeCost);
+            Init.Instance.resourceManager.AddStone(-stoneUpgradeCost);
+            switch (BuildingLevel)
+            {
+                case 1: // upgades to level 2
+                    {
+                        
+                        BuildingLevel = 2;
+                        upgradeDescription = "Upgrade to level 3 ";
+                        woodUpgradeCost = 1;
+                        stoneUpgradeCost = 1;
+                        attackDamage = attackDamage * 2;
+                        attackRate= attackRate * 1.2f;
+                       
+
+                        break;
+                    }
+                case 2: // upgades to level 3
+                    {
+                       
+                        BuildingLevel = 3;
+                        upgradeDescription = "Upgrade to level 4  ";
+                        woodUpgradeCost = 1;
+                        stoneUpgradeCost = 1;
+                        attackDamage = attackDamage * 2;
+                        attackRate = attackRate * 1.2f;
+
+                        break;
+                    }
+                case 3: // upgades to level 4
+                    {
+                        
+                        BuildingLevel = 4;
+                        upgradeDescription = "Max Level";
+                        woodUpgradeCost = 1;
+                        stoneUpgradeCost = 1;
+                        attackDamage = attackDamage * 2;
+                        attackRate = attackRate * 1.2f;
+
+                        break;
+                    }
+            }
+
+            return true;
+        }
+        return false;
+    }
+    public bool repair()
+    {
+        if (Init.Instance.resourceManager.GetWood() <= woodRepairCost && Init.Instance.resourceManager.GetStone() <= stoneRepairCost)
+        {
+            Debug.Log("repairing");
+            SetHealth(0f, true);
+            return true;
+        }
+        else { Debug.Log("Not enough resources to repair");return false;} 
+    }
+
     public int getTargetPriority() { return targetPrioritization; }
     public virtual void AttackTarget()
     {
@@ -193,5 +264,9 @@ public class Tower : Interactable
         }
         return weakestTarget;
     }
+    private void OnDestroy()
+    {
+        Destroy(InstanceMenu);
 
+    }
 }
