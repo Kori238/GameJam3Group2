@@ -55,7 +55,7 @@ public class S_Pl_Abilities : MonoBehaviour
         }
         else if (Input.GetButtonDown("Fire1"))
         {
-            Ability1();
+           // Ability1();
         }
         else if (Input.GetButtonDown("Ability2"))
         {
@@ -136,7 +136,7 @@ public class S_Pl_Abilities : MonoBehaviour
 
 
 
-    private void Ability1()
+    public void Ability1()
     {
         if (canAttack)
         {
