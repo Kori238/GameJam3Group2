@@ -140,6 +140,7 @@ MonoBehaviour:
   isSpaceOccupied: 0
   hasCentralAttackPoint: 0
   occupiedSpaceCount: 0
+  damageIndicator: {fileID: 0}
   resourcePU: {fileID: 7001411070169600475, guid: 2f2ca000bb1158748918cd56eb8a7079, type: 3}
 --- !u!61 &-1572090344944726726
 BoxCollider2D:
@@ -154,7 +155,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.07213807, y: -0.6992221}
+  m_Offset: {x: 0.0016365051, y: 0.1270566}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -165,5 +166,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.3005452, y: 8.004477}
+  m_Size: {x: 5.69419, y: 9.657035}
   m_EdgeRadius: 0

@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1607697709
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1607697710}
+  m_Layer: 0
+  m_Name: SpawnPoint1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1607697710
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607697709}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 19.910395, y: -24.447395, z: -5.63632}
+  m_LocalScale: {x: 0.15620717, y: 0.14005603, z: 1.6129034}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5048883363140918944}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &872910438044713194
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,7 +177,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.6385232, y: 0.00000023841858}
+  m_Offset: {x: 0.7837546, y: -0.13787699}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -157,7 +188,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.3973031, y: 2.3994498}
+  m_Size: {x: 1.1068404, y: 1.6334684}
   m_EdgeRadius: 0
 --- !u!1 &872910438976990391
 GameObject:
@@ -220,7 +251,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 20.08
+  orthographic size: 50
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -297,7 +328,7 @@ GameObject:
   - component: {fileID: 5048883363140918957}
   m_Layer: 6
   m_Name: PlayerCapsule (1)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -317,6 +348,7 @@ Transform:
   - {fileID: 872910438958327741}
   - {fileID: 872910438044713195}
   - {fileID: 872910438976990386}
+  - {fileID: 1607697710}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -411,6 +443,8 @@ MonoBehaviour:
   hitSound: {fileID: 0}
   SoundControllerScript: {fileID: 0}
   PlayerTransform: {fileID: 5048883363140918944}
+  staminaBar: {fileID: 0}
+  abilitiesScript: {fileID: 872910437640417545}
 --- !u!70 &872910437640417781
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -460,12 +494,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WoodCollector: {fileID: 3197684958974690188, guid: 57d434b4f96570647a997dbebc4b6c4f, type: 3}
-  StoneCollector: {fileID: 3376082192673638401, guid: 2e13d128650c6f64a97f07e8cb9f6225, type: 3}
+  StoneCollector: {fileID: 1560534135251209070, guid: f70aba8806a08354da0f05dbe6f856b8, type: 3}
+  Wall: {fileID: 8329114379578713061, guid: f2b7826ec2bf66b46b59db64896a0aa6, type: 3}
   minionHouse: {fileID: 7485029518356243802, guid: dffb038e2980de746beb85e70422fc84, type: 3}
+  BuildingNotificationPrefab: {fileID: 6641150058937854118, guid: e4ac53ae1aa7a3b41a0c675bba08d3e9, type: 3}
   WoodUI: {fileID: 0}
   pathfindingTestNodes:
   - {x: 0, y: 0}
   - {x: 0, y: 0}
+  select: {fileID: 0}
+  H1: {fileID: 0}
+  H2: {fileID: 0}
+  H3: {fileID: 0}
+  H4: {fileID: 0}
+  H5: {fileID: 0}
+  H6: {fileID: 0}
+  abilitiesScript: {fileID: 872910437640417545}
+  animator: {fileID: 872910437640417777}
 --- !u!114 &872910437640417545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -481,11 +526,15 @@ MonoBehaviour:
   MovementScript: {fileID: 5048883363140918959}
   SoundControllerScript: {fileID: 0}
   AttackCollider: {fileID: 872910438958327738}
+  swordSwingSlider: {fileID: 0}
+  swordSwingObject: {fileID: 0}
   playerCollider: {fileID: 872910437640417781}
   digTrigger: {fileID: 872910438044713192}
   playerVisual: {fileID: 5048883363140918945}
   digIcon: {fileID: 872910438044713193}
   digSpeedMultiplier: 0.5
+  flag: 0
+  digging: 0
 --- !u!114 &5048883363140918956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -500,8 +549,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerScript: {fileID: 5048883363140918959}
   PlayerTransform: {fileID: 5048883363140918944}
-  HealthINT: {fileID: 0}
+  ComputerUsage: {fileID: 0}
   AdminMenuControls: {fileID: 0}
+  TimeController: {fileID: 0}
   playerCollider: {fileID: 872910437640417781}
   playerVisual: {fileID: 5048883363140918945}
 --- !u!114 &5048883363140918957
@@ -518,3 +568,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 0}
   HUD: {fileID: 0}
+  WarningPanel: {fileID: 0}

@@ -18,7 +18,7 @@ public class PlayerInteractionScript : MonoBehaviour
     public Transform select;
     public Transform H1; public Transform H2; public Transform H3; public Transform H4; public Transform H5; public Transform H6;
 
-    private readonly int range = 500;
+    private readonly int range = 1000;
     private string currentTool = "Interact";
     [SerializeField] private S_Pl_Abilities abilitiesScript;
 
@@ -29,6 +29,9 @@ public class PlayerInteractionScript : MonoBehaviour
     //StoneCollector
 
     public Animator animator;
+    private float currentCollectionTime = 0f;
+    private float collectTime = 2f;
+    private bool collecting = false;
 
 
     private void Start()
@@ -41,10 +44,13 @@ public class PlayerInteractionScript : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
+
             PlayerInterct();
-           
-           // WoodUI.text = Init.Instance.resourceManager.GetWood().ToString();
+            currentCollectionTime = 0f;
+                 
         }
+        if (Input.GetMouseButton(1)) { resourceCollectionTime(); }
+       
         if (Input.GetKeyDown("1"))
         {
             currentTool = "Axe";
@@ -137,6 +143,13 @@ public class PlayerInteractionScript : MonoBehaviour
         animator.Play("Idle");
     }
 
+    private void resourceCollectionTime() 
+    { 
+       
+        currentCollectionTime += Time.deltaTime;
+        
+        if(currentCollectionTime>=collectTime) { collecting = true; CheckInteraction();currentCollectionTime = 0f;  }
+    }
 
 
     private void CheckInteraction()
@@ -154,6 +167,16 @@ public class PlayerInteractionScript : MonoBehaviour
                 {
                     if (i.transform.GetComponent<Interactable>()) // checks object is interactable
                     {
+                        if(i.transform.GetComponent<TreeInteract>() || i.transform.GetComponent<StoneInteract>())
+                        {
+                            if(collecting) { i.transform.GetComponent<Interactable>().Interact(); }
+                            collecting= false;
+
+
+
+                            return;
+                        }
+
                         i.transform.GetComponent<Interactable>().Interact(); // calls interaction script
 
                         return; // stops multiple objects from being interacted with
@@ -173,11 +196,11 @@ public class PlayerInteractionScript : MonoBehaviour
         {
             if (ylength <= range)
             {
-                print("in range");
+               
                 return true;
             }
         }
-        print("not in range");
+        
         return false;
     }
 
