@@ -20,7 +20,7 @@ public class PlayerInteractionScript : MonoBehaviour
     public Transform H1; public Transform H2; public Transform H3; public Transform H4; public Transform H5; public Transform H6;
 
     private readonly int range = 1000;
-    private string currentTool = "Interact";
+    private string currentTool = "Sword";
     [SerializeField] private S_Pl_Abilities abilitiesScript;
 
     [SerializeField] private ResourceManager resourceManager; // referance to the resource manager in game scene
@@ -43,18 +43,18 @@ public class PlayerInteractionScript : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(0))
         {
 
             PlayerInterct();
             currentCollectionTime = 0f;
 
         }
-        if (Input.GetMouseButton(1)) { resourceCollectionTime(); }
+        if (Input.GetMouseButton(0) && currentTool == "Interact") { resourceCollectionTime(); }
 
         if (Input.GetKeyDown("1"))
         {
-            currentTool = "Axe";
+            currentTool = "Sword";
 
             select.transform.position = H1.transform.position;
         }
@@ -104,9 +104,9 @@ public class PlayerInteractionScript : MonoBehaviour
         if (abilitiesScript.digging) return;
         switch (currentTool)
         {
-            case "Axe":
+            case "Sword":
                 {
-                    Axe();
+                    abilitiesScript.Ability1();
                     break;
                 }
             case "Interact":
@@ -149,17 +149,25 @@ public class PlayerInteractionScript : MonoBehaviour
 
     private void Axe()
     {
+
+
         animator.Play("Axe Swing");
-        CheckInteraction();
+
         animator.Play("Idle");
+
+
     }
 
     private void resourceCollectionTime()
     {
 
         currentCollectionTime += Time.deltaTime;
+        if (currentCollectionTime >= collectTime * 3 / 4) { Axe(); }
+        else if (currentCollectionTime >= collectTime * 2 / 4) { Axe(); }
+        else if (currentCollectionTime >= collectTime * 1 / 4) { Axe(); }
 
-        if (currentCollectionTime >= collectTime) { collecting = true; CheckInteraction(); currentCollectionTime = 0f; }
+
+        if (currentCollectionTime >= collectTime) { collecting = true; CheckInteraction(); currentCollectionTime = 0f; Axe(); }
     }
 
 
