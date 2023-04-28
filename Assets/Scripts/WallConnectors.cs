@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WallConnectors : MonoBehaviour
@@ -5,6 +6,7 @@ public class WallConnectors : MonoBehaviour
     public Transform center;
     public Transform connectorNS;
     public Transform connectorEW;
+    public List<Transform> connectors = new List<Transform>();
 
     public Transform C;
 
@@ -83,40 +85,47 @@ public class WallConnectors : MonoBehaviour
     {
         GetAdjacentWalls();
 
-        Destroy(center.gameObject);
-        Destroy(connectorNS.gameObject);
-        Destroy(connectorEW.gameObject);
+        //Destroy(center.gameObject);
+        //Destroy(connectorNS.gameObject);
+        //Destroy(connectorEW.gameObject);
+        foreach (Transform connector in connectors)
+        {
+            if (connector == null) continue;
+            Destroy(connector.gameObject);
+        }
+
+        connectors = new List<Transform>();
 
         if (gameObject.GetComponent<Wall>().destroyed) //Destroyed Sprites
         {
-            center = Instantiate(CD, transform.position + C.transform.position, Quaternion.identity, transform);
+            connectors.Add(Instantiate(CD, transform.position + C.transform.position, Quaternion.identity, transform));
             if (adjacent[0])
-                connectorNS = Instantiate(NSND, transform.position + NSND.transform.position, Quaternion.identity, transform);
+                connectors.Add(Instantiate(NSND, transform.position + NSND.transform.position, Quaternion.identity, transform));
             if (adjacent[2])
-                connectorNS = Instantiate(NSSD, transform.position + NSSD.transform.position, Quaternion.identity, transform);
-            if (!adjacent[0] && !adjacent[2]) connectorNS = Instantiate(NS, transform.position, Quaternion.identity, transform);
+                connectors.Add(Instantiate(NSSD, transform.position + NSSD.transform.position, Quaternion.identity, transform));
+            if (!adjacent[0] && !adjacent[2]) connectors.Add(Instantiate(NS, transform.position, Quaternion.identity, transform));
 
             if (adjacent[1])
-                connectorEW = Instantiate(EWED, transform.position + EWED.transform.position, Quaternion.identity, transform);
+                connectors.Add(Instantiate(EWED, transform.position + EWED.transform.position, Quaternion.identity, transform));
             if (adjacent[3])
-                connectorEW = Instantiate(EWWD, transform.position + EWWD.transform.position, Quaternion.identity, transform);
-            if(!adjacent[1] && !adjacent[3]) connectorEW = Instantiate(EW, transform.position, Quaternion.identity, transform);
+                connectors.Add(Instantiate(EWWD, transform.position + EWWD.transform.position, Quaternion.identity, transform));
+            if(!adjacent[1] && !adjacent[3]) connectors.Add(Instantiate(EW, transform.position, Quaternion.identity, transform));
         }
         else //Not Destroyed Sprites
         {
-            center = Instantiate(C, transform.position + C.transform.position, Quaternion.identity, transform);
+            connectors.Add(Instantiate(C, transform.position + C.transform.position, Quaternion.identity, transform));
 
             if (adjacent[0])
-                connectorNS = Instantiate(NSN, transform.position + NSN.transform.position, Quaternion.identity, transform);
+                connectors.Add(Instantiate(NSN, transform.position + NSN.transform.position, Quaternion.identity, transform));
             if (adjacent[2])
-                connectorNS = Instantiate(NSS, transform.position + NSS.transform.position, Quaternion.identity, transform);
-            if (!adjacent[0] && !adjacent[2]) connectorNS = Instantiate(NS, transform.position, Quaternion.identity, transform);
+                connectors.Add(Instantiate(NSS, transform.position + NSS.transform.position, Quaternion.identity, transform));
+            if (!adjacent[0] && !adjacent[2]) connectors.Add(Instantiate(NS, transform.position, Quaternion.identity, transform));
 
             if (adjacent[1])
-                connectorEW = Instantiate(EWE, transform.position + EWE.transform.position, Quaternion.identity, transform);
+                connectors.Add(Instantiate(EWE, transform.position + EWE.transform.position, Quaternion.identity, transform));
             if (adjacent[3])
-                connectorEW = Instantiate(EWW, transform.position + EWW.transform.position, Quaternion.identity, transform);
-            if(!adjacent[1] && !adjacent[3]) connectorEW = Instantiate(EW, transform.position, Quaternion.identity, transform);
+                connectors.Add(Instantiate(EWW, transform.position + EWW.transform.position, Quaternion.identity, transform));
+            if(!adjacent[1] && !adjacent[3]) connectors.Add(Instantiate(EW, transform.position, Quaternion.identity, transform));
         }
         transform.GetComponent<Wall>().UpdateFindOccupiedSpace();
     }
