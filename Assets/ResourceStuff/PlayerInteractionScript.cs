@@ -19,7 +19,7 @@ public class PlayerInteractionScript : MonoBehaviour
     public Transform H1; public Transform H2; public Transform H3; public Transform H4; public Transform H5; public Transform H6;
 
     private readonly int range = 1000;
-    private string currentTool = "Sword";
+    private string currentTool = "Interact";
     [SerializeField] private S_Pl_Abilities abilitiesScript;
 
     [SerializeField] private ResourceManager resourceManager; // referance to the resource manager in game scene
@@ -42,22 +42,22 @@ public class PlayerInteractionScript : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
 
             PlayerInterct();
             currentCollectionTime = 0f;
-                 
+
         }
-        if (Input.GetMouseButton(0) && currentTool=="Interact") { resourceCollectionTime(); }
-       
+        if (Input.GetMouseButton(1)) { resourceCollectionTime(); }
+
         if (Input.GetKeyDown("1"))
         {
-            currentTool = "Sword";
+            currentTool = "Axe";
 
             select.transform.position = H1.transform.position;
         }
-            if (Input.GetKeyDown("2"))
+        if (Input.GetKeyDown("2"))
         {
             currentTool = "Interact";
             print("interact Tool Equiped");
@@ -92,15 +92,20 @@ public class PlayerInteractionScript : MonoBehaviour
             Debug.Log("build wall equipped");
             select.transform.position = H5.transform.position;
         }
+        if (Input.GetKeyDown("b"))
+        {
+            currentTool = "demo";
+            Debug.Log("demo tool equiped");
+        }
     }
     private void PlayerInterct() //allows mutilple function to be called from mouse button 2
     {
         if (abilitiesScript.digging) return;
         switch (currentTool)
         {
-            case "Sword":
+            case "Axe":
                 {
-                    abilitiesScript.Ability1();
+                    Axe();
                     break;
                 }
             case "Interact":
@@ -133,29 +138,27 @@ public class PlayerInteractionScript : MonoBehaviour
                     PlaceWall();
                     break;
                 }
+            case "demo":
+                {
+                    demolish();
+                    break;
+                }
         }
     }
 
     private void Axe()
     {
-        
-        
-            animator.Play("Axe Swing");
-
-            animator.Play("Idle");
-        
-      
+        animator.Play("Axe Swing");
+        CheckInteraction();
+        animator.Play("Idle");
     }
 
-    private void resourceCollectionTime() 
-    { 
-       
-        currentCollectionTime += Time.deltaTime;
-        if (currentCollectionTime >= collectTime * 3 / 4) { Axe(); }    
-        else if (currentCollectionTime >= collectTime * 2 / 4) { Axe(); }
-        else if (currentCollectionTime >= collectTime * 1 / 4) { Axe(); }
+    private void resourceCollectionTime()
+    {
 
-        if (currentCollectionTime>=collectTime) { collecting = true; CheckInteraction();currentCollectionTime = 0f; Axe(); }
+        currentCollectionTime += Time.deltaTime;
+
+        if (currentCollectionTime >= collectTime) { collecting = true; CheckInteraction(); currentCollectionTime = 0f; }
     }
 
 
@@ -174,10 +177,10 @@ public class PlayerInteractionScript : MonoBehaviour
                 {
                     if (i.transform.GetComponent<Interactable>()) // checks object is interactable
                     {
-                        if(i.transform.GetComponent<TreeInteract>() || i.transform.GetComponent<StoneInteract>())
+                        if (i.transform.GetComponent<TreeInteract>() || i.transform.GetComponent<StoneInteract>())
                         {
-                            if(collecting) { i.transform.GetComponent<Interactable>().Interact(); }
-                            collecting= false;
+                            if (collecting) { i.transform.GetComponent<Interactable>().Interact(); }
+                            collecting = false;
 
 
 
@@ -203,11 +206,11 @@ public class PlayerInteractionScript : MonoBehaviour
         {
             if (ylength <= range)
             {
-               
+
                 return true;
             }
         }
-        
+
         return false;
     }
 
@@ -254,13 +257,13 @@ public class PlayerInteractionScript : MonoBehaviour
 
             if (valid)
             {
-                
+
                 //Init.Instance.resourceManager.AddWood(-50);
 
             }
             else { GameObject temp = Instantiate(BuildingNotificationPrefab, transform.position, Quaternion.identity); temp.GetComponent<resourcePopUp>().setText("INVALID LOCATION"); }
         }
-        else { GameObject temp =Instantiate(BuildingNotificationPrefab, transform.position, Quaternion.identity); temp.GetComponent<resourcePopUp>().setText("NOT ENOUGH RESOURCES"); }
+        else { GameObject temp = Instantiate(BuildingNotificationPrefab, transform.position, Quaternion.identity); temp.GetComponent<resourcePopUp>().setText("NOT ENOUGH RESOURCES"); }
     }
 
     private void PlaceWall()
@@ -268,7 +271,7 @@ public class PlayerInteractionScript : MonoBehaviour
         Vector2 MousePos = Input.mousePosition;
         Vector2 MouseWorldPos = Camera.main.ScreenToWorldPoint(MousePos);
         Vector2 gridPos;
-        if (Init.Instance.resourceManager.GetWood () >= 0)
+        if (Init.Instance.resourceManager.GetWood() >= 0)
         {
             gridPos = Init.Instance.grid.GetWorldCellPosition(MouseWorldPos.x, MouseWorldPos.y);
             var valid = Init.Instance.grid.BuildAtCell((int)gridPos.x, (int)gridPos.y, Wall);
@@ -276,8 +279,8 @@ public class PlayerInteractionScript : MonoBehaviour
             else { GameObject temp = Instantiate(BuildingNotificationPrefab, transform.position, Quaternion.identity); temp.GetComponent<resourcePopUp>().setText("INVALID LOCATION"); }
         }
         else { GameObject temp = Instantiate(BuildingNotificationPrefab, transform.position, Quaternion.identity); temp.GetComponent<resourcePopUp>().setText("NOT ENOUGH RESOURCES"); }
-          
-           
+
+
     }
 
 
@@ -309,11 +312,11 @@ public class PlayerInteractionScript : MonoBehaviour
         if (Init.Instance.resourceManager.GetWood() >= 0)
         {
             gridPos = Init.Instance.grid.GetWorldCellPosition(MouseWorldPos.x, MouseWorldPos.y);
-            var valid = Init.Instance.grid.BuildAtCell((int)gridPos.x, (int)gridPos.y,minionHouse);
+            var valid = Init.Instance.grid.BuildAtCell((int)gridPos.x, (int)gridPos.y, minionHouse);
 
             if (valid)
             {
-              //  Init.Instance.resourceManager.AddStone(0);
+                //  Init.Instance.resourceManager.AddStone(0);
             }
             else
             {
@@ -323,5 +326,14 @@ public class PlayerInteractionScript : MonoBehaviour
         }
         else { GameObject temp = Instantiate(BuildingNotificationPrefab, transform.position, Quaternion.identity); temp.GetComponent<resourcePopUp>().setText("NOT ENOUGH RESOURCES"); }
 
+    }
+
+    private void demolish()
+    {
+        Vector2 MousePos = Input.mousePosition;
+        Vector2 MouseWorldPos = Camera.main.ScreenToWorldPoint(MousePos);
+        Vector2 gridPos;
+        gridPos = Init.Instance.grid.GetWorldCellPosition(MouseWorldPos.x, MouseWorldPos.y);
+        Init.Instance.grid.DemolishAtCell((int)gridPos.x, (int)gridPos.y);
     }
 }
