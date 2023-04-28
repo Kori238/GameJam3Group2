@@ -14,8 +14,8 @@ public class EnvironmentSpawner : MonoBehaviour
 
         for (int i = 0; i < 50; i++)
         {
-            int x = Random.Range(0, 50);
-            int y = Random.Range(0, 50);
+            int x = Random.Range(0, 49);
+            int y = Random.Range(0, 49);
             int TorS = Random.Range(0, 2);
 
             if (TorS == 0)

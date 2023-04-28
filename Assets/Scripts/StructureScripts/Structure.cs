@@ -48,6 +48,7 @@ public class Structure : MonoBehaviour
 
         foreach (Vector2 collectionPosition in collectionPositions)
         {
+            if (collectionPosition.x >= 149 || collectionPosition.x < 0 || collectionPosition.y >= 149 || collectionPosition.y < 0) continue;
             var node = nodeGrid.gridArray[(int)collectionPosition.x, (int)collectionPosition.y];
             collectionPoints.Add(node);
         }
@@ -79,6 +80,7 @@ public class Structure : MonoBehaviour
 
         foreach (var point in attackPositions)
         {
+            if (point.x >= 149 || point.x < 0 || point.y >= 149 || point.y < 0) continue;
             var node = nodeGrid.gridArray[(int)point.x, (int)point.y];
             if (node != null && node.isWalkable)
             {
