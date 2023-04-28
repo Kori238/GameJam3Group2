@@ -167,6 +167,8 @@ MonoBehaviour:
   hasCentralAttackPoint: 0
   occupiedSpaceCount: 0
   damageIndicator: {fileID: 3205582515357515026, guid: 5f4dbc4b19dbf5e4483d0af10644508b, type: 3}
+  WoodRefund: 5
+  StoneRefund: 5
   attackDamage: 5
   attackRate: 1
   viewRange: 40
@@ -179,3 +181,4 @@ MonoBehaviour:
   animator: {fileID: 0}
   shootClip: {fileID: 0}
   idleClip: {fileID: 0}
+  PopMenu: {fileID: 0}

@@ -91,6 +91,8 @@ MonoBehaviour:
   hasCentralAttackPoint: 0
   occupiedSpaceCount: 0
   damageIndicator: {fileID: 3205582515357515026, guid: 5f4dbc4b19dbf5e4483d0af10644508b, type: 3}
+  WoodRefund: 5
+  StoneRefund: 5
 --- !u!1001 &1502861847494574389
 PrefabInstance:
   m_ObjectHideFlags: 0

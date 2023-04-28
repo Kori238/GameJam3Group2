@@ -204,8 +204,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7307068096613522034}
     - target: {fileID: 6201257626278293352, guid: 54b05267c83a2874098ca36184d8d891, type: 3}
+      propertyPath: WoodRefund
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6201257626278293352, guid: 54b05267c83a2874098ca36184d8d891, type: 3}
       propertyPath: attackRate
       value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6201257626278293352, guid: 54b05267c83a2874098ca36184d8d891, type: 3}
+      propertyPath: StoneRefund
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6201257626278293352, guid: 54b05267c83a2874098ca36184d8d891, type: 3}
       propertyPath: firingPoint

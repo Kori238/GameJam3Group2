@@ -21,6 +21,8 @@ public class Structure : MonoBehaviour
     public List<Node> occupiedSpace = new List<Node>();
     public List<Node> collectionPoints = new List<Node>();
     [SerializeField] private GameObject damageIndicator;
+    public int WoodRefund;
+    public int StoneRefund;
 
     public virtual void Start()
     {
@@ -287,5 +289,15 @@ public class Structure : MonoBehaviour
         {
             OccupySpace();
         }
+    }
+
+    public int GetWoodRefund()
+    {
+        return WoodRefund;
+    }
+
+    public int GetStoneRefund()
+    {
+        return StoneRefund;
     }
 }

@@ -8,6 +8,7 @@ public class PlayerInteractionScript : MonoBehaviour
     [SerializeField] private Transform StoneCollector;
     [SerializeField] private Transform Wall;
     [SerializeField] private Transform minionHouse;
+    [SerializeField] private GameObject resourcePU;
 
     [SerializeField] private GameObject BuildingNotificationPrefab;
 
@@ -334,6 +335,29 @@ public class PlayerInteractionScript : MonoBehaviour
         Vector2 MouseWorldPos = Camera.main.ScreenToWorldPoint(MousePos);
         Vector2 gridPos;
         gridPos = Init.Instance.grid.GetWorldCellPosition(MouseWorldPos.x, MouseWorldPos.y);
-        Init.Instance.grid.DemolishAtCell((int)gridPos.x, (int)gridPos.y);
+        if (gridPos.x == 24 && gridPos.y == 24)
+        {
+            GameObject temp = Instantiate(BuildingNotificationPrefab, transform.position, Quaternion.identity); temp.GetComponent<resourcePopUp>().setText("CAN'T DEMOLISH!");
+        }
+        else
+        {
+            GameObject temp = Init.Instance.grid.GetStructureAtCell((int)gridPos.x, (int)gridPos.y);
+
+            int tempnumber = temp.GetComponent<Structure>().GetWoodRefund();
+            Init.Instance.resourceManager.AddWood(tempnumber);
+            GameObject instance = Instantiate(resourcePU, transform.position, Quaternion.identity);
+            resourcePopUp instanceScript = instance.GetComponent<resourcePopUp>();
+            instanceScript.setImage("wood");
+            instanceScript.setText("+" + tempnumber.ToString());
+
+            tempnumber = temp.GetComponent<Structure>().GetStoneRefund();
+            Init.Instance.resourceManager.AddStone(tempnumber);
+            instance = Instantiate(resourcePU, new Vector3(transform.position.x, transform.position.y-10, transform.position.z), Quaternion.identity);
+            instanceScript = instance.GetComponent<resourcePopUp>();
+            instanceScript.setImage("stone");
+            instanceScript.setText("+" + tempnumber.ToString());
+
+            Init.Instance.grid.DemolishAtCell((int)gridPos.x, (int)gridPos.y);
+        }
     }
 }
