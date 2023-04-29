@@ -28,7 +28,8 @@ public class TimeController : MonoBehaviour
     public int enemiesPerRound = 10;
     public int enemiesSpawned = 0;
     public TMP_Text enemiesText;
-    private bool nightFlag = false;
+
+    int updateCounter = 0;
 
     // Start is called before the first frame update
     private void Start()
@@ -55,14 +56,35 @@ public class TimeController : MonoBehaviour
 
         for (int i = 0; i < enemiesPerRound; i++)
         {
-            if (canSpawn == true)
-            {
-                canSpawn = false;
-                StartCoroutine(SpawnEnemyTimer());
-            }
-        }
+            int r = Random.Range(0, 3);
 
-        
+            if (r == 0)
+            {
+                y = 475;
+                x = Random.Range(25, 475);
+            }
+            else if (r == 1)
+            {
+                y = 25;
+                x = Random.Range(25, 475);
+            }
+            else if (r == 2)
+            {
+                x = 25;
+                y = Random.Range(25, 475);
+            }
+            else if (r == 3)
+            {
+                x = 475;
+                y = Random.Range(25, 475);
+            }
+
+
+            loc.Set(x, y, -1);
+
+
+            spawnEnemy();
+        }
 
     }
 
@@ -72,46 +94,6 @@ public class TimeController : MonoBehaviour
         enemiesText.text = "Nooms: \n" + enemiesSpawned;
     }
 
-    private IEnumerator SpawnEnemyTimer()
-    {
-        int r = Random.Range(0, 3);
-
-        if(r == 0)
-        {
-            y = 475;
-            x = Random.Range(25, 475);
-        } 
-        else if (r == 1)
-        {
-            y = 25;
-            x = Random.Range(25, 475);
-        }
-        else if (r == 2)
-        {
-            x = 25;
-            y = Random.Range(25, 475);
-        }
-        else if (r == 3)
-        {
-            x = 475;
-            y = Random.Range(25, 475);
-        }
-
-
-        loc.Set(x, y, -1);
-
-
-        spawnEnemy();
-        yield return new WaitForSeconds(spawnDelay);
-        if (hourTime == 1 || hourTime == 2)
-        {
-            canSpawn = false;
-        }
-        else
-        {
-            canSpawn = true;
-        }
-    }
 
     private void spawnEnemy()
     {
@@ -156,17 +138,21 @@ public class TimeController : MonoBehaviour
         else if (hourTime == 6)
         {
             isNight = false;
+            updateCounter = 0;
             ActivateDay();
         }
         else if (hourTime == 17)
         {
-            
-            isNight = true;
+            if (updateCounter == 0)
+            {
+                updateCounter++;
+                isNight = true;
+            }
             canSpawn = true;
-
         }
         else if (isNight  == true)
         {
+            isNight = false;
             ActivateNight();
         }
     }
