@@ -12,6 +12,7 @@ public class TimeController : MonoBehaviour
     public GameObject clock;
     public TMP_Text timer;
     float clockRotation = 0;
+    public float timeScale = 1f;
     public int timeMultiplyer = 10;
     public SpriteRenderer[] maptiles = new SpriteRenderer[25];
 
@@ -112,6 +113,8 @@ public class TimeController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        Time.timeScale = timeScale;
+
         minutesTime += Time.deltaTime * timeMultiplyer * 4;
         clockRotation += Time.deltaTime * timeMultiplyer;
 
