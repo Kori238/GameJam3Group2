@@ -13,7 +13,7 @@ public class TimeController : MonoBehaviour
     public TMP_Text timer;
     float clockRotation = 0;
     public float timeScale = 1f;
-    public int timeMultiplyer = 10;
+    public int clockSpeed = 10;
     public SpriteRenderer[] maptiles = new SpriteRenderer[25];
 
     public bool canSpawn = true;
@@ -115,8 +115,8 @@ public class TimeController : MonoBehaviour
     {
         Time.timeScale = timeScale;
 
-        minutesTime += Time.deltaTime * timeMultiplyer * 4;
-        clockRotation += Time.deltaTime * timeMultiplyer;
+        minutesTime += Time.deltaTime * clockSpeed * 4;
+        clockRotation += Time.deltaTime * clockSpeed;
 
         var rotateClock = new Vector3(0, 0, (float)(clockRotation));
         clock.transform.eulerAngles = rotateClock;

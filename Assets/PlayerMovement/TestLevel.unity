@@ -10422,7 +10422,8 @@ MonoBehaviour:
   day: 0
   clock: {fileID: 1645789609}
   timer: {fileID: 2056456144}
-  timeMultiplyer: 2
+  timeScale: 1
+  timeMultiplyer: 10
   maptiles:
   - {fileID: 1451860184}
   - {fileID: 1120545921}
@@ -10459,7 +10460,9 @@ MonoBehaviour:
   loc: {x: 85, y: 95, z: -1}
   playerLocation: {fileID: 5335656977763315926}
   isNight: 0
-  enemiesToSpawn: 10
+  enemiesPerRound: 10
+  enemiesSpawned: 0
+  enemiesText: {fileID: 2005623076}
 --- !u!114 &2056456144
 MonoBehaviour:
   m_ObjectHideFlags: 0
