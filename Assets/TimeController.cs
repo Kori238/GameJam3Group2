@@ -25,12 +25,16 @@ public class TimeController : MonoBehaviour
     private int y;
 
     private float spawnDelay = 1.5f;
-
+    public int enemiesPerRound = 10;
+    public int enemiesSpawned = 0;
+    public TMP_Text enemiesText;
+    private bool nightFlag = false;
 
     // Start is called before the first frame update
     private void Start()
     {
         timer.text = "Day: " + day;
+        enemiesText.text = "Nooms: \n" + enemiesSpawned;
     }
 
     public void ActivateDay()
@@ -49,14 +53,23 @@ public class TimeController : MonoBehaviour
             maptiles[i].color = Color.gray;
         }
 
-        if (canSpawn == true)
+        for (int i = 0; i < enemiesPerRound; i++)
         {
-            canSpawn = false;
-            StartCoroutine(SpawnEnemyTimer());
-            
-            
+            if (canSpawn == true)
+            {
+                canSpawn = false;
+                StartCoroutine(SpawnEnemyTimer());
+            }
         }
 
+        
+
+    }
+
+    public void EnemyKilled()
+    {
+        enemiesSpawned--;
+        enemiesText.text = "Nooms: \n" + enemiesSpawned;
     }
 
     private IEnumerator SpawnEnemyTimer()
@@ -104,6 +117,8 @@ public class TimeController : MonoBehaviour
     {
         int toSpawn = Random.Range(0, enemies.Count);
         GameObject enemy1 = (GameObject)Instantiate(enemies[toSpawn], loc, Quaternion.identity);
+        enemiesSpawned++;
+        enemiesText.text = "Nooms: \n" + enemiesSpawned;
     }
 
     public void ForceSpawnEnemy()
@@ -135,7 +150,8 @@ public class TimeController : MonoBehaviour
             {
                 spawnDelay -= 0.1f;
             }
-            
+            enemiesPerRound += 5;
+
         }
         else if (hourTime == 6)
         {
@@ -144,8 +160,10 @@ public class TimeController : MonoBehaviour
         }
         else if (hourTime == 17)
         {
+            
             isNight = true;
             canSpawn = true;
+
         }
         else if (isNight  == true)
         {

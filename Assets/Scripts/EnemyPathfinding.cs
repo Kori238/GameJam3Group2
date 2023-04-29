@@ -56,6 +56,7 @@ public class EnemyPathfinding : MonoBehaviour
     public virtual void Defeated()
     {
         Destroy(this.gameObject);
+        GameObject.Find("Time").GetComponent<TimeController>().EnemyKilled();
     }
 
     public virtual void Start()
