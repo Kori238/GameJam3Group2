@@ -9,6 +9,7 @@ public class PlayerInteractionScript : MonoBehaviour
     [SerializeField] private Transform Wall;
     [SerializeField] private Transform minionHouse;
     [SerializeField] private GameObject resourcePU;
+    [SerializeField] private TMP_Text WhatsEquiped;
 
     [SerializeField] private GameObject BuildingNotificationPrefab;
 
@@ -17,7 +18,7 @@ public class PlayerInteractionScript : MonoBehaviour
     private readonly Vector2 boxSize = new Vector2(0.1f, 0.1f); // size of raycast
 
     public Transform select;
-    public Transform H1; public Transform H2; public Transform H3; public Transform H4; public Transform H5; public Transform H6;
+    public Transform H1; public Transform H2; public Transform H3; public Transform H4; public Transform H5; public Transform H6; public Transform H7; public Transform H8; public Transform H9;
 
     private readonly int range = 1000;
     private string currentTool = "Sword";
@@ -55,25 +56,25 @@ public class PlayerInteractionScript : MonoBehaviour
         if (Input.GetKeyDown("1"))
         {
             currentTool = "Sword";
-
+            WhatsEquiped.SetText("Sword Equipped");
             select.transform.position = H1.transform.position;
         }
         if (Input.GetKeyDown("2"))
         {
             currentTool = "Interact";
-            print("interact Tool Equiped");
+            WhatsEquiped.SetText("Interact/Axe Tool Equipped");
             select.transform.position = H2.transform.position;
         }
         if (Input.GetKeyDown("3"))
         {
             currentTool = "WoodCollector";
-            print("Build Wood Collector equiped");
+            WhatsEquiped.SetText("Wood Collector Equipped");
             select.transform.position = H3.transform.position;
         }
         if (Input.GetKeyDown("4"))
         {
             currentTool = "StoneCollector";
-            Debug.Log("Build Stone Collector equiped");
+            WhatsEquiped.SetText("Stone Collector Equipped");
             select.transform.position = H4.transform.position;
         }
         if (Init.Instance.testPathfinding && Input.GetKeyDown(KeyCode.T))
@@ -84,18 +85,25 @@ public class PlayerInteractionScript : MonoBehaviour
         if (Input.GetKeyDown("6"))
         {
             currentTool = "minionHouse";
-            Debug.Log("build minion house equiped");
+            WhatsEquiped.SetText("Minion House Equipped");
             select.transform.position = H6.transform.position;
         }
         if (Input.GetKeyDown("5"))
         {
             currentTool = "wall";
-            Debug.Log("build wall equipped");
+            WhatsEquiped.SetText("Wall Equipped");
             select.transform.position = H5.transform.position;
+        }
+        if (Input.GetKeyDown("7"))
+        {
+            currentTool = "tower";   // NOT IMPLEMENTED
+            WhatsEquiped.SetText("Tower Equipped");
+            select.transform.position = H7.transform.position;
         }
         if (Input.GetKeyDown("b"))
         {
             currentTool = "demo";
+            WhatsEquiped.SetText("fart Equipped");
             Debug.Log("demo tool equiped");
         }
     }
