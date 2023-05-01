@@ -181,4 +181,5 @@ MonoBehaviour:
   animator: {fileID: 0}
   shootClip: {fileID: 0}
   idleClip: {fileID: 0}
+  towerDestroyed: {fileID: 2273210677153966738, guid: bcbda4c16bae67b4db2482fc810f162d, type: 3}
   PopMenu: {fileID: 0}
