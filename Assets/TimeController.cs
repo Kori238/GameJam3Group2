@@ -59,6 +59,21 @@ public class TimeController : MonoBehaviour
         }
         dayMusic.volume = 0f;
         nightMusic.volume = 0.4f;
+
+        getRandomLocation();
+    }
+
+    public void EnemyKilled()
+    {
+        if (enemiesSpawned > 0)
+        {
+            enemiesSpawned--;
+            enemiesText.text = "Nooms: \n" + enemiesSpawned;
+        }
+    }
+
+    private void getRandomLocation()
+    {
         for (int i = 0; i < enemiesPerRound; i++)
         {
             int r = Random.Range(0, 3);
@@ -89,23 +104,17 @@ public class TimeController : MonoBehaviour
 
 
             spawnEnemy();
+            
         }
-
+        
     }
-
-    public void EnemyKilled()
-    {
-        enemiesSpawned--;
-        enemiesText.text = "Nooms: \n" + enemiesSpawned;
-    }
-
-
     private void spawnEnemy()
     {
         int toSpawn = Random.Range(0, enemies.Count);
         GameObject enemy1 = (GameObject)Instantiate(enemies[toSpawn], loc, Quaternion.identity);
         enemiesSpawned++;
         enemiesText.text = "Nooms: \n" + enemiesSpawned;
+        Debug.Log("Spawned : " + enemy1.name.ToString());
     }
 
     public void ForceSpawnEnemy()
