@@ -36,6 +36,7 @@ public class TimeController : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        Time.timeScale = timeScale;
         timer.text = "Day: " + day;
         enemiesText.text = "Nooms: \n" + enemiesSpawned;
     }
@@ -126,7 +127,7 @@ public class TimeController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        Time.timeScale = timeScale;
+        
 
         minutesTime += Time.deltaTime * clockSpeed * 4;
         clockRotation += Time.deltaTime * clockSpeed;

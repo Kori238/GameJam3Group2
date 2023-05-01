@@ -19,8 +19,9 @@ public class S_Mn_DeathMenu : MonoBehaviour
     {
         if(baseHealth.value <= 0)
         {
+            Time.timeScale = 0f;
             deathScreen.SetActive(true);
-            Time.timeScale = 0.5f;
+            
         }
     }
 
