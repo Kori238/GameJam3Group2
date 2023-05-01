@@ -15,7 +15,8 @@ public class TimeController : MonoBehaviour
     public float timeScale = 1f;
     public int clockSpeed = 10;
     public SpriteRenderer[] maptiles = new SpriteRenderer[25];
-
+    public AudioSource dayMusic;
+    public AudioSource nightMusic;
     public bool canSpawn = true;
 
     public List<GameObject> enemies;
@@ -44,8 +45,10 @@ public class TimeController : MonoBehaviour
         for (int i = 0; i < maptiles.Length; i++)
         {
             maptiles[i].color = Color.white;
+            
         }
-
+        dayMusic.volume = 0.4f;
+        nightMusic.volume = 0f;
     }
 
     public void ActivateNight()
@@ -54,7 +57,8 @@ public class TimeController : MonoBehaviour
         {
             maptiles[i].color = Color.gray;
         }
-
+        dayMusic.volume = 0f;
+        nightMusic.volume = 0.4f;
         for (int i = 0; i < enemiesPerRound; i++)
         {
             int r = Random.Range(0, 3);

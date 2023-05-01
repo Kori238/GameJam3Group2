@@ -14,6 +14,7 @@ public class S_Pl_Abilities : MonoBehaviour
     [SerializeField] private Collider2D playerCollider, digTrigger;
     [SerializeField] private SpriteRenderer playerVisual, digIcon;
     [SerializeField] private float digSpeedMultiplier = 0.5f;
+    public int maxScroll;
 
     private Animator animator;
     private bool canAttack = true, canDig = true;
@@ -43,7 +44,7 @@ public class S_Pl_Abilities : MonoBehaviour
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
         {
-            if (Camera.main.orthographicSize <= 200)
+            if (Camera.main.orthographicSize <= maxScroll)
             {
                 Camera.main.orthographicSize += 5;
             }

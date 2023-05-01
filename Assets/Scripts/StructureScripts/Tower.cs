@@ -24,7 +24,6 @@ public class Tower : Interactable
     [SerializeField] private Animator animator = null;
     [SerializeField] private AnimationClip shootClip = null;
     [SerializeField] private AnimationClip idleClip = null;
-    
 
     private GameObject InstanceMenu;
     [SerializeField] private GameObject PopMenu;
@@ -267,6 +266,7 @@ public class Tower : Interactable
     }
     private void OnDestroy()
     {
+
         Destroy(InstanceMenu);
 
     }
