@@ -167,11 +167,12 @@ public class TimeController : MonoBehaviour
             }
             canSpawn = true;
         }
-        else if (isNight  == true)
-        {
-            isNight = false;
-            ActivateNight();
-        }
+        else if (hourTime == 18 && canSpawn) { ActivateNight(); canSpawn = false; }
+        //else if (isNight  == true)
+       // {
+          //  isNight = false;
+          //  ActivateNight();
+        //}
     }
 
     
