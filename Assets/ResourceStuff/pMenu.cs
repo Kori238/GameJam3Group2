@@ -24,15 +24,8 @@ public class pMenu : MonoBehaviour
     [SerializeField] private TextMeshProUGUI buildingLevelText;
 
 
-    private void Start()
-    {
-        // AMinionSlider = GameObject.Find("MinionSlider").GetComponent<Slider>();
-        AMinionSlider.onValueChanged.AddListener(delegate { ValueChanged(); });
-        setSlider();
-    }
-    private void Update()
-    {
-    }
+   
+  
     private void setMenucosts()
     {
         int temp = ParentStructureScript.getWoodUpgradeCost();
@@ -54,6 +47,8 @@ public class pMenu : MonoBehaviour
         ParentStruture = thisParentStruture;
         ParentStructureScript= ParentStruture.GetComponent<WoodCollectorScript>();
         setMenucosts();
+        AMinionSlider.onValueChanged.AddListener(delegate { ValueChanged(); });
+        setSlider();
     }
 
     public void setSlider()

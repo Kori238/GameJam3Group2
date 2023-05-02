@@ -103,7 +103,7 @@ public class PlayerInteractionScript : MonoBehaviour
         if (Input.GetKeyDown("b"))
         {
             currentTool = "demo";
-            WhatsEquiped.SetText("fart Equipped");
+            WhatsEquiped.SetText("Demolish Tool Equipped");
             Debug.Log("demo tool equiped");
         }
     }
@@ -358,22 +358,25 @@ public class PlayerInteractionScript : MonoBehaviour
         else
         {
             GameObject temp = Init.Instance.grid.GetStructureAtCell((int)gridPos.x, (int)gridPos.y);
+            if(temp!= null) 
+            {
+                int tempnumber = temp.GetComponent<Structure>().GetWoodRefund();
+                Init.Instance.resourceManager.AddWood(tempnumber);
+                GameObject instance = Instantiate(resourcePU, transform.position, Quaternion.identity);
+                resourcePopUp instanceScript = instance.GetComponent<resourcePopUp>();
+                instanceScript.setImage("wood");
+                instanceScript.setText("+" + tempnumber.ToString());
 
-            int tempnumber = temp.GetComponent<Structure>().GetWoodRefund();
-            Init.Instance.resourceManager.AddWood(tempnumber);
-            GameObject instance = Instantiate(resourcePU, transform.position, Quaternion.identity);
-            resourcePopUp instanceScript = instance.GetComponent<resourcePopUp>();
-            instanceScript.setImage("wood");
-            instanceScript.setText("+" + tempnumber.ToString());
+                tempnumber = temp.GetComponent<Structure>().GetStoneRefund();
+                Init.Instance.resourceManager.AddStone(tempnumber);
+                instance = Instantiate(resourcePU, new Vector3(transform.position.x, transform.position.y - 10, transform.position.z), Quaternion.identity);
+                instanceScript = instance.GetComponent<resourcePopUp>();
+                instanceScript.setImage("stone");
+                instanceScript.setText("+" + tempnumber.ToString());
 
-            tempnumber = temp.GetComponent<Structure>().GetStoneRefund();
-            Init.Instance.resourceManager.AddStone(tempnumber);
-            instance = Instantiate(resourcePU, new Vector3(transform.position.x, transform.position.y-10, transform.position.z), Quaternion.identity);
-            instanceScript = instance.GetComponent<resourcePopUp>();
-            instanceScript.setImage("stone");
-            instanceScript.setText("+" + tempnumber.ToString());
-
-            Init.Instance.grid.DemolishAtCell((int)gridPos.x, (int)gridPos.y);
+                Init.Instance.grid.DemolishAtCell((int)gridPos.x, (int)gridPos.y);
+            }                                                                
+           
         }
     }
 }
