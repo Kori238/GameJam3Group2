@@ -19,9 +19,10 @@ public class PlayerInteractionScript : MonoBehaviour
     private readonly Vector2 boxSize = new Vector2(0.1f, 0.1f); // size of raycast
 
     public Transform select;
-    public Transform H1; public Transform H2; public Transform H3; public Transform H4; public Transform H5; public Transform H6; public Transform H7; public Transform H8; public Transform H9;
+    public Transform H1; public Transform H2; public Transform H3; public Transform H4; public Transform H5; public Transform H6; public Transform H7; public Transform H8; public Transform H9; public Transform B1;
     public Slider AxeSlider;
     public GameObject AxeSliderObject;
+    public GameObject DemoBorder;
 
     private readonly int range = 1000;
     private string currentTool = "Sword";
@@ -67,53 +68,63 @@ public class PlayerInteractionScript : MonoBehaviour
 
         if (Input.GetKeyDown("1"))
         {
+            DemoBorder.SetActive(false);
             currentTool = "Sword";
             WhatsEquiped.SetText("Sword Equipped");
             select.transform.position = H1.transform.position;
         }
         if (Input.GetKeyDown("2"))
         {
+            DemoBorder.SetActive(false);
             currentTool = "Interact";
             WhatsEquiped.SetText("Interact/Axe Tool Equipped");
             select.transform.position = H2.transform.position;
         }
         if (Input.GetKeyDown("3"))
         {
+            DemoBorder.SetActive(false);
             currentTool = "WoodCollector";
             WhatsEquiped.SetText("Wood Collector Equipped");
             select.transform.position = H3.transform.position;
         }
         if (Input.GetKeyDown("4"))
         {
+            DemoBorder.SetActive(false);
             currentTool = "StoneCollector";
             WhatsEquiped.SetText("Stone Collector Equipped");
             select.transform.position = H4.transform.position;
         }
         if (Init.Instance.testPathfinding && Input.GetKeyDown(KeyCode.T))
         {
+            DemoBorder.SetActive(false);
             currentTool = "PathfindingTester";
             Debug.Log("Pathfinding Tester equipped");
         }
         if (Input.GetKeyDown("6"))
         {
+            DemoBorder.SetActive(false);
             currentTool = "minionHouse";
             WhatsEquiped.SetText("Minion House Equipped");
             select.transform.position = H6.transform.position;
         }
         if (Input.GetKeyDown("5"))
         {
+            DemoBorder.SetActive(false);
             currentTool = "wall";
             WhatsEquiped.SetText("Wall Equipped");
             select.transform.position = H5.transform.position;
         }
         if (Input.GetKeyDown("7"))
         {
+            DemoBorder.SetActive(false);
             currentTool = "tower";   // NOT IMPLEMENTED
             WhatsEquiped.SetText("Tower Equipped");
             select.transform.position = H7.transform.position;
         }
         if (Input.GetKeyDown("b"))
         {
+            DemoBorder.SetActive(true);
+            select.transform.position = B1.transform.position;
             currentTool = "demo";
             WhatsEquiped.SetText("Demolish Tool Equipped");
             Debug.Log("demo tool equiped");
