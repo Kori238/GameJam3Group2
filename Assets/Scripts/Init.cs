@@ -41,8 +41,6 @@ public class Init : MonoBehaviour
         grid = new Grid((int)gridDimensions.x, (int)gridDimensions.y, cellSize);
         resourceManager = new ResourceManager();
         resourceManager.resourceUI = resourceUI.GetComponent<resourceUIScript>();
-        grid.BuildAtCell(5, 5, tree);
-        grid.BuildAtCell(5, 10, stone);
         grid.BuildAtCell((int)(gridDimensions.x - 1) / 2, (int)(gridDimensions.y - 1) / 2, home);
         if (wallDemo)
         {
@@ -75,24 +73,6 @@ public class Init : MonoBehaviour
 
     private IEnumerator BuildWalls()
     {
-        grid.BuildAtCell(6, 2, wall);
-        grid.BuildAtCell(6, 3, wall);
-        grid.BuildAtCell(6, 4, wall);
-        grid.BuildAtCell(6, 5, wall);
-        grid.BuildAtCell(6, 6, wall);
-        grid.BuildAtCell(7, 6, wall);
-        grid.BuildAtCell(8, 6, wall);
-        grid.BuildAtCell(9, 6, wall);
-        grid.BuildAtCell(10, 6, wall);
-        grid.BuildAtCell(10, 5, wall);
-        grid.BuildAtCell(10, 4, wall);
-        grid.BuildAtCell(10, 3, wall);
-        grid.BuildAtCell(10, 2, wall);
-        grid.BuildAtCell(9, 2, wall);
-        grid.BuildAtCell(8, 2, wall);
-        grid.BuildAtCell(7, 2, wall);
-        grid.BuildAtCell(9, 4, wall);
-
         grid.BuildAtCell(23, 24, tower); //LM
         grid.BuildAtCell(24, 25, tower); //TM
         grid.BuildAtCell(24, 23, tower); //BM

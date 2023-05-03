@@ -61,11 +61,14 @@ public class PlayerInteractionScript : MonoBehaviour
         if (Input.GetMouseButton(0) && currentTool == "Interact") 
         {
             AxeSliderObject.SetActive(true);
+            animator.Play("Axe Swing");
             resourceCollectionTime();
         }
         if (Input.GetMouseButtonUp(0))
         {
             AxeSliderObject.SetActive(false);
+
+            animator.Play("Idle");
         }
 
         if (Input.GetKeyDown("1"))
@@ -181,23 +184,22 @@ public class PlayerInteractionScript : MonoBehaviour
         }
     }
 
-    private void Axe()
-    {
-        animator.Play("Axe Swing");
-        animator.StopPlayback();
-        animator.Play("Idle");
+    //private void Axe()
+    //{
+    //    animator.Play("Axe Swing");
+    //    animator.StopPlayback();
         
-    }
+    //}
 
     private void resourceCollectionTime()
     {
-        //if (currentCollectionTime == 0) { AxeSliderObject.SetActive(true); }
         currentCollectionTime += Time.deltaTime;
         AxeSlider.value = currentCollectionTime / collectTime;
-        if (currentCollectionTime >= collectTime * 3 / 4) { Axe(); }
-        else if (currentCollectionTime >= collectTime * 2 / 4) { Axe(); }
-        else if (currentCollectionTime >= collectTime * 1 / 4) { Axe(); }
-        if (currentCollectionTime >= collectTime) { AxeSlider.value = currentCollectionTime / collectTime; collecting = true; CheckInteraction(); currentCollectionTime = 0f; Axe(); }
+        //if (currentCollectionTime >= collectTime * 3 / 4) {Axe(); }
+        //else if (currentCollectionTime >= collectTime * 2 / 4) { Axe(); }
+        //else if (currentCollectionTime >= collectTime * 1 / 4) { Axe(); }
+        if (currentCollectionTime >= collectTime) { AxeSlider.value = currentCollectionTime / collectTime; collecting = true; CheckInteraction(); currentCollectionTime = 0f; //Axe();
+                                                                                                                                                                              }
     }
 
    
@@ -222,7 +224,7 @@ public class PlayerInteractionScript : MonoBehaviour
                             if (collecting) { i.transform.GetComponent<Interactable>().Interact(); }
                             collecting = false;
 
-
+                            sounder.WoodMine();
 
                             return;
                         }
