@@ -49,4 +49,12 @@ public class MinionHouseScript : Interactable
     {
         
     }
+    public override void Demolished()
+    {
+
+        foreach (var Minion in housedMinions) { Destroy(Minion.gameObject); }
+
+
+        base.Demolished();
+    }
 }

@@ -222,8 +222,17 @@ public class WoodCollectorScript : Interactable
        
        
     }
-   
-    
+    public void unassignDeadMinion(MinionScript temp)// unassings minions and adds them to available minion list
+    {
+
+        int i = 0;
+        foreach(var minion in MinionList) { if (temp==minion) { MinionList.RemoveAt(i); } i++; }
+        
+
+
+    }
+
+
     private void OnDestroy()// temp may change how damgaged building works 
     {
         Destroy(InstanceMenu);
