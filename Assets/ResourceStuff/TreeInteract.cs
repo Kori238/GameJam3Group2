@@ -1,9 +1,17 @@
+using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 
 public class TreeInteract : Interactable
 {
+   [SerializeField] private List<WoodCollectorScript> collectors ;
    [SerializeField] private GameObject resourcePU;
+
+
+
+    public void addCollectors(WoodCollectorScript newcollector) { collectors.Add(newcollector); }
+
+
     public override void FindOccupiedSpace()
     {
         var nodePos = gridPos * 3;
@@ -28,5 +36,17 @@ public class TreeInteract : Interactable
     public override void CreateAttackPoints()
     {
         return;
+    }
+
+
+
+    public override void Demolished()
+    {
+
+        foreach (var Collector in collectors) { Collector.unssignTree(gameObject); }
+
+        
+
+        base.Demolished();
     }
 }

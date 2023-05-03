@@ -52,7 +52,7 @@ public class MinionHouseScript : Interactable
     public override void Demolished()
     {
 
-        foreach (var Minion in housedMinions) { Destroy(Minion.gameObject); }
+        foreach (var Minion in housedMinions) { Minion.GetComponent<MinionScript>().deHouse(); }
 
 
         base.Demolished();

@@ -189,7 +189,8 @@ public class MinionScript : MonoBehaviour
     public void setCollectionAmount(int newAmount) { collectionAmount = newAmount; }
     public void deHouse()
     {
-        jobLocation.GetComponent<WoodCollectorScript>().unassignDeadMinion(this);
-        Destroy(this);
+        if(jobLocation!=null) { jobLocation.GetComponent<WoodCollectorScript>().unassignDeadMinion(this); }
+        
+        Destroy(gameObject);
     }
 }
