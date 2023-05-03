@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerInteractionScript : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class PlayerInteractionScript : MonoBehaviour
 
     public Transform select;
     public Transform H1; public Transform H2; public Transform H3; public Transform H4; public Transform H5; public Transform H6; public Transform H7; public Transform H8; public Transform H9;
+    public Slider AxeSlider;
+    public GameObject AxeSliderObject;
 
     private readonly int range = 1000;
     private string currentTool = "Sword";
@@ -40,6 +43,7 @@ public class PlayerInteractionScript : MonoBehaviour
     {
         pathfindingTestNodes[0] = -Vector2.one;
         pathfindingTestNodes[1] = -Vector2.one;
+
     }
 
     private void Update()
@@ -51,7 +55,15 @@ public class PlayerInteractionScript : MonoBehaviour
             currentCollectionTime = 0f;
 
         }
-        if (Input.GetMouseButton(0) && currentTool == "Interact") { resourceCollectionTime(); }
+        if (Input.GetMouseButton(0) && currentTool == "Interact") 
+        {
+            AxeSliderObject.SetActive(true);
+            resourceCollectionTime();
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            AxeSliderObject.SetActive(false);
+        }
 
         if (Input.GetKeyDown("1"))
         {
@@ -157,27 +169,24 @@ public class PlayerInteractionScript : MonoBehaviour
 
     private void Axe()
     {
-
-
         animator.Play("Axe Swing");
-
+        animator.StopPlayback();
         animator.Play("Idle");
-
-
+        
     }
 
     private void resourceCollectionTime()
     {
-
+        //if (currentCollectionTime == 0) { AxeSliderObject.SetActive(true); }
         currentCollectionTime += Time.deltaTime;
+        AxeSlider.value = currentCollectionTime / collectTime;
         if (currentCollectionTime >= collectTime * 3 / 4) { Axe(); }
         else if (currentCollectionTime >= collectTime * 2 / 4) { Axe(); }
         else if (currentCollectionTime >= collectTime * 1 / 4) { Axe(); }
-
-
-        if (currentCollectionTime >= collectTime) { collecting = true; CheckInteraction(); currentCollectionTime = 0f; Axe(); }
+        if (currentCollectionTime >= collectTime) { AxeSlider.value = currentCollectionTime / collectTime; collecting = true; CheckInteraction(); currentCollectionTime = 0f; Axe(); }
     }
 
+   
 
     private void CheckInteraction()
     {
