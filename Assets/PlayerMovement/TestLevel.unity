@@ -9597,6 +9597,7 @@ MonoBehaviour:
   clip3: {fileID: 8300000, guid: 4a75b9b2bfb9a5846a3e8c414afe259a, type: 3}
   clip4: {fileID: 8300000, guid: e63429a0eff4e5540b04bcd736be90fb, type: 3}
   clip5: {fileID: 8300000, guid: be7740a8f5f75424caf03d4732708c92, type: 3}
+  demolish: {fileID: 8300000, guid: a19864941c0e6584d8fe4e267d18dc7c, type: 3}
 --- !u!4 &1762246960
 Transform:
   m_ObjectHideFlags: 0
@@ -12132,6 +12133,10 @@ PrefabInstance:
       propertyPath: select
       value: 
       objectReference: {fileID: 224264284}
+    - target: {fileID: 872910437640417549, guid: 0e1588dcc6c7b5d47bb5c54ff9f42f92, type: 3}
+      propertyPath: sounder
+      value: 
+      objectReference: {fileID: 1762246959}
     - target: {fileID: 872910437640417549, guid: 0e1588dcc6c7b5d47bb5c54ff9f42f92, type: 3}
       propertyPath: instance
       value: 
