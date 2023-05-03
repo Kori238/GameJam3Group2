@@ -5,7 +5,7 @@ public class S_SoundController : MonoBehaviour
 {
     public AudioSource SoundSource;
 
-    public AudioClip clip1, clip2, clip3, clip4, clip5;
+    public AudioClip clip1, clip2, clip3, clip4, clip5, demolish;
 
 
     public void AttackSound()
@@ -35,6 +35,12 @@ public class S_SoundController : MonoBehaviour
     public void HurtMonster()
     {
         SoundSource.clip = clip5;
-        SoundSource.PlayOneShot(clip5);
+        //SoundSource.PlayOneShot(clip5);
+    }
+
+    public void DemolishSound()
+    {
+        SoundSource.clip = demolish;
+        SoundSource.PlayOneShot(demolish);
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class PlayerInteractionScript : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class PlayerInteractionScript : MonoBehaviour
     public Slider AxeSlider;
     public GameObject AxeSliderObject;
     public GameObject DemoBorder;
+    public S_SoundController sounder;
 
     private readonly int range = 1000;
     private string currentTool = "Sword";
@@ -124,6 +126,7 @@ public class PlayerInteractionScript : MonoBehaviour
         if (Input.GetKeyDown("b"))
         {
             DemoBorder.SetActive(true);
+            sounder.GetComponent<S_SoundController>().DemolishSound();
             select.transform.position = B1.transform.position;
             currentTool = "demo";
             WhatsEquiped.SetText("Demolish Tool Equipped");
