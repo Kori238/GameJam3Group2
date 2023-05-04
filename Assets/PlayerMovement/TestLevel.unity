@@ -4825,10 +4825,10 @@ RectTransform:
   m_Father: {fileID: 1912142443}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 5.8047, y: -1.5243}
-  m_SizeDelta: {x: 1192.5522, y: 551.0233}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 9.546204, y: 0}
+  m_SizeDelta: {x: 18.712524, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &890318367
 MonoBehaviour:
@@ -12127,6 +12127,10 @@ PrefabInstance:
       propertyPath: H7
       value: 
       objectReference: {fileID: 1858332596}
+    - target: {fileID: 872910437640417549, guid: 0e1588dcc6c7b5d47bb5c54ff9f42f92, type: 3}
+      propertyPath: Tower
+      value: 
+      objectReference: {fileID: 6072493544227891598, guid: 3668718f5d95b754092696977e074ae6, type: 3}
     - target: {fileID: 872910437640417549, guid: 0e1588dcc6c7b5d47bb5c54ff9f42f92, type: 3}
       propertyPath: WoodUI
       value: 
