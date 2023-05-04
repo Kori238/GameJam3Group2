@@ -32,12 +32,13 @@ public class EnemyPathfinding : MonoBehaviour
     private GameObject home;
     public GameObject SoundController;
     [SerializeField] private GameObject damageIndicator;
+    public int playerDamage;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == 7) //If the Collider is the Players attack range then...
         {
-            Damaged(5);
+            Damaged(playerDamage);
             SoundScript.HurtMonster();
             Debug.Log("HURT");
         }

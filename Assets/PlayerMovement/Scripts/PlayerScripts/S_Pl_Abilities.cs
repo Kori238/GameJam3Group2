@@ -157,6 +157,7 @@ public class S_Pl_Abilities : MonoBehaviour
         swordSwingSlider.value = 0;
         canAttack = false;
         AttackCollider.enabled = true;
+        animator.StopPlayback();
         animator.Play("Attack");
         float timer = 1.5f;
         float i;
