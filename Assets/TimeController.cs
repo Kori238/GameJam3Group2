@@ -44,6 +44,8 @@ public class TimeController : MonoBehaviour
         Time.timeScale = timeScale;
         timer.text = "Day: " + day;
         enemiesText.text = "Nooms: \n" + enemiesSpawned;
+        CastleBuilding.GetComponent<Castle>().Damaged(-passiveBaseRegen);
+        StartCoroutine(RegenBase());
     }
 
     public void ActivateDay()
@@ -64,7 +66,7 @@ public class TimeController : MonoBehaviour
     {
         while (isNight == false)
         {
-            CastleBuilding.GetComponent<Castle>().gainHealth(passiveBaseRegen);
+            CastleBuilding.GetComponent<Castle>().Damaged(-passiveBaseRegen);
             yield return new WaitForSeconds(1f);
         }
     }

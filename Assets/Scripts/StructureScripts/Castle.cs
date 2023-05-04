@@ -6,12 +6,12 @@ using UnityEngine.UI;
 
 public class Castle : Structure
 {
-    public Slider healthSlider;
+    [SerializeField] private static Slider healthSlider;
 
-    public override void Start()
+    public void Awake()
     {
         healthSlider = GameObject.Find("HealthSlider").GetComponent<Slider>();
-        base.Start();
+        //base.Start();
     }
 
     //public override void CreateAttackPoints()
@@ -24,9 +24,9 @@ public class Castle : Structure
         healthSlider.GetComponent<Slider>().value = health;
     }
 
-    public void gainHealth(float amount)
+    public override void SetHealth(float amount, bool fullyHeal = false)
     {
-        Healed(health + amount);
+        base.SetHealth(health + amount);
         healthSlider.GetComponent<Slider>().value = health;
     }
 }

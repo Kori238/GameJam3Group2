@@ -214,6 +214,23 @@ public class Structure : MonoBehaviour
         }
     }
 
+    public virtual void Healed(float amount)
+    {
+        if (health + amount > maxHealth)
+        {
+            health = maxHealth;
+        }
+        else
+        {
+            health += amount;
+            print(health);
+        }
+        if (!destroyed || !(health > 0))
+            return;
+        destroyed = false;
+        UpdateStructure();
+
+    }
     public virtual void Destroyed()
     {
         destroyed = true;
@@ -251,26 +268,12 @@ public class Structure : MonoBehaviour
         else if (!destroyed && health <= 0)
         {
             Destroyed();
+            UpdateStructure();
         }
-        UpdateStructure();
+        
     }
 
-    public virtual void Healed(float amount)
-    {
-        if (health + amount > maxHealth)
-        {
-            health = maxHealth;
-        }
-        else
-        {
-            health += amount;
-        }
-        if (destroyed && health > 0)
-        {
-            destroyed = false;
-        }
-        UpdateStructure();
-    }
+
 
     public virtual void UpdateStructure()
     {
