@@ -33,13 +33,17 @@ public class TimeController : MonoBehaviour
 
     bool canRegenBase = true;
     int updateCounter = 0;
+
+    public int passiveBaseRegen = 15;
+    public GameObject CastleBuilding;
+
+
     // Start is called before the first frame update
     private void Start()
     {
         Time.timeScale = timeScale;
         timer.text = "Day: " + day;
         enemiesText.text = "Nooms: \n" + enemiesSpawned;
-        
     }
 
     public void ActivateDay()
@@ -54,11 +58,15 @@ public class TimeController : MonoBehaviour
         StartCoroutine(RegenBase());
     }
 
-    public int passiveBaseRegen = 15;
-    IEnumerator RegenBase()
+    
+
+    public IEnumerator RegenBase()
     {
-        GameObject.Find("Base").GetComponent<Castle>().gainHealth(passiveBaseRegen);
-        yield return new WaitForSeconds(1f);
+        while (isNight == false)
+        {
+            CastleBuilding.GetComponent<Castle>().gainHealth(passiveBaseRegen);
+            yield return new WaitForSeconds(1f);
+        }
     }
 
     public void ActivateNight()
@@ -165,10 +173,13 @@ public class TimeController : MonoBehaviour
         }
         else if (hourTime == 6)
         {
-            canRegenBase = true;
-            isNight = false;
-            updateCounter = 0;
-            ActivateDay();
+            if (minutesTime == 0)
+            {
+                canRegenBase = true;
+                isNight = false;
+                updateCounter = 0;
+                ActivateDay();
+            }
         }
         else if (hourTime == 17)
         {

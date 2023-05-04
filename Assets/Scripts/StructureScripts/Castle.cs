@@ -13,6 +13,11 @@ public class Castle : Structure
         healthSlider = GameObject.Find("HealthSlider").GetComponent<Slider>();
         base.Start();
     }
+
+    //public override void CreateAttackPoints()
+    //{
+    //    return;
+    //}
     public override void Damaged(float amount)
     {
         base.Damaged(amount);
@@ -21,7 +26,7 @@ public class Castle : Structure
 
     public void gainHealth(float amount)
     {
-        base.SetHealth(health + amount, false);
+        Healed(health + amount);
         healthSlider.GetComponent<Slider>().value = health;
     }
 }

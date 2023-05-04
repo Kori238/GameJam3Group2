@@ -11491,6 +11491,8 @@ MonoBehaviour:
   enemiesPerRound: 5
   enemiesSpawned: 0
   enemiesText: {fileID: 2005623076}
+  passiveBaseRegen: 1
+  CastleBuilding: {fileID: 8898366501636352334, guid: 5ab87a5bab402324ea1cab28bc10f12e, type: 3}
 --- !u!114 &2056456144
 MonoBehaviour:
   m_ObjectHideFlags: 0
