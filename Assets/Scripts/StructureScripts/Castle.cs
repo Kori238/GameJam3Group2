@@ -18,4 +18,10 @@ public class Castle : Structure
         base.Damaged(amount);
         healthSlider.GetComponent<Slider>().value = health;
     }
+
+    public void gainHealth(float amount)
+    {
+        base.SetHealth(health + amount, false);
+        healthSlider.GetComponent<Slider>().value = health;
+    }
 }

@@ -31,14 +31,15 @@ public class TimeController : MonoBehaviour
     public int enemiesSpawned = 0;
     public TMP_Text enemiesText;
 
+    bool canRegenBase = true;
     int updateCounter = 0;
-
     // Start is called before the first frame update
     private void Start()
     {
         Time.timeScale = timeScale;
         timer.text = "Day: " + day;
         enemiesText.text = "Nooms: \n" + enemiesSpawned;
+        
     }
 
     public void ActivateDay()
@@ -50,6 +51,14 @@ public class TimeController : MonoBehaviour
         }
         dayMusic.volume = 0.4f;
         nightMusic.volume = 0f;
+        StartCoroutine(RegenBase());
+    }
+
+    public int passiveBaseRegen = 15;
+    IEnumerator RegenBase()
+    {
+        GameObject.Find("Base").GetComponent<Castle>().gainHealth(passiveBaseRegen);
+        yield return new WaitForSeconds(1f);
     }
 
     public void ActivateNight()
@@ -124,6 +133,8 @@ public class TimeController : MonoBehaviour
         int toSpawn = Random.Range(0, enemies.Count);
         GameObject enemy1 = (GameObject)Instantiate(enemies[toSpawn], loc, Quaternion.identity);
     }
+
+
     // Update is called once per frame
     private void Update()
     {
@@ -154,6 +165,7 @@ public class TimeController : MonoBehaviour
         }
         else if (hourTime == 6)
         {
+            canRegenBase = true;
             isNight = false;
             updateCounter = 0;
             ActivateDay();
