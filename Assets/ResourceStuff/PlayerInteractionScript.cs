@@ -12,6 +12,7 @@ public class PlayerInteractionScript : MonoBehaviour
     [SerializeField] private Transform minionHouse;
     [SerializeField] private GameObject resourcePU;
     [SerializeField] private TMP_Text WhatsEquiped;
+    [SerializeField] private Transform Tower;
 
     [SerializeField] private GameObject BuildingNotificationPrefab;
 
@@ -175,6 +176,11 @@ public class PlayerInteractionScript : MonoBehaviour
                     PlaceWall();
                     break;
                 }
+            case "tower":
+                {
+                    PlaceTower();
+                    break;
+                }
             case "demo":
                 {
                     demolish();
@@ -323,6 +329,28 @@ public class PlayerInteractionScript : MonoBehaviour
 
 
     }
+
+    private void PlaceTower()
+    {
+        Vector2 MousePos = Input.mousePosition;
+        Vector2 MouseWorldPos = Camera.main.ScreenToWorldPoint(MousePos);
+        Vector2 gridPos;
+        if (Init.Instance.resourceManager.GetWood() >= 0)
+        {
+            gridPos = Init.Instance.grid.GetWorldCellPosition(MouseWorldPos.x, MouseWorldPos.y);
+            var valid = Init.Instance.grid.BuildAtCell((int)gridPos.x, (int)gridPos.y, Tower);
+
+            if (valid)
+            {
+
+                //Init.Instance.resourceManager.AddWood(-50);
+
+            }
+            else { GameObject temp = Instantiate(BuildingNotificationPrefab, transform.position, Quaternion.identity); temp.GetComponent<resourcePopUp>().setText("INVALID LOCATION"); }
+        }
+        else { GameObject temp = Instantiate(BuildingNotificationPrefab, transform.position, Quaternion.identity); temp.GetComponent<resourcePopUp>().setText("NOT ENOUGH RESOURCES"); }
+    }
+
 
 
     private void PlaceStoneCollector()

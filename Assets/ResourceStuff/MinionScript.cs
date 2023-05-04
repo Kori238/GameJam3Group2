@@ -54,16 +54,20 @@ public class MinionScript : MonoBehaviour
         if(!time.isNight && atJob && goToResource) // move to local resource
         {
             ResetPath();
-            Structure temp = jobLocation.GetComponent<WoodCollectorScript>().GetLocalTree();
-            if (temp != null)
+            if(jobLocation!= null) 
             {
-                Pathfind(temp);
-                atHouse = false;
-                atJob = false;
-                atResource = true;
-                StartCoroutine(WaitAt());
+                Structure temp = jobLocation.GetComponent<WoodCollectorScript>().GetLocalTree();
+                if (temp != null)
+                {
+                    Pathfind(temp);
+                    atHouse = false;
+                    atJob = false;
+                    atResource = true;
+                    StartCoroutine(WaitAt());
+                }
+                else { goToResource = false; }
             }
-            else { goToResource = false; }
+            
 
         }
         if (time.isNight && !atHouse) // move to house at night
@@ -112,7 +116,7 @@ public class MinionScript : MonoBehaviour
             }
            
         }
-        else { Debug.Log("fail"); }
+        
     }
 
 

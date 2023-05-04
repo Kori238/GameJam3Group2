@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public class WoodCollectorScript : Interactable
@@ -61,6 +62,7 @@ public class WoodCollectorScript : Interactable
                     if (overlapingObjects[i].GetComponent<StoneInteract>() is StoneInteract)
                     {
                         LocalTrees.Add(overlapingObjects[i].gameObject);
+                        overlapingObjects[i].gameObject.GetComponent<StoneInteract>().addCollectors(this);
                     }
                }
                
@@ -264,5 +266,16 @@ public class WoodCollectorScript : Interactable
     {
         return;
     }
-    
+    public override void Demolished()
+    {
+        foreach(var Minion in MinionList)
+        {
+            Minion.setJobLocation(null);
+        }
+
+
+
+
+        base.Demolished();
+    }
 }

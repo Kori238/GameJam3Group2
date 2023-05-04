@@ -1,9 +1,15 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class StoneInteract : Interactable
 
 {
     [SerializeField] private GameObject resourcePU;
+    [SerializeField] private List<WoodCollectorScript> collectors;
+
+
+
+    public void addCollectors(WoodCollectorScript newcollector) { collectors.Add(newcollector); }
 
     public override void FindOccupiedSpace()
     {
@@ -30,6 +36,18 @@ public class StoneInteract : Interactable
     }
     public override void CreateAttackPoints()
     {
-        return;
+       base.CreateAttackPoints();
+    }
+
+
+
+    public override void Demolished()
+    {
+
+        foreach (var Collector in collectors) { Collector.unssignTree(gameObject); }
+
+
+
+        base.Demolished();
     }
 }
