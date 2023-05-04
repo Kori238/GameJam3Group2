@@ -64,10 +64,9 @@ public class PlayerInteractionScript : MonoBehaviour
             animator.Play("Axe Swing");
             resourceCollectionTime();
         }
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && currentTool == "Interact")
         {
             AxeSliderObject.SetActive(false);
-
             animator.Play("Idle");
         }
 

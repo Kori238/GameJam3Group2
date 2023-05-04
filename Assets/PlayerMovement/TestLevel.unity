@@ -11488,7 +11488,7 @@ MonoBehaviour:
   loc: {x: 85, y: 95, z: -1}
   playerLocation: {fileID: 5335656977763315926}
   isNight: 0
-  enemiesPerRound: 10
+  enemiesPerRound: 5
   enemiesSpawned: 0
   enemiesText: {fileID: 2005623076}
 --- !u!114 &2056456144
