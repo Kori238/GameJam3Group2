@@ -27,7 +27,7 @@ public class TimeController : MonoBehaviour
     private int y;
 
     private float spawnDelay = 1.5f;
-    public int enemiesPerRound = 10;
+    public int enemiesPerRound = 5;
     public int enemiesSpawned = 0;
     public TMP_Text enemiesText;
 
@@ -149,7 +149,7 @@ public class TimeController : MonoBehaviour
             {
                 spawnDelay -= 0.1f;
             }
-            enemiesPerRound += 5;
+            enemiesPerRound += 3;
 
         }
         else if (hourTime == 6)

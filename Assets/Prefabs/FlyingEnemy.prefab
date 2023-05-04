@@ -11,6 +11,14 @@ PrefabInstance:
       propertyPath: flying
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 822463097559112523, guid: 26d1fc5550eacd54dad570685b672da6, type: 3}
+      propertyPath: health
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 822463097559112523, guid: 26d1fc5550eacd54dad570685b672da6, type: 3}
+      propertyPath: maxHealth
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 1565054349856889920, guid: 26d1fc5550eacd54dad570685b672da6, type: 3}
       propertyPath: m_RootOrder
       value: 0
