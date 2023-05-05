@@ -44,8 +44,7 @@ public class TimeController : MonoBehaviour
         Time.timeScale = timeScale;
         timer.text = "Day: " + day;
         enemiesText.text = "Nooms: \n" + enemiesSpawned;
-        CastleBuilding.GetComponent<Castle>().Damaged(-passiveBaseRegen);
-        StartCoroutine(RegenBase());
+        //StartCoroutine(RegenBase());
     }
 
     public void ActivateDay()
@@ -55,21 +54,21 @@ public class TimeController : MonoBehaviour
             maptiles[i].color = Color.white;
             
         }
-        dayMusic.volume = 0.4f;
+        dayMusic.volume = 0.25f;
         nightMusic.volume = 0f;
-        StartCoroutine(RegenBase());
+        //StartCoroutine(RegenBase());
     }
 
     
 
-    public IEnumerator RegenBase()
-    {
-        while (isNight == false)
-        {
-            CastleBuilding.GetComponent<Castle>().Damaged(-passiveBaseRegen);
-            yield return new WaitForSeconds(1f);
-        }
-    }
+    //public IEnumerator RegenBase()
+    //{
+    //    while (isNight == false)
+    //    {
+    //        CastleBuilding.GetComponent<Castle>().Damaged(-passiveBaseRegen);
+    //        yield return new WaitForSeconds(1f);
+    //    }
+    //}
 
     public void ActivateNight()
     {
@@ -78,7 +77,7 @@ public class TimeController : MonoBehaviour
             maptiles[i].color = Color.gray;
         }
         dayMusic.volume = 0f;
-        nightMusic.volume = 0.4f;
+        nightMusic.volume = 0.25f;
 
         getRandomLocation();
     }
