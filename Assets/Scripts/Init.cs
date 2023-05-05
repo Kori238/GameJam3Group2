@@ -73,16 +73,16 @@ public class Init : MonoBehaviour
 
     private IEnumerator BuildWalls()
     {
-        grid.BuildAtCell(23, 24, tower); //LM
-        grid.BuildAtCell(24, 25, tower); //TM
-        grid.BuildAtCell(24, 23, tower); //BM
-        grid.BuildAtCell(25, 24, tower); //RM
+        //grid.BuildAtCell(23, 24, tower); //LM
+        //grid.BuildAtCell(24, 25, tower); //TM
+        //grid.BuildAtCell(24, 23, tower); //BM
+        //grid.BuildAtCell(25, 24, tower); //RM
 
 
-        grid.BuildAtCell(23, 25, tower); //LM
-        grid.BuildAtCell(25, 25, tower); //TM
-        grid.BuildAtCell(23, 23, tower); //BM
-        grid.BuildAtCell(25, 23, tower); //RM
+        //grid.BuildAtCell(23, 25, tower); //LM
+        //grid.BuildAtCell(25, 25, tower); //TM
+        //grid.BuildAtCell(23, 23, tower); //BM
+        //grid.BuildAtCell(25, 23, tower); //RM
 
         yield return null;
     }
