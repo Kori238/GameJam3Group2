@@ -37,6 +37,8 @@ public class TimeController : MonoBehaviour
     public int passiveBaseRegen = 15;
     public GameObject CastleBuilding;
 
+    public GameObject Tips;
+
 
     // Start is called before the first frame update
     private void Start()
@@ -78,7 +80,7 @@ public class TimeController : MonoBehaviour
         }
         dayMusic.volume = 0f;
         nightMusic.volume = 0.25f;
-
+        Tips.SetActive(true);
         getRandomLocation();
     }
 
@@ -129,7 +131,22 @@ public class TimeController : MonoBehaviour
     }
     private void spawnEnemy()
     {
-        int toSpawn = Random.Range(0, enemies.Count);
+        int toSpawn;
+
+        if (day == 0)
+        {
+            toSpawn = 0;
+        }
+        else if(day == 1)
+        {
+            toSpawn = Random.Range(0, enemies.Count - 1);
+        } 
+        else
+        {
+            toSpawn = Random.Range(0, enemies.Count);
+        }
+
+        
         GameObject enemy1 = (GameObject)Instantiate(enemies[toSpawn], loc, Quaternion.identity);
         enemiesSpawned++;
         enemiesText.text = "Nooms: \n" + enemiesSpawned;

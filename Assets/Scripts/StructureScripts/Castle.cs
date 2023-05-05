@@ -24,9 +24,9 @@ public class Castle : Structure
         healthSlider.GetComponent<Slider>().value = health;
     }
 
-    public override void SetHealth(float amount, bool fullyHeal = false)
-    {
-        base.SetHealth(health + amount);
-        healthSlider.GetComponent<Slider>().value = health;
-    }
+    //public override void SetHealth(float amount, bool fullyHeal = false)
+    //{
+    //    base.SetHealth(health + amount);
+    //    healthSlider.GetComponent<Slider>().value = health;
+    //}
 }
