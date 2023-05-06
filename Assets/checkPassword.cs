@@ -26,6 +26,8 @@ public class checkPassword : MonoBehaviour
 
     void Awake()
     {
+        DontDestroyOnLoad(debugMenu);
+
         if (Instance != null && Instance != this)
         {
             Destroy(this.gameObject);

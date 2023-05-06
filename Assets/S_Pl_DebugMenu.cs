@@ -19,18 +19,18 @@ public class S_Pl_DebugMenu : MonoBehaviour
     private bool waitingForInput;
     private bool statsOpen;
 
-    public bool adminMode = false;
+    //public bool adminMode = false;
 
     // Update is called once per frame
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.M))
         {
-            Debug.Log(adminMode);
             bool adminModeFetch =  checkPassword.Instance.adminMode;
             Debug.Log("Fetch: " + adminModeFetch);
             if (adminModeFetch == true)
             {
+                DebugMode.Instance.enabled = true;
                 Debug.Log("Admin Menu Open.");
                 AdminMenuControls.SetActive(true);
                 StartCoroutine(WaitForInput());

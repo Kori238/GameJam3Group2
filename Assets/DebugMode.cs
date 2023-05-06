@@ -7,6 +7,21 @@ public class DebugMode : MonoBehaviour        //https://stackoverflow.com/questi
     uint qsize = 15;  // number of messages to keep
     Queue myLogQueue = new Queue();
 
+    public static DebugMode Instance { get; private set; }  //https://gamedev.stackexchange.com/questions/186437/how-can-i-access-a-variable-on-a-script-in-another-scene-that-i-made-it-dontdest
+
+    void Awake()
+    {
+
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(this.gameObject);
+    }
+
     void Start()
     {
         Debug.Log("Started up logging.");
