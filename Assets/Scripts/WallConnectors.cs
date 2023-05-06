@@ -67,16 +67,20 @@ public class WallConnectors : MonoBehaviour
         adjacent = new bool[4];
         var cellPos = gameObject.GetComponent<Wall>().gridPos;
         if (Init.Instance.grid.GetStructureAtCell((int)cellPos.x, (int)cellPos.y + 1) != null && Init.Instance.grid
-                .GetStructureAtCell((int)cellPos.x, (int)cellPos.y + 1).CompareTag("Wall"))
+                .GetStructureAtCell((int)cellPos.x, (int)cellPos.y + 1).CompareTag("Wall") && 
+            !Init.Instance.grid.GetStructureAtCell((int)cellPos.x, (int)cellPos.y + 1).GetComponent<Structure>().destroyed)
             adjacent[0] = true;
         if (Init.Instance.grid.GetStructureAtCell((int)cellPos.x + 1, (int)cellPos.y) != null && Init.Instance.grid
-                .GetStructureAtCell((int)cellPos.x + 1, (int)cellPos.y).CompareTag("Wall"))
+                .GetStructureAtCell((int)cellPos.x + 1, (int)cellPos.y).CompareTag("Wall") && 
+            !Init.Instance.grid.GetStructureAtCell((int)cellPos.x + 1, (int)cellPos.y).GetComponent<Structure>().destroyed)
             adjacent[1] = true;
         if (Init.Instance.grid.GetStructureAtCell((int)cellPos.x, (int)cellPos.y - 1) != null && Init.Instance.grid
-                .GetStructureAtCell((int)cellPos.x, (int)cellPos.y - 1).CompareTag("Wall"))
+                .GetStructureAtCell((int)cellPos.x, (int)cellPos.y - 1).CompareTag("Wall") && 
+            !Init.Instance.grid.GetStructureAtCell((int)cellPos.x, (int)cellPos.y - 1).GetComponent<Structure>().destroyed)
             adjacent[2] = true;
         if (Init.Instance.grid.GetStructureAtCell((int)cellPos.x - 1, (int)cellPos.y) != null && Init.Instance.grid
-                .GetStructureAtCell((int)cellPos.x - 1, (int)cellPos.y).CompareTag("Wall"))
+                .GetStructureAtCell((int)cellPos.x - 1, (int)cellPos.y).CompareTag("Wall") && 
+            !Init.Instance.grid.GetStructureAtCell((int)cellPos.x - 1, (int)cellPos.y).GetComponent<Structure>().destroyed)
             adjacent[3] = true;
     }
 
