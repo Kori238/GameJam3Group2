@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8329114379578713061}
   - component: {fileID: 3961657693559851907}
   - component: {fileID: 5899767425550901396}
+  - component: {fileID: 5734495248683283344}
   m_Layer: 0
   m_Name: Wall
   m_TagString: Wall
@@ -94,6 +95,32 @@ MonoBehaviour:
   damageIndicator: {fileID: 3205582515357515026, guid: 5f4dbc4b19dbf5e4483d0af10644508b, type: 3}
   WoodRefund: 20
   StoneRefund: 0
+--- !u!61 &5734495248683283344
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429788955074775326}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.012108326}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.9686766, y: 2.0171108}
+  m_EdgeRadius: 0
 --- !u!1001 &1502861847494574389
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -163,6 +190,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8329114379578713061}
     m_Modifications:
+    - target: {fileID: -8746406346751906147, guid: d51561b7c0afc0746b2850669ba4ddae, type: 3}
+      propertyPath: m_Size.x
+      value: 1.9193926
+      objectReference: {fileID: 0}
+    - target: {fileID: -8746406346751906147, guid: d51561b7c0afc0746b2850669ba4ddae, type: 3}
+      propertyPath: m_Size.y
+      value: 2.9621181
+      objectReference: {fileID: 0}
+    - target: {fileID: -8746406346751906147, guid: d51561b7c0afc0746b2850669ba4ddae, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.022424221
+      objectReference: {fileID: 0}
+    - target: {fileID: -8746406346751906147, guid: d51561b7c0afc0746b2850669ba4ddae, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.0056061745
+      objectReference: {fileID: 0}
     - target: {fileID: 450660900357088009, guid: d51561b7c0afc0746b2850669ba4ddae, type: 3}
       propertyPath: m_Enabled
       value: 0

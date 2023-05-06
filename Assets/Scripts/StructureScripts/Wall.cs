@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Diagnostics;
+using UnityEngine.UI;
 
-public class Wall : Structure
+public class Wall : Interactable
 {
     public override void Destroyed() //Overrides Structure method in order to update the connectors sprites
     {
@@ -35,5 +37,11 @@ public class Wall : Structure
         occupiedSpace = new List<Node>();
         FindOccupiedSpace();
         OccupySpace();
+    }
+    public override void Interact()
+    {
+        if(Init.Instance.resourceManager.GetWood()>= 20) { SetHealth(0f,true); Init.Instance.resourceManager.AddWood(-20); gameObject.GetComponent<WallConnectors>().updateAllConnectors(); }
+
+        
     }
 }

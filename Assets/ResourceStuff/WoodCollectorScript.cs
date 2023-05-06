@@ -117,11 +117,7 @@ public class WoodCollectorScript : Interactable
             InstanceMenu.GetComponent<pMenu>().SetParentStructure(gameObject);
             
         }
-        else if (!toOpen)
-        {
-            Destroy(InstanceMenu);
-            toOpen = true;
-        }
+       
 
 
      

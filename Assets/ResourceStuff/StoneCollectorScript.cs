@@ -43,11 +43,7 @@ public class StoneCollectorScript : WoodCollectorScript
             InstanceMenu.GetComponent<pMenu>().SetParentStructure(gameObject);
 
         }
-        else if (!toOpen)
-        {
-            Destroy(InstanceMenu);
-            toOpen = true;
-        }
+     
     }
 
         public override string  getResourceType()

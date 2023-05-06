@@ -81,6 +81,7 @@ public class pMenu : MonoBehaviour
     }
     public void onCloseButton()
     {
+        ParentStructureScript.toOpen = true;
         Destroy(gameObject);
     }
     
