@@ -74,7 +74,23 @@ public class WoodCollectorScript : Interactable
         }
 
         overlapingObjects.Clear();
-        if(LocalTrees.Count == 0) { GameObject temp = Instantiate(BuildingNotificationPrefab, transform.position, Quaternion.identity); temp.GetComponent<resourcePopUp>().setText("INVALID LOCATION, NO RESOURCES NEAR BY"); Demolished(); Init.Instance.resourceManager.AddWood(woodB); Init.Instance.resourceManager.AddStone(stoneB); }
+        if(LocalTrees.Count == 0) 
+        { 
+            GameObject temp = Instantiate(BuildingNotificationPrefab, transform.position, Quaternion.identity);
+            temp.GetComponent<resourcePopUp>().setText("INVALID LOCATION, NO RESOURCES NEAR BY");
+
+            Vector2 pos=transform.position;
+           Vector2 cellPos =Init.Instance.grid.GetWorldCellPosition(pos.x,pos.y);
+            Init.Instance.grid.DemolishAtCell((int)cellPos.x, (int)cellPos.y);
+
+
+            
+            Init.Instance.resourceManager.AddWood(woodB); 
+            Init.Instance.resourceManager.AddStone(stoneB);
+
+
+        
+        }
         Debug.Log(CollectionAmount.ToString());
         base.Start();
     }
