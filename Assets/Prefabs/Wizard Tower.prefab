@@ -242,7 +242,7 @@ PrefabInstance:
       objectReference: {fileID: 7400000, guid: c608cffce115e4243bec7c9fb730a204, type: 2}
     - target: {fileID: 6201257626278293352, guid: 54b05267c83a2874098ca36184d8d891, type: 3}
       propertyPath: WoodRefund
-      value: 5
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6201257626278293352, guid: 54b05267c83a2874098ca36184d8d891, type: 3}
       propertyPath: projectile
@@ -250,7 +250,7 @@ PrefabInstance:
       objectReference: {fileID: 6902514113654393813, guid: 741ac0de7d009e74f8a39d95c873381c, type: 3}
     - target: {fileID: 6201257626278293352, guid: 54b05267c83a2874098ca36184d8d891, type: 3}
       propertyPath: StoneRefund
-      value: 5
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6201257626278293352, guid: 54b05267c83a2874098ca36184d8d891, type: 3}
       propertyPath: firingPoint

@@ -141,6 +141,9 @@ MonoBehaviour:
   hasCentralAttackPoint: 0
   occupiedSpaceCount: 0
   damageIndicator: {fileID: 0}
+  WoodRefund: 30
+  StoneRefund: 0
+  collectors: []
   resourcePU: {fileID: 7001411070169600475, guid: 2f2ca000bb1158748918cd56eb8a7079, type: 3}
 --- !u!61 &-1572090344944726726
 BoxCollider2D:

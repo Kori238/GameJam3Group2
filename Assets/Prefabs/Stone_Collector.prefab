@@ -99,8 +99,8 @@ MonoBehaviour:
   hasCentralAttackPoint: 0
   occupiedSpaceCount: 0
   damageIndicator: {fileID: 3205582515357515026, guid: 5f4dbc4b19dbf5e4483d0af10644508b, type: 3}
-  WoodRefund: 100
-  StoneRefund: 20
+  WoodRefund: 50
+  StoneRefund: 100
   PopMenu: {fileID: 4407538026853727937, guid: bc43c59aa8da8da4ba5b4608fe9be5fe, type: 3}
   BuildingNotificationPrefab: {fileID: 6641150058937854118, guid: e4ac53ae1aa7a3b41a0c675bba08d3e9, type: 3}
   CollectionAmount: 25

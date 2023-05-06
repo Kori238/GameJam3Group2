@@ -51,6 +51,7 @@ MonoBehaviour:
   center: {fileID: 6633121298439771283}
   connectorNS: {fileID: 1267592411322723027}
   connectorEW: {fileID: 397653728540424669}
+  connectors: []
   C: {fileID: 9005956472478688593, guid: d51561b7c0afc0746b2850669ba4ddae, type: 3}
   CD: {fileID: 9005956472478688593, guid: 5cbb32a417b903142b4559f06bb8097b, type: 3}
   NS: {fileID: 4477277725211790361, guid: f96784866e0bf994f9eb432d4d918e24, type: 3}
@@ -91,8 +92,8 @@ MonoBehaviour:
   hasCentralAttackPoint: 0
   occupiedSpaceCount: 0
   damageIndicator: {fileID: 3205582515357515026, guid: 5f4dbc4b19dbf5e4483d0af10644508b, type: 3}
-  WoodRefund: 5
-  StoneRefund: 5
+  WoodRefund: 20
+  StoneRefund: 0
 --- !u!1001 &1502861847494574389
 PrefabInstance:
   m_ObjectHideFlags: 0

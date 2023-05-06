@@ -4,10 +4,10 @@ using UnityEngine;
 public class StoneCollectorScript : WoodCollectorScript
 {
 
-   
 
 
- 
+
+
 
 
 
@@ -18,6 +18,9 @@ public class StoneCollectorScript : WoodCollectorScript
         woodUpgradeCost = 50;
         stoneUpgradeCost = 100;
         CollectionAmount = 25;
+        woodB = 50;
+        stoneB= 100;
+        
 
         base.Start();
     }

@@ -155,6 +155,7 @@ public class PlayerInteractionScript : MonoBehaviour
             currentTool = "demo";
             WhatsEquiped.SetText("Demolish Tool Equipped");
             Debug.Log("demo tool equiped");
+            buildingCostPanel.SetActive(false);
         }
     }
 

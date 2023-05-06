@@ -39,9 +39,12 @@ public class WoodCollectorScript : Interactable
     public int stoneRepairCost=5;
 
     public string resourceType = "wood";
-    
+    public int woodB = 100;
+    public int stoneB = 0;
+
     public override void Start()
     {
+       
         UpgradeDescription = ("Upgrade to level 2 and increase production to "+ (CollectionAmount+25));
 
         collectZone.GetComponent<Collider2D>().OverlapCollider(treeFilter,overlapingObjects);
@@ -71,7 +74,7 @@ public class WoodCollectorScript : Interactable
         }
 
         overlapingObjects.Clear();
-        if(LocalTrees.Count == 0) { GameObject temp = Instantiate(BuildingNotificationPrefab, transform.position, Quaternion.identity); temp.GetComponent<resourcePopUp>().setText("INVALID LOCATION, NO RESOURCES NEAR BY"); Demolished(); }
+        if(LocalTrees.Count == 0) { GameObject temp = Instantiate(BuildingNotificationPrefab, transform.position, Quaternion.identity); temp.GetComponent<resourcePopUp>().setText("INVALID LOCATION, NO RESOURCES NEAR BY"); Demolished(); Init.Instance.resourceManager.AddWood(woodB); Init.Instance.resourceManager.AddStone(stoneB); }
         Debug.Log(CollectionAmount.ToString());
         base.Start();
     }
