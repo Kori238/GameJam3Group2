@@ -5972,8 +5972,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 62, y: -146}
-  m_SizeDelta: {x: 743.6222, y: 257.4206}
+  m_AnchoredPosition: {x: 0, y: -138}
+  m_SizeDelta: {x: 503.5048, y: 180.3597}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1796155551
 MonoBehaviour:
@@ -5995,30 +5995,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'WASD - Movement
-
-    Shift - Dash Forward
-
-    Mouse1 - Main Attack
-
-    Space
-    - Tunnel Mode
-
-    Z - Camera Zoom
-
-    1 - Interact
-
-    2 - Place Wood Collector
-
-    3
-    - Place Stone Collector
-
-    T - Pathfinding Query (RMB one node then RMB second
-    node)
-
-    Esc - Pause Menu
-
-    M - Admin Menu'
+  m_text: "WASD - Movement\nShift - Dash Forward (Watch out for stamina!)\nMouse1
+    - Main Hand Use (Main attack/Placing)\nSpace - Tunnel Mode (Tunnel under walls)\nScroll
+    In/Out - Zoom In/Out\n1-8 - Hotbar Items \nEsc - Pause Menu"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
