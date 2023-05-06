@@ -169,7 +169,7 @@ public class Grid
 
     public void OutlineCell(int x, int y, Transform outline)
     {
-        if (x > _width || y > _height || x < 0 || y < 0)
+        if (x > _width-1 || y > _height-1 || x < 0 || y < 0)
         {
             Debug.Log("Could not outline cell at position " + x + " " + y + "as these co-ordinates are invalid");
             return;
@@ -179,7 +179,7 @@ public class Grid
 
     public void DeOutlineCell(int x, int y)
     {
-        if (x > _width || y > _height || x < 0 || y < 0)
+        if (x > _width-1 || y > _height-1 || x < 0 || y < 0)
         {
             Debug.Log("Could not deoutline cell at position " + x + " " + y + "as these co-ordinates are invalid");
             return;
