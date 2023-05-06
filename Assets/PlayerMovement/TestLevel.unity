@@ -14284,6 +14284,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1762246958}
     - target: {fileID: 5048883363140918956, guid: 0e1588dcc6c7b5d47bb5c54ff9f42f92, type: 3}
+      propertyPath: adminMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5048883363140918956, guid: 0e1588dcc6c7b5d47bb5c54ff9f42f92, type: 3}
       propertyPath: ComputerUsage
       value: 
       objectReference: {fileID: 1765353957}

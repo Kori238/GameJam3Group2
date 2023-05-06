@@ -1541,6 +1541,7 @@ GameObject:
   - component: {fileID: 485537528}
   - component: {fileID: 485537527}
   - component: {fileID: 485537526}
+  - component: {fileID: 485537529}
   m_Layer: 5
   m_Name: Passwod
   m_TagString: Untagged
@@ -1631,7 +1632,7 @@ MonoBehaviour:
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8563421314861526990, guid: b2666d74f42f4814591949f1582f33ad, type: 3}
+      - m_Target: {fileID: 485537529}
         m_TargetAssemblyTypeName: checkPassword, Assembly-CSharp
         m_MethodName: checkString
         m_Mode: 0
@@ -1717,6 +1718,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 485537524}
   m_CullTransparentMesh: 1
+--- !u!114 &485537529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 485537524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb70213189e906e47953597fa36f1c20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DebugMode: {fileID: 663656932}
+  cPs: {fileID: 485537529}
+  adminMode: 0
+  debugMenu: {fileID: 5048883363140918959, guid: 0e1588dcc6c7b5d47bb5c54ff9f42f92, type: 3}
 --- !u!1 &488124460
 GameObject:
   m_ObjectHideFlags: 0
@@ -2507,6 +2524,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &663656932 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7579285567351593767, guid: b2666d74f42f4814591949f1582f33ad, type: 3}
+  m_PrefabInstance: {fileID: 1269751326}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &718331359
 GameObject:
   m_ObjectHideFlags: 0
@@ -4084,13 +4106,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7579285567351593766, guid: b2666d74f42f4814591949f1582f33ad, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7579285567351593767, guid: b2666d74f42f4814591949f1582f33ad, type: 3}
       propertyPath: m_Name
       value: DebugMode
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 7579285567351593767, guid: b2666d74f42f4814591949f1582f33ad, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8563421314861526990, guid: b2666d74f42f4814591949f1582f33ad, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b2666d74f42f4814591949f1582f33ad, type: 3}
 --- !u!1 &1290347807
 GameObject:
