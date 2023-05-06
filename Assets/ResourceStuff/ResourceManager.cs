@@ -8,9 +8,9 @@ public class ResourceManager
 {
     private int maxMinions;
     private int starlight;
-    private int stone;
+    private int stone=200;
     private int unassignedMinions;
-    private int wood;
+    private int wood=200;
     private List<Transform> availableMinions = new List<Transform>();
     public resourceUIScript resourceUI;
    

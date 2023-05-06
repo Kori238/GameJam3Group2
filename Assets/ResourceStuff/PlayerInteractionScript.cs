@@ -13,6 +13,9 @@ public class PlayerInteractionScript : MonoBehaviour
     [SerializeField] private GameObject resourcePU;
     [SerializeField] private TMP_Text WhatsEquiped;
     [SerializeField] private Transform Tower;
+    [SerializeField] private GameObject buildingCostPanel;
+    [SerializeField] private TextMeshProUGUI woodCost;
+    [SerializeField] private TextMeshProUGUI stoneCost;
 
     [SerializeField] private GameObject BuildingNotificationPrefab;
 
@@ -77,6 +80,8 @@ public class PlayerInteractionScript : MonoBehaviour
             currentTool = "Sword";
             WhatsEquiped.SetText("Sword Equipped");
             select.transform.position = H1.transform.position;
+            buildingCostPanel.SetActive(false);
+
         }
         if (Input.GetKeyDown("2"))
         {
@@ -84,6 +89,7 @@ public class PlayerInteractionScript : MonoBehaviour
             currentTool = "Interact";
             WhatsEquiped.SetText("Interact/Axe Tool Equipped");
             select.transform.position = H2.transform.position;
+            buildingCostPanel.SetActive(false);
         }
         if (Input.GetKeyDown("3"))
         {
@@ -91,6 +97,9 @@ public class PlayerInteractionScript : MonoBehaviour
             currentTool = "WoodCollector";
             WhatsEquiped.SetText("Wood Collector Equipped");
             select.transform.position = H3.transform.position;
+            buildingCostPanel.SetActive(true);
+            woodCost.SetText("100    <sprite=0>");
+            stoneCost.SetText("");
         }
         if (Input.GetKeyDown("4"))
         {
@@ -98,6 +107,9 @@ public class PlayerInteractionScript : MonoBehaviour
             currentTool = "StoneCollector";
             WhatsEquiped.SetText("Stone Collector Equipped");
             select.transform.position = H4.transform.position;
+            buildingCostPanel.SetActive(true);
+            woodCost.SetText("50    <sprite=0>");
+            stoneCost.SetText("100  <sprite=0>");
         }
         if (Init.Instance.testPathfinding && Input.GetKeyDown(KeyCode.T))
         {
@@ -111,6 +123,9 @@ public class PlayerInteractionScript : MonoBehaviour
             currentTool = "minionHouse";
             WhatsEquiped.SetText("Minion House Equipped");
             select.transform.position = H6.transform.position;
+            buildingCostPanel.SetActive(true);
+            woodCost.SetText("100   <sprite=0>");
+            stoneCost.SetText("");
         }
         if (Input.GetKeyDown("5"))
         {
@@ -118,13 +133,19 @@ public class PlayerInteractionScript : MonoBehaviour
             currentTool = "wall";
             WhatsEquiped.SetText("Wall Equipped");
             select.transform.position = H5.transform.position;
+            buildingCostPanel.SetActive(true);
+            woodCost.SetText("20    <sprite=0>");
+            stoneCost.SetText("");
         }
         if (Input.GetKeyDown("7"))
         {
             DemoBorder.SetActive(false);
-            currentTool = "tower";   // NOT IMPLEMENTED
+            currentTool = "tower";   
             WhatsEquiped.SetText("Tower Equipped");
             select.transform.position = H7.transform.position;
+            buildingCostPanel.SetActive(true);
+            woodCost.SetText("50    <sprite=0>");
+            stoneCost.SetText("100  <sprite=0>");
         }
         if (Input.GetKeyDown("b"))
         {
@@ -136,6 +157,9 @@ public class PlayerInteractionScript : MonoBehaviour
             Debug.Log("demo tool equiped");
         }
     }
+
+
+    
     private void PlayerInterct() //allows mutilple function to be called from mouse button 2
     {
         if (abilitiesScript.digging) return;
@@ -297,7 +321,7 @@ public class PlayerInteractionScript : MonoBehaviour
         Vector2 MousePos = Input.mousePosition;
         Vector2 MouseWorldPos = Camera.main.ScreenToWorldPoint(MousePos);
         Vector2 gridPos;
-        if (Init.Instance.resourceManager.GetWood() >= 0)
+        if (Init.Instance.resourceManager.GetWood() >= 100)
         {
             gridPos = Init.Instance.grid.GetWorldCellPosition(MouseWorldPos.x, MouseWorldPos.y);
             var valid = Init.Instance.grid.BuildAtCell((int)gridPos.x, (int)gridPos.y, WoodCollector);
@@ -305,7 +329,7 @@ public class PlayerInteractionScript : MonoBehaviour
             if (valid)
             {
 
-                //Init.Instance.resourceManager.AddWood(-50);
+                Init.Instance.resourceManager.AddWood(-100);
 
             }
             else { GameObject temp = Instantiate(BuildingNotificationPrefab, transform.position, Quaternion.identity); temp.GetComponent<resourcePopUp>().setText("INVALID LOCATION"); }
@@ -318,11 +342,16 @@ public class PlayerInteractionScript : MonoBehaviour
         Vector2 MousePos = Input.mousePosition;
         Vector2 MouseWorldPos = Camera.main.ScreenToWorldPoint(MousePos);
         Vector2 gridPos;
-        if (Init.Instance.resourceManager.GetWood() >= 0)
+        if (Init.Instance.resourceManager.GetWood() >= 20)
         {
             gridPos = Init.Instance.grid.GetWorldCellPosition(MouseWorldPos.x, MouseWorldPos.y);
             var valid = Init.Instance.grid.BuildAtCell((int)gridPos.x, (int)gridPos.y, Wall);
-            if (valid) { }
+            if (valid)
+            {
+
+                Init.Instance.resourceManager.AddWood(-20);
+
+            }
             else { GameObject temp = Instantiate(BuildingNotificationPrefab, transform.position, Quaternion.identity); temp.GetComponent<resourcePopUp>().setText("INVALID LOCATION"); }
         }
         else { GameObject temp = Instantiate(BuildingNotificationPrefab, transform.position, Quaternion.identity); temp.GetComponent<resourcePopUp>().setText("NOT ENOUGH RESOURCES"); }
@@ -335,7 +364,7 @@ public class PlayerInteractionScript : MonoBehaviour
         Vector2 MousePos = Input.mousePosition;
         Vector2 MouseWorldPos = Camera.main.ScreenToWorldPoint(MousePos);
         Vector2 gridPos;
-        if (Init.Instance.resourceManager.GetWood() >= 0)
+        if (Init.Instance.resourceManager.GetWood() >= 50 && Init.Instance.resourceManager.GetStone()>= 100)
         {
             gridPos = Init.Instance.grid.GetWorldCellPosition(MouseWorldPos.x, MouseWorldPos.y);
             var valid = Init.Instance.grid.BuildAtCell((int)gridPos.x, (int)gridPos.y, Tower);
@@ -343,7 +372,8 @@ public class PlayerInteractionScript : MonoBehaviour
             if (valid)
             {
 
-                //Init.Instance.resourceManager.AddWood(-50);
+                Init.Instance.resourceManager.AddWood(-50);
+                Init.Instance.resourceManager.AddStone(-100);
 
             }
             else { GameObject temp = Instantiate(BuildingNotificationPrefab, transform.position, Quaternion.identity); temp.GetComponent<resourcePopUp>().setText("INVALID LOCATION"); }
@@ -358,14 +388,15 @@ public class PlayerInteractionScript : MonoBehaviour
         Vector2 MousePos = Input.mousePosition;
         Vector2 MouseWorldPos = Camera.main.ScreenToWorldPoint(MousePos);
         Vector2 gridPos;
-        if (Init.Instance.resourceManager.GetStone() >= 0)
+        if (Init.Instance.resourceManager.GetWood()>=50 && Init.Instance.resourceManager.GetStone() >= 100)
         {
             gridPos = Init.Instance.grid.GetWorldCellPosition(MouseWorldPos.x, MouseWorldPos.y);
             var valid = Init.Instance.grid.BuildAtCell((int)gridPos.x, (int)gridPos.y, StoneCollector);
 
             if (valid)
             {
-                Init.Instance.resourceManager.AddStone(0);
+                Init.Instance.resourceManager.AddWood(-50);
+                Init.Instance.resourceManager.AddStone(-100);
             }
             else { GameObject temp = Instantiate(BuildingNotificationPrefab, transform.position, Quaternion.identity); temp.GetComponent<resourcePopUp>().setText("INVALID LOCATION"); }
         }
@@ -378,14 +409,14 @@ public class PlayerInteractionScript : MonoBehaviour
         Vector2 MousePos = Input.mousePosition;
         Vector2 MouseWorldPos = Camera.main.ScreenToWorldPoint(MousePos);
         Vector2 gridPos;
-        if (Init.Instance.resourceManager.GetWood() >= 0)
+        if (Init.Instance.resourceManager.GetWood() >= 100)
         {
             gridPos = Init.Instance.grid.GetWorldCellPosition(MouseWorldPos.x, MouseWorldPos.y);
             var valid = Init.Instance.grid.BuildAtCell((int)gridPos.x, (int)gridPos.y, minionHouse);
 
             if (valid)
             {
-                //  Init.Instance.resourceManager.AddStone(0);
+                  Init.Instance.resourceManager.AddWood(-100);
             }
             else
             {
