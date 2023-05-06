@@ -166,4 +166,8 @@ MonoBehaviour:
   isSpaceOccupied: 0
   hasCentralAttackPoint: 0
   occupiedSpaceCount: 0
+  damageIndicator: {fileID: 0}
+  WoodRefund: 0
+  StoneRefund: 30
   resourcePU: {fileID: 7001411070169600475, guid: 2f2ca000bb1158748918cd56eb8a7079, type: 3}
+  collectors: []

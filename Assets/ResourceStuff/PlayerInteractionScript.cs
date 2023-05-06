@@ -13,6 +13,8 @@ public class PlayerInteractionScript : MonoBehaviour
     [SerializeField] private GameObject resourcePU;
     [SerializeField] private TMP_Text WhatsEquiped;
     [SerializeField] private Transform Tower;
+    [SerializeField] private Transform TowerArcher;
+    [SerializeField] private Transform TowerArtillery;
     [SerializeField] private GameObject buildingCostPanel;
     [SerializeField] private TextMeshProUGUI woodCost;
     [SerializeField] private TextMeshProUGUI stoneCost;
@@ -141,8 +143,28 @@ public class PlayerInteractionScript : MonoBehaviour
         {
             DemoBorder.SetActive(false);
             currentTool = "tower";   
-            WhatsEquiped.SetText("Tower Equipped");
+            WhatsEquiped.SetText("Magic Tower Equipped");
             select.transform.position = H7.transform.position;
+            buildingCostPanel.SetActive(true);
+            woodCost.SetText("50    <sprite=0>");
+            stoneCost.SetText("100  <sprite=0>");
+        }
+        if (Input.GetKeyDown("8"))
+        {
+            DemoBorder.SetActive(false);
+            currentTool = "towerArcher";
+            WhatsEquiped.SetText("Archer Tower Equipped");
+            select.transform.position = H8.transform.position;
+            buildingCostPanel.SetActive(true);
+            woodCost.SetText("50    <sprite=0>");
+            stoneCost.SetText("100  <sprite=0>");
+        }
+        if (Input.GetKeyDown("9"))
+        {
+            DemoBorder.SetActive(false);
+            currentTool = "towerArtillery";
+            WhatsEquiped.SetText("Artillery Tower Equipped");
+            select.transform.position = H9.transform.position;
             buildingCostPanel.SetActive(true);
             woodCost.SetText("50    <sprite=0>");
             stoneCost.SetText("100  <sprite=0>");
@@ -203,12 +225,22 @@ public class PlayerInteractionScript : MonoBehaviour
                 }
             case "tower":
                 {
-                    PlaceTower();
+                    PlaceTower(Tower);
                     break;
                 }
             case "demo":
                 {
                     demolish();
+                    break;
+                }
+            case "towerArcher":
+                {
+                    PlaceTower(TowerArcher);
+                    break;
+                }
+            case "towerArtillery":
+                {
+                    PlaceTower(TowerArtillery);
                     break;
                 }
         }
@@ -360,7 +392,7 @@ public class PlayerInteractionScript : MonoBehaviour
 
     }
 
-    private void PlaceTower()
+    private void PlaceTower(Transform newTower)
     {
         Vector2 MousePos = Input.mousePosition;
         Vector2 MouseWorldPos = Camera.main.ScreenToWorldPoint(MousePos);
@@ -368,7 +400,7 @@ public class PlayerInteractionScript : MonoBehaviour
         if (Init.Instance.resourceManager.GetWood() >= 50 && Init.Instance.resourceManager.GetStone()>= 100)
         {
             gridPos = Init.Instance.grid.GetWorldCellPosition(MouseWorldPos.x, MouseWorldPos.y);
-            var valid = Init.Instance.grid.BuildAtCell((int)gridPos.x, (int)gridPos.y, Tower);
+            var valid = Init.Instance.grid.BuildAtCell((int)gridPos.x, (int)gridPos.y, newTower);
 
             if (valid)
             {
