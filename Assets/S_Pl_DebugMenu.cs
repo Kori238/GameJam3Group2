@@ -1,5 +1,6 @@
 using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class S_Pl_DebugMenu : MonoBehaviour
@@ -26,19 +27,20 @@ public class S_Pl_DebugMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.M))
         {
-            bool adminModeFetch =  checkPassword.Instance.adminMode;
-            Debug.Log("Fetch: " + adminModeFetch);
-            if (adminModeFetch == true)
-            {
-                DebugMode.Instance.enabled = true;
-                Debug.Log("Admin Menu Open.");
-                AdminMenuControls.SetActive(true);
-                StartCoroutine(WaitForInput());
-            }
-            else
-            {
-                Debug.Log("Access Denied: please enter admin password in options.");
-            }
+                bool adminModeFetch = checkPassword.Instance.adminMode;
+                Debug.Log("Fetch: " + adminModeFetch);
+
+                if (adminModeFetch == true)
+                {
+                    DebugMode.Instance.enabled = true;
+                    Debug.Log("Admin Menu Open.");
+                    AdminMenuControls.SetActive(true);
+                    StartCoroutine(WaitForInput());
+                }
+                else
+                {
+                    Debug.Log("Access Denied: please enter admin password in options.");
+                }
         }
 
         if (waitingForInput)
