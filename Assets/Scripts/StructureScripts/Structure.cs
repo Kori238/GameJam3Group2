@@ -268,7 +268,6 @@ public class Structure : MonoBehaviour
         else if (!destroyed && health <= 0)
         {
             Destroyed();
-            UpdateStructure();
         }
         
     }

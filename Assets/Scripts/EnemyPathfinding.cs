@@ -122,12 +122,8 @@ public class EnemyPathfinding : MonoBehaviour
         }
         if (target == null)
         {
-            Pathfind();
-            if (target == null)
-            {
-                MoveTowardsBase();
-                return;
-            }
+            MoveTowardsBase();
+            return;
         }
         if (!moving || _currentPath == null || _currentPath.nodes.Count <= 0) return;
         var targetNode = _currentPath.nodes[currentPathIndex];
@@ -163,7 +159,14 @@ public class EnemyPathfinding : MonoBehaviour
     public IEnumerator PathfindingLoop()
     {
         Pathfind();
-        yield return new WaitForSeconds(1f);
+        if (target == null)
+        {
+            yield return new WaitForSeconds(0.1f);
+        }
+        else
+        {
+            yield return new WaitForSeconds(1f);
+        }
         yield return PathfindingLoop();
     }
 

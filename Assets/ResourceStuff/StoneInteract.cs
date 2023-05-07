@@ -36,7 +36,6 @@ public class StoneInteract : Interactable
     }
     public override void CreateAttackPoints()
     {
-       base.CreateAttackPoints();
     }
 
 

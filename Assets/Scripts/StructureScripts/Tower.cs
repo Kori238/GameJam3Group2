@@ -24,6 +24,10 @@ public class Tower : Interactable
     [SerializeField] private Animator animator = null;
     [SerializeField] private AnimationClip shootClip = null;
     [SerializeField] private AnimationClip idleClip = null;
+    [SerializeField] private bool previousDestroyedState = false;
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private Sprite defaultSprite;
+    [SerializeField] private Sprite destroyedSprite;
 
     private GameObject InstanceMenu;
     [SerializeField] private GameObject PopMenu;
@@ -43,6 +47,28 @@ public class Tower : Interactable
             (int)(Init.Instance.gridDimensions.y - 1) / 2);
         InvokeRepeating(nameof(AttackTarget), 0f, attackRate);
         base.Start();
+    }
+
+
+    public override void UpdateStructure()
+    {
+        if (destroyed == previousDestroyedState)
+        {
+            base.UpdateStructure();
+            return;
+        }
+        previousDestroyedState = destroyed;
+        Debug.Log(destroyed);
+        if (!destroyed)
+        {
+            spriteRenderer.sprite = defaultSprite;
+            if (occupant != null) occupant.gameObject.SetActive(true);
+        }
+        else {
+            spriteRenderer.sprite = destroyedSprite;
+            if (occupant != null) occupant.gameObject.SetActive(false);
+        }
+        base.UpdateStructure(); 
     }
 
     public override void Interact()

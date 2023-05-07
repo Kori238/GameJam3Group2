@@ -181,5 +181,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   shootClip: {fileID: 0}
   idleClip: {fileID: 0}
-  towerDestroyed: {fileID: 2273210677153966738, guid: bcbda4c16bae67b4db2482fc810f162d, type: 3}
+  spriteRenderer: {fileID: 3709763574979629582}
+  defaultSprite: {fileID: 21300000, guid: 4cf843994a68d234ea3a08e956bd74be, type: 3}
+  destroyedSprite: {fileID: 21300000, guid: b21136d9b358d064f833f47a53f5a3dd, type: 3}
   PopMenu: {fileID: 0}
