@@ -124,12 +124,16 @@ public class Grid
     private readonly float _cellSize;
     private readonly int _height;
     private readonly int _width;
+    private readonly int _widthCheck;
+    private readonly int _heightCheck;
     public readonly GridCell[,] gridArray;
 
     public Grid(int width, int height, float cellSize)
     {
         _width = width; // this is called by Init to define the width, height and cellSize there
+        _widthCheck = width - 1;
         _height = height;
+        _heightCheck = height - 1;
         _cellSize = cellSize;
 
 
@@ -169,7 +173,7 @@ public class Grid
 
     public void OutlineCell(int x, int y, Transform outline)
     {
-        if (x > _width-1 || y > _height-1 || x < 0 || y < 0)
+        if (x > _widthCheck || y > _heightCheck || x < 0 || y < 0)
         {
             Debug.Log("Could not outline cell at position " + x + " " + y + "as these co-ordinates are invalid");
             return;
@@ -179,7 +183,7 @@ public class Grid
 
     public void DeOutlineCell(int x, int y)
     {
-        if (x > _width-1 || y > _height-1 || x < 0 || y < 0)
+        if (x > _widthCheck || y > _heightCheck || x < 0 || y < 0)
         {
             Debug.Log("Could not deoutline cell at position " + x + " " + y + "as these co-ordinates are invalid");
             return;
@@ -188,7 +192,7 @@ public class Grid
     }
     public bool BuildAtCell(int x, int y, Transform structure)
     {
-        if (x > _width || y > _height || x < 0 || y < 0)
+        if (x > _widthCheck || y > _heightCheck || x < 0 || y < 0)
         {
             Debug.Log("Could not build at position " + x + " " + y + " as these co-ordinates are invalid");
             return false;
@@ -198,7 +202,7 @@ public class Grid
 
     public bool DemolishAtCell(int x, int y)
     {
-        if (x > _width || y > _height || x < 0 || y < 0)
+        if (x > _widthCheck || y > _height || x < 0 || y < 0)
         {
             Debug.Log("Could not destroy at position " + x + " " + y + " as these co-ordinates are invalid");
             return false;
@@ -208,7 +212,7 @@ public class Grid
 
     public bool DamageAtCell(int x, int y, float amount)
     {
-        if (x > _width || y > _height || x < 0 || y < 0)
+        if (x > _widthCheck || y > _heightCheck || x < 0 || y < 0)
         {
             Debug.Log("Could not damage at position " + x + " " + y + " as these co-ordinates are invalid");
             return false;
@@ -218,7 +222,7 @@ public class Grid
 
     public GameObject GetStructureAtCell(int x, int y)
     {
-        if (x <= _width && y <= _height && x >= 0 && y >= 0)
+        if (x <= _widthCheck && y <= _heightCheck && x >= 0 && y >= 0)
             return (GameObject)gridArray[x, y].Values["structure"];
         Debug.Log("Attempted to find structure at " + x + " " + y + " but these co-ordinates are out of range");
         return null;
@@ -226,7 +230,7 @@ public class Grid
 
     public bool HealAtCell(int x, int y, float amount)
     {
-        if (x > _width || y > _height || x < 0 || y < 0)
+        if (x > _widthCheck || y > _heightCheck || x < 0 || y < 0)
         {
             Debug.Log("Could not heal at position " + x + " " + y + " as these co-ordinates are invalid");
             return false;
@@ -236,7 +240,7 @@ public class Grid
 
     public bool SetHealthAtCell(int x, int y, float amount, bool fullyHeal = false)
     {
-        if (x > _width || y > _height || x < 0 || y < 0)
+        if (x > _widthCheck || y > _heightCheck || x < 0 || y < 0)
         {
             Debug.Log("Could not set health at position " + x + " " + y + " as these co-ordinates are invalid");
             return false;
