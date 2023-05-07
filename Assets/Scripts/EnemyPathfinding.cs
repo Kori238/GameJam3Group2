@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using Random = System.Random;
 
@@ -124,6 +125,7 @@ public class EnemyPathfinding : MonoBehaviour
         {
             MoveTowardsBase();
             return;
+            
         }
         if (!moving || _currentPath == null || _currentPath.nodes.Count <= 0) return;
         var targetNode = _currentPath.nodes[currentPathIndex];
