@@ -11,7 +11,7 @@ public class ResourceManager
     private int stone=250;
     private int unassignedMinions;
     private int wood=500;
-    private List<Transform> availableMinions = new List<Transform>();
+    public List<MinionScript> availableMinions = new List<MinionScript>();
     public resourceUIScript resourceUI;
    
   
@@ -60,24 +60,11 @@ public class ResourceManager
         unassignedMinions = unassignedMinions + newMinionToAssign;
     }
 
-    public void AddToMinionsList(List<Transform> MinionToAdd)
+  
 
-    {
-        int i = MinionToAdd.Count;
-         
-        for(int j=0 ; j <i; j++)
-        {
 
-            
-            Transform temp= MinionToAdd[j];
-            availableMinions.Add(temp);
-            Debug.Log( " minionList");
-            
-            
-        }
-        Debug.Log(availableMinions[0]);
-    }
-    public void addSingleMinionToList(Transform minionToAdd)
+
+    public void addSingleMinionToList(MinionScript minionToAdd)
     {
         availableMinions.Add(minionToAdd);
     }
@@ -85,14 +72,18 @@ public class ResourceManager
     public Transform GetMinionList()
     {
 
-
+    
         
-        Transform temp = availableMinions[availableMinions.Count - 1];
+        Transform temp = availableMinions[availableMinions.Count - 1].transform;
         availableMinions.RemoveAt(availableMinions.Count - 1);
         return temp;
     }
     public int getAvailableMinionLength()
     {
         return availableMinions.Count;
+    }
+    public void removeFromAvailibleMinionList(MinionScript tempMinion)
+    {
+        availableMinions.Remove(tempMinion);
     }
 }

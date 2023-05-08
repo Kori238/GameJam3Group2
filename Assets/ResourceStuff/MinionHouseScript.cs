@@ -17,10 +17,10 @@ public class MinionHouseScript : Interactable
             Transform newMinion = Instantiate(Minion, Location, Quaternion.identity);
             newMinion.GetComponent<MinionScript>().setHouse(this);
             housedMinions.Add(newMinion);
+           
 
-            Init.Instance.resourceManager.AddToMinionsList(housedMinions);
         }
-        
+      
         base.Start();
         
     }

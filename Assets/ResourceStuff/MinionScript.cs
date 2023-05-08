@@ -29,6 +29,7 @@ public class MinionScript : MonoBehaviour
     private void Start()
     {
         time = GameObject.Find("Time").GetComponent<TimeController>();
+       
     }
 
     private void FixedUpdate()
@@ -188,13 +189,14 @@ public class MinionScript : MonoBehaviour
     public bool setHouse(Structure newHouse) 
     {
         house= newHouse;
+        Init.Instance.resourceManager.addSingleMinionToList(this);
         return true;
     }
     public void setCollectionAmount(int newAmount) { collectionAmount = newAmount; }
     public void deHouse()
     {
-        if(jobLocation!=null) { jobLocation.GetComponent<WoodCollectorScript>().unassignDeadMinion(this); }
-        
+        if(jobLocation!=null) { jobLocation.GetComponent<WoodCollectorScript>().unassignDeadMinion(this);  }
+        Init.Instance.resourceManager.removeFromAvailibleMinionList(this);
         Destroy(gameObject);
     }
 }

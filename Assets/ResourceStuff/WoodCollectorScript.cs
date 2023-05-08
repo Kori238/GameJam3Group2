@@ -225,7 +225,7 @@ public class WoodCollectorScript : Interactable
             MinionScript temp = MinionList[MinionList.Count - 1];
             MinionList.RemoveAt(MinionList.Count - 1);
             temp.setJobLocation(null);
-            Init.Instance.resourceManager.addSingleMinionToList(temp.transform);
+            Init.Instance.resourceManager.addSingleMinionToList(temp);
             MAssigned = MinionList.Count;
        
        
