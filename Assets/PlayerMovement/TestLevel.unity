@@ -2746,7 +2746,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &356671657
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2765,10 +2765,10 @@ RectTransform:
   m_Father: {fileID: 1912142443}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.1182251, y: -2.5676}
-  m_SizeDelta: {x: 24, y: 40.6}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0.1182251, y: -2.5675964}
+  m_SizeDelta: {x: -1054, y: -503.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &363881548
 GameObject:
@@ -3489,7 +3489,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1500850931}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1.5
+  m_MaxValue: 0.7
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -13643,7 +13643,7 @@ MonoBehaviour:
   clock: {fileID: 1645789609}
   timer: {fileID: 2056456144}
   timeScale: 1
-  clockSpeed: 3
+  clockSpeed: 2
   maptiles:
   - {fileID: 1451860184}
   - {fileID: 1120545921}
@@ -14066,7 +14066,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.4144, y: -1.712}
+  m_AnchoredPosition: {x: -0.4144287, y: -1.7120056}
   m_SizeDelta: {x: 1302.2129, y: 716.8245}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2130330864
