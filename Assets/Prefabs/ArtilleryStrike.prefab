@@ -30,18 +30,18 @@ PrefabInstance:
     - target: {fileID: 6357283317103094972, guid: b7f1f4a398493e64f82df7f41573a6b4, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -2413806693520163455, guid: 9713183a4b82aa6469a003545ac082f4, type: 3}
+      objectReference: {fileID: 21300000, guid: 2c2edf63c4746d24681edc94c473a9b9, type: 3}
     - target: {fileID: 6357283317103094972, guid: b7f1f4a398493e64f82df7f41573a6b4, type: 3}
       propertyPath: m_Color.b
-      value: 0.4056604
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6357283317103094972, guid: b7f1f4a398493e64f82df7f41573a6b4, type: 3}
       propertyPath: m_Color.g
-      value: 0.4056604
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6357283317103094972, guid: b7f1f4a398493e64f82df7f41573a6b4, type: 3}
       propertyPath: m_Color.r
-      value: 0.4056604
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7466798797180198136, guid: b7f1f4a398493e64f82df7f41573a6b4, type: 3}
       propertyPath: m_RootOrder
@@ -101,7 +101,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8097233012308975147, guid: b7f1f4a398493e64f82df7f41573a6b4, type: 3}
       propertyPath: m_Name
-      value: Fireball
+      value: ArtilleryStrike
       objectReference: {fileID: 0}
     - target: {fileID: 8332220108689638058, guid: b7f1f4a398493e64f82df7f41573a6b4, type: 3}
       propertyPath: flyClip

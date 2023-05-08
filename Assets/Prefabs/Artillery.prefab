@@ -91,9 +91,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3709763574979629582, guid: 54b05267c83a2874098ca36184d8d891, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3709763574979629582, guid: 54b05267c83a2874098ca36184d8d891, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: cbde9db5aa034b14699d855cb44f5d31, type: 3}
+    - target: {fileID: 3709763574979629582, guid: 54b05267c83a2874098ca36184d8d891, type: 3}
+      propertyPath: m_SpriteSortPoint
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6201257626278293352, guid: 54b05267c83a2874098ca36184d8d891, type: 3}
+      propertyPath: projectile
+      value: 
+      objectReference: {fileID: 6902514113654393813, guid: 741ac0de7d009e74f8a39d95c873381c, type: 3}
     - target: {fileID: 6201257626278293352, guid: 54b05267c83a2874098ca36184d8d891, type: 3}
       propertyPath: firingPoint
       value: 
@@ -102,6 +114,10 @@ PrefabInstance:
       propertyPath: defaultSprite
       value: 
       objectReference: {fileID: 21300000, guid: cbde9db5aa034b14699d855cb44f5d31, type: 3}
+    - target: {fileID: 6201257626278293352, guid: 54b05267c83a2874098ca36184d8d891, type: 3}
+      propertyPath: destroyedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0bcf3d1b817388d4ea091ddd8ec54cae, type: 3}
     - target: {fileID: 7755978259375396982, guid: 54b05267c83a2874098ca36184d8d891, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.71

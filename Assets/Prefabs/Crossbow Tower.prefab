@@ -200,10 +200,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6201257626278293352, guid: 54b05267c83a2874098ca36184d8d891, type: 3}
-      propertyPath: PopMenu
-      value: 
-      objectReference: {fileID: 1011456130296947494, guid: da31027617457254993ef8ea7e900883, type: 3}
-    - target: {fileID: 6201257626278293352, guid: 54b05267c83a2874098ca36184d8d891, type: 3}
       propertyPath: occupant
       value: 
       objectReference: {fileID: 7307068096613522034}

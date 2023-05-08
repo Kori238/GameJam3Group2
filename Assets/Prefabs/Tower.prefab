@@ -166,9 +166,12 @@ MonoBehaviour:
   isSpaceOccupied: 0
   hasCentralAttackPoint: 0
   occupiedSpaceCount: 0
+  collision: {fileID: 0}
   damageIndicator: {fileID: 3205582515357515026, guid: 5f4dbc4b19dbf5e4483d0af10644508b, type: 3}
   WoodRefund: 5
   StoneRefund: 5
+  woodRepairCost: 25
+  stoneRepairCost: 50
   attackDamage: 5
   attackRate: 1
   viewRange: 40
@@ -181,7 +184,9 @@ MonoBehaviour:
   animator: {fileID: 0}
   shootClip: {fileID: 0}
   idleClip: {fileID: 0}
+  previousDestroyedState: 0
   spriteRenderer: {fileID: 3709763574979629582}
   defaultSprite: {fileID: 21300000, guid: 4cf843994a68d234ea3a08e956bd74be, type: 3}
   destroyedSprite: {fileID: 21300000, guid: b21136d9b358d064f833f47a53f5a3dd, type: 3}
-  PopMenu: {fileID: 0}
+  PopMenu: {fileID: 1011456130296947494, guid: da31027617457254993ef8ea7e900883, type: 3}
+  toOpen: 1
