@@ -28,6 +28,7 @@ public class EnemyPathfinding : MonoBehaviour
     [SerializeField] private Transform spriteContainer;
     [SerializeField] bool facingRight = true;
     [SerializeField] private S_SoundController SoundScript;
+    [SerializeField] private TimeController TimeControllerScript;
     private Path _currentPath = null;
     public Path _newPath = null;
     private GameObject home;
@@ -58,12 +59,13 @@ public class EnemyPathfinding : MonoBehaviour
     public virtual void Defeated()
     {
         Destroy(this.gameObject);
-        GameObject.Find("Time").GetComponent<TimeController>().EnemyKilled();
+        TimeControllerScript.EnemyKilled();
     }
 
     public virtual void Start()
     {
         SoundScript = GameObject.Find("SoundController").GetComponent<S_SoundController>();
+        TimeControllerScript = GameObject.Find("Time").GetComponent<TimeController>();
         home = Init.Instance.grid.GetStructureAtCell((int)(Init.Instance.gridDimensions.x - 1) / 2,
             (int)(Init.Instance.gridDimensions.y - 1) / 2);
         StartCoroutine(PathfindingLoop());

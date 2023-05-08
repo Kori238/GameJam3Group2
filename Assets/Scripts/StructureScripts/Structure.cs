@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Structure : MonoBehaviour
@@ -20,6 +21,7 @@ public class Structure : MonoBehaviour
     public Node centralAttackPoint;
     public List<Node> occupiedSpace = new List<Node>();
     public List<Node> collectionPoints = new List<Node>();
+    public Collider2D collision;
     [SerializeField] private GameObject damageIndicator;
     public int WoodRefund;
     public int StoneRefund;
@@ -27,6 +29,7 @@ public class Structure : MonoBehaviour
     public virtual void Start()
     {
         attackPointPrefab = Init.Instance.attackPointPrefab;
+        collision = GetComponent<Collider2D>();
         FindOccupiedSpace();
         OccupySpace();
         CreateAttackPoints();
@@ -86,7 +89,7 @@ public class Structure : MonoBehaviour
             {
                 var attackPoint = Instantiate(attackPointPrefab, point * 3.3333f + new Vector2(10 / 6, 10 / 6) * 1.66f,
                     Quaternion.identity, transform);
-                // Do I understand why the vector has to be timesed by 1.66? No... Does it work? Unfortunatly... :(
+                // Do I understand why the vector has to be timesed by 1.66? No... Does it work? Unfortunately... :(
                 attackPoint.GetComponent<AttackPoint>().parentNode = node;
                 node.SetAttackPoint(attackPoint.gameObject);
                 attackPoints.Add(node);
@@ -277,6 +280,22 @@ public class Structure : MonoBehaviour
     public virtual void UpdateStructure()
     {
         Debug.Log(gameObject.name + "was Updated");
+        Debug.Log(gameObject.layer + " " + LayerMask.GetMask("Structures") + " " + LayerMask.GetMask("DestroyedStructures"));
+        foreach (Transform child in transform)
+        {
+            child.gameObject.layer = destroyed switch
+            {
+                true when child.gameObject.layer == 9 => 11,
+                false when child.gameObject.layer == 11 => 9,
+                _ => gameObject.layer
+            };
+        }
+        gameObject.layer = destroyed switch
+        {
+            true when gameObject.layer == 9 => 11,
+            false when gameObject.layer == 11 => 9,
+            _ => gameObject.layer
+        };
         UpdateOccupiedSpace();
         UpdateAllAttackPoints();
     }
