@@ -234,6 +234,7 @@ public class WoodCollectorScript : Interactable
     {
 
         MinionList.Remove(newMinion);
+        MAssigned= MinionList.Count;
       
 
         
