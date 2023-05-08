@@ -157,13 +157,13 @@ public class S_Pl_Abilities : MonoBehaviour
         swordSwingSlider.value = 0;
         canAttack = false;
         animator.Play("Attack");
-        float timer = 1.5f;
+        float timer = 0.7f;
         float i;
         for (i = 0; i < timer; i += 0.1f) //Increases value of slider over time with the delay.
         {
             yield return new WaitForSeconds(0.1f);
             swordSwingSlider.value = i;
-            if(i > 0.5)
+            if(i > 0.1 && i < 0.6)
             {
                 AttackCollider.enabled = true;
             }
