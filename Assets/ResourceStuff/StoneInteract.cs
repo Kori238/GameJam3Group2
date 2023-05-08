@@ -15,7 +15,7 @@ public class StoneInteract : Interactable
     {
         var nodePos = gridPos * 3;
         var nodeGrid = Init.Instance.pathfinding.GetGrid();
-        for (var y = (int)nodePos.x; y < (int)nodePos.y + 3; y++)
+        for (var y = (int)nodePos.y; y < (int)nodePos.y + 3; y++)
         {
             occupiedSpace.Add(nodeGrid.gridArray[(int)nodePos.x + 1, y]);
         }
