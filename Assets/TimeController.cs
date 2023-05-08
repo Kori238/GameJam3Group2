@@ -56,7 +56,7 @@ public class TimeController : MonoBehaviour
             maptiles[i].color = Color.white;
             
         }
-        dayMusic.volume = 0.25f;
+        dayMusic.volume = 0.2f;
         nightMusic.volume = 0f;
         //StartCoroutine(RegenBase());
     }
@@ -79,7 +79,7 @@ public class TimeController : MonoBehaviour
             maptiles[i].color = Color.gray;
         }
         dayMusic.volume = 0f;
-        nightMusic.volume = 0.25f;
+        nightMusic.volume = 0.15f;
         Tips.SetActive(true);
         getRandomLocation();
     }
