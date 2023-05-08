@@ -27,6 +27,8 @@ public class S_Pl_DebugMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.M))
         {
+            if (GameObject.Find("DebugMode") != null)
+            {
                 bool adminModeFetch = checkPassword.Instance.adminMode;
                 Debug.Log("Fetch: " + adminModeFetch);
 
@@ -41,6 +43,7 @@ public class S_Pl_DebugMenu : MonoBehaviour
                 {
                     Debug.Log("Access Denied: please enter admin password in options.");
                 }
+            }
         }
 
         if (waitingForInput)
