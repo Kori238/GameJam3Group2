@@ -35,8 +35,7 @@ public class Tower : Interactable
     private int woodUpgradeCost=1;
     private int stoneUpgradeCost=1;
     private string upgradeDescription;
-    private int woodRepairCost=25;
-    private int stoneRepairCost=50;
+   
 
     private int BuildingLevel =1;
 
@@ -152,17 +151,7 @@ public class Tower : Interactable
         }
         return false;
     }
-    public bool repair()
-    {
-        if (Init.Instance.resourceManager.GetWood() >= woodRepairCost && Init.Instance.resourceManager.GetStone() >= stoneRepairCost)
-        {
-            Debug.Log("repairing");
-            SetHealth(0f, true);
-            UpdateStructure();
-            return true;
-        }
-        else { Debug.Log("Not enough resources to repair");return false;} 
-    }
+    
 
     public int getTargetPriority() { return targetPrioritization; }
     public virtual void AttackTarget()

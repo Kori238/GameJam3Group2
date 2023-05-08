@@ -49,4 +49,16 @@ public class Wall : Interactable
 
         
     }
+    public override bool repair()
+    {
+        if (Init.Instance.resourceManager.GetWood() >= woodRepairCost && Init.Instance.resourceManager.GetStone() >= stoneRepairCost)
+        {
+            
+            SetHealth(0f, true);
+            UpdateStructure();
+            gameObject.GetComponent<WallConnectors>().updateAllConnectors();
+            return true;
+        }
+        else { return false; }
+    }
 }

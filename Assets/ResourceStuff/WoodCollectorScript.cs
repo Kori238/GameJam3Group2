@@ -35,8 +35,7 @@ public class WoodCollectorScript : Interactable
     public string UpgradeDescription;
 
     
-    public int woodRepairCost=25;
-    public int stoneRepairCost=5;
+
 
     public string resourceType = "wood";
     public int woodB = 100;
@@ -123,16 +122,7 @@ public class WoodCollectorScript : Interactable
      
     }
 
-    public void repair()
-    {
-        if(Init.Instance.resourceManager.GetWood()<= woodRepairCost && Init.Instance.resourceManager.GetStone()<= stoneRepairCost)
-        {
-            Debug.Log("repairing");
-            SetHealth(0f, true);
-        }
-        else { Debug.Log("Not enough resources to repair"); }
-       
-    }
+
     public virtual  bool upgrade()
     {
         if(woodUpgradeCost<=Init.Instance.resourceManager.GetWood() && stoneUpgradeCost <= Init.Instance.resourceManager.GetStone()) 
