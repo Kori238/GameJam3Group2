@@ -331,10 +331,15 @@ public class Structure : MonoBehaviour
     {
         if (Init.Instance.resourceManager.GetWood() >= woodRepairCost && Init.Instance.resourceManager.GetStone() >= stoneRepairCost)
         {
-            Debug.Log("repairing");
-            SetHealth(0f, true);
-            UpdateStructure();
-            return true;
+            if (health < maxHealth)
+            {
+                Debug.Log("repairing");
+                SetHealth(0f, true);
+                UpdateStructure();
+                return true;
+            }
+            return false;
+            
         }
         else { Debug.Log("Not enough resources to repair"); return false; }
     }
