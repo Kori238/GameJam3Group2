@@ -35,6 +35,9 @@ public class Tower : Interactable
     private int woodUpgradeCost=1;
     private int stoneUpgradeCost=1;
     private string upgradeDescription;
+    public float burnTick = 0.5f;
+    public float burnDamage = 5f;
+    public float burnDuration = 5f;
    
 
     private int BuildingLevel =1;
@@ -162,10 +165,8 @@ public class Tower : Interactable
 
         Transform firePoint = transform;
         if (firingPoint != null) firePoint = firingPoint;
-        target.Damaged(attackDamage);
         if (Vector3.Distance(firePoint.position, target.transform.position) < viewRange)
         {
-            
             StartCoroutine(FireProjectile(firePoint.position, target.transform.position));
         }
         if (occupant != null)
@@ -198,7 +199,7 @@ public class Tower : Interactable
             if (Vector2.Distance(proj.position, transform.position) > viewRange) break;
             if (Vector2.Distance(start, end) < Vector2.Distance(start, proj.position)) break;
         }
-        StartCoroutine(proj.GetComponent<Projectile>().Destroyed());
+        StartCoroutine(proj.GetComponent<Projectile>().Destroyed(target.gameObject, true));
     }
 
 

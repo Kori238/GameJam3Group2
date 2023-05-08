@@ -243,7 +243,7 @@ PrefabInstance:
     - target: {fileID: 6201257626278293352, guid: 54b05267c83a2874098ca36184d8d891, type: 3}
       propertyPath: projectile
       value: 
-      objectReference: {fileID: 6902514113654393813, guid: 741ac0de7d009e74f8a39d95c873381c, type: 3}
+      objectReference: {fileID: 5795754970656366766, guid: 00aa8b2d6db3f4b4a9939d6eb3e15eb2, type: 3}
     - target: {fileID: 6201257626278293352, guid: 54b05267c83a2874098ca36184d8d891, type: 3}
       propertyPath: StoneRefund
       value: 100

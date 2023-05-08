@@ -5,14 +5,9 @@ using UnityEngine;
 
 public class A0EProjectile : Projectile
 {
-    [SerializeField] private Tower towerScript = null;
     [SerializeField] private float AOERadius;
 
-    public void Start()
-    {
-        towerScript = GetComponentInParent<Tower>();
-    }
-
+    
     public virtual void DamageAOE()
     {
         var results = Physics2D.OverlapCircleAll(transform.position, AOERadius, LayerMask.GetMask("Enemy"));
@@ -28,9 +23,9 @@ public class A0EProjectile : Projectile
         }
     }
 
-    public override IEnumerator Destroyed()
+    public override IEnumerator Destroyed(GameObject target, bool damageTarget = false)
     {
         DamageAOE();
-        return base.Destroyed();
+        return base.Destroyed(target, damageTarget);
     }
 }
