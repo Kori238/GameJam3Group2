@@ -10,6 +10,7 @@ public class MinionScript : MonoBehaviour
 {
    
     [SerializeField] private Structure jobLocation = null;
+    private WoodCollectorScript jobScript;
     [SerializeField] private Structure house = null;
     [SerializeField] private float speed = 10f;
     [SerializeField] private float waitTime = 10f;
@@ -55,32 +56,31 @@ public class MinionScript : MonoBehaviour
         if(!time.isNight && atJob && goToResource) // move to local resource
         {
             ResetPath();
-            if(jobLocation!= null) 
+            if(jobLocation!= null &&jobScript.getLocalTreeLength()>0) 
             {
-                Structure temp = jobLocation.GetComponent<WoodCollectorScript>().GetLocalTree();
-                if (temp != null)
-                {
+                Structure temp =jobScript.GetLocalTree();
+               
                     Pathfind(temp);
                     atHouse = false;
                     atJob = false;
                     atResource = true;
                     StartCoroutine(WaitAt());
-                }
-                else { goToResource = false; }
+               
             }
-            
+
+            else { goToResource = false; }
 
         }
         if (time.isNight && !atHouse) // move to house at night
         {
-            if (house != null)
-            {
+           
+            
                 ResetPath();
                 Pathfind(house);
                 atJob = false;
                 atResource = false;
                 atHouse = true;
-            }
+            
         }
         if (_currentPath != null) TraversePath();
     }
@@ -178,10 +178,12 @@ public class MinionScript : MonoBehaviour
     public bool setJobLocation(Structure newJobLocation)
     {
         jobLocation = newJobLocation;
-        if(jobLocation != null) {
-            if (jobLocation.GetComponent<WoodCollectorScript>() is WoodCollectorScript)
-            { ResourceType = jobLocation.GetComponent<WoodCollectorScript>().getResourceType(); }
-        }
+        //if(jobLocation != null) {
+        //if (jobLocation.GetComponent<WoodCollectorScript>() is WoodCollectorScript)
+        jobScript =newJobLocation.GetComponent<WoodCollectorScript>();
+        ResourceType = jobScript.getResourceType();
+        atJob = false;
+       // }
        
         return true;
     }
@@ -189,6 +191,7 @@ public class MinionScript : MonoBehaviour
     public bool setHouse(Structure newHouse) 
     {
         house= newHouse;
+        
         Init.Instance.resourceManager.addSingleMinionToList(this);
         return true;
     }

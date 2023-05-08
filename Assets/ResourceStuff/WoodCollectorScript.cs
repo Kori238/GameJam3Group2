@@ -261,6 +261,7 @@ public class WoodCollectorScript : Interactable
         }
         return null;
     }
+    public int getLocalTreeLength() { return LocalTrees.Count; }
 
     public virtual string getResourceType()
     {
