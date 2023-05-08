@@ -3506,7 +3506,7 @@ GameObject:
   - component: {fileID: 490161739}
   - component: {fileID: 490161738}
   - component: {fileID: 490161737}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: NorthBoundary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5382,7 +5382,7 @@ GameObject:
   - component: {fileID: 831755708}
   - component: {fileID: 831755710}
   - component: {fileID: 831755709}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: EastBoundary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10280,7 +10280,7 @@ GameObject:
   - component: {fileID: 1635241539}
   - component: {fileID: 1635241541}
   - component: {fileID: 1635241540}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SouthBoundary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12133,7 +12133,7 @@ GameObject:
   - component: {fileID: 1889276444}
   - component: {fileID: 1889276446}
   - component: {fileID: 1889276445}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: West Boundary
   m_TagString: Untagged
   m_Icon: {fileID: 0}

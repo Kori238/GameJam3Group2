@@ -477,18 +477,26 @@ public class PlayerInteractionScript : MonoBehaviour
             if(temp!= null) 
             {
                 int tempnumber = temp.GetComponent<Structure>().GetWoodRefund();
-                Init.Instance.resourceManager.AddWood(tempnumber);
-                GameObject instance = Instantiate(resourcePU, transform.position, Quaternion.identity);
-                resourcePopUp instanceScript = instance.GetComponent<resourcePopUp>();
-                instanceScript.setImage("wood");
-                instanceScript.setText("+" + tempnumber.ToString());
+                if (tempnumber > 0)
+                {
+                    Init.Instance.resourceManager.AddWood(tempnumber);
+                    GameObject instance = Instantiate(resourcePU, transform.position, Quaternion.identity);
+                    resourcePopUp instanceScript = instance.GetComponent<resourcePopUp>();
+                    instanceScript.setImage("wood");
+                    instanceScript.setText("+" + tempnumber.ToString());
+                }
+                    
 
                 tempnumber = temp.GetComponent<Structure>().GetStoneRefund();
-                Init.Instance.resourceManager.AddStone(tempnumber);
-                instance = Instantiate(resourcePU, new Vector3(transform.position.x, transform.position.y - 10, transform.position.z), Quaternion.identity);
-                instanceScript = instance.GetComponent<resourcePopUp>();
-                instanceScript.setImage("stone");
-                instanceScript.setText("+" + tempnumber.ToString());
+                if(tempnumber>0) 
+                {
+                    Init.Instance.resourceManager.AddStone(tempnumber);
+                    GameObject instance = Instantiate(resourcePU, new Vector3(transform.position.x, transform.position.y - 10, transform.position.z), Quaternion.identity);
+                    resourcePopUp instanceScript = instance.GetComponent<resourcePopUp>();
+                    instanceScript.setImage("stone");
+                    instanceScript.setText("+" + tempnumber.ToString());
+                }
+             
 
                 Init.Instance.grid.DemolishAtCell((int)gridPos.x, (int)gridPos.y);
             }                                                                
