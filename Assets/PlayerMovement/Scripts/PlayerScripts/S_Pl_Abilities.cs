@@ -117,7 +117,7 @@ public class S_Pl_Abilities : MonoBehaviour
     {
         digging = true;
         canDig = false;
-        playerCollider.enabled = false;
+        playerCollider.gameObject.layer = 13;
         playerVisual.enabled = false;
         digIcon.enabled = true;
         MovementScript.GetComponent<S_Pl_Movement>().Pl_Speed *= digSpeedMultiplier;
@@ -126,7 +126,7 @@ public class S_Pl_Abilities : MonoBehaviour
 
     private IEnumerator finishDig()
     {
-        playerCollider.enabled = true;
+        playerCollider.gameObject.layer = 6;
         playerVisual.enabled = true;
         digging = false;
         canDig = true;
