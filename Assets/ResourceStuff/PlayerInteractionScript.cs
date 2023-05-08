@@ -32,7 +32,7 @@ public class PlayerInteractionScript : MonoBehaviour
     public GameObject DemoBorder;
     public S_SoundController sounder;
 
-    private readonly int range = 1000;
+    private readonly int range = 5000;
     private string currentTool = "Sword";
     [SerializeField] private S_Pl_Abilities abilitiesScript;
 
@@ -46,6 +46,8 @@ public class PlayerInteractionScript : MonoBehaviour
     private float currentCollectionTime = 0f;
     private float collectTime = 2f;
     private bool collecting = false;
+    private bool tryingToCollect=false;
+  
 
 
     private void Start()
@@ -66,14 +68,19 @@ public class PlayerInteractionScript : MonoBehaviour
         }
         if (Input.GetMouseButton(0) && currentTool == "Interact") 
         {
-            AxeSliderObject.SetActive(true);
-            animator.Play("Axe Swing");
-            resourceCollectionTime();
+            
+            if(tryingToCollect) {
+                AxeSliderObject.SetActive(true);
+                animator.Play("Axe Swing");
+                resourceCollectionTime();
+            }
         }
+        if (Input.GetMouseButton(0) && currentTool == "repair") { repairTool(); }
         if (Input.GetMouseButtonUp(0) && currentTool == "Interact")
         {
             AxeSliderObject.SetActive(false);
             animator.Play("Idle");
+            tryingToCollect = false;
         }
 
         if (Input.GetKeyDown("1"))
@@ -118,6 +125,7 @@ public class PlayerInteractionScript : MonoBehaviour
             DemoBorder.SetActive(false);
             currentTool = "PathfindingTester";
             Debug.Log("Pathfinding Tester equipped");
+           
         }
         if (Input.GetKeyDown("6"))
         {
@@ -128,6 +136,7 @@ public class PlayerInteractionScript : MonoBehaviour
             buildingCostPanel.SetActive(true);
             woodCost.SetText("100   <sprite=0>");
             stoneCost.SetText("");
+            
         }
         if (Input.GetKeyDown("5"))
         {
@@ -138,6 +147,7 @@ public class PlayerInteractionScript : MonoBehaviour
             buildingCostPanel.SetActive(true);
             woodCost.SetText("20    <sprite=0>");
             stoneCost.SetText("");
+            
         }
         if (Input.GetKeyDown("7"))
         {
@@ -148,6 +158,7 @@ public class PlayerInteractionScript : MonoBehaviour
             buildingCostPanel.SetActive(true);
             woodCost.SetText("50    <sprite=0>");
             stoneCost.SetText("100  <sprite=0>");
+            
         }
         if (Input.GetKeyDown("8"))
         {
@@ -158,6 +169,7 @@ public class PlayerInteractionScript : MonoBehaviour
             buildingCostPanel.SetActive(true);
             woodCost.SetText("50    <sprite=0>");
             stoneCost.SetText("100  <sprite=0>");
+            
         }
         if (Input.GetKeyDown("9"))
         {
@@ -168,6 +180,7 @@ public class PlayerInteractionScript : MonoBehaviour
             buildingCostPanel.SetActive(true);
             woodCost.SetText("50    <sprite=0>");
             stoneCost.SetText("100  <sprite=0>");
+           
         }
         if (Input.GetKeyDown("b"))
         {
@@ -178,6 +191,17 @@ public class PlayerInteractionScript : MonoBehaviour
             WhatsEquiped.SetText("Demolish Tool Equipped");
             Debug.Log("demo tool equiped");
             buildingCostPanel.SetActive(false);
+            
+
+        }
+        if (Input.GetKeyDown("r")) 
+        {
+            DemoBorder.SetActive(false);
+            currentTool = "repair";
+            WhatsEquiped.SetText("Repair Tool Equipped");
+            buildingCostPanel.SetActive(false);
+           
+
         }
     }
 
@@ -243,6 +267,11 @@ public class PlayerInteractionScript : MonoBehaviour
                     PlaceTower(TowerArtillery);
                     break;
                 }
+            case "repair":
+                {
+                    repairTool();
+                        break;
+                }
         }
     }
 
@@ -257,10 +286,14 @@ public class PlayerInteractionScript : MonoBehaviour
     {
         currentCollectionTime += Time.deltaTime;
         AxeSlider.value = currentCollectionTime / collectTime;
-        //if (currentCollectionTime >= collectTime * 3 / 4) {Axe(); }
-        //else if (currentCollectionTime >= collectTime * 2 / 4) { Axe(); }
-        //else if (currentCollectionTime >= collectTime * 1 / 4) { Axe(); }
-        if (currentCollectionTime >= collectTime) { AxeSlider.value = currentCollectionTime / collectTime; collecting = true; CheckInteraction(); currentCollectionTime = 0f; //Axe();
+      
+        if (currentCollectionTime >= collectTime) 
+        {
+            AxeSlider.value = currentCollectionTime / collectTime;
+            collecting = true; 
+            CheckInteraction();
+            currentCollectionTime = 0f; 
+            
                                                                                                                                                                               }
     }
 
@@ -283,6 +316,7 @@ public class PlayerInteractionScript : MonoBehaviour
                     {
                         if (i.transform.GetComponent<TreeInteract>() || i.transform.GetComponent<StoneInteract>())
                         {
+                            tryingToCollect= true;
                             if (collecting) { i.transform.GetComponent<Interactable>().Interact(); }
                             collecting = false;
 
@@ -503,4 +537,25 @@ public class PlayerInteractionScript : MonoBehaviour
            
         }
     }
+
+    private void repairTool()
+    {
+        Vector2 MousePos = Input.mousePosition;
+        Vector2 MouseWorldPos = Camera.main.ScreenToWorldPoint(MousePos);
+        Vector2 CurrentPlayerPos = transform.position;
+        var hits = Physics2D.BoxCastAll(MouseWorldPos, boxSize, 0, Vector2.zero); // gets list of objects at mouse postition
+        if (hits.Length > 0) // checks if object is present
+        {
+            foreach (var i in hits)
+            {
+                if (i.transform.GetComponent<Interactable>()) // checks object is interactable
+                
+                {
+                    Structure temp = i.transform.GetComponent<Structure>();
+                    temp.repair();
+                }
+            }
+        }
+    }
+
 }

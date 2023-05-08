@@ -25,6 +25,8 @@ public class Structure : MonoBehaviour
     [SerializeField] private GameObject damageIndicator;
     public int WoodRefund;
     public int StoneRefund;
+    public int woodRepairCost = 25;
+    public int stoneRepairCost = 50;
 
     public virtual void Start()
     {
@@ -98,8 +100,8 @@ public class Structure : MonoBehaviour
 
         //if (!hasCentralAttackPoint)
         //{
-            
-            //hasCentralAttackPoint = true;
+
+        //hasCentralAttackPoint = true;
         //}
     }
 
@@ -272,7 +274,7 @@ public class Structure : MonoBehaviour
         {
             Destroyed();
         }
-        
+
     }
 
 
@@ -322,5 +324,18 @@ public class Structure : MonoBehaviour
     public int GetStoneRefund()
     {
         return StoneRefund;
+    }
+
+
+    public virtual bool repair()
+    {
+        if (Init.Instance.resourceManager.GetWood() >= woodRepairCost && Init.Instance.resourceManager.GetStone() >= stoneRepairCost)
+        {
+            Debug.Log("repairing");
+            SetHealth(0f, true);
+            UpdateStructure();
+            return true;
+        }
+        else { Debug.Log("Not enough resources to repair"); return false; }
     }
 }
