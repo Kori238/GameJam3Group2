@@ -31,7 +31,7 @@ public class Tower : Interactable
 
     private GameObject InstanceMenu;
     [SerializeField] private GameObject PopMenu;
-    private bool toOpen = true;
+    public bool toOpen = true;
     private int woodUpgradeCost=1;
     private int stoneUpgradeCost=1;
     private string upgradeDescription;
@@ -80,11 +80,7 @@ public class Tower : Interactable
             InstanceMenu.GetComponent<towerMenuScript>().SetParentStructure(this);
 
         }
-        else if (!toOpen)
-        {
-            Destroy(InstanceMenu);
-            toOpen = true;
-        }
+    
 
 
 

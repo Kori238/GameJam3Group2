@@ -113,6 +113,7 @@ public class towerMenuScript : MonoBehaviour
     }
     public void onCloseButton()
     {
+        ParentStructure.toOpen = true;
         Destroy(gameObject);
     }
 }
