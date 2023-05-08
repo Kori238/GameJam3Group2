@@ -34,7 +34,7 @@ public class MinionScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (time.hourTime == 6)
+        if (time.hourTime == 6 &&time.minutesTime==00)
         {
             goToResource = false;
         }

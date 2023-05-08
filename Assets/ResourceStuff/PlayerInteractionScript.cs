@@ -76,6 +76,7 @@ public class PlayerInteractionScript : MonoBehaviour
             }
         }
         if (Input.GetMouseButton(0) && currentTool == "repair") { repairTool(); }
+        if (Input.GetMouseButton(0) && currentTool == "wall") { PlaceWall(); }
         if (Input.GetMouseButtonUp(0) && currentTool == "Interact")
         {
             AxeSliderObject.SetActive(false);
@@ -419,9 +420,9 @@ public class PlayerInteractionScript : MonoBehaviour
                 Init.Instance.resourceManager.AddWood(-20);
 
             }
-            else { GameObject temp = Instantiate(BuildingNotificationPrefab, transform.position, Quaternion.identity); temp.GetComponent<resourcePopUp>().setText("INVALID LOCATION"); }
+            //else { GameObject temp = Instantiate(BuildingNotificationPrefab, transform.position, Quaternion.identity); temp.GetComponent<resourcePopUp>().setText("INVALID LOCATION"); }
         }
-        else { GameObject temp = Instantiate(BuildingNotificationPrefab, transform.position, Quaternion.identity); temp.GetComponent<resourcePopUp>().setText("NOT ENOUGH RESOURCES"); }
+        //else { GameObject temp = Instantiate(BuildingNotificationPrefab, transform.position, Quaternion.identity); temp.GetComponent<resourcePopUp>().setText("NOT ENOUGH RESOURCES"); }
 
 
     }
