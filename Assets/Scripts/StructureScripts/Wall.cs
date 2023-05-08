@@ -40,7 +40,12 @@ public class Wall : Interactable
     }
     public override void Interact()
     {
-        if(Init.Instance.resourceManager.GetWood()>= 20) { SetHealth(0f,true); Init.Instance.resourceManager.AddWood(-20); gameObject.GetComponent<WallConnectors>().updateAllConnectors(); }
+        if(Init.Instance.resourceManager.GetWood()>= 20 && health<maxHealth)
+        {
+            SetHealth(0f,true);
+            Init.Instance.resourceManager.AddWood(-20);
+            gameObject.GetComponent<WallConnectors>().updateAllConnectors(); 
+        }
 
         
     }
