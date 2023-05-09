@@ -206,7 +206,7 @@ public class Tower : Interactable
         }
         if (target == null)
         {
-            Destroy(gameObject);
+            Destroy(proj.gameObject);
             yield break;
         }
         StartCoroutine(proj.GetComponent<Projectile>().Destroyed(target.gameObject, true));
