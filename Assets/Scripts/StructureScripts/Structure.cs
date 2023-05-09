@@ -40,23 +40,7 @@ public class Structure : MonoBehaviour
 
     public virtual void FindCollectionPoints()
     {
-        if (destroyed) return;
-        var nodePos = gridPos * 3;
-        var nodeGrid = Init.Instance.pathfinding.GetGrid();
-        var collectionPositions = new List<Vector2>
-        {
-            new Vector2(nodePos.x - 1, nodePos.y + 1),
-            new Vector2(nodePos.x + 3, nodePos.y + 1),
-            new Vector2(nodePos.x + 1, nodePos.y - 1),
-            new Vector2(nodePos.x + 1, nodePos.y + 3)
-        };
 
-        foreach (Vector2 collectionPosition in collectionPositions)
-        {
-            if (collectionPosition.x >= 149 || collectionPosition.x < 0 || collectionPosition.y >= 149 || collectionPosition.y < 0) continue;
-            var node = nodeGrid.gridArray[(int)collectionPosition.x, (int)collectionPosition.y];
-            collectionPoints.Add(node);
-        }
     }
 
 

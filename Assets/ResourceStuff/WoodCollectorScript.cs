@@ -58,14 +58,14 @@ public class WoodCollectorScript : Interactable
                         LocalTrees.Add(overlapingObjects[i].gameObject);
                         overlapingObjects[i].gameObject.GetComponent<TreeInteract>().addCollectors(this);
                     }
-                }
-                else
-                {
-                    if (overlapingObjects[i].GetComponent<StoneInteract>() is StoneInteract)
-                    {
-                        LocalTrees.Add(overlapingObjects[i].gameObject);
-                        overlapingObjects[i].gameObject.GetComponent<StoneInteract>().addCollectors(this);
-                    }
+               }
+               else
+               {
+                   if (overlapingObjects[i].GetComponent<StoneInteract>() is StoneInteract)
+                   {
+                       LocalTrees.Add(overlapingObjects[i].gameObject);
+                       overlapingObjects[i].gameObject.GetComponent<StoneInteract>().addCollectors(this);
+                   }
                }
                
 
@@ -94,15 +94,35 @@ public class WoodCollectorScript : Interactable
         base.Start();
     }
 
-
-
-
-
-    // Update is called once per frame
-    private void Update()
+    public override void FindOccupiedSpace()
     {
-    
+        var nodePos = gridPos * 3;
+        var nodeGrid = Init.Instance.pathfinding.GetGrid();
+        occupiedSpace.Add(nodeGrid.gridArray[(int)nodePos.x + 1, (int)nodePos.y + 1]);
+        }
+
+
+    public override void FindCollectionPoints()
+    {
+        if (destroyed) return;
+        var nodePos = gridPos * 3;
+        var nodeGrid = Init.Instance.pathfinding.GetGrid();
+        var collectionPositions = new List<Vector2>
+        {
+            new Vector2(nodePos.x + 1, nodePos.y),
+            new Vector2(nodePos.x, nodePos.y + 1),
+            new Vector2(nodePos.x + 1, nodePos.y + 2),
+            new Vector2(nodePos.x + 2, nodePos.y + 1),
+        };
+
+        foreach (Vector2 collectionPosition in collectionPositions)
+        {
+            if (collectionPosition.x >= 149 || collectionPosition.x < 0 || collectionPosition.y >= 149 || collectionPosition.y < 0) continue;
+            var node = nodeGrid.gridArray[(int)collectionPosition.x, (int)collectionPosition.y];
+            collectionPoints.Add(node);
+        }
     }
+
     private void FixedUpdate()
     {
         CurrentWoodCoolDown += 1;

@@ -11,6 +11,26 @@ public class TreeInteract : Interactable
 
     public void addCollectors(WoodCollectorScript newcollector) { collectors.Add(newcollector); }
 
+    public override void FindCollectionPoints()
+    {
+        if (destroyed) return;
+        var nodePos = gridPos * 3;
+        var nodeGrid = Init.Instance.pathfinding.GetGrid();
+        var collectionPositions = new List<Vector2>
+        {
+            new Vector2(nodePos.x, nodePos.y + 1),
+            new Vector2(nodePos.x + 2, nodePos.y + 1)
+        };
+
+        foreach (Vector2 collectionPosition in collectionPositions)
+        {
+            if (collectionPosition.x >= 149 || collectionPosition.x < 0 || collectionPosition.y >= 149 || collectionPosition.y < 0) continue;
+            var node = nodeGrid.gridArray[(int)collectionPosition.x, (int)collectionPosition.y];
+            collectionPoints.Add(node);
+        }
+    }
+
+
 
     public override void FindOccupiedSpace()
     {
