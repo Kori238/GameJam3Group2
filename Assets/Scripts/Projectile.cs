@@ -21,11 +21,11 @@ public class Projectile : MonoBehaviour
         if (animator != null) animator.Play(destroyedClip.name);
         if (damageTarget)
         {
-            /*EnemyPathfinding enemyScript = target.GetComponent<EnemyPathfinding>();
+            EnemyPathfinding enemyScript = target.GetComponent<EnemyPathfinding>();
             if (enemyScript != null)
             {
                 enemyScript.Damaged(towerScript.attackDamage);
-            }*/
+            }
         }
         yield return new WaitForSeconds(destroyDelay);
         Destroy(gameObject);
