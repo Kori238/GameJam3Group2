@@ -140,9 +140,12 @@ MonoBehaviour:
   isSpaceOccupied: 0
   hasCentralAttackPoint: 0
   occupiedSpaceCount: 0
+  collision: {fileID: 0}
   damageIndicator: {fileID: 0}
   WoodRefund: 30
   StoneRefund: 0
+  woodRepairCost: 25
+  stoneRepairCost: 50
   collectors: []
   resourcePU: {fileID: 7001411070169600475, guid: 2f2ca000bb1158748918cd56eb8a7079, type: 3}
 --- !u!61 &-1572090344944726726
@@ -158,7 +161,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0016365051, y: 0.1270566}
+  m_Offset: {x: 0.028912783, y: -1.0730863}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -169,5 +172,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5.69419, y: 9.657035}
+  m_Size: {x: 1.7118993, y: 7.256749}
   m_EdgeRadius: 0

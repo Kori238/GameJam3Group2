@@ -40,7 +40,7 @@ public class MinionScript : MonoBehaviour
             goToResource = false;
         }
 
-
+        if (_currentPath != null) { TraversePath(); return; }
         if ((!time.isNight && atHouse)|| atResource && !goToResource) // moves to resource collector 
         {
             if (jobLocation != null)
@@ -82,42 +82,42 @@ public class MinionScript : MonoBehaviour
                 atHouse = true;
             
         }
-        if (_currentPath != null) TraversePath();
+        
     }
 
     private IEnumerator WaitAt()// time before moving again between collector and resource
     {
         while (moving)
         {
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(1f);
         }
-        yield return new WaitForSeconds(Random.Range(waitTime/2,waitTime));
+        yield return new WaitForSeconds(waitTime);//Random.Range(waitTime/2,waitTime));
         goToResource = !goToResource;
-        if(atResource)
+        if (atResource)
         {
             Debug.Log("add resource");
-            if(ResourceType == "wood")
-            {               
+            if (ResourceType == "wood")
+            {
                 Init.Instance.resourceManager.AddWood(collectionAmount);
                 Vector3 location = transform.position;
-                GameObject PopUpInstance =Instantiate(woodPU,location, quaternion.identity);
+                GameObject PopUpInstance = Instantiate(woodPU, location, quaternion.identity);
                 resourcePopUp instanceScript = PopUpInstance.GetComponent<resourcePopUp>();
                 instanceScript.setImage("wood");
-                instanceScript.setText("+"+collectionAmount);
-               
+                instanceScript.setText("+" + collectionAmount);
+
             }
             else
             {
-                Init.Instance.resourceManager.AddStone(collectionAmount);Debug.Log("stone");
+                Init.Instance.resourceManager.AddStone(collectionAmount); Debug.Log("stone");
                 Vector3 location = transform.position;
                 GameObject PopUpInstance = Instantiate(woodPU, location, quaternion.identity);
                 resourcePopUp instanceScript = PopUpInstance.GetComponent<resourcePopUp>();
                 instanceScript.setImage("stone");
-                instanceScript.setText("+"+collectionAmount);
+                instanceScript.setText("+" + collectionAmount);
             }
-           
+
         }
-        
+
     }
 
 
@@ -177,14 +177,21 @@ public class MinionScript : MonoBehaviour
     
     public bool setJobLocation(Structure newJobLocation)
     {
+        atJob = false;
         jobLocation = newJobLocation;
-        //if(jobLocation != null) {
-        //if (jobLocation.GetComponent<WoodCollectorScript>() is WoodCollectorScript)
+        if(jobLocation != null) 
+        {
+        
         jobScript =newJobLocation.GetComponent<WoodCollectorScript>();
         ResourceType = jobScript.getResourceType();
-        atJob = false;
-       // }
-       
+        
+        }
+        else {
+            ResetPath();
+            Pathfind(house);
+            atHouse = true;
+            atResource = false;
+        }
         return true;
     }
 
