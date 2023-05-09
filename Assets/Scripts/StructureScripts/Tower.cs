@@ -118,9 +118,10 @@ public class Tower : Interactable
                         upgradeDescription = "Upgrade to level 3 ";
                         woodUpgradeCost = 1;
                         stoneUpgradeCost = 1;
-                        attackDamage = attackDamage * 2;
+                        attackDamage = (int)(attackDamage * 1.5f);
                         attackRate= attackRate * 1.2f;
-                       
+                        burnDamage *= 1.2f;
+                        burnTick *= 1.3f;
 
                         break;
                     }
@@ -131,8 +132,10 @@ public class Tower : Interactable
                         upgradeDescription = "Upgrade to level 4  ";
                         woodUpgradeCost = 1;
                         stoneUpgradeCost = 1;
-                        attackDamage = attackDamage * 2;
-                        attackRate = attackRate * 1.2f;
+                        attackDamage = (int)(attackDamage * 1.5f);
+                        attackRate= attackRate * 1.2f;
+                        burnDamage *= 1.2f;
+                        burnTick *= 1.3f;
 
                         break;
                     }
@@ -143,8 +146,10 @@ public class Tower : Interactable
                         upgradeDescription = "Max Level";
                         woodUpgradeCost = 1;
                         stoneUpgradeCost = 1;
-                        attackDamage = attackDamage * 2;
-                        attackRate = attackRate * 1.2f;
+                        attackDamage = (int)(attackDamage * 1.5f);
+                        attackRate= attackRate * 1.2f;
+                        burnDamage *= 1.2f;
+                        burnTick *= 1.3f;
 
                         break;
                     }
