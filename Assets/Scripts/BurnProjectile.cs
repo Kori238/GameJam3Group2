@@ -13,7 +13,7 @@ public class BurnProjectile : Projectile
             if (enemyScript != null)
             {
                 enemyScript.Damaged(towerScript.attackDamage);
-                yield return enemyScript.Burn((int)towerScript.burnDamage, towerScript.burnTick, towerScript.burnDuration);
+                if (!enemyScript.burning) enemyScript.StartBurn((int)towerScript.burnDamage, towerScript.burnTick, towerScript.burnDuration);
             }
         }
         yield return new WaitForSeconds(destroyDelay);

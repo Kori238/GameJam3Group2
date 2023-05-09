@@ -232,6 +232,7 @@ MonoBehaviour:
   spriteContainer: {fileID: 4810880988336245914}
   facingRight: 1
   SoundScript: {fileID: 0}
+  TimeControllerScript: {fileID: 0}
   SoundController: {fileID: 3683826661274061954, guid: e7ac84214fde43b4c9cabf8127251a7d, type: 3}
   damageIndicator: {fileID: 7916877636215915304, guid: 4440668432f7ed341ba20f1bd6f6ef0d, type: 3}
   playerDamage: 10

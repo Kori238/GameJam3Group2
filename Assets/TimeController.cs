@@ -43,7 +43,7 @@ public class TimeController : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        Time.timeScale = timeScale;
+        //Time.timeScale = timeScale;
         timer.text = "Day: " + day;
         enemiesText.text = "Nooms: \n" + enemiesSpawned;
         //StartCoroutine(RegenBase());

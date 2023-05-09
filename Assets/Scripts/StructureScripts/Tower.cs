@@ -37,7 +37,7 @@ public class Tower : Interactable
     private string upgradeDescription;
     public float burnTick = 0.5f;
     public float burnDamage = 5f;
-    public float burnDuration = 5f;
+    public float burnDuration = 2f;
    
 
     private int BuildingLevel =1;

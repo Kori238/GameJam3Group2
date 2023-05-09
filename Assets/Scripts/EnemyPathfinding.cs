@@ -24,7 +24,7 @@ public class EnemyPathfinding : MonoBehaviour
     [SerializeField] private bool _initiated = false;
     [SerializeField] public bool flying = false;
     [SerializeField] bool slowed = false;
-    [SerializeField] bool burning = false;
+    public bool burning = false;
     [SerializeField] private Transform spriteContainer;
     [SerializeField] bool facingRight = true;
     [SerializeField] private S_SoundController SoundScript;
@@ -226,16 +226,23 @@ public class EnemyPathfinding : MonoBehaviour
         }
     }
 
+    public void StartBurn(int damagePerTick, float tickRate, float duration)
+    {
+        StartCoroutine(Burn(damagePerTick, tickRate, duration));
+    }
+
     public IEnumerator Burn(int damagePerTick, float tickRate, float duration)
     {
-        if (burning) yield break;
+        //if (burning) yield break;
         burning = true;
         while (duration > 0)
         {
+            Debug.Log("aaaaaaaaa");
             Damaged(damagePerTick);
             duration -= tickRate;
             yield return new WaitForSeconds(tickRate);
         }
+        
         burning = false;
     }
 
